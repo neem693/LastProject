@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="comment">
+
+	<insert id="comment_insert" parameterType="comment">
+		insert into comment_tb
+		values(comment_seq.nextVal,#{id},#{name},#{ip},#{content},sysdate,#{b_idx})
+	</insert>
+
+
+	<select id="comment_list" parameterType="int"
+		resultType="comment">
+		select * from comment_tb where b_idx = #{b_idx}
+		order by idx
+		desc
+	</select>
+	<select id="comment_list_page" parameterType="java.util.Map"
+		resultType="comment">
+		select *
+		from (select rownum no, c.* from comment_tb c where b_idx =#{b_idx})
+		where no between #{start} and #{end}
+	</select>
+	<select id="comment_count" parameterType="int" resultType="int">
+		select nvl(count(*),0)
+		from comment_tb
+		where b_idx = #{b_idx}
+	</select>
+
+	<delete id="comment_delete" parameterType="int">
+		delete from comment_tb
+		where idx = #{idx}
+	</delete>
+
+
+	
+
+
+
+
+
+
+
+
+</mapper>

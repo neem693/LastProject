@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+
+	<select id="board_list" resultType="board">
+		select * from board order by
+		ref desc,step asc
+	</select>
+
+	<select id="board_check_one" parameterType="board"
+		resultType="board">
+		select * from board where idx = #{idx} and id = #{id}
+	</select>
+
+	<select id="board_select_one" parameterType="int"
+		resultType="board">
+		select * from board where idx = #{idx}
+	</select>
+	<!-- 조회수 올리기 -->
+	<update id="board_update_readhit" parameterType="int">
+		update board set
+		readhit = readhit + 1
+		where idx =#{idx}
+	</update>
+
+	<insert id="board_insert" parameterType="board">
+		insert into board
+		values(seq_board_idx.nextVal,#{id},#{name},#{subject},#{content},#{pwd},#{ip},sysdate,0,seq_board_idx.currVal,0,0,0)
+	</insert>
+
+	<insert id="board_reply" parameterType="board">
+		insert into board
+		values(seq_board_idx.nextVal,#{id},#{name},#{subject},#{content},#{pwd},#{ip},sysdate,0,#{ref},#{step},#{depth},0)
+	</insert>
+
+
+
+
+	<delete id="board_delete" parameterType="board">
+		delete from board where
+		idx = #{idx} and id = #{id}
+	</delete>
+	<delete id="board_delete_continue" parameterType="board">
+		delete from
+		board where
+		step = #{step} and ref = #{ref} and del = 1
+	</delete>
+
+
+	<update id="board_update_stepUp" parameterType="board">
+		update board set
+		step = step+1 where ref=#{ref} and step>#{step}
+
+	</update>
+
+
+	<select id="board_select_one_detail" parameterType="board"
+		resultType="board">
+		select * from board where idx = #{idx} and id = #{id}
+	</select>
+
+
+	<update id="board_update_all" parameterType="board">
+		update board set
+		subject = #{subject},content = #{content},pwd=#{pwd} where
+		idx = #{idx}
+	</update>
+
+
+	<select id="board_all_count" parameterType="java.util.Map"
+		resultType="int">
+		select nvl(count(*),0)
+		from board
+		<if test="vo!=null">
+			<trim prefix="where" prefixOverrides="or">
+				<if test="vo.name!=null">
+					name like '%' || #{ vo.name } || '%'
+				</if>
+				<if test="vo.subject!=null">
+					or subject like '%' || #{vo.subject } || '%'
+				</if>
+				<if test="vo.content!=null">
+					or content like '%' || #{ vo.content } || '%'
+				</if>
+
+			</trim>
+		</if>
+	</select>
+
+	<select id="board_condition_list" parameterType="java.util.Map"
+		resultType="board">
+		select*
+		from(
+		select rownum no,s.*
+		from (
+		select b.*,(select count(b_idx)
+		from
+		comment_tb where b_idx = b.idx)c_count
+		from board b
+		<if test="vo!=null">
+			<trim prefix="where" prefixOverrides="or|and">
+				<if test="vo.name!=null">
+					b.name like '%' || #{vo.name} || '%'
+				</if>
+				<if test="vo.subject!=null">
+					or b.subject like '%' || #{vo.subject} || '%'
+				</if>
+				<if test="vo.content!=null">
+					or content like '%' || #{ vo.content } || '%'
+				</if>
+			</trim>
+		</if>
+		order by ref desc,step asc
+		) s )
+		where no between #{start} and #{end}
+
+
+	</select>
+	<select id="board_is_only_one" parameterType="board"
+		resultType="int">
+		select nvl(count(*),0)
+		from board
+		where ref = #{ref} and
+		step>#{step}
+	</select>
+
+
+	<update id="board_update_del_mod" parameterType="board">
+		update board set
+		del = 1 where idx = #{idx}
+	</update>
+
+
+
+
+
+</mapper>
