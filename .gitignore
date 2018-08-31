@@ -1,5 +1,5 @@
-/.metadata/
-
+/.metadata/*
+db.properties
 .metadata/.log
 .metadata/.plugins/org.eclipse.core.resources/.root/.indexes/properties.index
 .metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources
@@ -27,3 +27,5 @@
 last_baseball_project/target/m2e-wtp/web-resources/META-INF/MANIFEST.MF
 last_baseball_project/target/m2e-wtp/web-resources/META-INF/maven/kr.co/pickBaseball/pom.properties
 Servers/Tomcat v8.0 Server at localhost-config/server.xml
+.metadata/.plugins/org.eclipse.m2e.logback.configuration/0.log
+.metadata/.plugins/org.eclipse.m2e.core/nexus/830bc118332e77292949ed1e6d2fabe0/_1.cfs
