@@ -542,3 +542,4 @@ Caused by: org.codehaus.plexus.util.xml.pull.XmlPullParserException: expected > 
 2018-09-02 16:21:27,443 [Worker-11] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
 2018-09-02 16:21:27,444 [Worker-11] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
 2018-09-02 16:21:27,446 [Worker-11] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2018-09-03 09:57:02,321 [Worker-1] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
