@@ -8,3 +8,16 @@ int c;
 int d;
 
 a=b=c=d;
+
+
+yayaya
+yayaya
+
+fefefefef
+efefef
+eeeee
+dddddd
+aaaaa
+zzzz
+xxx
+c
