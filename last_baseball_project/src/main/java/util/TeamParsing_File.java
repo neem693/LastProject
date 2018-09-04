@@ -15,6 +15,7 @@ public class TeamParsing_File {
 
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
+		
 		String file_url = "src/main/java/util/html/팀순위   순위   KBO.htm";
 	//	URL url = new URL(file_url);
 		boolean start = false;

@@ -1,0 +1,35 @@
+test this is test
+
+
+int a;
+int b;
+int c;
+
+int d;
+
+a=b=c=d;
+
+
+yayaya
+
+yayayaya hihihihi
+
+
+int a;
+int b;
+int c;
+
+
+yayaya
+yayaya
+
+fefefefef
+efefef
+eeeee
+dddddd
+aaaaa
+zzzz
+xxx
+c
+
+劃馬馬馬馬

@@ -7,6 +7,10 @@
 
 	<!-- 입고 dao -->
 
+	<bean id="team_dao" class="dao.TeamDaoImpl">
+		<property name="session" ref="sql_template"></property>
+	</bean>
+
 
 
 

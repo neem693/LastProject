@@ -3,14 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-
 	<typeAliases>
 		<!-- <typeAlias type="#package.#modelname" alias="#modelname"></typeAlias> -->
 		<!-- <typeAlias type="vo.VisitVo" alias="visit"/> -->
-
+		<typeAlias type="vo.TeamVo" alias="Team" />
 	</typeAliases>
 	<mappers>
-<!-- 		<mapper resource="config/mybatis/mapper/board.xml" /> -->
-
+		<mapper resource="config/mybatis/mapper/team.xml" />
+		<!--<mapper resource="config/mybatis/mapper/board.xml" /> -->
 	</mappers>
 </configuration>
