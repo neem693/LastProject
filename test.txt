@@ -8,3 +8,12 @@ int c;
 int d;
 
 a=b=c=d;
+
+yayaya
+
+yayayaya hihihihi
+
+
+int a;
+int b;
+int c;
