@@ -9,6 +9,7 @@ int d;
 
 a=b=c=d;
 
+
 yayaya
 
 yayayaya hihihihi
@@ -17,3 +18,17 @@ yayayaya hihihihi
 int a;
 int b;
 int c;
+
+
+yayaya
+yayaya
+
+fefefefef
+efefef
+eeeee
+dddddd
+aaaaa
+zzzz
+xxx
+c
+
