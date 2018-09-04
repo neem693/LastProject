@@ -70,14 +70,14 @@ public class TeamDaoImpl implements DaoInterface{
 	@Override
 	public int update_all(Object[] ob) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("업데이트 합니다.");
 		
 		int res=0;
 		for(Object obb : ob) {
 			res += session.insert("team.team_update",obb);
 		}
 		
-		
+		System.out.println(res);
 		
 		return res;
 		
@@ -86,13 +86,13 @@ public class TeamDaoImpl implements DaoInterface{
 	@Override
 	public int insert_all(Object[] ob) {
 		// TODO Auto-generated method stub
+		System.out.println("인서트 합니다.");
 		int res=0;
 		for(Object obb : ob) {
-			TeamVo vo = (TeamVo)obb;
-			res += session.insert("team.team_insert",vo);
+			res += session.insert("team.team_insert",obb);
 		}
 		
-		
+		System.out.println(res);
 		
 		return res;
 	}

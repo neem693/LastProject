@@ -31,7 +31,7 @@
 
 	<!-- <beans:bean id= "mapToJson" class="com.ic.bbs.JSONController"></beans:bean> -->
 
-	<beans:bean id="team_controller"
+	<beans:bean id="BaseBallcontroller"
 		class="kr.co.pickBaseball.BaseBallController">
 		<beans:property name="service" ref="service"></beans:property>
 	</beans:bean>

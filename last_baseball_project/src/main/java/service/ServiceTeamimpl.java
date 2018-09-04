@@ -66,19 +66,19 @@ public class ServiceTeamimpl implements ServiceInterface {
 		if(count==10)
 			dao.update_all(ob);
 		
-		System.out.println(teamvo.getT_name());
-		System.out.println(teamvo.getT_rank());
-		System.out.println(teamvo.getT_nom());
-		System.out.println(teamvo.getT_win());
-		System.out.println(teamvo.getT_lose());
-		System.out.println(teamvo.getT_draw());
-		System.out.println(teamvo.getT_winpo());
-		System.out.println(teamvo.getT_leading());
-		System.out.println(teamvo.getT_recent10());
-		System.out.println(teamvo.getT_contn());
-		System.out.println(teamvo.getT_home());
-		System.out.println(teamvo.getT_away());
-		
+//		System.out.println(teamvo.getT_name());
+//		System.out.println(teamvo.getT_rank());
+//		System.out.println(teamvo.getT_nom());
+//		System.out.println(teamvo.getT_win());
+//		System.out.println(teamvo.getT_lose());
+//		System.out.println(teamvo.getT_draw());
+//		System.out.println(teamvo.getT_winpo());
+//		System.out.println(teamvo.getT_leading());
+//		System.out.println(teamvo.getT_recent10());
+//		System.out.println(teamvo.getT_contn());
+//		System.out.println(teamvo.getT_home());
+//		System.out.println(teamvo.getT_away());
+//		
 		
 		
 		
