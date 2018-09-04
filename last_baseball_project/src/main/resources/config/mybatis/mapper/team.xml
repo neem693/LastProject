@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="team">
+
+
+<insert id="team_inset" parameterType="Team">
+insert into team(t_name,t_rank,t_nom,t_win,t_lose,t_draw,t_winpo,t_leading,t_recent10,t_contn,t_home,t_away)
+		values(	#{t_name},
+				#{t_rank},
+				#{t_nom},
+				#{t_win},
+				#{t_lose},
+				#{t_draw},
+				#{t_winpo},
+				#{t_leading},
+				#{t_recent10},
+				#{t_contn},
+				#{t_home},
+				#{t_away}
+)
+</insert>
+
+
+
+
+<update id="team_update" parameterType="Team">
+
+update team
+set t_rank=#t_rank,
+	t_nom=#t_nom,
+	t_win=#t_win,
+	t_lose=#t_lose,
+	t_draw=#t_draw,
+	t_winpo=#t_winpo,
+	t_leading=#t_leading,
+	t_recent10=#t_recent10,
+	t_contn=#t_contn,
+	t_home=#t_home,
+	t_away=#t_away
+	where t_name = #t_name
+
+</update>
+
+<select id="all_count" resultType="int">
+select count(*)
+from team
+</select>
+	
+
+
+
+
+</mapper>
