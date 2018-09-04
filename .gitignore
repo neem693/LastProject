@@ -56,3 +56,4 @@ local.properties
 
 
 last_baseball_project/target/classes/config/mybatis/db.properties
+last_baseball_project/src/main/resources/config/mybatis/db.properties
