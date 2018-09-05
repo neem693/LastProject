@@ -1,10 +1,9 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=689265e0be3e796360fd7a5b4d3e6bb67029effa
 eclipse.preferences.version=1
 fontPropagated=true
-<<<<<<< HEAD
-org.eclipse.jface.textfont=1|Courier New|14.0|0|WINDOWS|1|0|0|0|0|0|0|0|0|1|0|0|0|0|Courier New;
-=======
-org.eclipse.jface.textfont=1|D2Coding|11.25|0|WINDOWS|1|-15|0|0|0|400|0|0|0|0|3|2|1|49|D2Coding;
->>>>>>> 689265e0be3e796360fd7a5b4d3e6bb67029effa
+org.eclipse.jface.textfont=1|Courier New|16.0|0|WINDOWS|1|0|0|0|0|0|0|0|0|1|0|0|0|0|Courier New;
 org.eclipse.wst.jsdt.internal.ui.navigator.layout=1
 org.eclipse.wst.jsdt.ui.editor.tab.width=
 org.eclipse.wst.jsdt.ui.formatterprofiles.version=11
