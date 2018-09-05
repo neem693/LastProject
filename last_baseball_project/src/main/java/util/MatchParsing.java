@@ -5,15 +5,24 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.apache.log4j.PatternLayout;
+import org.apache.log4j.helpers.PatternParser;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import vo.PlayVo;
 
 public class MatchParsing {
 	String str_url;
 
 	public static void main(String[] args) throws Exception {
+		
 		String str_url = "https://www.koreabaseball.com/ws/Schedule.asmx/GetMonthSchedule?gameMonth=08&leId=1&seasonId=2018&srIdList=0,1,3,4,5,7,9";
 		URL url = new URL(str_url);
 		
@@ -85,8 +94,60 @@ public class MatchParsing {
 			match_list[count] = text[i].split("\\(");
 			count++;
 		}
-
-		System.out.println("°æ±â ÆÄ½Ì ¿Ï·á");
+		System.out.println(count); //°æ±â°¡ ÀÖ´ø ³¯¿¡ ´ëÇÑ°Í Áï, ÇØ´ç count * 5°¡ ÃÑ °æ±â¼ö°¡ µÈ´Ù.
+	
+		String pattern = "([°¡-ÆRa-zA-Z]+) ([0-9]*) ?: ?([0-9]*) ([°¡-ÆRa-zA-Z]+) (\\[?[°¡-ÆRa-zA-Z]*\\]?)";
+		Pattern p = Pattern.compile(pattern);
+		//System.out.println(match_list[0][2]);
+		
+		
+		List<PlayVo> list_p = new ArrayList<PlayVo>();
+		PlayVo vo = new PlayVo();
+		Matcher m;
+		
+		
+		
+		for(int i =0; i<count;i++) { 
+			for(int j =1; j<match_list[i].length;j++) {//0Àº ¾îÂ÷ÇÇ ºñ¾îÀÖÀ¸¹Ç·Î »ý·«
+				//1Àº ³¯Â¥¸¦ ³ªÅ¸³¿À¸·Î ¿©±â¿¡ ÇöÀç³âµµ¿Í ¿ùÀ» ±¸ÇØ¼­ ½ºÆ®¸µÀ» ´õÇØ¹ö¸²
+				
+				
+				m = p.matcher(match_list[i][j]);
+				if(!m.find())
+					continue;
+				else {
+					//±×·ì0Àº ÀüÃ¼, ±×·ì1Àº ¿øÁ¤, ±×·ì2´Â ½ºÄÚ¾î(¾øÀ»°æ¿ì ¹Ù·Î "CANCLE"ÀÔ·Â) ±×·ì3Àº È¨ ½ºÄÚ¾î(±×·ì2¶û ÇÕÃÄÁü)
+					//±×·ì2°¡ ´õ Å¬°æ¿ì ½Â, ¾Æ´Ï¸é ÆÐ, °°À¸¸é ¹«
+					//±×·ì4´Â È¨ ÆÀÀÌ¸§ ±×·ì5´Â ÇØ´ç È¨ÆÃ °æ±âÀå
+					//³âµµ ¿ù ÀÏÀ» ´ÙÇÕÃÄ¼­ °æ±â³¯Â¥ Áý¾î³Ö±â
+					
+				}
+				
+			
+				
+				
+			}
+		}
+		
+		
+		
+		
+		
+		
+//		final String regex = "([°¡-ÆRa-zA-Z]+) ([0-9]*) ?: ?([0-9]*) ([°¡-ÆRa-zA-Z]+) (\\[?[°¡-ÆRa-zA-Z]*\\]?)";
+//		final String string = "LG 8 : 14 µÎ»ê ";
+//
+//		final Pattern pattern = Pattern.compile(regex);
+//		final Matcher matcher = pattern.matcher(string);
+//
+//		while (matcher.find()) {
+//		    System.out.println("Full match: " + matcher.group(0));
+//		    for (int i = 1; i <= matcher.groupCount(); i++) {
+//		        System.out.println("Group " + i + ": " + matcher.group(i));
+//		    }
+//		}
+//
+	System.out.println("°æ±â ÆÄ½Ì ¿Ï·á");
 
 	}
 }
