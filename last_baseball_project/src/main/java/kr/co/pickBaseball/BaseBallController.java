@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import myconst.Myconst;
 import service.ServiceInterface;
 import service.ServiceTeamimpl;
 import util.TeamParsing;
@@ -33,6 +34,22 @@ public class BaseBallController {
 		service.update(vo);
 		
 		return "main.jsp";
+	}
+	
+	
+	@RequestMapping("/join.do")
+	public String join() {
+		
+		return Myconst.BaseBall.BASEBALL_DIR + "join_form.jsp";
+		
+	}
+	
+	
+	@RequestMapping("/login.do")
+	public String login() {
+		
+		return Myconst.BaseBall.BASEBALL_DIR + "login_form.jsp";
+		
 	}
 	
 	
