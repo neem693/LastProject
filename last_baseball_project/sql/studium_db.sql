@@ -95,5 +95,16 @@ insert into studium(s_name,s_addr,s_open,s_seat) values(
 							'20800석'
 							);								
 							
+insert into studium(s_name,s_addr,s_open,s_seat) values(
+							'창원 마산 야구장',
+							'경상남도 창원시 마산회원구 삼호로 63 (양덕2동 477번지)',
+							'2019년(완공예정)',
+							'22011석'
+							);								
 							
-							
+insert into studium(s_name,s_addr,s_open,s_seat) values(
+							'군산월명종합운동장',
+							'전라북도 군산시 번영로 281',
+							'1989년',
+							'11000석'
+							);	
