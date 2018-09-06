@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+ul {
+	width: 50%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+li {
+	display: inline-block;
+	width: 300px;
+	border: 1px solid black;
+	text-align: center;
+	transition: background-color 2s, color 2s;
+}
+.nexen{
+
+background-color: #900020;
+color: white;
+transition: background-color 2s, color 2s;
+font-weight: bold;
+
+}
+
+.hanwha{
+
+background-color: #f37321;
+color: black;
+transition: background-color 2s, color 2s;
+font-weight: bold;
+}
+
+.sk{
+
+background-color: #e1002a;
+color: #ff7f00;
+transition: background-color 2s, color 2s,text-shadow 2s;
+font-weight: bold;
+text-shadow: 0px 0px 2px black;
+}
+
+.doosan{
+
+background-color: #110f29;
+color: white;
+transition: background-color 2s, color 2s;
+font-weight: bold;
+}
+
+
+.kt_wiz{
+
+background-color: #000000;
+color: red;
+transition: background-color 2s, color 2s;
+font-weight: bold;
+
+}
+
+
+.nc{
+
+background-color: #264e90;
+color: #c1ab86;
+transition: background-color 2s, color 2s;
+font-weight: bold;
+
+}
+
+.lg{
+
+background-color: #b31c38;
+color: #000000;
+transition: background-color 2s, color 2s;
+font-weight: bold;
+
+
+}
+
+.kia{
+
+background-color: #af1e2b;
+color: white;
+transition: background-color 2s, color 2s;
+font-weight: bold;
+
+
+}
+
+.lotte{
+
+background-color: #231f20;
+color: #f14e23;
+transition: background-color 2s, color 2s;
+font-weight: bold;
+
+
+}
+
+
+.samsung{
+
+background-color: #0066b3;
+color: #bfc1c3;
+transition: background-color 2s, color 2s;
+font-weight: bold;
+
+
+}
+
+
+
+
+</style>
+<script src="Insert%20title%20here_files/jquery.js"></script>
+<script type="text/javascript">
+
+function effect_on(ob){
+	
+    var div = ob.children().eq(0);
+	var img  = div.children().eq(0);
+	var name = div.attr("id");
+	ob.addClass(name);
+	//console.log(class_name);
+	console.log(name);
+
+}
+
+function effect_off(ob){
+    
+    var div = ob.children().eq(0);
+	var img  = div.children().eq(0);
+	var name = div.attr("id");
+	ob.removeClass(name);
+    console.log(name +" remove")
+	
+}
+	$(document).ready(function() {
+		
+		$("li").on("mouseenter", function(){
+		    effect_on($(this));
+		});
+		$("li").on("mouseleave",function(){
+		
+		effect_off($(this));
+			
+		});  
+
+	});
+</script>
+</head>
+<body>
+	<h2>KBO 구단</h2>
+	<ul>
+		<li>1.넥센
+			<div id="nexen">
+				<img src="Insert%20title%20here_files/a_005.png">
+				<p>넥센 히어로즈</p>
+			</div>
+		</li>
+		<li>2.한화
+			<div id="hanwha">
+				<img src="Insert%20title%20here_files/a_003.png">
+				<p>한화 이글스</p>
+			</div>
+		</li>
+		<li>3.에스케이
+			<div id="sk">
+				<img src="Insert%20title%20here_files/a_009.png">
+				<p>에스케이 와이번스</p>
+			</div>
+		</li>
+		<li class="doosan">4.두산
+			<div id="doosan">
+				<img src="Insert%20title%20here_files/a_006.png">
+				<p>두산 베어스</p>
+			</div>
+		</li>
+		<li>5.KT위즈
+			<div id="kt_wiz">
+				<img src="Insert%20title%20here_files/_.png">
+				<p>케이티 위즈</p>
+			</div>
+		</li>
+		<li>6.엔씨
+			<div id="nc">
+				<img src="Insert%20title%20here_files/a_008.png">
+				<p>엔시 다이노스</p>
+			</div>
+		</li>
+		<li>7.엘쥐
+			<div id="lg">
+				<img src="Insert%20title%20here_files/a_004.png">
+				<p>엘쥐 트윈스</p>
+			</div>
+		</li>
+		<li>8.기아
+			<div id="kia">
+				<img src="Insert%20title%20here_files/a_007.png">
+				<p>기아 타이거즈</p>
+			</div>
+		</li>
+		<li>9.로떼
+			<div id="lotte">
+				<img src="Insert%20title%20here_files/a.png">
+				<p>로떼 자이언츠</p>
+			</div>
+		</li>
+		<li>10.삼성
+			<div id="samsung">
+				<img src="Insert%20title%20here_files/a_002.png">
+				<p>삼성 라이온스</p>
+			</div>
+		</li>
+	</ul>
+
+
+</body></html>
