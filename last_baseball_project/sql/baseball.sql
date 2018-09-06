@@ -14,10 +14,12 @@ t_leading double(4,1) unsigned not null,
 t_recent10 varchar(10) not null,
 t_contn varchar(5) not null,
 t_home varchar(10) not null,
-t_away varchar(10) not null,
-primary key(t_name)
+t_away varchar(10) not null
 )
 
+
+alter table team
+add constraint pk_t_name primary key(t_name);
 
 --팀 테이블 인서트 예시
 insert into team(t_name,t_rank,t_nom,t_win,t_lose,t_draw,t_winpo,t_leading,t_recent10,t_contn,t_home,t_away)
