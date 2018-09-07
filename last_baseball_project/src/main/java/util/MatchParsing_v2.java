@@ -19,17 +19,22 @@ import vo.PlayVo;
 public class MatchParsing_v2 {
 	String str_url;
 
-	public PlayVo[] matchParsing(int mon, int year) throws Exception {
+	public PlayVo[] matchParsing(int month, int thisyear) throws Exception {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date match_day;
 		Date today = new Date();
 		DateUtil dateUtil = new DateUtil();
+		
+		
+		String month_str= String.format("%02d", month);
 
-		int thisyear = year;
-		int month = mon;
-		String month_str = String.format("%02d", month);
+
+		String year_str = String.format("%d", thisyear);
+		System.out.println(month_str);
+		System.out.println(year_str);
+
 		// System.out.println(month_str);
-		String str_url = "https://www.koreabaseball.com/ws/Schedule.asmx/GetScheduleList?gameMonth=09&leId=1&seasonId=2018&srIdList=0,9&teamId=";
+		String str_url = "https://www.koreabaseball.com/ws/Schedule.asmx/GetScheduleList?gameMonth="+month_str+"&leId=1&seasonId="+year_str+"&srIdList=0,9&teamId=";
 		URL url = new URL(str_url);
 
 		// System.out.println(Da);
@@ -156,7 +161,7 @@ public class MatchParsing_v2 {
 				if (m.group(2).equals("")) {
 					match_day = format.parse(day_time);
 					if (dateUtil.isBeforeDay(match_day, today)) {
-						vo[i].setP_rts(match_text[i][8]);
+						vo[i].setP_rts(match_text[i][7]);
 						vo[i].setP_score("C");
 					} else {
 

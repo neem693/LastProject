@@ -6,9 +6,12 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
 
-	<bean id="service" class="service.ServiceTeamimpl">
-		<property name="dao" ref="team_dao"></property>
+	<bean id="partyService" class="service.ServiceTeamimpl">
+		<property name="team_dao" ref="team_dao"></property>
+		<property name="play_dao" ref="play_dao"></property>
 	</bean>
+
+	
 
 
 </beans>
