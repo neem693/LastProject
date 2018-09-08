@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="play">
+
+
+<insert id="play_insert" parameterType="Play">
+insert into play(p_idx,p_date,p_score,p_rts,s_idx,t_home,t_away)
+		values(	#{p_idx},
+				#{p_date},
+				#{p_score},
+				#{p_rts},
+				#{s_idx},
+				#{t_home},
+				#{t_away}
+		
+)
+</insert>
+
+
+
+
+<update id="play_update" parameterType="Play">
+
+update play
+set p_date = #{p_date},
+	p_score = #{p_score},
+	p_rts = #{p_rts},
+	s_idx = #{s_idx},
+	t_home = #{t_home},
+	t_away = #{t_away}
+	where p_idx = #{p_idx}
+
+</update>
+
+<select id="all_count" parameterType="java.util.Map" resultType="int">
+select count(*)
+from play 
+where p_idx like concat(#{year},#{month},'%')
+</select>
+	
+
+
+
+
+</mapper>

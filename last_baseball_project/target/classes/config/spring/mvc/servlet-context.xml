@@ -33,7 +33,7 @@
 
 	<beans:bean id="BaseBallcontroller"
 		class="kr.co.pickBaseball.BaseBallController">
-		<beans:property name="service" ref="service"></beans:property>
+		<beans:property name="partyService" ref="partyService"></beans:property>
 	</beans:bean>
 
 

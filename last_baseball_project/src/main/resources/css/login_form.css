@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+
+
+.container{
+	
+	height: 300px;
+	padding:  8px;
+	width:500px;
+	text-align:center;	
+	color: #804000!important;
+	background-color: #fdf5e6 !important
+
+}
+
+.text_brown{
+	color: #795548 !important
+}
+
+.login_input {
+	
+	margin-left:90px;	
+	display: block;
+	height:35px;
+	border: none;
+	border-bottom: 2px solid #ccc;
+   	width:300px;
+    color: #000 !important;
+	background-color: #fdf5e6 !important
+    
+}
+.pading {
+
+    padding:15px;
+ 
+}
+.lobster_title {
+   
+    padding:3px;
+    font-family: "Lobster", serif;
+    font-size:30px;
+ 
+}
+
+.lobster {
+     
+    font-family: "Lobster", serif;
+    font-size:20px;
+}
+
+.btn_join {
+	margin:10px;
+	margin-right:30px;
+	border-radius: 16px;
+	border: none;
+	display: inline-block;
+	padding: 10px 18px;
+	vertical-align: middle;
+	overflow: hidden;
+	text-decoration: none;
+	color: inherit;
+	background-color: inherit;
+	text-align: center;
+	cursor: pointer;
+	white-space: nowrap
+}
+
+.btn_return {
+	margin:10px;
+	
+	border-radius: 16px;
+	border: none;
+	display: inline-block;
+	padding: 10px 18px;
+	vertical-align: middle;
+	overflow: hidden;
+	text-decoration: none;
+	color: inherit;
+	background-color: inherit;
+	text-align: center;
+	cursor: pointer;
+	white-space: nowrap
+}
+
+
+
+
+.cyan{
+	color: #000 !important;
+	background-color: #e6c4db!important
+}
+
+.cyan:hover {
+	color: #fff !important;
+	background-color: #000 !important
+}

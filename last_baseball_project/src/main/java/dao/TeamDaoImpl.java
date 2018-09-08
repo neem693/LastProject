@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import vo.TeamVo;
 
-public class TeamDaoImpl implements DaoInterface{
+public class TeamDaoImpl implements PartyDaoInerface{
 	
 	
 	SqlSession session;
@@ -92,7 +92,7 @@ public class TeamDaoImpl implements DaoInterface{
 			res += session.insert("team.team_insert",obb);
 		}
 		
-		System.out.println(res);
+		System.out.println("ÆÀ: ÀÎ¼­Æ® °¹¼ö:" + res);
 		
 		return res;
 	}
@@ -104,6 +104,12 @@ public class TeamDaoImpl implements DaoInterface{
 		
 		
 		
+		return 0;
+	}
+
+	@Override
+	public int selectCount(Object ob) {
+		// TODO Auto-generated method stub
 		return 0;
 	}
 	

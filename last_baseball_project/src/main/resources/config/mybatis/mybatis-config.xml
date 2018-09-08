@@ -7,9 +7,14 @@
 		<!-- <typeAlias type="#package.#modelname" alias="#modelname"></typeAlias> -->
 		<!-- <typeAlias type="vo.VisitVo" alias="visit"/> -->
 		<typeAlias type="vo.TeamVo" alias="Team" />
+		<typeAlias type="vo.PlayVo" alias = "Play"/>
+		<typeAlias type = "vo.Parsing_updateVo" alias = "Parsing"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="config/mybatis/mapper/team.xml" />
+		<mapper resource="config/mybatis/mapper/play.xml"/>
+		<mapper resource="config/mybatis/mapper/parsing.xml"/>
+	
 		<!--<mapper resource="config/mybatis/mapper/board.xml" /> -->
 	</mappers>
 </configuration>
