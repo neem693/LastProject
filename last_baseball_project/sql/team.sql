@@ -39,20 +39,43 @@ valuse(
 )
 
 select * from team
+order by t_rank
+
+
+
+--¿Ã½ºÅ¸´Â ¿©±âÀÖ´Ù.
 
 insert into team(t_name,t_rank,t_nom,t_win,t_lose,t_draw,t_winpo,t_leading,t_recent10,t_contn,t_home,t_away)
-valuse(
+values(
 '³ª´®',
-10,
-116,
-47,
-68,
+100,
 1,
-0.409,
-27,
-'5½Â0¹«5ÆÐ',
-'1ÆÐ',
-'25-0-34',
-'22-1-34'
+1,
+0,
+0,
+0,
+100,
+'1½Â0¹«0ÆÐ',
+'1½Â',
+'-',
+'-'
 )
 
+
+insert into team(t_name,t_rank,t_nom,t_win,t_lose,t_draw,t_winpo,t_leading,t_recent10,t_contn,t_home,t_away)
+values(
+'µå¸²',
+100,
+1,
+0,
+1,
+0,
+0,
+100,
+'0½Â0¹«1ÆÐ',
+'1ÆÐ',
+'-',
+'-'
+)
+
+--

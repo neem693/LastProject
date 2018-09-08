@@ -1,4 +1,4 @@
-package util;
+package util.parsing;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -27,7 +27,7 @@ public class MatchParsing {
 
 	public static void main(String[] args) throws Exception {
 
-		int thisyear = Myconst.DateCheck.year;
+		int thisyear = Myconst.ParsingDateCheck.YEAR;
 		int month = 9;
 		String month_str = String.format("%02d", month);
 		// System.out.println(month_str);

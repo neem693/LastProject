@@ -1,4 +1,4 @@
-package util;
+package util.parsing;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
@@ -48,12 +48,12 @@ public class TeamParsing {
 				break;
 
 			if (str.contains("<tbody") && all == 0) {
-				System.out.println("티바디가 여기있네");
+				//System.out.println("티바디가 여기있네");
 				start = true;
 				all = 1;
 			}
 			if (start && str.contains("<td")) {
-				System.out.println(str);// 여기서 println을 하면 \n이 추가 되가지고 하나씩 계속 밀려진다.
+				//System.out.println(str);// 여기서 println을 하면 \n이 추가 되가지고 하나씩 계속 밀려진다.
 				all_table_text[count][team] = str.trim();
 				team++;
 				if (team == 12) {
@@ -64,7 +64,7 @@ public class TeamParsing {
 			}
 
 			if (str.contains("/tbody")) {
-				System.out.println("티바디가 끝나네");
+				//System.out.println("티바디가 끝나네");
 				start = false;
 			}
 
@@ -187,7 +187,7 @@ public class TeamParsing {
 			for (int j = 0; j < all_table_text[i].length; j++) {
 				all_table_text[i][j] = all_table_text[i][j].replaceAll("</td>", "");
 				all_table_text[i][j] = all_table_text[i][j].replaceAll("<td.*>", "");
-				System.out.println(all_table_text[i][j]);
+				//System.out.println(all_table_text[i][j]);
 				switch (j) {
 				case 0:
 					team_vo[i].setT_rank(Integer.parseInt(all_table_text[i][j]));

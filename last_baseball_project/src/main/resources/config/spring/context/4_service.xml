@@ -6,9 +6,10 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
 
-	<bean id="partyService" class="service.ServiceTeamimpl">
+	<bean id="partyService" class="service.ServicePartyimpl">
 		<property name="team_dao" ref="team_dao"></property>
 		<property name="play_dao" ref="play_dao"></property>
+		<property name="parsing_second_dao" ref="parsing_dao"></property>
 	</bean>
 
 	

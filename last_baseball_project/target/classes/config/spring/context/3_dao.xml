@@ -14,6 +14,11 @@
 		<property name="session" ref="sql_template"></property>
 	</bean>
 
+	<bean id="parsing_dao" class="dao.parsing_update_dao">
+		<property name="session" ref="sql_template"></property>
+
+	</bean>
+
 
 
 
