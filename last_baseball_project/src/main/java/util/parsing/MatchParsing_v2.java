@@ -1,4 +1,4 @@
-package util;
+package util.parsing;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -19,17 +19,21 @@ import vo.PlayVo;
 public class MatchParsing_v2 {
 	String str_url;
 
-	public PlayVo[] matchParsing(int mon, int year) throws Exception {
+	public PlayVo[] matchParsing(int month, int thisyear) throws Exception {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date match_day;
 		Date today = new Date();
 		DateUtil dateUtil = new DateUtil();
 
-		int thisyear = year;
-		int month = mon;
 		String month_str = String.format("%02d", month);
+
+		String year_str = String.format("%d", thisyear);
+		System.out.println(month_str);
+		System.out.println(year_str);
+
 		// System.out.println(month_str);
-		String str_url = "https://www.koreabaseball.com/ws/Schedule.asmx/GetScheduleList?gameMonth=09&leId=1&seasonId=2018&srIdList=0,9&teamId=";
+		String str_url = "https://www.koreabaseball.com/ws/Schedule.asmx/GetScheduleList?gameMonth=" + month_str
+				+ "&leId=1&seasonId=" + year_str + "&srIdList=0,9&teamId=";
 		URL url = new URL(str_url);
 
 		// System.out.println(Da);
@@ -76,8 +80,7 @@ public class MatchParsing_v2 {
 
 		/*
 		 * 
-		 * 9ÀÏ¶§ 0(³¯Â¥),1(½Ã°£),2(ÆÀ,Á¡¼ö),7(°æ±âÀå),8(Ãë¼ÒµÉ °æ¿ì »çÀ¯) 
-		 * 8ÀÏ¶§ 0(½Ã°£),1(ÆÀ,Á¡¼ö),6(°æ±âÀå),7(ºñ°í Ãë¼ÒµÉ
+		 * 9ÀÏ¶§ 0(³¯Â¥),1(½Ã°£),2(ÆÀ,Á¡¼ö),7(°æ±âÀå),8(Ãë¼ÒµÉ °æ¿ì »çÀ¯) 8ÀÏ¶§ 0(½Ã°£),1(ÆÀ,Á¡¼ö),6(°æ±âÀå),7(ºñ°í Ãë¼ÒµÉ
 		 * °æ¿ì »çÀ¯) Á¤±ÔÇ¥Çö½Ä ([a-zA-Z°¡-ÆR]+)([0-9]*)vs([0-9]*)([a-zA-Z°¡-ÆR]+)
 		 */
 
@@ -112,10 +115,14 @@ public class MatchParsing_v2 {
 				m.find();
 				vo[i].setT_away(m.group(1));
 				vo[i].setT_home(m.group(4));
-				if (m.group(2).equals("")) {
+				match_day = format.parse(day_time); // ÇöÀç µ¥ÀÌÆ®(date)¸¦ ¹Þ´Â ¼ø°£ ÀÌÁ¦ °Ë»ç¸¦ ÇÑ´Ù.
+				if (dateUtil.isToday(match_day)&&m.group(2).equals("0")&&m.group(3).equals("0"))// ¿À´ÃÀÎ°¡?(¿À´Ã ³¯Â¥·Î °æ±âÇÏ³ª?)
+				{
+					vo[i].setP_rts("-");
+					vo[i].setP_score("T"); // ¿À´ÃÀÌ¶ó´Â ÀÇ¹ÌÀÇ T
+				} else if (m.group(2).equals("")) {// Á¤±ÔÇ¥Çö½Ä Ã¼Å©ÇÏ´Â ºÎºÐ¿¡ ¾Æ¹«°Íµµ ¾ø´Â°¡?
 
-					match_day = format.parse(day_time);
-					if (dateUtil.isBeforeDay(match_day, today)) {
+					if (dateUtil.isBeforeDay(match_day, today)) {// ÀÌÀüÀÎÁö ¾ÕÀ¸·ÎÀÎÁö¿¡ µû¶ó¼­ (¿ìÃµÃë¼Ò-´Þ¶óÁü-)(¿¹Á¤)À¸·Î ³ª´¶´Ù.
 						vo[i].setP_rts(match_text[i][8]);
 						vo[i].setP_score("C");
 					} else {
@@ -152,11 +159,15 @@ public class MatchParsing_v2 {
 				m.find();
 				vo[i].setT_away(m.group(1));
 				vo[i].setT_home(m.group(4));
+				match_day = format.parse(day_time);
+				if (dateUtil.isToday(match_day)&&m.group(2).equals("0")&&m.group(3).equals("0"))// ¿À´ÃÀÎ°¡?(¿À´Ã ³¯Â¥·Î °æ±âÇÏ³ª?)
+				{
+					vo[i].setP_rts("-");
+					vo[i].setP_score("T"); // ¿À´ÃÀÌ¶ó´Â ÀÇ¹ÌÀÇ T
+				} else if (m.group(2).equals("")) {
 
-				if (m.group(2).equals("")) {
-					match_day = format.parse(day_time);
 					if (dateUtil.isBeforeDay(match_day, today)) {
-						vo[i].setP_rts(match_text[i][8]);
+						vo[i].setP_rts(match_text[i][7]);
 						vo[i].setP_score("C");
 					} else {
 

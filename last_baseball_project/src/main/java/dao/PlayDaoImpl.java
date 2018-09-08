@@ -1,22 +1,13 @@
 package dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
-import vo.TeamVo;
+public class PlayDaoImpl implements PartyDaoInerface {
 
-public class TeamDaoImpl implements PartyDaoInerface{
-	
-	
 	SqlSession session;
-	
-	
-	
-	
-	
-	
-	
 
 	public SqlSession getSession() {
 		return session;
@@ -26,16 +17,9 @@ public class TeamDaoImpl implements PartyDaoInerface{
 		this.session = session;
 	}
 
-	
-	
-	
 	@Override
-	public List<TeamVo> selectList() {
+	public List selectList() {
 		// TODO Auto-generated method stub
-		
-		
-		
-		
 		return null;
 	}
 
@@ -48,11 +32,10 @@ public class TeamDaoImpl implements PartyDaoInerface{
 	@Override
 	public int selectCount() {
 		// TODO Auto-generated method stub
-		
-		int count =0;
-		count = session.selectOne("team.all_count");
-		
-		return count;
+
+		int res = session.selectOne("play.play_count");
+
+		return res;
 	}
 
 	@Override
@@ -70,48 +53,41 @@ public class TeamDaoImpl implements PartyDaoInerface{
 	@Override
 	public int update_all(Object[] ob) {
 		// TODO Auto-generated method stub
-		System.out.println("업데이트 합니다.");
-		
-		int res=0;
-		for(Object obb : ob) {
-			res += session.insert("team.team_update",obb);
-		}
-		
-		System.out.println(res);
-		
+		int res = 0;
+
+		for (Object obb : ob)
+			res += session.update("play.play_update", obb);
+		System.out.println("플레이: 업데이트 갯수:" + res);
 		return res;
-		
 	}
 
 	@Override
 	public int insert_all(Object[] ob) {
 		// TODO Auto-generated method stub
-		System.out.println("인서트 합니다.");
-		int res=0;
-		for(Object obb : ob) {
-			res += session.insert("team.team_insert",obb);
-		}
+		int res = 0;
+
 		
-		System.out.println("팀: 인서트 갯수:" + res);
-		
+		for (Object obb : ob)
+			res += session.insert("play.play_insert", obb);
+		System.out.println("플레이: 인서트 갯수:" + res);
 		return res;
 	}
 
 	@Override
 	public int delete() {
 		// TODO Auto-generated method stub
-		
-		
-		
-		
 		return 0;
 	}
 
 	@Override
 	public int selectCount(Object ob) {
 		// TODO Auto-generated method stub
-		return 0;
+		
+		
+	int res=	session.selectOne("play.all_count",ob);
+		
+		
+		return res;
 	}
-	
 
 }

@@ -1,4 +1,4 @@
-package util;
+package util.parsing;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
