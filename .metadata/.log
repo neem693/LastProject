@@ -134,6 +134,7 @@ org.eclipse.jst.jee.archive.ArchiveOpenFailureException: C:\Users\inc\.m2\reposi
 	at org.eclipse.wst.server.ui.internal.cnf.ServerDecorator.getServerStatusLabel(ServerDecorator.java:140)
 	at org.eclipse.wst.server.ui.internal.cnf.ServerDecorator.decorate(ServerDecorator.java:73)
 	at org.eclipse.ui.internal.decorators.LightweightDecoratorDefinition.decorate(LightweightDecoratorDefinition.java:259)
+<<<<<<< HEAD
 	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager$LightweightRunnable.run(LightweightDecoratorManager.java:104)
 	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
 	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager.decorate(LightweightDecoratorManager.java:377)
@@ -182,6 +183,8 @@ org.eclipse.jst.jee.archive.ArchiveOpenFailureException: C:\Users\inc\.m2\reposi
 	at org.eclipse.wst.server.ui.internal.cnf.ServerDecorator.getServerStatusLabel(ServerDecorator.java:140)
 	at org.eclipse.wst.server.ui.internal.cnf.ServerDecorator.decorate(ServerDecorator.java:73)
 	at org.eclipse.ui.internal.decorators.LightweightDecoratorDefinition.decorate(LightweightDecoratorDefinition.java:259)
+=======
+>>>>>>> parsing_match
 	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager$LightweightRunnable.run(LightweightDecoratorManager.java:104)
 	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
 	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager.decorate(LightweightDecoratorManager.java:377)
@@ -189,6 +192,57 @@ org.eclipse.jst.jee.archive.ArchiveOpenFailureException: C:\Users\inc\.m2\reposi
 	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.ensureResultCached(DecorationScheduler.java:347)
 	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.run(DecorationScheduler.java:311)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+<<<<<<< HEAD
+=======
+Caused by: java.io.FileNotFoundException: C:\Users\inc\.m2\repository\commons-logging\commons-logging\1.1.1\commons-logging-1.1.1.jar (지정된 경로를 찾을 수 없습니다)
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at org.eclipse.jst.common.internal.modulecore.util.ManifestUtilities$1.<init>(ManifestUtilities.java:259)
+	at org.eclipse.jst.common.internal.modulecore.util.ManifestUtilities.newZipFile(ManifestUtilities.java:259)
+	at org.eclipse.jst.jee.archive.internal.ArchiveUtil.newZipFile(ArchiveUtil.java:248)
+	at org.eclipse.jst.jee.archive.internal.ArchiveUtil.newZipFile(ArchiveUtil.java:234)
+	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentLoadAdapter.resetZipFile(JavaEEBinaryComponentLoadAdapter.java:67)
+	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentLoadAdapter.<init>(JavaEEBinaryComponentLoadAdapter.java:51)
+	... 31 more
+
+!ENTRY org.eclipse.jst.j2ee 4 0 2018-09-08 16:26:48.656
+!MESSAGE C:\Users\inc\.m2\repository\org\mybatis\mybatis\3.2.2\mybatis-3.2.2.jar
+!STACK 0
+org.eclipse.jst.jee.archive.ArchiveOpenFailureException: C:\Users\inc\.m2\repository\org\mybatis\mybatis\3.2.2\mybatis-3.2.2.jar
+	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentLoadAdapter.<init>(JavaEEBinaryComponentLoadAdapter.java:56)
+	at org.eclipse.jst.j2ee.internal.archive.JavaEEArchiveUtilities.openBinaryArchive(JavaEEArchiveUtilities.java:254)
+	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentHelper$ArchiveCache.openArchive(JavaEEBinaryComponentHelper.java:612)
+	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentHelper.openArchive(JavaEEBinaryComponentHelper.java:470)
+	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentHelper.getUniqueArchive(JavaEEBinaryComponentHelper.java:422)
+	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentHelper.getArchive(JavaEEBinaryComponentHelper.java:415)
+	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentHelper.getJavaEEQuickPeek(JavaEEBinaryComponentHelper.java:98)
+	at org.eclipse.jst.j2ee.project.JavaEEProjectUtilities.getJ2EEComponentType(JavaEEProjectUtilities.java:273)
+	at org.eclipse.jst.j2ee.internal.common.exportmodel.JEEHeirarchyExportParticipant.isChildModule(JEEHeirarchyExportParticipant.java:42)
+	at org.eclipse.wst.common.componentcore.internal.flat.GlobalHeirarchyParticipant.isChildModule(GlobalHeirarchyParticipant.java:41)
+	at org.eclipse.wst.common.componentcore.internal.flat.FlatVirtualComponent.isChildModule(FlatVirtualComponent.java:367)
+	at org.eclipse.wst.common.componentcore.internal.flat.FlatVirtualComponent.addUsedReferences(FlatVirtualComponent.java:305)
+	at org.eclipse.wst.common.componentcore.internal.flat.FlatVirtualComponent.treeWalk(FlatVirtualComponent.java:235)
+	at org.eclipse.wst.common.componentcore.internal.flat.FlatVirtualComponent.cacheResources(FlatVirtualComponent.java:188)
+	at org.eclipse.wst.common.componentcore.internal.flat.FlatVirtualComponent.getChildModules(FlatVirtualComponent.java:160)
+	at org.eclipse.wst.web.internal.deployables.FlatComponentDeployable.getExportModelChildren(FlatComponentDeployable.java:252)
+	at org.eclipse.wst.web.internal.deployables.FlatComponentDeployable.getModules(FlatComponentDeployable.java:263)
+	at org.eclipse.jst.server.tomcat.core.internal.TomcatServer.getChildModules(TomcatServer.java:386)
+	at org.eclipse.wst.server.core.internal.Server.getChildModules(Server.java:2647)
+	at org.eclipse.wst.server.core.internal.Server.visitModule(Server.java:3068)
+	at org.eclipse.wst.server.core.internal.Server.visit(Server.java:3049)
+	at org.eclipse.wst.server.core.internal.Server.isPublishUnknown(Server.java:1269)
+	at org.eclipse.wst.server.ui.internal.cnf.ServerDecorator.getServerStatusLabel(ServerDecorator.java:140)
+	at org.eclipse.wst.server.ui.internal.cnf.ServerDecorator.decorate(ServerDecorator.java:73)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorDefinition.decorate(LightweightDecoratorDefinition.java:259)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager$LightweightRunnable.run(LightweightDecoratorManager.java:104)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager.decorate(LightweightDecoratorManager.java:377)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager.getDecorations(LightweightDecoratorManager.java:359)
+	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.ensureResultCached(DecorationScheduler.java:347)
+	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.run(DecorationScheduler.java:311)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+>>>>>>> parsing_match
 Caused by: java.io.FileNotFoundException: C:\Users\inc\.m2\repository\org\mybatis\mybatis\3.2.2\mybatis-3.2.2.jar (지정된 경로를 찾을 수 없습니다)
 	at java.util.zip.ZipFile.open(Native Method)
 	at java.util.zip.ZipFile.<init>(Unknown Source)
@@ -488,6 +542,7 @@ Caused by: java.io.FileNotFoundException: C:\Users\inc\.m2\repository\aopallianc
 	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentLoadAdapter.resetZipFile(JavaEEBinaryComponentLoadAdapter.java:67)
 	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentLoadAdapter.<init>(JavaEEBinaryComponentLoadAdapter.java:51)
 	... 31 more
+<<<<<<< HEAD
 
 !ENTRY org.eclipse.jst.j2ee 4 0 2018-09-08 16:26:48.669
 !MESSAGE C:\Users\inc\.m2\repository\org\aspectj\aspectjweaver\1.6.11\aspectjweaver-1.6.11.jar
@@ -541,6 +596,13 @@ Caused by: java.io.FileNotFoundException: C:\Users\inc\.m2\repository\org\aspect
 !MESSAGE C:\Users\inc\.m2\repository\cglib\cglib\2.2\cglib-2.2.jar
 !STACK 0
 org.eclipse.jst.jee.archive.ArchiveOpenFailureException: C:\Users\inc\.m2\repository\cglib\cglib\2.2\cglib-2.2.jar
+=======
+
+!ENTRY org.eclipse.jst.j2ee 4 0 2018-09-08 16:26:48.669
+!MESSAGE C:\Users\inc\.m2\repository\org\aspectj\aspectjweaver\1.6.11\aspectjweaver-1.6.11.jar
+!STACK 0
+org.eclipse.jst.jee.archive.ArchiveOpenFailureException: C:\Users\inc\.m2\repository\org\aspectj\aspectjweaver\1.6.11\aspectjweaver-1.6.11.jar
+>>>>>>> parsing_match
 	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentLoadAdapter.<init>(JavaEEBinaryComponentLoadAdapter.java:56)
 	at org.eclipse.jst.j2ee.internal.archive.JavaEEArchiveUtilities.openBinaryArchive(JavaEEArchiveUtilities.java:254)
 	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentHelper$ArchiveCache.openArchive(JavaEEBinaryComponentHelper.java:612)
@@ -573,7 +635,11 @@ org.eclipse.jst.jee.archive.ArchiveOpenFailureException: C:\Users\inc\.m2\reposi
 	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.ensureResultCached(DecorationScheduler.java:347)
 	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.run(DecorationScheduler.java:311)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+<<<<<<< HEAD
 Caused by: java.io.FileNotFoundException: C:\Users\inc\.m2\repository\cglib\cglib\2.2\cglib-2.2.jar (지정된 경로를 찾을 수 없습니다)
+=======
+Caused by: java.io.FileNotFoundException: C:\Users\inc\.m2\repository\org\aspectj\aspectjweaver\1.6.11\aspectjweaver-1.6.11.jar (지정된 경로를 찾을 수 없습니다)
+>>>>>>> parsing_match
 	at java.util.zip.ZipFile.open(Native Method)
 	at java.util.zip.ZipFile.<init>(Unknown Source)
 	at java.util.zip.ZipFile.<init>(Unknown Source)
@@ -585,10 +651,17 @@ Caused by: java.io.FileNotFoundException: C:\Users\inc\.m2\repository\cglib\cgli
 	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentLoadAdapter.<init>(JavaEEBinaryComponentLoadAdapter.java:51)
 	... 31 more
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.jst.j2ee 4 0 2018-09-08 16:26:48.673
 !MESSAGE C:\Users\inc\.m2\repository\asm\asm\3.1\asm-3.1.jar
 !STACK 0
 org.eclipse.jst.jee.archive.ArchiveOpenFailureException: C:\Users\inc\.m2\repository\asm\asm\3.1\asm-3.1.jar
+=======
+!ENTRY org.eclipse.jst.j2ee 4 0 2018-09-08 16:26:48.671
+!MESSAGE C:\Users\inc\.m2\repository\cglib\cglib\2.2\cglib-2.2.jar
+!STACK 0
+org.eclipse.jst.jee.archive.ArchiveOpenFailureException: C:\Users\inc\.m2\repository\cglib\cglib\2.2\cglib-2.2.jar
+>>>>>>> parsing_match
 	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentLoadAdapter.<init>(JavaEEBinaryComponentLoadAdapter.java:56)
 	at org.eclipse.jst.j2ee.internal.archive.JavaEEArchiveUtilities.openBinaryArchive(JavaEEArchiveUtilities.java:254)
 	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentHelper$ArchiveCache.openArchive(JavaEEBinaryComponentHelper.java:612)
@@ -621,7 +694,11 @@ org.eclipse.jst.jee.archive.ArchiveOpenFailureException: C:\Users\inc\.m2\reposi
 	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.ensureResultCached(DecorationScheduler.java:347)
 	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.run(DecorationScheduler.java:311)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+<<<<<<< HEAD
 Caused by: java.io.FileNotFoundException: C:\Users\inc\.m2\repository\asm\asm\3.1\asm-3.1.jar (지정된 경로를 찾을 수 없습니다)
+=======
+Caused by: java.io.FileNotFoundException: C:\Users\inc\.m2\repository\cglib\cglib\2.2\cglib-2.2.jar (지정된 경로를 찾을 수 없습니다)
+>>>>>>> parsing_match
 	at java.util.zip.ZipFile.open(Native Method)
 	at java.util.zip.ZipFile.<init>(Unknown Source)
 	at java.util.zip.ZipFile.<init>(Unknown Source)
@@ -633,10 +710,17 @@ Caused by: java.io.FileNotFoundException: C:\Users\inc\.m2\repository\asm\asm\3.
 	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentLoadAdapter.<init>(JavaEEBinaryComponentLoadAdapter.java:51)
 	... 31 more
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.jst.j2ee 4 0 2018-09-08 16:26:48.675
 !MESSAGE C:\Users\inc\.m2\repository\mysql\mysql-connector-java\5.1.41\mysql-connector-java-5.1.41.jar
 !STACK 0
 org.eclipse.jst.jee.archive.ArchiveOpenFailureException: C:\Users\inc\.m2\repository\mysql\mysql-connector-java\5.1.41\mysql-connector-java-5.1.41.jar
+=======
+!ENTRY org.eclipse.jst.j2ee 4 0 2018-09-08 16:26:48.673
+!MESSAGE C:\Users\inc\.m2\repository\asm\asm\3.1\asm-3.1.jar
+!STACK 0
+org.eclipse.jst.jee.archive.ArchiveOpenFailureException: C:\Users\inc\.m2\repository\asm\asm\3.1\asm-3.1.jar
+>>>>>>> parsing_match
 	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentLoadAdapter.<init>(JavaEEBinaryComponentLoadAdapter.java:56)
 	at org.eclipse.jst.j2ee.internal.archive.JavaEEArchiveUtilities.openBinaryArchive(JavaEEArchiveUtilities.java:254)
 	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentHelper$ArchiveCache.openArchive(JavaEEBinaryComponentHelper.java:612)
@@ -669,7 +753,11 @@ org.eclipse.jst.jee.archive.ArchiveOpenFailureException: C:\Users\inc\.m2\reposi
 	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.ensureResultCached(DecorationScheduler.java:347)
 	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.run(DecorationScheduler.java:311)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+<<<<<<< HEAD
 Caused by: java.io.FileNotFoundException: C:\Users\inc\.m2\repository\mysql\mysql-connector-java\5.1.41\mysql-connector-java-5.1.41.jar (지정된 경로를 찾을 수 없습니다)
+=======
+Caused by: java.io.FileNotFoundException: C:\Users\inc\.m2\repository\asm\asm\3.1\asm-3.1.jar (지정된 경로를 찾을 수 없습니다)
+>>>>>>> parsing_match
 	at java.util.zip.ZipFile.open(Native Method)
 	at java.util.zip.ZipFile.<init>(Unknown Source)
 	at java.util.zip.ZipFile.<init>(Unknown Source)
@@ -681,6 +769,70 @@ Caused by: java.io.FileNotFoundException: C:\Users\inc\.m2\repository\mysql\mysq
 	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentLoadAdapter.<init>(JavaEEBinaryComponentLoadAdapter.java:51)
 	... 31 more
 
+<<<<<<< HEAD
+!ENTRY org.eclipse.jst.j2ee 4 0 2018-09-08 16:26:48.677
+!MESSAGE C:\Users\inc\.m2\repository\org\json\json\20180813\json-20180813.jar
+!STACK 0
+org.eclipse.jst.jee.archive.ArchiveOpenFailureException: C:\Users\inc\.m2\repository\org\json\json\20180813\json-20180813.jar
+=======
+!ENTRY org.eclipse.jst.j2ee 4 0 2018-09-08 16:26:48.675
+!MESSAGE C:\Users\inc\.m2\repository\mysql\mysql-connector-java\5.1.41\mysql-connector-java-5.1.41.jar
+!STACK 0
+org.eclipse.jst.jee.archive.ArchiveOpenFailureException: C:\Users\inc\.m2\repository\mysql\mysql-connector-java\5.1.41\mysql-connector-java-5.1.41.jar
+>>>>>>> parsing_match
+	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentLoadAdapter.<init>(JavaEEBinaryComponentLoadAdapter.java:56)
+	at org.eclipse.jst.j2ee.internal.archive.JavaEEArchiveUtilities.openBinaryArchive(JavaEEArchiveUtilities.java:254)
+	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentHelper$ArchiveCache.openArchive(JavaEEBinaryComponentHelper.java:612)
+	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentHelper.openArchive(JavaEEBinaryComponentHelper.java:470)
+	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentHelper.getUniqueArchive(JavaEEBinaryComponentHelper.java:422)
+	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentHelper.getArchive(JavaEEBinaryComponentHelper.java:415)
+	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentHelper.getJavaEEQuickPeek(JavaEEBinaryComponentHelper.java:98)
+	at org.eclipse.jst.j2ee.project.JavaEEProjectUtilities.getJ2EEComponentType(JavaEEProjectUtilities.java:273)
+	at org.eclipse.jst.j2ee.internal.common.exportmodel.JEEHeirarchyExportParticipant.isChildModule(JEEHeirarchyExportParticipant.java:42)
+	at org.eclipse.wst.common.componentcore.internal.flat.GlobalHeirarchyParticipant.isChildModule(GlobalHeirarchyParticipant.java:41)
+	at org.eclipse.wst.common.componentcore.internal.flat.FlatVirtualComponent.isChildModule(FlatVirtualComponent.java:367)
+	at org.eclipse.wst.common.componentcore.internal.flat.FlatVirtualComponent.addUsedReferences(FlatVirtualComponent.java:305)
+	at org.eclipse.wst.common.componentcore.internal.flat.FlatVirtualComponent.treeWalk(FlatVirtualComponent.java:235)
+	at org.eclipse.wst.common.componentcore.internal.flat.FlatVirtualComponent.cacheResources(FlatVirtualComponent.java:188)
+	at org.eclipse.wst.common.componentcore.internal.flat.FlatVirtualComponent.getChildModules(FlatVirtualComponent.java:160)
+	at org.eclipse.wst.web.internal.deployables.FlatComponentDeployable.getExportModelChildren(FlatComponentDeployable.java:252)
+	at org.eclipse.wst.web.internal.deployables.FlatComponentDeployable.getModules(FlatComponentDeployable.java:263)
+	at org.eclipse.jst.server.tomcat.core.internal.TomcatServer.getChildModules(TomcatServer.java:386)
+	at org.eclipse.wst.server.core.internal.Server.getChildModules(Server.java:2647)
+	at org.eclipse.wst.server.core.internal.Server.visitModule(Server.java:3068)
+	at org.eclipse.wst.server.core.internal.Server.visit(Server.java:3049)
+	at org.eclipse.wst.server.core.internal.Server.isPublishUnknown(Server.java:1269)
+	at org.eclipse.wst.server.ui.internal.cnf.ServerDecorator.getServerStatusLabel(ServerDecorator.java:140)
+	at org.eclipse.wst.server.ui.internal.cnf.ServerDecorator.decorate(ServerDecorator.java:73)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorDefinition.decorate(LightweightDecoratorDefinition.java:259)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager$LightweightRunnable.run(LightweightDecoratorManager.java:104)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager.decorate(LightweightDecoratorManager.java:377)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager.getDecorations(LightweightDecoratorManager.java:359)
+	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.ensureResultCached(DecorationScheduler.java:347)
+	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.run(DecorationScheduler.java:311)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+<<<<<<< HEAD
+Caused by: java.io.FileNotFoundException: C:\Users\inc\.m2\repository\org\json\json\20180813\json-20180813.jar (지정된 경로를 찾을 수 없습니다)
+=======
+Caused by: java.io.FileNotFoundException: C:\Users\inc\.m2\repository\mysql\mysql-connector-java\5.1.41\mysql-connector-java-5.1.41.jar (지정된 경로를 찾을 수 없습니다)
+>>>>>>> parsing_match
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at org.eclipse.jst.common.internal.modulecore.util.ManifestUtilities$1.<init>(ManifestUtilities.java:259)
+	at org.eclipse.jst.common.internal.modulecore.util.ManifestUtilities.newZipFile(ManifestUtilities.java:259)
+	at org.eclipse.jst.jee.archive.internal.ArchiveUtil.newZipFile(ArchiveUtil.java:248)
+	at org.eclipse.jst.jee.archive.internal.ArchiveUtil.newZipFile(ArchiveUtil.java:234)
+	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentLoadAdapter.resetZipFile(JavaEEBinaryComponentLoadAdapter.java:67)
+	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentLoadAdapter.<init>(JavaEEBinaryComponentLoadAdapter.java:51)
+	... 31 more
+
+<<<<<<< HEAD
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2018-09-08 16:41:25.435
+!MESSAGE No repository found at http://download.eclipse.org/usssdk/drops/nightly/N707.
+
+=======
 !ENTRY org.eclipse.jst.j2ee 4 0 2018-09-08 16:26:48.677
 !MESSAGE C:\Users\inc\.m2\repository\org\json\json\20180813\json-20180813.jar
 !STACK 0
@@ -732,15 +884,23 @@ Caused by: java.io.FileNotFoundException: C:\Users\inc\.m2\repository\org\json\j
 !ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2018-09-08 16:41:25.435
 !MESSAGE No repository found at http://download.eclipse.org/usssdk/drops/nightly/N707.
 
+>>>>>>> parsing_match
 !ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2018-09-08 16:41:30.765
 !MESSAGE No repository found at https://sschaef.github.io/IndentGuide/update.
 
 !ENTRY org.eclipse.jface.text 2 0 2018-09-08 17:13:46.130
 !MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+<<<<<<< HEAD
 
 !ENTRY org.eclipse.jface.text 2 0 2018-09-08 17:13:46.136
 !MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
 
+=======
+
+!ENTRY org.eclipse.jface.text 2 0 2018-09-08 17:13:46.136
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+>>>>>>> parsing_match
 !ENTRY org.eclipse.ui 2 0 2018-09-08 17:21:11.003
 !MESSAGE Save Failed
 !STACK 0
@@ -990,6 +1150,7 @@ Binding(CTRL+R,
 !MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 !ENTRY org.eclipse.datatools.sqltools.sqleditor 4 0 2018-09-06 23:37:54.471
 !MESSAGE Error occurred while removing markers
 !STACK 1
@@ -1158,6 +1319,10 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.eclipse.m2e.logback.appender 2 0 2018-09-07 14:48:34.777
 !MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+=======
+!ENTRY org.eclipse.jface.text 2 0 2018-09-08 23:10:37.437
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+>>>>>>> parsing_match
 =======
 !ENTRY org.eclipse.jface.text 2 0 2018-09-08 23:10:37.437
 !MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'

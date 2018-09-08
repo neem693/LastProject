@@ -82,4 +82,7 @@ INDEX VERSION 1.130+C:\mywork\LastProject\.metadata\.plugins\org.eclipse.jdt.cor
 2459445662.index
 2669312648.index
 3519596460.index
+<<<<<<< HEAD
+>>>>>>> parsing_match
+=======
 >>>>>>> parsing_match
