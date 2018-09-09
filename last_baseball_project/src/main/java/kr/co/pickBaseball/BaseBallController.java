@@ -1,26 +1,41 @@
 package kr.co.pickBaseball;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import member.service.MemberServiceInterface;
 import myconst.Myconst;
 import service.PartyServiceInterface;
 import util.parsing.TeamParsing;
+import vo.MemberVo;
 import vo.TeamVo;
 
 @Controller
 public class BaseBallController {
 	PartyServiceInterface partyService;
-
+	
+	//회원가입 서비스 호출 객체 ( 3단계 구조)
+	MemberServiceInterface memberservice;
+	
 	@Autowired
 	HttpServletRequest request;
+
+	public MemberServiceInterface getMemberservice() {
+		return memberservice;
+	}
+
+	public void setMemberservice(MemberServiceInterface memberservice) {
+		this.memberservice = memberservice;
+	}
 
 	public PartyServiceInterface getPartyService() {
 		return partyService;
@@ -83,15 +98,39 @@ public class BaseBallController {
 	@RequestMapping("/join.do")
 	public String join() {
 
-		return Myconst.BaseBall.BASEBALL_DIR + "join_form.jsp";
+		return Myconst.Member.MEMBER_DIR + "member_join_form.jsp";
 
 	}
 
 	@RequestMapping("/login.do")
 	public String login() {
-
-		return Myconst.BaseBall.BASEBALL_DIR + "login_form.jsp";
-
+		return Myconst.Member.MEMBER_DIR + "login.jsp";
 	}
 
+	@RequestMapping("/test_list.do")
+	public String test_list(Model model) {
+	
+		List<MemberVo> list=null;
+		
+		list=memberservice.selectList();
+		
+		model.addAttribute("list",list);
+		
+		return Myconst.Member.MEMBER_DIR + "testlist.jsp";
+	}
+	
+	@RequestMapping("/test_insert.do")
+	public String member_insert(MemberVo vo) {
+	
+		vo.setM_ip(request.getRemoteAddr());
+		
+		memberservice.insert(vo);
+		
+		return "test_list.do";
+	}
+	
+	
+	
+	
+	
 }

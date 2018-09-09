@@ -7,6 +7,11 @@ public class Myconst {
 		
 	}
 	
+	public static class Member{
+		public static String MEMBER_DIR= "/WEB-INF/views/pickBaseball/input/";
+		
+	}
+	
 	
 	public static class ParsingDateCheck{
 		public static int YEAR = 2018;
