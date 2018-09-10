@@ -8,5 +8,6 @@
 </head>
 <body>
 <%=request.getContextPath()%>
-</body>
+
+${pageContext.request.contextPath}
 </html>

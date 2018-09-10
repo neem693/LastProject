@@ -10,10 +10,11 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
+<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/joonggo/joonggo.css">
 <!-- smart_editor2 -->
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script src='js/SE2B_imgupload.js' charset='utf-8'></script>
 
 <%-- <script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script> --%>
 
@@ -100,10 +101,17 @@ margin : 0 auto;
                   <label class="col-sm-2" for="inputSubject">이메일</label>
                   <div class="col-sm-10"><input type="text" class="form-control" id="inputSubject" placeholder="subject"></div><br>
                 </div>
+                
+                  <br>
+                  <div class="form-group">
+                  <label class="col-sm-2" for="inputSubject">대표이미지</label>
+                  <div class="col-sm-10"><input type="file" class="btn btn-primary" id="p_image_s" ></div><br>
+                </div>
+
 
                 <br>
-
-                    <textarea name="editor" id="editor" rows="10" cols="100"style="width: 900px; height: 500px;"></textarea>
+                      <!-- 스마트 에디터2 -->
+                    <textarea name="editor" id="editor" style="width: auto; height: 600px;" ></textarea>
 
 		</div>
 
@@ -126,7 +134,7 @@ $(function(){
     nhn.husky.EZCreator.createInIFrame({
         oAppRef: obj,
         elPlaceHolder: "editor",
-        sSkinURI: "../resources/editor/SmartEditor2Skin.html",
+        sSkinURI: "<%=request.getContextPath()%>/resources/editor/SmartEditor2Skin.html",
         htParams : {
             // 툴바 사용 여부
             bUseToolbar : true,            
