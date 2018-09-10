@@ -7,14 +7,14 @@
 
 	<!-- 입고 dao -->
 
-	<bean id="team_dao" class="dao.TeamDaoImpl">
+	<bean id="team_dao" class="dao.party.TeamDaoImpl">
 		<property name="session" ref="sql_template"></property>
 	</bean>
-	<bean id="play_dao" class="dao.PlayDaoImpl">
+	<bean id="play_dao" class="dao.party.PlayDaoImpl">
 		<property name="session" ref="sql_template"></property>
 	</bean>
 
-	<bean id="parsing_dao" class="dao.parsing_update_dao">
+	<bean id="parsing_dao" class="dao.party.parsing_update_dao">
 		<property name="session" ref="sql_template"></property>
 
 	</bean>

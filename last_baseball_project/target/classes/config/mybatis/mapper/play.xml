@@ -39,6 +39,15 @@ select count(*)
 from play 
 where p_idx like concat(#{year},#{month},'%')
 </select>
+
+
+<select id = "play_list" parameterType="java.util.Map" resultType="Play">
+
+select * from play
+where p_idx like concat(#{year_month},'%')
+
+</select>
+
 	
 
 

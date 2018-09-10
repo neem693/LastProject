@@ -1,10 +1,10 @@
-package dao;
+package dao.party;
 
 import java.util.List;
 
 public interface PartyDaoInerface {
 	
-	List selectList();
+	List selectList(Object map);
 	Object selectOne();
 	int selectCount();
 	int selectCount(Object ob);

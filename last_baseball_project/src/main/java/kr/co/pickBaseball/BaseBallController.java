@@ -1,17 +1,21 @@
 package kr.co.pickBaseball;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import myconst.Myconst;
-import service.PartyServiceInterface;
+import service.party.PartyServiceInterface;
 import util.parsing.TeamParsing;
 import vo.TeamVo;
 
@@ -45,7 +49,7 @@ public class BaseBallController {
 			System.out.println("지금은 파싱을 할 수 없습니다.(맞는 월이 아님, n시간 카운트가 안지남)");
 		else if (res == -1)
 			System.out.println("파싱 오류발생");
-		
+
 		System.out.println("----------파싱작업끝----------");
 
 	}
@@ -92,6 +96,26 @@ public class BaseBallController {
 
 		return Myconst.BaseBall.BASEBALL_DIR + "login_form.jsp";
 
+	}
+
+	@RequestMapping("/party/party_list.do")
+	public String party_list(String year, String month, Model model) {
+
+		if (year == null && month == null) {
+			year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+			month = String.valueOf(Calendar.getInstance().get(Calendar.MONTH) + 1);
+		}
+
+		List list = partyService.take_play_list(year, month);
+		Map map;
+		// String cal = partyService.make_cal(list);
+		model.addAttribute("list", list);
+		map = partyService.getWeekday(list);
+		// System.out.println(first_day);
+		model.addAttribute("first_day", map.get("first_day"));
+		model.addAttribute("last_day", map.get("last_day"));
+
+		return Myconst.BaseBall.PARTY_DIR + "list.jsp";
 	}
 
 }
