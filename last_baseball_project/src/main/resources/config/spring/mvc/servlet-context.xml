@@ -35,7 +35,11 @@
 		class="kr.co.pickBaseball.BaseBallController">
 		<beans:property name="service" ref="service"></beans:property>
 	</beans:bean>
+    
+    <beans:bean id = "JoonggoController" class = "kr.co.pickBaseball.JoonggoController"> 
+    </beans:bean>
 
-
+   <!--smarteditor  -->
+  <resources location="/smarteditor/" mapping="/smarteditor/**/"></resources>
 
 </beans:beans>

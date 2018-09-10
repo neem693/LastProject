@@ -13,7 +13,7 @@
 
 <!-- smart_editor2 -->
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="/resource/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="/resource/editor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 
 <script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 
@@ -55,7 +55,7 @@ function send(f){
 	    nhn.husky.EZCreator.createInIFrame({
 	        oAppRef: obj,
 	        elPlaceHolder: "editor",
-	        sSkinURI: "/resource/editor/SmartEditor2Skin.html",
+	        sSkinURI: "/resource/smarteditor/SmartEditor2Skin.html",
 	        htParams : {
 	            // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
 	            bUseToolbar : true,            
@@ -65,17 +65,27 @@ function send(f){
 	            bUseModeChanger : true,
 	        }
 	    });
+	    
 	    //전송버튼
-	    $("#savebutton").click(function(){
+	    function submictContents(elclickedObj)
+	    {
+	    	oEditors.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
+	    	
+	    	try {
+				elClickedObj.form.submit();
+			} catch (e) {
+				// TODO: handle exception
+			}
+	    }
+	    /* $("#savebutton").click(function(){
 	        //id가 smarteditor인 textarea에 에디터에서 대입
 	        obj.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
 	        //폼 submit
-	        $("#frm").submit();
+	        
+	        $("#frm").submit(); 
 	    })
+	    */
 	})
-
-
-	출처: http://hellogk.tistory.com/108 [IT Code Storage]
 	
 }
 </script>
@@ -136,7 +146,7 @@ margin : 0 auto;
 						<form action="/submit" method="post" id="frm">
 							<textarea name="editor" id="editor" rows="10" cols="100"
 								style="width: 766px; height: 412px;"></textarea>
-							<input type="button" id="savebutton" value="서버전송" />
+							<input type="button" id="savebutton" name="savebutton" value="전송" />
 						</form>
 
 <!--                 <tr>
