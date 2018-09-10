@@ -12,7 +12,7 @@
 		<property name="parsing_second_dao" ref="parsing_dao"></property>
 	</bean>
 
-	<bean id="memberService" class="member.service.MemberService">
+	<bean id="memberService" class="service.member.MemberService">
 		<property name="member_dao" ref="member_dao"></property>
 		
 	

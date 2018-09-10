@@ -18,7 +18,7 @@
 		<property name="session" ref="sql_template"></property>
 	</bean>
 
-	<bean id="member_dao" class="member.dao.MemberDaoImpl">
+	<bean id="member_dao" class="dao.member.MemberDaoImpl">
 		<property name="session" ref="sql_template"></property>
 	</bean>
 

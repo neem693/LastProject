@@ -6,9 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale = 1.0" />
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title></title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/join_form.css">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -27,25 +25,25 @@
 		}).open();
 	}
 
-	$(document).ready(function() {
+</script>
 
-	});
 
+<script>
 	//백엔드 파트 script
 
 	function send(f) {
 
 		if (check_val() && check_input_value()) {
 			// 유효성검사
-			
-			check_id();
-			alert("ok");
 			f.method = 'POST';
-			f.action = 'test_insert.do';
+			f.action = 'test_modify.do';
 			f.submit();//전송	
 
+			alert("ok");
+
 		}
-	};
+
+	}
 
 	function check_input_value() {
 		//정규식 체크
@@ -73,14 +71,14 @@
 			alert("한글2~4글자 띄어쓰기 금지 입니다.");
 			return false;
 		}
-		if (!nick.test($('#nick').val())) {
+		if (!nick.test($('#nick_name').val())) {
 			alert("한글2~8글자 띄어쓰기 금지 입니다.");
 			return false;
 		}
 
 		if (!pwd.test($('#pwd').val())) {
 			alert("영문자 숫자포함 4자리 이상 10자리 미만입니다.");
-			return;
+			return false;
 		}
 
 		if (pwd_a != pwd_b) {
@@ -143,121 +141,57 @@
 
 		return true;
 	}
-	
-	function check_id(){
-
-		if(id==''){	alert('아이디를 입력하세요');return;}	
-		var m_id=$('#id').val();
-		
-		$.ajax({ url:'check_id.do', 
-			 data:{'m_id':m_id}, 
-			 success:function(data){ 
-				 var json=eval(data);			
-				if(json[0].result=='no'){		//배열로 받아서 비교하는게 제일 안전하다.
-						alert('이미 사용중인 아이디 입니다.');
-						return;	
-					}	 	
-				alert('사용 가능한 id입니다.');
-			 }
-			
-		});	 
-		
-
-	
-	}
-	
-	
-		function check_nick(){
-
-		if(id==''){	alert('닉네임 입력하세요');return;}	
-		
-		var m_nick=$('#nick').val();
-		
-		$.ajax({ url:'check_nick.do', 
-			 data:{'m_nick':m_nick}, 
-			 success:function(data){ 
-				 var json=eval(data);			
-				if(json[0].result=='no'){		//배열로 받아서 비교하는게 제일 안전하다.
-						alert('이미 사용중인 닉네임 입니다.');
-						return;	
-					}	 	
-				alert('사용 가능한 닉네임입니다.');
-			 }
-			
-		});	 
-		
-
-	}
-	
-	
-	
-	
-	
-	
-	
 </script>
 
 
 </head>
 
 <!--배경 이미지 셋팅-->
-<body
-	background="${pageContext.request.contextPath}/resources/images/back_join_form.png">
+<body>
 
 	<div>
-		<div style="max-width: 100%; max-heght: 100%;"></div>
 
-
-		<div class="center">
-			<label class="welcom_font">WELCOME B.B JOIN~♥♥♥</label>
-		</div>
+		<div class="center">회원 정보 수정</div>
 
 
 		<form>
 
+			<input type="hidden" name="m_idx" value="${vo.m_idx}">
+
 			<!-- input:입력창 css , input_s 입력창 크기  -->
 			<div class="center_form">
-				<span> <input id="id" name="m_id" value="a11111"
-					class="input input_s" placeholder="아이디(4~10자리)"> 
-				
-			<input class="button button_id"  type="button" value="중복확인" onclick="check_id();" >
-				</span>
-				
-				
-				 <br> <input id="name" name="m_name" value="사랑"
-					class="input input_s" placeholder="이름(한글2~4자리)"><br> 
-					
-					<input
-					id="nick" name="m_nick" value="야수" class="input input_s"
-					placeholder="닉네임(2~8자리 한글)"> 
-					
-					<input  class="button button_id" type="button" value="중복확인" onclick="check_nick();"><br>
+				<span> <input id="id" name="m_id" value="${vo.m_id}"
+					class="input input_s" placeholder="아이디(4~10자리)"> <input
+					class="button button_id" type="button" value="중복확인">
+				</span> <br> <input id="name" name="m_name" value="${vo.m_name}"
+					class="input input_s" placeholder="이름(한글2~4자리)"><br> <input
+					id="nick_name" name="m_nick" value="${vo.m_nick}"
+					class="input input_s" placeholder="닉네임(2~8자리 한글)"> <input
+					class="button button_id" type="button" value="중복확인"><br>
 
-
+			<!-- 코멘트입력   -->
+				<input id="comment" name="m_comment"
+					class="input input_s" type="text" placeholder="자기소개" value="${vo.m_comment}"> <br>
+			
 				<input id="pwd" name="m_pwd" value="aaa111" class="input input_s"
 					type="password" placeholder="비밀번호(영어 숫자 포함  4~10)"><br>
-				
 				<input id="pwd_check" value="aaa111" class="input input_s"
-					type="password" placeholder="비밀번호 확인"><br> 
-					<input	id="e_mail" value="xxx@xxx.com" name="m_email"
+					type="password" placeholder="비밀번호 확인"><br> <input
+					id="e_mail" value="${vo.m_email}" name="m_email"
 					class="input input_m" placeholder="E-MAIL(XXXX@XXXX.XXX형식입니다.)"><br>
-				<input id="tel" name="m_tel" class="input input_s" placeholder="연락처"><br>
-
-				
-				<!-- 코멘트입력   -->
-				<input id="comment" name="m_comment"
-					class="input input_s" type="text" placeholder="자기소개"> <br>
+				<input id="tel" value="${vo.m_tel}" name="m_tel"
+					class="input input_s" placeholder="연락처"><br>
 
 
 				<!-- 주소검색 버튼  -->
-				<input id="zip_code" value="홈" name="m_zip_code"
+				<input id="zip_code" value="${vo.m_zip_code}" name="m_zip_code"
 					class="input input_s" type="text" placeholder="우편번호"> <input
 					type="button" class="button button_id" value="검색" onclick="pop();"><br>
 
 
-				<input id="addr" value="홈" name="m_addr" class="input input_m"
-					placeholder="주소"> <br> <input class="input input_s"
-					type="text" placeholder="프로필사진"> <br>
+				<input id="addr" value="${vo.m_addr}" name="m_addr"
+					class="input input_m" placeholder="주소"> <br> <input
+					class="input input_s" type="text" placeholder="프로필사진"> <br>
 
 				<div class="green_text">
 					<h2 style="text-shadow: 1px 1px 0 #444">선호 팀 선택</h2>
@@ -294,8 +228,8 @@
 					class="picture_size"
 					src="${pageContext.request.contextPath}/resources/images/한화.png">
 				<input type="radio" name="t_name" value="한화"><br> <input
-					id="sub" type="button" class="button button_id"
-					value="     	   가입    	     " onclick="send(this.form);"><br>
+					id="sub" type="button" class="button button_id" value=" 수정하기"
+					onclick="send(this.form);"><br>
 		</form>
 
 	</div>
