@@ -89,15 +89,9 @@ public class BaseBallController {
 
 	@RequestMapping("/login.do")
 	public String login() {
-<<<<<<< HEAD
-
 		return Myconst.BaseBall.BASEBALL_DIR + "login_form.jsp";
 
-=======
-		
-		return Myconst.MEMBER.MEMBER + "member_login_form.jsp";
-		
->>>>>>> joonggo
+
 	}
 
 }
