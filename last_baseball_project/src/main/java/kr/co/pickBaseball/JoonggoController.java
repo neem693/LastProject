@@ -1,11 +1,7 @@
 package kr.co.pickBaseball;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import service.ServiceTeamimpl;
 
 @Controller
 public class JoonggoController {
@@ -20,5 +16,11 @@ public String insert_form()
 public String list()
 {
 	return myconst.Myconst.Joonggo.VIEW_PATH + "joonggo_list.jsp";
+}
+
+@RequestMapping("/joonggo/file.do")
+public String file()
+{
+return myconst.Myconst.Joonggo.VIEW_PATH + "NewFile.jsp";	
 }
 }

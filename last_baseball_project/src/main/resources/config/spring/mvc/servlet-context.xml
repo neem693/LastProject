@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans
-	xmlns="http://www.springframework.org/schema/mvc"
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
@@ -13,6 +12,7 @@
 
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
+	
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
 		up static resources in the ${webappRoot}/resources directory -->
@@ -24,9 +24,7 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" /> <beans:property 
 		name="suffix" value=".jsp" /> </beans:bean> -->
 
-	<!-- <context:component-scan base-package="com.ic.db" /> -->
-
-	<context:annotation-config></context:annotation-config>
+	<!-- <context:annotation-config></context:annotation-config> -->
 
 
 	<!-- <beans:bean id= "mapToJson" class="com.ic.bbs.JSONController"></beans:bean> -->
@@ -38,8 +36,8 @@
     
     <beans:bean id = "JoonggoController" class = "kr.co.pickBaseball.JoonggoController"> 
     </beans:bean>
-
-   <!--smarteditor  -->
-  <resources location="/smarteditor/" mapping="/smarteditor/**/"></resources>
-
+    
+    <beans:bean id = "FileUploadController" class = "kr.co.pickBaseball.FileUploadController">
+    </beans:bean>
+ 
 </beans:beans>

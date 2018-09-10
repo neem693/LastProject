@@ -175,7 +175,7 @@
 
  <!-- 글쓰기 -->
 <div class="pull-right">
-              <button type="submit" class="btn btn-primary">글쓰기</button>
+              <button type="submit" class="btn btn-primary" onclick ="location.href='insert_form.do'">글쓰기</button>
           </div> 
           
 

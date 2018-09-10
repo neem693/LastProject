@@ -13,12 +13,13 @@
 
 <!-- smart_editor2 -->
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="/resource/editor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 
-<script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
+<%-- <script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script> --%>
 
 <script type="text/javascript">
-function send(f){
+function send(f)
+{
 	var name = f.name.value.trim();
 	//var content = f.content.value.trim();
 	var content = CKEDITOR.instances.content.getData();
@@ -46,49 +47,10 @@ function send(f){
 	//절대주의 :  f.submit 에러는 안남 동작안된다
 	//            함수호출해야된다  
 	f.submit();
-	
-	/* smart_editor2 */
-	$(function(){
-	    //전역변수
-	    var obj = [];              
-	    //스마트에디터 프레임생성
-	    nhn.husky.EZCreator.createInIFrame({
-	        oAppRef: obj,
-	        elPlaceHolder: "editor",
-	        sSkinURI: "/resource/smarteditor/SmartEditor2Skin.html",
-	        htParams : {
-	            // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
-	            bUseToolbar : true,            
-	            // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
-	            bUseVerticalResizer : true,    
-	            // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
-	            bUseModeChanger : true,
-	        }
-	    });
-	    
-	    //전송버튼
-	    function submictContents(elclickedObj)
-	    {
-	    	oEditors.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
-	    	
-	    	try {
-				elClickedObj.form.submit();
-			} catch (e) {
-				// TODO: handle exception
-			}
-	    }
-	    /* $("#savebutton").click(function(){
-	        //id가 smarteditor인 textarea에 에디터에서 대입
-	        obj.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
-	        //폼 submit
-	        
-	        $("#frm").submit(); 
-	    })
-	    */
-	})
-	
 }
 </script>
+
+
 <style type="text/css">
 *{
 margin : 0px;
@@ -105,7 +67,7 @@ margin : 0 auto;
 </head>
 <body>
 
-<form>
+<form method="post" id="insertBoardFrm" enctype="multipart/form-data">
 	<div  id = main_insert_form align="center">
 		<div class="container">
 		<div class="panel panel-default">
@@ -141,49 +103,46 @@ margin : 0 auto;
 
                 <br>
 
-                 <!-- smart_editor2 -->
-				 <!-- action : 에디터에 입력한 html 코드를 전달받을 Controller페이지 URL -->
-						<form action="/submit" method="post" id="frm">
-							<textarea name="editor" id="editor" rows="10" cols="100"
-								style="width: 766px; height: 412px;"></textarea>
-							<input type="button" id="savebutton" name="savebutton" value="전송" />
-						</form>
+                    <textarea name="editor" id="editor" rows="10" cols="100"style="width: 900px; height: 500px;"></textarea>
 
-<!--                 <tr>
-			<th>내용</th>
-			<td colspan="3">
-			   <textarea  name="content" rows="5" cols="" style="width:98%;"></textarea>
-			   <script>
-					// Replace the <textarea id="editor1"> with a CKEditor
-					// instance, using default configuration.
-					CKEDITOR.replace( 'content', {
-					filebrowserUploadUrl: '${pageContext.request.contextPath}/ckeditorImageUpload.do'	
-					});
-					
-					CKEDITOR.on('dialogDefinition', function( ev ){
-			            var dialogName = ev.data.name;
-			            var dialogDefinition = ev.data.definition;
-			          
-			            switch (dialogName) {
-			                case 'image': //Image Properties dialog
-			                    //dialogDefinition.removeContents('info');
-			                    dialogDefinition.removeContents('Link');
-			                    dialogDefinition.removeContents('advanced');
-			                    break;
-			            }
-			        });
-				</script>
-			</td>
-		</tr> -->
 		</div>
 
 </div>
               <div class="pull-right" aling = "centor">
-              <button type="submit" class="btn btn-primary">확인</button>
+              <button type="submit" id="insertBoard" class="btn btn-primary">확인</button>
+              <!-- <input type="button" id="savebutton" name="savebutton" value="전송" />
+              <input type="button" id="insertBoard" value="등록" /> -->
                 <button type="submit" class="btn btn-default">취소</button>
           </div>
 </div>
 </div>
 </form>
 </body>
+<script type="text/javascript">
+$(function(){
+    //전역변수
+    var obj = [];              
+    //스마트에디터 프레임생성
+    nhn.husky.EZCreator.createInIFrame({
+        oAppRef: obj,
+        elPlaceHolder: "editor",
+        sSkinURI: "../resources/editor/SmartEditor2Skin.html",
+        htParams : {
+            // 툴바 사용 여부
+            bUseToolbar : true,            
+            // 입력창 크기 조절바 사용 여부
+            bUseVerticalResizer : true,    
+            // 모드 탭(Editor | HTML | TEXT) 사용 여부
+            bUseModeChanger : true,
+        }
+    });
+    //전송버튼
+    $("#insertBoard").click(function(){
+        //id가 smarteditor인 textarea에 에디터에서 대입
+        obj.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
+        //폼 submit
+        $("#insertBoardFrm").submit();
+    });
+});
+</script>
 </html>
