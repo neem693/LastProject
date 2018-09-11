@@ -7015,3 +7015,104 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.eclipse.m2e.logback.appender 2 0 2018-09-11 21:05:02.050
 !MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+!SESSION 2018-09-11 23:25:54.759 -----------------------------------------------
+eclipse.buildId=4.7.3.M20180301-0715
+java.version=1.8.0_161
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.ui 2 0 2018-09-11 23:26:47.102
+!MESSAGE Warnings while parsing the images from the 'org.eclipse.ui.commandImages' extension point.
+!SUBENTRY 1 org.eclipse.ui 2 0 2018-09-11 23:26:47.102
+!MESSAGE Cannot bind to an undefined command: plug-in='org.eclipse.lsp4e', id='org.eclipse.lsp4e.togglehighlight'
+
+!ENTRY org.eclipse.jface 2 0 2018-09-11 23:26:49.555
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-09-11 23:26:49.555
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@5629e904,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1d7914a5,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.jface.text 2 0 2018-09-11 23:26:51.696
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-09-11 23:26:51.696
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-09-11 23:26:55.446
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\UIO'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2018-09-11 23:27:14.305
+!MESSAGE No repository found at http://download.eclipse.org/usssdk/drops/nightly/N707.
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2018-09-11 23:27:18.290
+!MESSAGE No repository found at https://sschaef.github.io/IndentGuide/update.
+
+!ENTRY org.eclipse.ui 2 2 2018-09-11 23:38:28.222
+!MESSAGE org.eclipse.jdt.junit.ResultView: Deprecated relationship "fast" should be converted to "stack".
+
+!ENTRY org.eclipse.ui 2 2 2018-09-11 23:38:28.222
+!MESSAGE org.springframework.ide.eclipse.aop.ui.navigator.aopReferenceModelNavigator: Deprecated relationship "fast" should be converted to "stack".
+
+!ENTRY org.eclipse.ui 2 2 2018-09-11 23:38:28.222
+!MESSAGE org.eclipse.contribution.xref.ui.views.XReferenceView: Deprecated relationship "fast" should be converted to "stack".
+
+!ENTRY org.eclipse.wst.server.discovery 1 0 2018-09-11 23:38:41.046
+!MESSAGE already installed: org.eclipse.jst.server.generic.jonas4
+
+!ENTRY org.eclipse.wst.server.discovery 1 0 2018-09-11 23:38:41.046
+!MESSAGE already installed: org.eclipse.jst.server.generic.jonas4
+
+!ENTRY org.eclipse.jst.server.tomcat.core 4 0 2018-09-11 23:39:04.298
+!MESSAGE Could not publish server configuration for Tomcat v8.0 Server at localhost.
+!SUBENTRY 1 org.eclipse.jst.server.tomcat.core 4 0 2018-09-11 23:39:04.298
+!MESSAGE Multiple Contexts have a path of "/pickBaseball".
+
+!ENTRY org.eclipse.jst.server.tomcat.core 4 0 2018-09-11 23:39:08.454
+!MESSAGE Could not publish server configuration for Tomcat v8.0 Server at localhost.
+!SUBENTRY 1 org.eclipse.jst.server.tomcat.core 4 0 2018-09-11 23:39:08.454
+!MESSAGE Multiple Contexts have a path of "/pickBaseball".
+
+!ENTRY org.eclipse.wst.server.discovery 1 0 2018-09-11 23:39:14.329
+!MESSAGE already installed: org.eclipse.jst.server.generic.jonas4
+
+!ENTRY org.eclipse.jface.text 2 0 2018-09-11 23:43:35.142
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-09-11 23:43:35.157
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-09-11 23:55:32.854
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-09-11 23:55:32.854
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-09-12 00:04:04.530
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-09-12 00:04:04.531
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.php.debug.core 4 4 2018-09-12 00:05:22.403
+!MESSAGE class org.eclipse.php.internal.debug.core.xdebug.dbgp.session.DBGpSession : Unexpected null from readResponse waiting for Init

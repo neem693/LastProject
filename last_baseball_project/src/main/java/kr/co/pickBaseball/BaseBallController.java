@@ -117,5 +117,12 @@ public class BaseBallController {
 
 		return Myconst.BaseBall.PARTY_DIR + "list.jsp";
 	}
+	
+	@RequestMapping("/party/insert_party.do")
+	public String insert_party() {
+		
+		return Myconst.BaseBall.PARTY_DIR + "party_create.jsp";
+		
+	}
 
 }
