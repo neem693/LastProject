@@ -10,6 +10,7 @@ div#main_box {
 	height: auto;
 	/* background-color: #cccccc; */
 	margin: 0 auto;
+	display: inline-block;
 }
 
 div#header {
@@ -17,14 +18,17 @@ div#header {
 	height: 40px;
 	background-color: #ff8080;
 }
-
+.p_image{
+	display: inline-block;
+	text-align: left;
+	
+	}
+	
 .content {
-	min-height: 80%; /* 컨텐츠 최소 크기를 400px 만큼 늘린다. */
-	width: 100%;
-	height: 100%; /* auto로 하면 데이터를가 많아지면 content사이즈가 증가하면서 스크롤로이 생긴다. */
+	min-height: 50%; /* 컨텐츠 최소 크기를 400px 만큼 늘린다. */
+	width: auto;
+	height: auto; /* auto로 하면 데이터를가 많아지면 content사이즈가 증가하면서 스크롤로이 생긴다. */
    /*  border : 1px solid black; */
-
-
 	/*   background-color: #008080; */
 }
 
