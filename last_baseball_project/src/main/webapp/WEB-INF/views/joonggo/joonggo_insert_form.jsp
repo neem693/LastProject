@@ -67,7 +67,7 @@ margin : 0 auto;
 
 </head>
 <body>
-
+<input type = "hidden" name = "idx" value="${list.idx }">
 <form method="post" id="insertBoardFrm" enctype="multipart/form-data">
 	<div  id = main_insert_form align="center">
 		<div class="container">
@@ -75,7 +75,18 @@ margin : 0 auto;
         <div class="panel-heading clearfix">
           <h3 class="panel-title">글 쓰기</h3>
         </div>
-        
+        <br>
+      <div class = "category">  
+    
+        <label class="col-sm-2" for="inputTo">카테고리</label>
+        <select name="category" align = "list">
+        		<option value="">카테고리 선택</option>
+        		<option value="com001">야구방망이</option>
+        		<option value="ele002">글러브</option>
+        		<option value="sp003">야구용품</option>
+        </select>
+    </div>
+    
         <div class="panel-body">
                 <div class="form-group">
                   <label class="col-sm-2" for="inputTo">제목</label>
@@ -89,12 +100,12 @@ margin : 0 auto;
                 <br>
                   <div class="form-group">
                   <label class="col-sm-2" for="inputSubject">이름</label>
-                  <div class="col-sm-10"><input type="text" class="form-control" id="inputSubject" placeholder="subject"></div><br>
+                  <div class="col-sm-10"><input type="text" class="form-control" id="inputSubject" placeholder="subject" value="${list.m_name }"></div><br>
                 </div>
                 <br>
                   <div class="form-group">
                   <label class="col-sm-2" for="inputSubject">연락처</label>
-                  <div class="col-sm-10"><input type="text" class="form-control" id="inputSubject" placeholder="subject"></div><br>
+                  <div class="col-sm-10"><input type="text" class="form-control" id="inputSubject" placeholder="subject" value="${list.m_tel }"></div><br>
                 </div>
                 <br>
                   <div class="form-group">

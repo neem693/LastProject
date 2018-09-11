@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,12 +24,12 @@
 <!-- <div class = "center" id = "header">중고 물품</div> -->
 
 <div class = "content" >
-
+<c:forEach var = "vo" items = "${list }">
 			<ul>
-				<li><img src="${ pageContext.request.contextPath }/image/1.png">
+				<li><img src="${ pageContext.request.contextPath }/resources/photoUpload/${ vo.j_image}">
 					<div class="caption">
-						<h4>글러브</h4>
-						<p>10,000원</p>
+						<h6>${vo.j_title }</h6>
+						<p> ${vo.j_price }</p>
 						<p align="center">
 							<a href="http://bootsnipp.com/" class="btn btn-primary btn-block">Open</a>
 						</p>
@@ -36,123 +37,7 @@
 					</li>
 			</ul>
 
-<ul>
-<li>
-<img src="${ pageContext.request.contextPath }/image/1.png">
-                        <div class="caption">
-						<h4>이대호 사인볼</h4>
-						<p>10원</p>
-						<p align="center">
-							<a href="http://bootsnipp.com/" class="btn btn-primary btn-block">Open</a>
-						</p>
-					</div>
-</li>
-</ul>
-
-<ul>
-<li>
-<img src="${ pageContext.request.contextPath }/image/1.png">
-<div class="caption">
-						<h4>오재원 사인모자</h4>
-						<p>20,000원</p>
-						<p align="center">
-							<a href="http://bootsnipp.com/" class="btn btn-primary btn-block">Open</a>
-						</p>
-					</div>
-</li>
-</ul>
-
-<ul>
-<li>
-<img src="${ pageContext.request.contextPath }/image/1.png">
-<div class="caption">
-						<h4>김성근 잠바</h4>
-						<p>500,000원</p>
-						<p align="center">
-							<a href="http://bootsnipp.com/" class="btn btn-primary btn-block">Open</a>
-						</p>
-					</div>
-</li>
-</ul>
-
-<ul>
-<li>
-<img src="${ pageContext.request.contextPath }/image/1.png">
-<div class="caption">
-						<h4>김광현 사인볼</h4>
-						<p>-50,000원</p>
-						<p align="center">
-							<a href="http://bootsnipp.com/" class="btn btn-primary btn-block">Open</a>
-						</p>
-					</div>
-</li>
-</ul>
-
-<ul>
-<li>
-<img src="${ pageContext.request.contextPath }/image/1.png">
-<div class="caption">
-						<h3>Header Name</h3>
-						<p>Description</p>
-						<p align="center">
-							<a href="http://bootsnipp.com/" class="btn btn-primary btn-block">Open</a>
-						</p>
-					</div>
-</li>
-</ul>
-
-<ul>
-<li>
-<img src="${ pageContext.request.contextPath }/image/1.png">
-<div class="caption">
-						<h3>Header Name</h3>
-						<p>Description</p>
-						<p align="center">
-							<a href="http://bootsnipp.com/" class="btn btn-primary btn-block">Open</a>
-						</p>
-					</div>
-</li>
-</ul>
-
-<ul>
-<li>
-<img src="${ pageContext.request.contextPath }/image/1.png">
-<div class="caption">
-						<h3>Header Name</h3>
-						<p>Description</p>
-						<p align="center">
-							<a href="http://bootsnipp.com/" class="btn btn-primary btn-block">Open</a>
-						</p>
-					</div>
-</li>
-</ul>
-
-<ul>
-<li>
-<img src="${ pageContext.request.contextPath }/image/1.png">
-<div class="caption">
-						<h3>Header Name</h3>
-						<p>Description</p>
-						<p align="center">
-						<a href="http://bootsnipp.com/" class="btn btn-primary btn-block">Open</a>
-						</p>
-					</div>
-</li>
-</ul>
-
-<ul>
-<li>
-<img src="${ pageContext.request.contextPath }/image/1.png">
-<div class="caption">
-						<h3>Header Name</h3>
-						<p>Description</p>
-						<p align="center">
-							<a href="http://bootsnipp.com/" class="btn btn-primary btn-block">Open</a>
-						</p>
-					</div>
-</li>
-</ul>
-
+</c:forEach>
 </div>
 
 
@@ -185,7 +70,7 @@
 <select id = "search">
 <option value = "all">전체</option>
 <option value = "title">제목</option>
-<option value = "name">작성자</option>
+<option value = "nick">작성자</option>
 <option value = "title_content">제목+내용</option>
 </select>
 <input id = "search_text" value = "">

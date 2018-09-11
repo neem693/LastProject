@@ -14,14 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import vo.PhotoVo;
+import vo.JoonggoVo;
 
 @Controller
 public class FileUploadController {
 
 	//단일파일업로드
 	@RequestMapping("/photoUpload")
-	public String photoUpload(HttpServletRequest request, PhotoVo vo){
+	public String photoUpload(HttpServletRequest request, JoonggoVo vo){
 	    String callback = vo.getCallback();
 	    String callback_func = vo.getCallback_func();
 	    String file_result = "";
@@ -101,7 +101,7 @@ public class FileUploadController {
 	         sFileInfo += "&sFileName="+ filename;;
 	         
 	         /*서버 경로에 이미지가 존재해야 이미지가 뜬다 .그래서  "http://localhost:9090/pickBaseball/resources/photo_upload/" 요렇게 잡아줬다.*/
-	         sFileInfo += "&sFileURL=" + "http://localhost:9090/pickBaseball/resources/photo_upload/" + realFileNm;
+	         sFileInfo += "&sFileURL=" + "http://localhost:9191/pickBaseball/resources/photo_upload/" + realFileNm;
 	         PrintWriter print = response.getWriter();
 	         print.print(sFileInfo);
 	         print.flush();

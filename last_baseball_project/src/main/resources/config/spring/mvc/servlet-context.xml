@@ -34,9 +34,12 @@
 		<beans:property name="partyService" ref="partyService"></beans:property>
 	</beans:bean>
     
+    <!-- 중고 컨트롤러 -->
     <beans:bean id = "JoonggoController" class = "kr.co.pickBaseball.JoonggoController"> 
+    <beans:property name="joonggo_dao" ref = "joonggo_dao"/>
     </beans:bean>
     
+    <!-- 스마트에디터 파일 업로드 컨트롤러 -->
     <beans:bean id = "FileUploadController" class = "kr.co.pickBaseball.FileUploadController">
     </beans:bean>
  
