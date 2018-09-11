@@ -18,53 +18,21 @@
 
 <%-- <script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script> --%>
 
-<script type="text/javascript">	
-	$(function(){
-	    //전역변수
-	    var obj = [];              
-	    //스마트에디터 프레임생성
-	    nhn.husky.EZCreator.createInIFrame({
-	        oAppRef: obj,
-	        elPlaceHolder: "editor",
-	        sSkinURI: "<%=request.getContextPath()%>/resources/editor/SmartEditor2Skin.html",
-	        htParams : {
-	            // 툴바 사용 여부
-	            bUseToolbar : true,            
-	            // 입력창 크기 조절바 사용 여부
-	            bUseVerticalResizer : false,    
-	            // 모드 탭(Editor | HTML | TEXT) 사용 여부
-	            bUseModeChanger : true,
-	        }
-	    });
-	    //전송버튼
-	    $("#insertBoard").click(function(){
-	        //id가 smarteditor인 textarea에 에디터에서 대입
-	        obj.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
-	        //폼 submit
-	        $("#insertBoardFrm").action("insert.do");
-	        $("#insertBoardFrm").submit();
-	    });
-	});
+<script type="text/javascript">
+function send(f)
+{
+ f.action  = "insert.do";
+ 
+ f.submit();
+	
+
+
 }
 </script>
 
-
-<style type="text/css">
-*{
-margin : 0px;
-}
-div#main_insert_form{
-width : 1000px;
-heigth : auto;
-margin : 0 auto;
-}
-
-
-</style>
-
 </head>
 <body>
-<input type = "hidden" name = "idx" value="${list.idx }">
+<input type = "hidden" name = "idx" value="${list.j_idx }">
 <form method="post" id="insertBoardFrm" enctype="multipart/form-data">
 	<div  id = main_insert_form align="center">
 		<div class="container">
@@ -127,12 +95,38 @@ margin : 0 auto;
               <div class="pull-right" aling = "centor">
              <!--  <button type="submit" id="insertBoard" class="btn btn-primary">확인</button>
              <input type="button" id="savebutton" name="savebutton" value="전송" /> -->
-              <input type="button" id="insertBoard" class="btn btn-primary" value="등록" />
+              <input type="button" id="insertBoard" class="btn btn-primary" value="등록" onclick = "send(this.form)"/>
                 <button type="submit" class="btn btn-default">취소</button>
           </div>
 </div>
 </div>
 </form>
 </body>
-
+<script type="text/javascript">
+$(function(){
+    //전역변수
+    var obj = [];              
+    //스마트에디터 프레임생성
+    nhn.husky.EZCreator.createInIFrame({
+        oAppRef: obj,
+        elPlaceHolder: "editor",
+        sSkinURI: "<%=request.getContextPath()%>/resources/editor/SmartEditor2Skin.html",
+        htParams : {
+            // 툴바 사용 여부
+            bUseToolbar : true,            
+            // 입력창 크기 조절바 사용 여부
+            bUseVerticalResizer : false,    
+            // 모드 탭(Editor | HTML | TEXT) 사용 여부
+            bUseModeChanger : true,
+        }
+    });
+    //전송버튼
+    $("#insertBoard").click(function(){
+        //id가 smarteditor인 textarea에 에디터에서 대입
+        obj.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
+        //폼 submit
+        $("#insertBoardFrm").submit();
+    });
+});
+</script>
 </html>

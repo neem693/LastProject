@@ -38,13 +38,22 @@ public class JoonggoDaoImpl implements JoonggoDao  {
 	@Override
 	public JoonggoVo selectOne(int idx) {
 		// TODO Auto-generated method stub
-		return null;
+		JoonggoVo vo = null;
+		
+		vo = sqlSession.selectOne("joonggo.joonggo_one", idx);
+		
+		return vo;
 	}
 
 	@Override
 	public int insert(JoonggoVo vo) {
 		// TODO Auto-generated method stub
-		return 0;
+		
+		int res = 0;
+		
+		res = sqlSession.insert("joonggo.joonggo_insert", vo);
+		
+		return res;
 	}
 
 	@Override

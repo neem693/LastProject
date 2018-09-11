@@ -23,10 +23,10 @@
 	<!-- <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
 		<beans:property name="prefix" value="/WEB-INF/views/" /> <beans:property 
 		name="suffix" value=".jsp" /> </beans:bean> -->
-
-	<!-- <context:annotation-config></context:annotation-config> -->
-
-
+		
+    <!-- autowired을 지원하는 속성 -->
+	<context:annotation-config></context:annotation-config>
+	
 	<!-- <beans:bean id= "mapToJson" class="com.ic.bbs.JSONController"></beans:bean> -->
 
 	<beans:bean id="BaseBallcontroller"

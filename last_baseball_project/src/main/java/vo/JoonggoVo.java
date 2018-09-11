@@ -20,6 +20,7 @@ public class JoonggoVo {
     String j_content;
     int j_price;
     String j_ip;
+    String j_filename;
     String j_image;
     int j_readhits;
     String j_date;
@@ -29,6 +30,10 @@ public class JoonggoVo {
     String m_name;
     String m_tel;
     String m_nick;
+    
+    
+    
+    
 	public String getCallback() {
 		return callback;
 	}
@@ -82,6 +87,12 @@ public class JoonggoVo {
 	}
 	public void setJ_ip(String j_ip) {
 		this.j_ip = j_ip;
+	}
+	public String getJ_filename() {
+		return j_filename;
+	}
+	public void setJ_filename(String j_filename) {
+		this.j_filename = j_filename;
 	}
 	public String getJ_image() {
 		return j_image;
