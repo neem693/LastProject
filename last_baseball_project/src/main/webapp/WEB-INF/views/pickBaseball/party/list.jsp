@@ -48,10 +48,10 @@ tr, td, th {
 
 										<c:forEach var="i" begin="${n}" end="${n+4}">
 											<li>${list[i].t_away}${list[i].p_score}${list[i].t_home}</li>
-
+											<c:set var="n" value="${n+1}"></c:set>
 										</c:forEach>
 									</ul>
-									<c:set var="n" value="${n+5}"></c:set>
+
 								</c:if>
 							</td>
 

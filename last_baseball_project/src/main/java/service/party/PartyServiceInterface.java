@@ -17,7 +17,7 @@ int check_parsing();
 
 List take_play_list(String year,String month);
 
-Map getWeekday(List list);
+Map getWeekday(String year, String month);
 
 
 

@@ -201,15 +201,19 @@ public class ServicePartyimpl implements PartyServiceInterface {
 	}
 
 	@Override
-	public Map getWeekday(List list) {
+	public Map getWeekday(String year,String month) {
 		// TODO Auto-generated method stub
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		PlayVo vo = (PlayVo)list.get(0);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		
+		int year_int = Integer.parseInt(year);
+		int month_int = Integer.parseInt(month);
+		
+		String year_month = String.format("%d-%02d-01",year_int,month_int);
 		
 		Date date=null;
+	
 		try {
-			date = format.parse(vo.getP_date());
+			date = format.parse(year_month);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -219,7 +223,7 @@ public class ServicePartyimpl implements PartyServiceInterface {
 		Calendar cal=Calendar.getInstance();
 		cal.setTime(date);
 		
-		cal.set(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH) , 1);
+		//cal.set(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH) , 1);
 		int week_day = cal.get(Calendar.DAY_OF_WEEK);
 		int last_day = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 		last_day-=1;

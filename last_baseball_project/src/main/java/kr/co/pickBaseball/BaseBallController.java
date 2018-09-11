@@ -110,7 +110,7 @@ public class BaseBallController {
 		Map map;
 		// String cal = partyService.make_cal(list);
 		model.addAttribute("list", list);
-		map = partyService.getWeekday(list);
+		map = partyService.getWeekday(year,month);
 		// System.out.println(first_day);
 		model.addAttribute("first_day", map.get("first_day"));
 		model.addAttribute("last_day", map.get("last_day"));
