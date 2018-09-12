@@ -27,5 +27,8 @@ public class Myconst {
 	public static class Joonggo {
 		public static String VIEW_PATH = "/WEB-INF/views/joonggo/";
 	}
-
+	
+	public static class Main{
+		public static String VIEW_PATH = "/WEB-INF/views/main/";
+	}
 }
