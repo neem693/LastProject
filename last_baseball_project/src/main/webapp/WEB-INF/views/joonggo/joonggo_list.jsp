@@ -26,7 +26,7 @@
 <div class = "content" >
 <c:forEach var = "vo" items = "${list }">
 			<ul>
-				<li><img src="${ pageContext.request.contextPath }/resources/photo_upload/${ vo.j_image}">
+				<li><img src="${ pageContext.request.contextPath }/resources/photoUpload/${ vo.j_filename}">
 					<div class="caption">
 						<h6>${vo.j_title }</h6>
 						<p> ${vo.j_price }</p>

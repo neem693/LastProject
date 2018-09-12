@@ -30,7 +30,7 @@ function send1(f)
 </head>
 <body>
 
-<form method="get" id="insertBoardFrm" enctype="multipart/form-data">
+<form method="post" id="insertBoardFrm" enctype="multipart/form-data">
 <input type = "hidden" name = "idx" value="1">
 	<div  id = main_insert_form align="center">
 		<div class="container">
@@ -79,7 +79,7 @@ function send1(f)
                   <br>
                   <div class="form-group">
                   <label class="col-sm-2" >대표이미지</label>
-                  <div class="col-sm-10"><input type="file" name="j_image" class = "p_image"></div><br>
+                  <div class="col-sm-10"><input type="file" name="Filedata" class = "J_image"></div><br>
                 </div>
 
 
@@ -115,7 +115,7 @@ $(function(){
             // 툴바 사용 여부
             bUseToolbar : true,            
             // 입력창 크기 조절바 사용 여부
-            bUseVerticalResizer : false,    
+            bUseVerticalResizer : true,    
             // 모드 탭(Editor | HTML | TEXT) 사용 여부
             bUseModeChanger : true,
         }

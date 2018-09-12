@@ -11,14 +11,13 @@ select * from joonggo
 
 <!-- 중고 물품 등록 -->
 <insert id="joonggo_insert" parameterType="joonggo">
-insert into joonggo(j_category, j_title, j_content, j_price, j_ip, j_filename, j_image, j_readhits, j_date) values(
+insert into joonggo(j_category, j_title, j_content, j_price, j_ip, j_filename, j_readhits, j_date) values(
                                                                                               #{j_category},
                                                                                               #{j_title},
                                                                                               #{j_content},
                                                                                               #{j_price},
                                                                                               #{j_ip},
                                                                                               #{j_filename},
-                                                                                              #{j_image},
                                                                                               0,
                                                                                               NOW())
 

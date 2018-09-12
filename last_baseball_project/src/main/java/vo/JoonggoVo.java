@@ -21,7 +21,6 @@ public class JoonggoVo {
     int j_price;
     String j_ip;
     String j_filename;
-    String j_image;
     int j_readhits;
     String j_date;
     
@@ -31,6 +30,8 @@ public class JoonggoVo {
     String m_tel;
     String m_email;
     String m_nick;
+    
+    
 	public String getCallback() {
 		return callback;
 	}
@@ -91,12 +92,6 @@ public class JoonggoVo {
 	public void setJ_filename(String j_filename) {
 		this.j_filename = j_filename;
 	}
-	public String getJ_image() {
-		return j_image;
-	}
-	public void setJ_image(String j_image) {
-		this.j_image = j_image;
-	}
 	public int getJ_readhits() {
 		return j_readhits;
 	}
@@ -127,19 +122,19 @@ public class JoonggoVo {
 	public void setM_tel(String m_tel) {
 		this.m_tel = m_tel;
 	}
-	public String getM_nick() {
-		return m_nick;
-	}
-	public void setM_nick(String m_nick) {
-		this.m_nick = m_nick;
-	}
 	public String getM_email() {
 		return m_email;
 	}
 	public void setM_email(String m_email) {
 		this.m_email = m_email;
 	}
-    
+	public String getM_nick() {
+		return m_nick;
+	}
+	public void setM_nick(String m_nick) {
+		this.m_nick = m_nick;
+	}
+	
     
     
 }

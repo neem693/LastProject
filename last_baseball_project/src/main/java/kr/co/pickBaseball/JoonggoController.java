@@ -49,7 +49,16 @@ public String insert_form()
 @RequestMapping("/list.do")
 public String list(String search, String search_text, Model model)
 {
+	String web_path = "/resources/photoUpload/";
 	JoonggoVo vo = new JoonggoVo();
+	
+	
+	//디버깅 경로 확인
+	System.out.println(application.getRealPath(web_path));
+	System.out.println(   request.getRequestURI());
+    System.out.println(   request.getRequestURL());
+	//
+	
 	
 	if(search!=null && search.equals("all"))
 	{
@@ -85,14 +94,14 @@ public String insert(JoonggoVo vo, Model model) throws IllegalStateException, IO
 
 	
 	//업로드된 파일 정보 체크
-	String web_path = "resources/photo_upload/";
+	String web_path = "/resources/photoUpload/";
 	String abs_path = application.getRealPath(web_path);
 	
 	System.out.println(abs_path);
 	
 	String filename = "no_file";
 	MultipartFile Filedata = vo.getFiledata();
-/*	if(Filedata.isEmpty()==false)//업로드 화일이 있는 경우
+	if(Filedata.isEmpty()==false)//업로드 화일이 있는 경우
 	{
 	    //업로드된 화일명을 얻어오기
 		filename = Filedata.getOriginalFilename();
@@ -111,7 +120,7 @@ public String insert(JoonggoVo vo, Model model) throws IllegalStateException, IO
 		// 임시화일 => 지정된 위치로 복사
 		Filedata.transferTo(f);
 
-	}*/
+	}
 	// 업로드된 화일명을 vo넣어준다.
       vo.setJ_filename(filename);
 	

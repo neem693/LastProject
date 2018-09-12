@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import myconst.Myconst;
 import vo.JoonggoVo;
 
 @Controller
@@ -33,7 +34,7 @@ public class FileUploadController {
 	            //파일 기본경로
 	            String defaultPath = request.getSession().getServletContext().getRealPath("/");
 	            //파일 기본경로 _ 상세경로        경로 : resources\photo_upload 
-	            String path = defaultPath + "resources" + File.separator + "photo_upload" + File.separator;             
+	            String path = defaultPath + "resources" + File.separator + "photoUpload" + File.separator;             
 	            File file = new File(path);
 	            System.out.println("path:"+path);
 	            //디렉토리 존재하지 않을경우 디렉토리 생성
@@ -45,7 +46,9 @@ public class FileUploadController {
 	        ///////////////// 서버에 파일쓰기 /////////////////
 	            vo.getFiledata().transferTo(new File(path+realname));
 	            /*서버 경로에 이미지가 존재해야 이미지가 뜬다 .그래서  "http://localhost:9090/pickBaseball/resources/photo_upload/" 요렇게 잡아줬다.*/
-	            file_result += "&bNewLine=true&sFileName="+original_name+"&sFileURL=http://localhost:9090/pickBaseball/resources/photo_upload/"+realname;
+	            file_result += "&bNewLine=true&sFileName="+original_name+"&sFileURL=http://localhost:9090/pickBaseball/resources/photoUpload/"+realname;
+	        	System.out.println(   request.getRequestURI());
+	            System.out.println(   request.getRequestURL());
 	        } else {
 	            file_result += "&errstr=error";
 	        }
@@ -71,7 +74,7 @@ public class FileUploadController {
 	         //파일 기본경로
 	         String dftFilePath = request.getSession().getServletContext().getRealPath("/");
 	         //파일 기본경로 _ 상세경로 경로 : resources\photo_upload 
-	         String filePath = dftFilePath + "resources" + File.separator + "photo_upload" + File.separator;
+	         String filePath = dftFilePath + "resources" + File.separator + "photoUpload" + File.separator;
 	         File file = new File(filePath);
 	         if(!file.exists()) {
 	            file.mkdirs();
@@ -98,10 +101,12 @@ public class FileUploadController {
 	         // 정보 출력
 	         sFileInfo += "&bNewLine=true";
 	         // img 태그의 title 속성을 원본파일명으로 적용시켜주기 위함
-	         sFileInfo += "&sFileName="+ filename;;
+	         sFileInfo += "&sFileName="+ filename;
 	         
+	         request.getRequestURL();
+	      
 	         /*서버 경로에 이미지가 존재해야 이미지가 뜬다 .그래서  "http://localhost:9090/pickBaseball/resources/photo_upload/" 요렇게 잡아줬다.*/
-	         sFileInfo += "&sFileURL=" + "http://localhost:9191/pickBaseball/resources/photo_upload/" + realFileNm;
+	         sFileInfo += "&sFileURL=" + Myconst.PhotoUpload.PHOTO_WEB_PATH_LOOT + realFileNm;
 	         PrintWriter print = response.getWriter();
 	         print.print(sFileInfo);
 	         print.flush();
