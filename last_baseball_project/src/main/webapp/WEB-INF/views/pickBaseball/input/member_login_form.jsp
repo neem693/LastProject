@@ -14,6 +14,7 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript"> 
 
+
 function pop(){
     new daum.Postcode({
         oncomplete: function(data) {
@@ -154,8 +155,7 @@ $(document).ready(function() {
 	
 		<input id="name" name="m_name" value="사랑" class="input input_s" placeholder="이름(한글2~4자리)"><br>
 		
-		
-		
+	
 	
 		<input id="nick_name" name="m_nick" value="야수" class="input input_s" placeholder="닉네임(2~8자리 한글)">	
 				<input class="button button_id" type="button" value="중복확인"><br>

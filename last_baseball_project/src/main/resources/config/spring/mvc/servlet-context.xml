@@ -34,8 +34,18 @@
 	<beans:bean id="BaseBallcontroller"
 		class="kr.co.pickBaseball.BaseBallController">
 		<beans:property name="partyService" ref="partyService"></beans:property>
+		<beans:property name="memberservice" ref="memberService"></beans:property>
+	
+	
 	</beans:bean>
+    
+    <beans:bean id = "JoonggoController" class = "kr.co.pickBaseball.JoonggoController"> 
+    </beans:bean>
+    
+    <beans:bean id = "MainController" class = "kr.co.pickBaseball.MainController"> 
+    </beans:bean>
 
-
+   <!--smarteditor  -->
+  <resources location="/smarteditor/" mapping="/smarteditor/**/"></resources>
 
 </beans:beans>

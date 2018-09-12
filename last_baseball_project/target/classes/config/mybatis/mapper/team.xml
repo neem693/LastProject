@@ -23,8 +23,6 @@ insert into team(t_name,t_rank,t_nom,t_win,t_lose,t_draw,t_winpo,t_leading,t_rec
 </insert>
 
 
-
-
 <update id="team_update" parameterType="Team">
 
 update team

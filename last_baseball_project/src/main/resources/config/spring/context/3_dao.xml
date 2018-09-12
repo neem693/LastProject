@@ -16,10 +16,11 @@
 
 	<bean id="parsing_dao" class="dao.parsing_update_dao">
 		<property name="session" ref="sql_template"></property>
-
 	</bean>
 
-
+	<bean id="member_dao" class="dao.member.MemberDaoImpl">
+		<property name="session" ref="sql_template"></property>
+	</bean>
 
 
 
