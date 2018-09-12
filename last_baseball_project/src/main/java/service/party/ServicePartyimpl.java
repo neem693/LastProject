@@ -1,11 +1,15 @@
-package service;
+package service.party;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import dao.PartyDaoInerface;
+import dao.party.PartyDaoInerface;
 import myconst.Myconst;
 import util.parsing.MatchParsing_v2;
 import util.parsing.TeamParsing;
@@ -103,10 +107,10 @@ public class ServicePartyimpl implements PartyServiceInterface {
 		Long time = (Long) parsing_second_dao.selectOne();
 		long time_m = time.longValue();
 		long current_m = System.currentTimeMillis();
-		
+
 		long def = current_m - time_m;
 		System.out.println(def + "밀리초 지났습니다. (파싱까지 대기)");
-		if (def >= (long) (Myconst.ParsingDateCheck.ONE_HOUR_MILESECOND*Myconst.ParsingDateCheck.PARSING_INTERVAL)) {// 작동시작
+		if (def >= (long) (Myconst.ParsingDateCheck.ONE_HOUR_MILESECOND * Myconst.ParsingDateCheck.PARSING_INTERVAL)) {// 작동시작
 
 			Calendar cal = Calendar.getInstance();
 			int year = cal.get(Calendar.YEAR);
@@ -138,8 +142,8 @@ public class ServicePartyimpl implements PartyServiceInterface {
 			return result;
 
 		} else
-			result =0;
-			return result;
+			result = 0;
+		return result;
 		// 1시간이 체크되어있지 않음으로 자동파싱안함
 
 	}
@@ -175,6 +179,61 @@ public class ServicePartyimpl implements PartyServiceInterface {
 			msg = "success";
 
 		return msg;
+	}
+
+	@Override
+	public List take_play_list(String year, String month) {
+		// TODO Auto-generated method stub
+
+		// int row = Myconst.Party.CALENDAR_ROW;
+		// int col =Myconst.Party.CALENDAR_COL;
+
+		int year_int = Integer.parseInt(year);
+		int month_int = Integer.parseInt(month);
+		String year_month = String.format("%d%02d", year_int, month_int);
+
+		Map map = new HashMap();
+		map.put("year_month", year_month);
+
+		List list = play_dao.selectList(map);
+
+		return list;
+	}
+
+	@Override
+	public Map getWeekday(String year,String month) {
+		// TODO Auto-generated method stub
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		
+		int year_int = Integer.parseInt(year);
+		int month_int = Integer.parseInt(month);
+		
+		String year_month = String.format("%d-%02d-01",year_int,month_int);
+		
+		Date date=null;
+	
+		try {
+			date = format.parse(year_month);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		Calendar cal=Calendar.getInstance();
+		cal.setTime(date);
+		
+		//cal.set(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH) , 1);
+		int week_day = cal.get(Calendar.DAY_OF_WEEK);
+		int last_day = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+		last_day-=1;
+		Map map = new HashMap();
+		map.put("first_day", week_day);
+		map.put("last_day", last_day);
+		
+	
+		
+		return map;
 	}
 
 }

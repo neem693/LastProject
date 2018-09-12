@@ -2,13 +2,17 @@ package myconst;
 
 public class Myconst {
 
-	public static class BaseBall {
-		public static String BASEBALL_DIR = "/WEB-INF/views/pickBaseball/";
 
-	}
+
 
 	public static class Member {
 		public static String MEMBER_DIR = "/WEB-INF/views/pickBaseball/input/";
+
+	}
+	
+	public static class BaseBall{
+		public static String BASEBALL_DIR= "/WEB-INF/views/pickBaseball/";
+		public static String PARTY_DIR = "/WEB-INF/views/pickBaseball/party/";
 
 	}
 
@@ -26,6 +30,13 @@ public class Myconst {
 
 	public static class Joonggo {
 		public static String VIEW_PATH = "/WEB-INF/views/joonggo/";
+	}
+	public static class Party{
+		
+		public static int CALENDAR_ROW =7;
+		public static int CALENDAR_COL =7;
+		
+		
 	}
 
 }

@@ -1,16 +1,13 @@
-package dao;
+package dao.party;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
-public class parsing_update_dao implements PartyDaoInerface {
-	
+public class PlayDaoImpl implements PartyDaoInerface {
+
 	SqlSession session;
-	
-	
-	
-	
 
 	public SqlSession getSession() {
 		return session;
@@ -19,35 +16,67 @@ public class parsing_update_dao implements PartyDaoInerface {
 	public void setSession(SqlSession session) {
 		this.session = session;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	@Override
-	public List selectList() {
+	public List selectList(Object map) {
 		// TODO Auto-generated method stub
-		return null;
+
+		List list = session.selectList("play.play_list", map);
+
+		return list;
 	}
 
 	@Override
 	public Object selectOne() {
 		// TODO Auto-generated method stub
-		
-		long time =0;
-		
-		time = session.selectOne("parsing.get_second");
-		
-		return time;
+		return null;
 	}
 
 	@Override
 	public int selectCount() {
+		// TODO Auto-generated method stub
+
+		int res = session.selectOne("play.play_count");
+
+		return res;
+	}
+
+	@Override
+	public int update(Object ob) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int insert(Object ob) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int update_all(Object[] ob) {
+		// TODO Auto-generated method stub
+		int res = 0;
+
+		for (Object obb : ob)
+			res += session.update("play.play_update", obb);
+		System.out.println("플레이: 업데이트 갯수:" + res);
+		return res;
+	}
+
+	@Override
+	public int insert_all(Object[] ob) {
+		// TODO Auto-generated method stub
+		int res = 0;
+
+		for (Object obb : ob)
+			res += session.insert("play.play_insert", obb);
+		System.out.println("플레이: 인서트 갯수:" + res);
+		return res;
+	}
+
+	@Override
+	public int delete() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -55,41 +84,10 @@ public class parsing_update_dao implements PartyDaoInerface {
 	@Override
 	public int selectCount(Object ob) {
 		// TODO Auto-generated method stub
-		return 0;
-	}
 
-	@Override
-	public int update(Object ob) {
-		// TODO Auto-generated method stub
-		
-		int res = session.update("parsing.update_parsing_key",ob);
-		
+		int res = session.selectOne("play.all_count", ob);
+
 		return res;
-	}
-
-	@Override
-	public int insert(Object ob) {
-		// TODO Auto-generated method stub
-		
-	return 0;
-	}
-
-	@Override
-	public int update_all(Object[] ob) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int insert_all(Object[] ob) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int delete() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }
