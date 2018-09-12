@@ -29,11 +29,8 @@ public class JoonggoVo {
     int m_idx;
     String m_name;
     String m_tel;
+    String m_email;
     String m_nick;
-    
-    
-    
-    
 	public String getCallback() {
 		return callback;
 	}
@@ -136,11 +133,13 @@ public class JoonggoVo {
 	public void setM_nick(String m_nick) {
 		this.m_nick = m_nick;
 	}
+	public String getM_email() {
+		return m_email;
+	}
+	public void setM_email(String m_email) {
+		this.m_email = m_email;
+	}
     
-	
     
-  
     
-
-
 }

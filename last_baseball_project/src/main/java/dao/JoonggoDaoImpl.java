@@ -52,7 +52,7 @@ public class JoonggoDaoImpl implements JoonggoDao  {
 		int res = 0;
 		
 		res = sqlSession.insert("joonggo.joonggo_insert", vo);
-		
+	
 		return res;
 	}
 

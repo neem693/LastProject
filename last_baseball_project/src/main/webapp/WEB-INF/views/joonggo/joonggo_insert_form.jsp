@@ -16,24 +16,22 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script src='js/SE2B_imgupload.js' charset='utf-8'></script>
 
-<%-- <script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script> --%>
 
 <script type="text/javascript">
-function send(f)
+function send1(f)
 {
  f.action  = "insert.do";
- 
+/*  f.method = 'POST'; */
  f.submit();
 	
-
-
 }
 </script>
 
 </head>
 <body>
-<input type = "hidden" name = "idx" value="${list.j_idx }">
-<form method="post" id="insertBoardFrm" enctype="multipart/form-data">
+
+<form method="get" id="insertBoardFrm" enctype="multipart/form-data">
+<input type = "hidden" name = "idx" value="1">
 	<div  id = main_insert_form align="center">
 		<div class="container">
 		<div class="panel panel-default">
@@ -44,50 +42,50 @@ function send(f)
       <div class = "category">  
     
         <label class="col-sm-2">카테고리</label>
-        <select name="category" align = "list">
+        <select name="j_category" align = "list">
         		<option value="">카테고리 선택</option>
-        		<option value="com001">야구방망이</option>
-        		<option value="ele002">글러브</option>
-        		<option value="sp003">야구용품</option>
+        		<option value="o1">야구방망이</option>
+        		<option value="o2">글러브</option>
+        		<option value="o3">야구용품</option>
         </select>
     </div>
     
         <div class="panel-body">
                 <div class="form-group">
                   <label class="col-sm-2">제목</label>
-                  <div class="col-sm-10"><input type="text" class="form-control" id="title" placeholder="제목을 입력하세요."></div><br>
+                  <div class="col-sm-10"><input type="text" class="form-control" name="j_title" placeholder="제목을 입력하세요."></div><br>
                 </div>
                 <br>
                 <div class="form-group">
                   <label class="col-sm-2">가격</label>
-                  <div class="col-sm-10"><input type="text" class="form-control" id="price" placeholder="가격을 입력하세요."></div><br>
+                  <div class="col-sm-10"><input type="text" class="form-control" name="j_price" placeholder="가격을 입력하세요."></div><br>
                 </div>
                 <br>
                   <div class="form-group">
                   <label class="col-sm-2">이름</label>
-                  <div class="col-sm-10"><input type="text" class="form-control" id="name" placeholder="이름을 입력하세요." value="${list.m_name }"></div><br>
+                  <div class="col-sm-10"><input type="text" class="form-control" name="m_name" placeholder="이름을 입력하세요." value=""></div><br>
                 </div>
                 <br>
                   <div class="form-group">
                   <label class="col-sm-2">연락처</label>
-                  <div class="col-sm-10"><input type="text" class="form-control" id="tel" placeholder="연락처를 입력하세요." value="${list.m_tel }"></div><br>
+                  <div class="col-sm-10"><input type="text" class="form-control" name="m_tel" placeholder="연락처를 입력하세요." value=""></div><br>
                 </div>
                 <br>
                   <div class="form-group">
                   <label class="col-sm-2">이메일</label>
-                  <div class="col-sm-10"><input type="text" class="form-control" id="e_mail" placeholder="E_MAIL을 입력하세요."></div><br>
+                  <div class="col-sm-10"><input type="text" class="form-control" name="m_email" placeholder="E_MAIL을 입력하세요." value=""></div><br>
                 </div>
                 
                   <br>
                   <div class="form-group">
                   <label class="col-sm-2" >대표이미지</label>
-                  <div class="col-sm-10"><input type="file" id="p_image" class = "p_image"></div><br>
+                  <div class="col-sm-10"><input type="file" name="j_image" class = "p_image"></div><br>
                 </div>
 
 
                 <br>
                       <!-- 스마트 에디터2 -->
-                    <textarea name="editor" id="editor" style="width: auto; height: auto;" ></textarea>
+                    <textarea name="j_content" id="editor" style="width: auto; height: auto;" ></textarea>
 
 		</div>
 
@@ -95,7 +93,9 @@ function send(f)
               <div class="pull-right" aling = "centor">
              <!--  <button type="submit" id="insertBoard" class="btn btn-primary">확인</button>
              <input type="button" id="savebutton" name="savebutton" value="전송" /> -->
-              <input type="button" id="insertBoard" class="btn btn-primary" value="등록" onclick = "send(this.form)"/>
+            <!--  <input type="button" id="insertBoard" value="등록" /> -->
+          <!--   <input type = "button" value = "좀 들어가" onclick = "send1(this.form)"> -->
+              <input type="button" id="insertBoard" class="btn btn-primary" value="등록" /> 
                 <button type="submit" class="btn btn-default">취소</button>
           </div>
 </div>
@@ -125,7 +125,11 @@ $(function(){
         //id가 smarteditor인 textarea에 에디터에서 대입
         obj.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
         //폼 submit
-        $("#insertBoardFrm").submit();
+        $form = $("#insertBoardFrm");
+        /* 
+        $("#formId").attr("action", "action.jsp"); */
+        $form.attr("action","insert.do");
+        $form.submit();
     });
 });
 </script>

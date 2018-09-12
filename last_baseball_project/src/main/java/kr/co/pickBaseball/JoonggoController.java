@@ -35,18 +35,15 @@ public JoonggoDao getJoonggo_dao() {
 	
 	@Autowired
 	ServletContext application;
+
+	private char[] j_title;
 	
+
+
 @RequestMapping("/insert_form.do")
 public String insert_form()
 {
 	return myconst.Myconst.Joonggo.VIEW_PATH + "joonggo_insert_form.jsp";
-}
-
-
-@RequestMapping("/file.do")
-public String file()
-{
-return myconst.Myconst.Joonggo.VIEW_PATH + "NewFile.jsp";	
 }
 
 @RequestMapping("/list.do")
@@ -85,14 +82,17 @@ public String insert(JoonggoVo vo, Model model) throws IllegalStateException, IO
 	//IP 수신
 	String ip = request.getRemoteAddr();
 	vo.setJ_ip(ip);
+
 	
 	//업로드된 파일 정보 체크
-	String web_path = "${pageContext.request.contextPath}/resources/photo_upload/";
+	String web_path = "resources/photo_upload/";
 	String abs_path = application.getRealPath(web_path);
+	
+	System.out.println(abs_path);
 	
 	String filename = "no_file";
 	MultipartFile Filedata = vo.getFiledata();
-	if(Filedata.isEmpty()==false)//업로드 화일이 있는 경우
+/*	if(Filedata.isEmpty()==false)//업로드 화일이 있는 경우
 	{
 	    //업로드된 화일명을 얻어오기
 		filename = Filedata.getOriginalFilename();
@@ -111,9 +111,9 @@ public String insert(JoonggoVo vo, Model model) throws IllegalStateException, IO
 		// 임시화일 => 지정된 위치로 복사
 		Filedata.transferTo(f);
 
-	}
+	}*/
 	// 업로드된 화일명을 vo넣어준다.
-	vo.setJ_filename(filename);
+      vo.setJ_filename(filename);
 	
 	// model통해서 DisptcherServlet에게 데이터를 넘긴다.
 	model.addAttribute("vo", vo); // 결과적으로 request binding
@@ -124,9 +124,28 @@ public String insert(JoonggoVo vo, Model model) throws IllegalStateException, IO
 	//return MyConstant.PhotoGalleryController.VIEW_PATH + "photo_list.jsp";
 	//목록보기이동
 	//response.sendRedirect("list.do");
-    return "redirect : list.do";
-	
-	
+    return "redirect:list.do";
 }
+
+@RequestMapping("/submit")
+public void submit(HttpServletRequest request){
+System.out.println("에디터 컨텐츠값:" + request.getParameter("editor"));
+}
+
+
+@RequestMapping("/form")
+public String form(){
+    return "form";
+}
+     
+/**
+ * form submit 파일결과 받기
+ * @param file
+ */
+@RequestMapping("/getFiledata")
+public void getFile(JoonggoVo file){
+    System.out.println(file.getFiledata().getOriginalFilename());
+}
+
 
 }
