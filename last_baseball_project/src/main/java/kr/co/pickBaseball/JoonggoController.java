@@ -46,10 +46,16 @@ public String insert_form()
 	return myconst.Myconst.Joonggo.VIEW_PATH + "joonggo_insert_form.jsp";
 }
 
+@RequestMapping("/view.do")
+public String view()
+{
+	return myconst.Myconst.Joonggo.VIEW_PATH + "joonggo_view.jsp";
+}
+
 @RequestMapping("/list.do")
 public String list(String search, String search_text, Model model)
 {
-	String web_path = "/resources/photoUpload/";
+	String web_path = "/resources/photo_upload/";
 	JoonggoVo vo = new JoonggoVo();
 	
 	
@@ -94,7 +100,7 @@ public String insert(JoonggoVo vo, Model model) throws IllegalStateException, IO
 
 	
 	//업로드된 파일 정보 체크
-	String web_path = "/resources/photoUpload/";
+	String web_path = "/resources/photo_upload/";
 	String abs_path = application.getRealPath(web_path);
 	
 	System.out.println(abs_path);

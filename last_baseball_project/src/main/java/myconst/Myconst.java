@@ -29,6 +29,6 @@ public class Myconst {
 	}
 
 	public static class PhotoUpload {
-		public static String PHOTO_WEB_PATH_LOOT = "/pickBaseball/resources/photoUpload/";
+		public static String PHOTO_WEB_PATH_LOOT = "/pickBaseball/resources/photo_upload/";
 	}
 }
