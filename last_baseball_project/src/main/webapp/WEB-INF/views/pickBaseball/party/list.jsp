@@ -50,7 +50,19 @@
 tr, td, th {
 	border: 1px solid black;
 }
+
+.match_day {
+	cursor: pointer;
+}
 </style>
+<script type="text/javascript">
+function showButton(m){
+	var 
+	
+}
+
+
+</script>
 </head>
 <body>
 	<c:set var="day" value="0"></c:set>
@@ -79,7 +91,8 @@ tr, td, th {
 									<td></td>
 								</c:when>
 								<c:otherwise>
-									<td>${day = day +1}<c:if test="${fisrt_day != 0}">
+									<td class="match_day" onclick="showButton(this)">${day = day +1}<c:if
+											test="${fisrt_day != 0}">
 											<c:set var="first_day" value="0"></c:set>
 										</c:if> <c:forEach var="i" begin="${n}" end="${n+4}">
 											<c:if test="${list[i].day eq day}">
@@ -110,7 +123,6 @@ tr, td, th {
 
 														</c:when>
 
-
 														<c:otherwise>
 
 															<li>${list[i].t_away}${list[i].p_score}
@@ -118,13 +130,21 @@ tr, td, th {
 															</li>
 
 														</c:otherwise>
+														
+														
+														
 
 
 													</c:choose>
 													<c:set var="n" value="${n+1}"></c:set>
 												</c:forEach>
 											</ul>
+											<ul class = "match_button">
+										<li><button>파티생성</button></li>
+										<li><button>파티리스트보기</button></li>
+										</ul>
 										</c:if>
+										
 									</td>
 
 
