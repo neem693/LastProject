@@ -13,12 +13,42 @@
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/joonggo/j_view.css">
 
 </head>
+<script type="text/javascript">
+function del(f)
+{
+	if(confirm('정말 삭제하시겠습니까?')==false)
+		return;
+	
+      f.action = "delete.do";
+      f.submit();
+	
+	}
+function send(f)
+{
+	if(confirm("정말 수정하시겠습니까")==false)
+		return;
+	
+	f.action = "update_form.do?j_idx=${vo.j_idx}";
+   /*  location.href='update_form.do?j_idx=' + j_idx;  */
+	/* f.submit(); */
+		
+	}
+	
 
+
+</script>
 <body>
 
 <form method="post">
 <input type = "hidden" name ="j_idx" value = "${vo.j_idx }">
 <div class="container">
+
+    <div class="row">
+        <div class="form-group col-md-12">
+            <img src="${pageContext.request.contextPath }/resources/photo_upload/${vo.j_filename}">
+        </div>
+    </div>
+    
     <div class="title"> 
      <label class="col-sm-10">${vo.j_title }</label>
     </div>
@@ -27,12 +57,6 @@
      <label class="col-sm-10">${ vo.j_price}</label>
     </div>
     
-    <div class="row">
-        <div class="form-group col-md-12">
-            <a><img src="${pageContext.request.contextPath }/resources/photo_upload/${vo.j_filename}"></a>
-        </div>
-    </div>
-	
 	<div class="row">
 	    <div class="col-md-4">
             <div class="input-group">
@@ -82,12 +106,12 @@
                 </div>
   
 <div class="pull-right">
-<button type="submit" class="btn btn-primary btn-block" onclick ="">삭제</button>
+<button class="btn btn-primary btn-block" onclick ="del(this.form)">삭제</button>
 </div>	
 
 
 <div class="pull-right">
-<button type="submit" class="btn btn-primary btn-block" onclick ="">수정</button>
+<button class="btn btn-primary btn-block" onclick ="send(this.form)">수정</button>
 </div>
 	</div>	
 <br>

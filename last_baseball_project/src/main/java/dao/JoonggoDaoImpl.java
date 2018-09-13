@@ -19,6 +19,7 @@ public class JoonggoDaoImpl implements JoonggoDao  {
 		this.sqlSession = sqlSession;
 	}
 
+	/*조회*/
 	@Override
 	public List<JoonggoVo> selectList() {
 		// TODO Auto-generated method stub
@@ -35,6 +36,7 @@ public class JoonggoDaoImpl implements JoonggoDao  {
 		return null;
 	}
 	
+    /*게시물 1건 얻어오기*/
 	@Override
 	public JoonggoVo selectOne(int j_idx) {
 		// TODO Auto-generated method stub
@@ -44,7 +46,7 @@ public class JoonggoDaoImpl implements JoonggoDao  {
 		
 		return vo;
 	}
-
+    /*입력*/
 	@Override
 	public int insert(JoonggoVo vo) {
 		// TODO Auto-generated method stub
@@ -56,16 +58,25 @@ public class JoonggoDaoImpl implements JoonggoDao  {
 		return res;
 	}
 
+	/*수정*/
 	@Override
 	public int update(JoonggoVo vo) {
 		// TODO Auto-generated method stub
-		return 0;
+		int res = 0;
+		
+		res = sqlSession.update("joonggo.joonggo_update", vo);
+		
+		return res;
 	}
 
+	/*삭제*/
 	@Override
 	public int delete(int j_idx) {
 		// TODO Auto-generated method stub
-		return 0;
+		int res = 0;
+		res = sqlSession.delete("joonggo.joonggo_delete", j_idx);
+		
+		return res;
 	}
 
 	@Override

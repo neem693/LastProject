@@ -26,9 +26,12 @@ public class Myconst {
 
 	public static class Joonggo {
 		public static String VIEW_PATH = "/WEB-INF/views/joonggo/";
+		
+		public static String UPDATA_VIEW_PATH = "/WEB-INF/views/joonggo/";
 	}
 
 	public static class PhotoUpload {
 		public static String PHOTO_WEB_PATH_LOOT = "/pickBaseball/resources/photo_upload/";
 	}
+
 }

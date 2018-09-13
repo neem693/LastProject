@@ -29,4 +29,22 @@ select * from joonggo where j_idx=#{j_idx}
 
 </select>
 
+
+<!-- 삭제 -->
+<delete id="joonggo_delete" parameterType="int" >
+delete from joonggo where j_idx=#{j_idx}
+</delete>
+
+<!-- 수정 -->
+<update id="joonggo_update" parameterType="joonggo">
+update joonggo set                                                                                              
+j_category = #{j_category},
+j_title =  #{j_title},
+j_content = #{j_content},
+j_price = #{j_price},
+j_ip = #{j_ip},
+j_filename = #{j_filename},
+NOW())
+</update>
+
 </mapper>
