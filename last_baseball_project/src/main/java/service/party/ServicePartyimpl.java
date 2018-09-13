@@ -120,8 +120,8 @@ public class ServicePartyimpl implements PartyServiceInterface {
 
 			int res = 0;
 			if (month != 12 && month != 1) {
-				rt1 = parsing_manager(String.valueOf(year), String.valueOf(month));
-				rt2 = parsing_manager(String.valueOf(year), String.valueOf(month - 1));
+				rt1 = parsing_manager(String.valueOf(year), String.valueOf(month));//해당 달을 파싱하고
+				rt2 = parsing_manager(String.valueOf(year), String.valueOf(month - 1)); //그 전달도 파싱합니다.
 				try {
 					team_vo = team_parsing.parsing_url();
 				} catch (IOException e) {
@@ -221,6 +221,9 @@ public class ServicePartyimpl implements PartyServiceInterface {
 		
 		
 		Calendar cal=Calendar.getInstance();
+		int today = cal.get(Calendar.DAY_OF_MONTH);
+		int this_year = cal.get(Calendar.YEAR);
+		int this_month = cal.get(Calendar.MONTH) +1;
 		cal.setTime(date);
 		
 		//cal.set(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH) , 1);
@@ -228,12 +231,33 @@ public class ServicePartyimpl implements PartyServiceInterface {
 		int last_day = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 		last_day-=1;
 		Map map = new HashMap();
+		map.put("today", today);
 		map.put("first_day", week_day);
 		map.put("last_day", last_day);
+		map.put("this_year", this_year);
+		map.put("this_month", this_month);
 		
 	
 		
 		return map;
+	}
+
+	
+//이건 파티를 생성할 때 경기를 불러올 때 사용된다.
+	@Override
+	public List take_play_list(String year, String month, String day) {
+		// TODO Auto-generated method stub
+		int year_int = Integer.parseInt(year);
+		int month_int = Integer.parseInt(month);
+		int day_int = Integer.parseInt(day);
+		String year_month = String.format("%d%02d%02d", year_int, month_int,day_int);
+
+		Map map = new HashMap();
+		map.put("year_month", year_month);
+
+		List list = play_dao.selectList(map);
+
+		return list;
 	}
 
 }
