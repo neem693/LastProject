@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 
-location.href = "view.do";
+location.href = "list.do";
 
 </script>
 </head>

@@ -27,7 +27,6 @@ insert into joonggo(j_category, j_title, j_content, j_price, j_ip, j_filename, j
 <select id="joonggo_one" parameterType="int" resultType="joonggo">
 select * from joonggo where j_idx=#{j_idx}
 
-
 </select>
 
 </mapper>

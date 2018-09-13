@@ -13,7 +13,6 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/joonggo/joonggo.css">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <style type="text/css">
 
 }
@@ -31,7 +30,7 @@
 						<h6>${vo.j_title }</h6>
 						<p> ${vo.j_price }</p>
 						<p align="center">
-							<a href="http://bootsnipp.com/" class="btn btn-primary btn-block">Open</a>
+							<a class="btn btn-primary btn-block" onclick ="location.href='view.do?j_idx=${vo.j_idx}'">Open</a>
 						</p>
 					</div>
 					</li>

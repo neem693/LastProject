@@ -15,7 +15,7 @@ public interface JoonggoDao {
 	public List<JoonggoVo> selectList(Map map);
 	
 	// 1건 조회
-	public JoonggoVo selectOne(int idx);
+	public JoonggoVo selectOne(int j_idx);
 	
 	//글쓰기(insert)
 	public int insert(JoonggoVo vo);
@@ -23,11 +23,11 @@ public interface JoonggoDao {
 	//수정(update)
 	public int update(JoonggoVo vo);
 	
-	//숙제(delete)
-	public int delete(int idx);
+	//삭제(delete)
+	public int delete(int j_idx);
 	
 	// 조회수(readhits)
-	public int readhits(int idx);
+	public int readhits(int j_idx);
 	
 	
 }

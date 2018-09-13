@@ -47,9 +47,14 @@ public String insert_form()
 }
 
 @RequestMapping("/view.do")
-public String view()
+public String view(int j_idx, Model model)
 {
-	return myconst.Myconst.Joonggo.VIEW_PATH + "joonggo_view.jsp";
+	JoonggoVo vo = joonggo_dao.selectOne(j_idx);
+	
+	model.addAttribute("vo", vo);
+	
+	
+	return myconst.Myconst.Joonggo.VIEW_PATH + "j_view_form.jsp";
 }
 
 @RequestMapping("/list.do")
@@ -147,20 +152,20 @@ public void submit(HttpServletRequest request){
 System.out.println("에디터 컨텐츠값:" + request.getParameter("editor"));
 }
 
-
+/*
 @RequestMapping("/form")
 public String form(){
     return "form";
-}
+}*/
      
 /**
  * form submit 파일결과 받기
  * @param file
- */
+ *//*
 @RequestMapping("/getFiledata")
 public void getFile(JoonggoVo file){
     System.out.println(file.getFiledata().getOriginalFilename());
 }
-
+*/
 
 }

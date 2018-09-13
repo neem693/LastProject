@@ -16,20 +16,8 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script src='js/SE2B_imgupload.js' charset='utf-8'></script>
 
-
-<script type="text/javascript">
-function send1(f)
-{
- f.action  = "insert.do";
-/*  f.method = 'POST'; */
- f.submit();
-	
-}
-</script>
-
 </head>
 <body>
-
 <form method="post" id="insertBoardFrm" enctype="multipart/form-data">
 <input type = "hidden" name = "idx" value="1">
 	<div  id = main_insert_form align="center">

@@ -36,11 +36,11 @@ public class JoonggoDaoImpl implements JoonggoDao  {
 	}
 	
 	@Override
-	public JoonggoVo selectOne(int idx) {
+	public JoonggoVo selectOne(int j_idx) {
 		// TODO Auto-generated method stub
 		JoonggoVo vo = null;
 		
-		vo = sqlSession.selectOne("joonggo.joonggo_one", idx);
+		vo = sqlSession.selectOne("joonggo.joonggo_one", j_idx);
 		
 		return vo;
 	}
@@ -63,13 +63,13 @@ public class JoonggoDaoImpl implements JoonggoDao  {
 	}
 
 	@Override
-	public int delete(int idx) {
+	public int delete(int j_idx) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int readhits(int idx) {
+	public int readhits(int j_idx) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
