@@ -136,7 +136,8 @@ function create_party(day_num){
 								</c:when>
 								<c:otherwise>
 									<td>
-										 ${day= day +1}<c:if
+									<c:set var="day" value="${day+1 }"></c:set>
+										 ${day}<c:if
 											test="${fisrt_day != 0}">
 											<c:set var="first_day" value="0"></c:set>
 										</c:if> <c:forEach var="i" begin="${n}" end="${n+4}">

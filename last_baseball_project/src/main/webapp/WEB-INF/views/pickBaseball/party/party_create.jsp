@@ -13,6 +13,10 @@
 <script
 	src="${pageContext.request.contextPath}/resources/jquery/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
+
+var map;
+
+
 	function send_form() {
 		var form_dd = document.getElementById("baseball_party");
 
@@ -46,19 +50,7 @@
 
 		////////////////해당 주소로 맵 이동////////////////////
 
-		var infowindow = new daum.maps.InfoWindow({
-			zIndex : 1
-		});
-
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		mapOption = {
-			center : new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-			level : 5
-		// 지도의 확대 레벨
-		};
-
-		// 지도를 생성합니다    
-		var map = new daum.maps.Map(mapContainer, mapOption);
+	
 
 		// 장소 검색 객체를 생성합니다
 		var ps = new daum.maps.services.Places();
@@ -87,6 +79,48 @@
 		//////////////////////////////
 		/////////선택시 해당 주소 출력///////
 		/////////////////////////////
+	
+		///////////////////여기까지/////////////////
+
+		var p_idx = play.value;
+		var res;
+		var stadium = document.getElementById("stadium");
+		var op = {
+			url : 'select_stadium.do',
+			data : {
+				'p_idx' : p_idx
+			},
+			async : false,
+			success : function(result) {
+
+				result = eval(result);
+				console.log(result);
+				res = result;
+				stadium.value = res;
+
+			}
+
+		}
+		$.ajax(op);
+
+	}
+
+	$(document).ready(function() {
+		
+		var infowindow = new daum.maps.InfoWindow({
+			zIndex : 1
+		});
+
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		mapOption = {
+			center : new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+			level : 5
+		// 지도의 확대 레벨
+		};
+
+		// 지도를 생성합니다    
+		map = new daum.maps.Map(mapContainer, mapOption);
+		
 		var geocoder = new daum.maps.services.Geocoder();
 
 		var marker = new daum.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
@@ -153,32 +187,6 @@
 				}
 			}
 		}
-		///////////////////여기까지/////////////////
-
-		var p_idx = play.value;
-		var res;
-		var stadium = document.getElementById("stadium");
-		var op = {
-			url : 'select_stadium.do',
-			data : {
-				'p_idx' : p_idx
-			},
-			async : false,
-			success : function(result) {
-
-				result = eval(result);
-				console.log(result);
-				res = result;
-				stadium.value = res;
-
-			}
-
-		}
-		$.ajax(op);
-
-	}
-
-	$(document).ready(function() {
 
 	});
 </script>
