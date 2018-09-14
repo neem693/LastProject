@@ -224,14 +224,16 @@ public class BaseBallController {
 	}
 	
 	
-	@RequestMapping(value = "/party/select_stadium.do" )
+	@RequestMapping(value = "/party/select_stadium.do" ,produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public String select_stadium(String p_idx) {
 		
 		
+		String stadium = partyService.selectStadium(p_idx);
+		String result = String.format("[{'result':'%s'}]", stadium);
 		
 		
-		return "";
+		return result;
 	}
 
 }

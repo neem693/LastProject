@@ -5,7 +5,8 @@ import java.util.List;
 public interface PartyDaoInerface {
 	
 	List selectList(Object map);
-	Object selectOne();
+	Object selectOne();	
+	Object selectOne(Object map);
 	int selectCount();
 	int selectCount(Object ob);
 	int update(Object ob);

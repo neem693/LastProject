@@ -92,4 +92,10 @@ public class parsing_update_dao implements PartyDaoInerface {
 		return 0;
 	}
 
+	@Override
+	public Object selectOne(Object map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

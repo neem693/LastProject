@@ -260,4 +260,14 @@ public class ServicePartyimpl implements PartyServiceInterface {
 		return list;
 	}
 
+	@Override
+	public String selectStadium(String p_idx) {
+		// TODO Auto-generated method stub
+		
+		String stadium =(String)play_dao.selectOne(p_idx);
+		
+		
+		return stadium;
+	}
+
 }

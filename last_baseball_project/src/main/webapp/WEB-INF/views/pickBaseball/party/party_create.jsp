@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -9,13 +9,14 @@
 <script type="text/javascript"
 	src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=1025388614b7b8c70d0002c6339d84f4&libraries=services
 "></script>
-
 <script
 	src="${pageContext.request.contextPath}/resources/jquery/jquery-3.3.1.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/daum_map.js"></script>
+
 <script type="text/javascript">
-
-var map;
-
+	var map_class;
+	var centeraddr;
 
 	function send_form() {
 		var form_dd = document.getElementById("baseball_party");
@@ -46,45 +47,17 @@ var map;
 
 	}
 
+	function search_location() {
+		var search_text = document.getElementById("search_addr").value;
+		ps.keywordSearch(search_text, placesSearchCB);
+	}
+
 	function ajax_for_stadium(play) {
-
-		////////////////ÇØ´ç ÁÖ¼Ò·Î ¸Ê ÀÌµ¿////////////////////
-
-	
-
-		// Àå¼Ò °Ë»ö °´Ã¼¸¦ »ı¼ºÇÕ´Ï´Ù
-		var ps = new daum.maps.services.Places();
-
-		// Å°¿öµå·Î Àå¼Ò¸¦ °Ë»öÇÕ´Ï´Ù
-		ps.keywordSearch('°íÃ´½ºÄ«ÀÌµ¼', placesSearchCB);
-
-		// Å°¿öµå °Ë»ö ¿Ï·á ½Ã È£ÃâµÇ´Â Äİ¹éÇÔ¼ö ÀÔ´Ï´Ù
-		function placesSearchCB(data, status, pagination) {
-			if (status === daum.maps.services.Status.OK) {
-
-				// °Ë»öµÈ Àå¼Ò À§Ä¡¸¦ ±âÁØÀ¸·Î Áöµµ ¹üÀ§¸¦ Àç¼³Á¤ÇÏ±âÀ§ÇØ
-				// LatLngBounds °´Ã¼¿¡ ÁÂÇ¥¸¦ Ãß°¡ÇÕ´Ï´Ù
-				var bounds = new daum.maps.LatLngBounds();
-
-				for (var i = 0; i < 1; i++) {
-					//displayMarker(data[i]);    
-					bounds.extend(new daum.maps.LatLng(data[i].y, data[i].x));
-				}
-
-				// °Ë»öµÈ Àå¼Ò À§Ä¡¸¦ ±âÁØÀ¸·Î Áöµµ ¹üÀ§¸¦ Àç¼³Á¤ÇÕ´Ï´Ù
-				map.setBounds(bounds);
-				map.setLevel(3);
-			}
-		}
-		//////////////////////////////
-		/////////¼±ÅÃ½Ã ÇØ´ç ÁÖ¼Ò Ãâ·Â///////
-		/////////////////////////////
-	
-		///////////////////¿©±â±îÁö/////////////////
 
 		var p_idx = play.value;
 		var res;
 		var stadium = document.getElementById("stadium");
+
 		var op = {
 			url : 'select_stadium.do',
 			data : {
@@ -95,8 +68,15 @@ var map;
 
 				result = eval(result);
 				console.log(result);
-				res = result;
+				res = result[0].result;
 				stadium.value = res;
+				/////////ê²€ìƒ‰ê²°ê³¼ë¡œ
+				ps.keywordSearch(res, placesSearchCB);
+				////////í•´ë‹¹ ë§µìœ¼ë¡œ ì´ë™ë§Œ í•¨
+				if (map_class.style.opacity == 0) {
+					map_class.style.opacity = "1";
+					centeraddr_id.style.opacity = "1";
+				}
 
 			}
 
@@ -104,93 +84,39 @@ var map;
 		$.ajax(op);
 
 	}
+	function location_pick(that) {
+		var value = that.value;
+		var addr_search = document.getElementById("search_addr");
+		var addr_search_b = document.getElementById("search_addr_b");
+		var help = document.getElementById("search_help");
+		console.log(addr_search_b.value)
+
+		addr_search.style.display = "none";
+		addr_search_b.style.display = "none";
+		help.style.display = "none"
+
+		if (value == 1) {
+			addr_search.style.display = "block";
+			addr_search_b.style.display = "block";
+			help.style.display = "block";
+
+		}
+
+	}
 
 	$(document).ready(function() {
-		
-		var infowindow = new daum.maps.InfoWindow({
-			zIndex : 1
-		});
-
-		var mapContainer = document.getElementById('map'), // Áöµµ¸¦ Ç¥½ÃÇÒ div 
-		mapOption = {
-			center : new daum.maps.LatLng(37.566826, 126.9786567), // ÁöµµÀÇ Áß½ÉÁÂÇ¥
-			level : 5
-		// ÁöµµÀÇ È®´ë ·¹º§
-		};
-
-		// Áöµµ¸¦ »ı¼ºÇÕ´Ï´Ù    
-		map = new daum.maps.Map(mapContainer, mapOption);
-		
-		var geocoder = new daum.maps.services.Geocoder();
-
-		var marker = new daum.maps.Marker(), // Å¬¸¯ÇÑ À§Ä¡¸¦ Ç¥½ÃÇÒ ¸¶Ä¿ÀÔ´Ï´Ù
-		infowindow = new daum.maps.InfoWindow({
-			zindex : 1
-		}); // Å¬¸¯ÇÑ À§Ä¡¿¡ ´ëÇÑ ÁÖ¼Ò¸¦ Ç¥½ÃÇÒ ÀÎÆ÷À©µµ¿ìÀÔ´Ï´Ù
-
-		// ÇöÀç Áöµµ Áß½ÉÁÂÇ¥·Î ÁÖ¼Ò¸¦ °Ë»öÇØ¼­ Áöµµ ÁÂÃø »ó´Ü¿¡ Ç¥½ÃÇÕ´Ï´Ù
-		searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-
-		// Áöµµ¸¦ Å¬¸¯ÇßÀ» ¶§ Å¬¸¯ À§Ä¡ ÁÂÇ¥¿¡ ´ëÇÑ ÁÖ¼ÒÁ¤º¸¸¦ Ç¥½ÃÇÏµµ·Ï ÀÌº¥Æ®¸¦ µî·ÏÇÕ´Ï´Ù
-		daum.maps.event.addListener(map, 'click', function(mouseEvent) {
-			searchDetailAddrFromCoords(mouseEvent.latLng, function(result,
-					status) {
-				if (status === daum.maps.services.Status.OK) {
-					var detailAddr = !!result[0].road_address ? '<div>µµ·Î¸íÁÖ¼Ò : '
-							+ result[0].road_address.address_name + '</div>'
-							: '';
-					detailAddr += '<div>Áö¹ø ÁÖ¼Ò : '
-							+ result[0].address.address_name + '</div>';
-
-					var content = '<div class="bAddr">'
-							+ '<span class="title">¹ıÁ¤µ¿ ÁÖ¼ÒÁ¤º¸</span>'
-							+ detailAddr + '</div>';
-
-					// ¸¶Ä¿¸¦ Å¬¸¯ÇÑ À§Ä¡¿¡ Ç¥½ÃÇÕ´Ï´Ù 
-					marker.setPosition(mouseEvent.latLng);
-					marker.setMap(map);
-
-					// ÀÎÆ÷À©µµ¿ì¿¡ Å¬¸¯ÇÑ À§Ä¡¿¡ ´ëÇÑ ¹ıÁ¤µ¿ »ó¼¼ ÁÖ¼ÒÁ¤º¸¸¦ Ç¥½ÃÇÕ´Ï´Ù
-					infowindow.setContent(content);
-					infowindow.open(map, marker); 
-				}
-			});
-		});
-
-		// Áß½É ÁÂÇ¥³ª È®´ë ¼öÁØÀÌ º¯°æµÆÀ» ¶§ Áöµµ Áß½É ÁÂÇ¥¿¡ ´ëÇÑ ÁÖ¼Ò Á¤º¸¸¦ Ç¥½ÃÇÏµµ·Ï ÀÌº¥Æ®¸¦ µî·ÏÇÕ´Ï´Ù
-		daum.maps.event.addListener(map, 'idle', function() {
-			searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-		});
-
-		function searchAddrFromCoords(coords, callback) {
-			// ÁÂÇ¥·Î ÇàÁ¤µ¿ ÁÖ¼Ò Á¤º¸¸¦ ¿äÃ»ÇÕ´Ï´Ù
-			geocoder.coord2RegionCode(coords.getLng(), coords.getLat(),
-					callback);
-		}
-
-		function searchDetailAddrFromCoords(coords, callback) {
-			// ÁÂÇ¥·Î ¹ıÁ¤µ¿ »ó¼¼ ÁÖ¼Ò Á¤º¸¸¦ ¿äÃ»ÇÕ´Ï´Ù
-			geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
-		}
-
-		// Áöµµ ÁÂÃø»ó´Ü¿¡ Áöµµ Áß½ÉÁÂÇ¥¿¡ ´ëÇÑ ÁÖ¼ÒÁ¤º¸¸¦ Ç¥ÃâÇÏ´Â ÇÔ¼öÀÔ´Ï´Ù
-		function displayCenterInfo(result, status) {
-			if (status === daum.maps.services.Status.OK) {
-				var infoDiv = document.getElementById('centerAddr');
-
-				for (var i = 0; i < result.length; i++) {
-					// ÇàÁ¤µ¿ÀÇ region_type °ªÀº 'H' ÀÌ¹Ç·Î
-					if (result[i].region_type === 'H') {
-						infoDiv.innerHTML = result[i].address_name;
-						break;
-					}
-				}
-			}
-		}
+		map_class = document.getElementsByClassName("map")[0];
+		centeraddr_id = document.getElementById("centerAddr");
+		make_map();
 
 	});
 </script>
 <style type="text/css">
+table {
+	border-collapse: collapse;
+	width: 70%;
+}
+
 .select {
 	
 }
@@ -199,64 +125,81 @@ var map;
 	display: none;
 }
 
+.addr1 {
+	width: 50%;
+}
+
+.map {
+	width: 100%;
+	height: 500px;
+}
+
+#centerAddr, .map {
+	opacity: 0;
+	transition: all 1s;
+}
+
+#search_addr, #search_addr_b, #search_help {
+	display: none;
+}
 </style>
 </head>
 <body>
 
-	<!-- »ğÀÔÇØ¾ß ÇÒ °Í. ÆÄÆ¼¸í, ³¯Â¥, ¸ñÀû, °æ±â, ÃÖ´ëÀÎ¿ø¼ö, ¸ğÀÏÀå¼Ò, ÆÄÆ¼¼³¸í  -->
+	<!-- ì‚½ì…í•´ì•¼ í•  ê²ƒ. íŒŒí‹°ëª…, ë‚ ì§œ, ëª©ì , ê²½ê¸°, ìµœëŒ€ì¸ì›ìˆ˜, ëª¨ì¼ì¥ì†Œ, íŒŒí‹°ì„¤ëª…  -->
 	<p class="date">
-		ÀÏ½Ã:<span class="year_value">${param.year}</span>³â<span
-			class="month_value">${param.month}</span>¿ù<span class="day_value">${param.day}</span>ÀÏ
+		ì¼ì‹œ:<span class="year_value">${param.year}</span>ë…„<span
+			class="month_value">${param.month}</span>ì›”<span class="day_value">${param.day}</span>ì¼
 	</p>
 
 	<form id="baseball_party">
 		<table class="form_table">
 			<tr>
-				<td>ÆÄÆ¼ ÀÌ¸§</td>
+				<td>íŒŒí‹° ì´ë¦„</td>
 				<td><input name="party_name"></td>
 			</tr>
 			<tr>
-				<td>¿¹¾àÀ¯Çü</td>
-				<td>°ñ¶óÁÖ¼¼¿ä<input type="radio" name="date" value="none"
+				<td>ì˜ˆì•½ìœ í˜•</td>
+				<td>ê³¨ë¼ì£¼ì„¸ìš”<input type="radio" name="date" value="none"
 					checked="checked" onclick="check_radio(this)"><br>
-					½Ã°£À¸·Î Àâ±â<input type="radio" name="date" value="time"
-					onclick="check_radio(this)"><br> ³¯Â¥·Î Àâ±â<input
+					ì‹œê°„ìœ¼ë¡œ ì¡ê¸°<input type="radio" name="date" value="time"
+					onclick="check_radio(this)"><br> ë‚ ì§œë¡œ ì¡ê¸°<input
 					type="radio" name="date" value="day" onclick="check_radio(this)"><br>
 					<select name="day" id="day" class="hide">
-						<option value="-1" selected="selected">°æ±â½ÃÀÛ 1ÀÏ Àü</option>
-						<option value="-2">°æ±â½ÃÀÛ 2ÀÏ Àü</option>
-						<option value="-10">°æ±â½ÃÀÛ 3ÀÏ Àü ÀÌ»ó</option>
+						<option value="-1" selected="selected">ê²½ê¸°ì‹œì‘ 1ì¼ ì „</option>
+						<option value="-2">ê²½ê¸°ì‹œì‘ 2ì¼ ì „</option>
+						<option value="-10">ê²½ê¸°ì‹œì‘ 3ì¼ ì „ ì´ìƒ</option>
 				</select> <select name="hour" id="hour" class="hide">
 
-						<option value="+2">°æ±â½ÃÀÛ 2½Ã°£ ÈÄ</option>
-						<option value="+1">°æ±â½ÃÀÛ 1½Ã°£ ÈÄ</option>
-						<option value="0">°æ±â½Ã°£¿¡ µü ¸ÂÃç¼­</option>
-						<option value="-1" selected="selected">°æ±â½ÃÀÛ 1½Ã°£ Àü</option>
-						<option value="-2">°æ±â½ÃÀÛ 2½Ã°£ Àü</option>
-						<option value="-3">°æ±â½ÃÀÛ 3½Ã°£ Àü</option>
-						<option value="-4">°æ±â½ÃÀÛ 4½Ã°£ Àü</option>
-						<option value="-5">°æ±â½ÃÀÛ 5½Ã°£ Àü</option>
-						<option value="-6">°æ±â½ÃÀÛ 6½Ã°£ Àü</option>
-						<option value="-12">±× ÀÌ»ó</option>
+						<option value="+2">ê²½ê¸°ì‹œì‘ 2ì‹œê°„ í›„</option>
+						<option value="+1">ê²½ê¸°ì‹œì‘ 1ì‹œê°„ í›„</option>
+						<option value="0">ê²½ê¸°ì‹œê°„ì— ë”± ë§ì¶°ì„œ</option>
+						<option value="-1" selected="selected">ê²½ê¸°ì‹œì‘ 1ì‹œê°„ ì „</option>
+						<option value="-2">ê²½ê¸°ì‹œì‘ 2ì‹œê°„ ì „</option>
+						<option value="-3">ê²½ê¸°ì‹œì‘ 3ì‹œê°„ ì „</option>
+						<option value="-4">ê²½ê¸°ì‹œì‘ 4ì‹œê°„ ì „</option>
+						<option value="-5">ê²½ê¸°ì‹œì‘ 5ì‹œê°„ ì „</option>
+						<option value="-6">ê²½ê¸°ì‹œì‘ 6ì‹œê°„ ì „</option>
+						<option value="-12">ê·¸ ì´ìƒ</option>
 
 				</select><br></td>
 			</tr>
 			<tr>
-				<td>ÆÄÆ¼ ¸ñÀû</td>
+				<td>íŒŒí‹° ëª©ì </td>
 				<td><select id="purpose" name="purpose"
 					onchange="check_purpose(this)">
-						<option value="0" selected="selected">¸ñÀû ¼±ÅÃ</option>
-						<option value="1">±¸Àå³» Æ¯¼ö½Ã¼³ ÀÌ¿ë</option>
-						<option value="2">½Å³ª´Â ÀÀ¿ø</option>
-						<option value="3">ÀÏ´Ü ¸ğ¿©¶ó!</option>
-						<option value="10">±âÅ¸</option>
+						<option value="0" selected="selected">ëª©ì  ì„ íƒ</option>
+						<option value="1">êµ¬ì¥ë‚´ íŠ¹ìˆ˜ì‹œì„¤ ì´ìš©</option>
+						<option value="2">ì‹ ë‚˜ëŠ” ì‘ì›</option>
+						<option value="3">ì¼ë‹¨ ëª¨ì—¬ë¼!</option>
+						<option value="10">ê¸°íƒ€</option>
 				</select></td>
 			</tr>
 			<tr>
-				<td>°æ±â ¼±ÅÃ</td>
+				<td>ê²½ê¸° ì„ íƒ</td>
 				<td><select id="select_match" name="select_match"
 					onchange="ajax_for_stadium(this);">
-						<option value="0" selected="selected">°æ±â ¼±ÅÃ</option>
+						<option value="0" selected="selected">ê²½ê¸° ì„ íƒ</option>
 						<c:forEach var="o" items="${match_list}">
 							<option value="${o.p_idx}">${o.t_away}VS${o.t_home}</option>
 						</c:forEach>
@@ -265,16 +208,31 @@ var map;
 
 
 			<tr>
-				<td>¸ğÀÏÀå¼Ò</td>
+				<td>ëª¨ì¼ì¥ì†Œ</td>
 
-				<td><label id="stadium_label">°æ±âÀå:</label><input name="stadium"
-					id="stadium" disabled="disabled"> <select name="location"
-					id="location"></select>
+				<td><label id="stadium_label">ê²½ê¸°ì¥:</label><input name="stadium"
+					id="stadium" disabled="disabled"> <select
+					onchange="location_pick(this);"><option
+							selected="selected" value="0">ê²½ê¸°ì¥ ì£¼ìœ„</option>
+						<option value="1">ê²½ê¸°ì¥ ì™¸ë¶€</option></select><input id="search_addr">
+					<button value="ë²„íŠ¼" id="search_addr_b"
+						onclick="search_location();return false;">ìœ„ì¹˜ ê²€ìƒ‰</button> <br>
+					<p id="search_help">â€»ìœ„ì¹˜ë¥¼ ê²€ìƒ‰í•˜ë©´ í•´ë‹¹ ì£¼ì†Œë¡œ ë§µì´ ì´ë™í•©ë‹ˆë‹¤.</p>
+					<p>â€»ì§€ë„ë¥¼ í´ë¦­í•˜ì—¬ ë§ˆí¬ë¥¼ ë§Œë“¤ì–´ì„œ ëª¨ì¼ ì¥ì†Œë¥¼ ëª…í™•íˆ ì§€ì •í•´ì£¼ì„¸ìš”</p> <br>
 					<div id="centerAddr"></div>
-					<div id="map" style="width: 500px; height: 400px;"> </div></td>
+					<div class="map" id="map"></div> <label>ì‹¤ì œì£¼ì†Œ:</label> <input
+					readonly="readonly" class="addr1" id="real_addr" name="addr1"><br>
+					<label>ì£¼ì†Œë©”ëª¨:</label><input class="addr2" id="some_addr"
+					name="addr2"> <input type="hidden" readonly="readonly"
+					id="coor_x" name="addr3"><input readonly="readonly"
+					type="hidden" id="coor_y" name="addr4"></td>
+				<!-- addr1ì€ [ë„ë¡œëª… ì£¼ì†Œ/]ë²ˆì§€ì£¼ì†Œ\ addr2ëŠ” ë©”ëª¨ì£¼ì†Œ \ ê°€ì¥ ì¤‘ìš”í•œ addr3ëŠ” xì¢Œí‘œ \ ë˜ ì¤‘ìš”í•œ addr4ëŠ” yì¢Œí‘œ -->
 
 
-
+			</tr>
+			<tr>
+				<td>íŒŒí‹° ì„¤ëª…</td>
+				<td></td>
 			</tr>
 
 
@@ -282,7 +240,7 @@ var map;
 		</table>
 	</form>
 
-	<button onclick="send_form();return false;">º¸³»±â</button>
+	<button onclick="send_form();return false;">ë³´ë‚´ê¸°</button>
 
 </body>
 </html>

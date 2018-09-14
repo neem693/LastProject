@@ -19,6 +19,7 @@ List take_play_list(String year,String month);
 List take_play_list(String year, String month, String day);
 
 Map getWeekday(String year, String month);
+String selectStadium(String p_idx);
 
 
 

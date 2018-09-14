@@ -90,4 +90,14 @@ public class PlayDaoImpl implements PartyDaoInerface {
 		return res;
 	}
 
+	@Override
+	public Object selectOne(Object p_idx) {
+		// TODO Auto-generated method stub
+		
+		
+		Object stadium = session.selectOne("play.select_stadium",p_idx);
+		
+		return stadium;
+	}
+
 }

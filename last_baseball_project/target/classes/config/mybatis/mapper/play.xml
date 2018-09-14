@@ -48,7 +48,12 @@ where p_idx like concat(#{year_month},'%')
 
 </select>
 
-	
+	<select id ="select_stadium" parameterType="java.lang.String" resultType="java.lang.String">
+	select s.s_name from
+	play p inner join studium s
+	on p.s_idx = s.s_idx
+	where p.p_idx = #{p_idx};
+	</select>
 
 
 
