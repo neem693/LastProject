@@ -44,7 +44,10 @@ j_content = #{j_content},
 j_price = #{j_price},
 j_ip = #{j_ip},
 j_filename = #{j_filename},
-NOW())
+j_date=NOW()
+where j_idx = #{j_idx}
+
+
 </update>
 
 </mapper>

@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/joonggo/joonggo.css">
 <!-- smart_editor2 -->
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script src='js/SE2B_imgupload.js' charset='utf-8'></script>
 
@@ -31,10 +32,10 @@
     
         <label class="col-sm-2">카테고리</label>
         <select name="j_category" align = "list">
-        		<option value="">카테고리 선택</option>
-        		<option value="구매">구매합니다</option>
-        		<option value="판매">판매합니다</option>
-        		<option value="교환">교환합니다</option>
+        		<option value="0">카테고리 선택</option>
+        		<option value="1">구매합니다</option>
+        		<option value="2">판매합니다</option>
+        		<option value="3">교환합니다</option>
         </select>
     </div>
     

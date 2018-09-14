@@ -211,10 +211,10 @@ public String updata(JoonggoVo vo, Model model) throws IllegalStateException, IO
 		// 업로드된 화일명을 vo넣어준다.
 	      vo.setJ_filename(filename);
 		
-	   // <br> => \n 수정 : 이유 => textarea에서 엔터처리하려고..  
+	 /*  // <br> => \n 수정 : 이유 => textarea에서 엔터처리하려고..  
 	  	String content = vo.getJ_content();
 		content = content.replaceAll("<br>", "\n");
-		vo.setJ_content(content);
+		vo.setJ_content(content);*/
 		
 		// model통해서 DisptcherServlet에게 데이터를 넘긴다.
 		model.addAttribute("vo", vo); // 결과적으로 request binding
@@ -225,8 +225,10 @@ public String updata(JoonggoVo vo, Model model) throws IllegalStateException, IO
 		//return MyConstant.PhotoGalleryController.VIEW_PATH + "photo_list.jsp";
 		//목록보기이동
 		//response.sendRedirect("list.do");
-	    return "redirect:view.do";
-	
+	    return "redirect:list.do";
+	    		
+	    		/*"redirect:(String.format(\"view.do?j_idx=%d\", j_idx))";// DispatcherServlet에 전달하면 response.sendRedirect("list.do"); 처리한다.
+*/	
 }
 /*스마트에디터 전송*/
 @RequestMapping("/submit")
@@ -234,11 +236,11 @@ public void submit(HttpServletRequest request){
 System.out.println("에디터 컨텐츠값:" + request.getParameter("editor"));
 }
 
-/*
+
 @RequestMapping("/form")
 public String form(){
     return "form";
-}*/
+}
      
 /**
  * form submit 파일결과 받기

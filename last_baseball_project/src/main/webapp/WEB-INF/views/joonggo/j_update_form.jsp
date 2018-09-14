@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/joonggo/joonggo.css">
 <!-- smart_editor2 -->
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script src='js/SE2B_imgupload.js' charset='utf-8'></script>
 <script type="text/javascript">
@@ -58,12 +59,11 @@ function send(f)
 	f.j_content.focus();
 	return;
 	}
-
-	
 	}
 
-
 </script>
+
+
 </head>
 <body>
 <form method="post" id="insertBoardFrm" enctype="multipart/form-data">
@@ -75,14 +75,14 @@ function send(f)
           <h3 class="panel-title">수정</h3>
         </div>
         <br>
+        
       <div class = "category">  
-    
         <label class="col-sm-2">카테고리</label>
-        <select name="j_category" value = "${vo.j_category}" align = "list">
-        		<option value="">카테고리 선택</option>
-        		<option value="구매">구매합니다</option>
-        		<option value="판매">판매합니다</option>
-        		<option value="교환">교환합니다</option>
+        <select id="j_category" name="j_category" align = "list">
+        		<option value="0">카테고리 선택</option>
+        		<option value="1">구매합니다</option>
+        		<option value="2">판매합니다</option>
+        		<option value="3">교환합니다</option>
         </select>
     </div>
     
@@ -115,7 +115,8 @@ function send(f)
                   <br>
                   <div class="form-group">
                   <label class="col-sm-2" >대표이미지</label>
-                  <div class="col-sm-10"><img src="${ pageContext.request.contextPath }/resources/photo_upload/${ vo.j_filename}"></div><br>
+                  <div class="col-sm-10"><input type="file" name="Filedata" class = "J_image"></div><br>
+                 <%--  <img src="${ pageContext.request.contextPath }/resources/photo_upload/${ vo.j_filename}"> --%>
                 </div>
 
 
@@ -169,4 +170,23 @@ $(function(){
     });
 });
 </script>
+<!-- 카테고리 db값 가져오기-->
+<script type="text/javascript">
+var inputVal = "${vo.j_category}"; //받아온값
+
+/* java script 방법 */
+ for(var i = 0; i < document.getElementById("j_category").options.length; i++)
+
+{
+
+  if(inputVal ==  document.getElementById("j_category").options[i].value)
+
+  {
+
+    document.getElementById("j_category").options[i].selected = true;
+
+  }
+}
+</script>
+
 </html>
