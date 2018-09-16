@@ -2,10 +2,13 @@ package kr.co.pickBaseball;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import dao.JoonggoDao;
+import util.page.Paging;
 import vo.JoonggoVo;
 
 @Controller
@@ -35,6 +39,9 @@ public JoonggoDao getJoonggo_dao() {
 	
 	@Autowired
 	ServletContext application;
+	
+	@Autowired
+	HttpSession session;
 
 	private char[] j_title;
 	
@@ -69,11 +76,21 @@ public String delete(int j_idx)
 
 /*조회*/
 @RequestMapping("/list.do")
-public String list(String search, String search_text, Model model)
+public String list(String search, String search_text, Integer page, Model model)
 {
 	String web_path = "/resources/photo_upload/";
 	JoonggoVo vo = new JoonggoVo();
 	
+	int nowPage = 1;
+	if(page!=null)
+		nowPage = page;
+	
+	int start = (nowPage-1) * myconst.Myconst.JoonggoPage.BLOCK_LIST + 1;
+	int end = start + myconst.Myconst.JoonggoPage.BLOCK_LIST -1;
+	
+	Map map = new HashMap();
+	map.put("start", start);
+	map.put("end", end);
 	
 	//디버깅 경로 확인
 	System.out.println(application.getRealPath(web_path));
@@ -82,26 +99,33 @@ public String list(String search, String search_text, Model model)
 	//
 	
 	
-	if(search!=null && search.equals("all"))
+	if(search!=null && !search.equals("all"))
 	{
-		if(search.equals("title_content"))// 이름 + 내용
+		if(search.equals("title_content"))// 제목 + 내용
 		{
-			vo.setJ_title(search_text);
-			vo.setJ_content(search_text);
+			map.put("title", search_text);
+			map.put("content", search_text);
 		}
-		else if(search.equals("title")) //이름
+		else if(search.equals("title")) //제목
 		{
-			vo.setJ_title(search_text);
+		   map.put("title", search_text);
 		}
 		else if(search.equals("nick")) // 내용
 		{
-			vo.setM_nick(search_text);
-		}
+			map.put("nick", search_text);
+	}
 	}
 	
-	List<JoonggoVo> list = joonggo_dao.selectList();
+	List<JoonggoVo> list = joonggo_dao.selectList(map);
+	
+	session.removeAttribute("show");
+	
+	int rowTotal = joonggo_dao.selectRowTotal(map);
+	
+	String pageMenu = Paging.getPaging("list.do", nowPage, rowTotal, search, search_text, myconst.Myconst.JoonggoPage.BLOCK_LIST, myconst.Myconst.JoonggoPage.BLOCK_PAGE);
 	
 	model.addAttribute("list", list);
+	model.addAttribute("pageMenu", pageMenu);
 	
 	return myconst.Myconst.Joonggo.VIEW_PATH + "joonggo_list.jsp";
 }

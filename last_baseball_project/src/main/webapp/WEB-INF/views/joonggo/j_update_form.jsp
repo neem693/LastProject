@@ -68,6 +68,7 @@ function send(f)
 <body>
 <form method="post" id="insertBoardFrm" enctype="multipart/form-data">
 <input type = "hidden" name = "j_idx" value="${vo.j_idx }">
+<input type = "hidden" name = "page" value="${param.page }">
 	<div  id = main_insert_form align="center">
 		<div class="container">
 		<div class="panel panel-default">

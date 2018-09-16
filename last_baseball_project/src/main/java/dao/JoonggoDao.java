@@ -9,10 +9,13 @@ import vo.JoonggoVo;
 
 public interface JoonggoDao {
 
-	// 리스트 얻어오기 
+	// 목록 얻어오기 
 	public List<JoonggoVo> selectList();
 	
+	// 조건별 목록 얻어오기 (페이지)
 	public List<JoonggoVo> selectList(Map map);
+	
+	public int selectRowTotal(Map map);
 	
 	// 1건 조회
 	public JoonggoVo selectOne(int j_idx);
@@ -28,6 +31,8 @@ public interface JoonggoDao {
 	
 	// 조회수(readhits)
 	public int readhits(int j_idx);
+	
+/*	public int reply(JoonggoVo vo);*/
 	
 	
 }

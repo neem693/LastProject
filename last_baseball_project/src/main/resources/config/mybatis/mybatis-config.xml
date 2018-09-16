@@ -10,6 +10,7 @@
 		<typeAlias type="vo.PlayVo" alias = "Play"/>
 		<typeAlias type="vo.Parsing_updateVo" alias = "Parsing"/>
 		<typeAlias type="vo.JoonggoVo" alias = "joonggo"/>
+		<typeAlias type="vo.CommentVo" alias = "comment"/>
 		
 	</typeAliases>
 	<mappers>
@@ -19,6 +20,10 @@
 		
 		<!-- 중고 mapper -->
 	    <mapper resource="config/mybatis/mapper/joonggo.xml"/>
+	    
+	    <!-- 중고 댓글 mapper -->
+	    <mapper resource = "config/mybatis/mapper/j_comment.xml"/>
+	    
 		<!--<mapper resource="config/mybatis/mapper/board.xml" /> -->
 	</mappers>
 </configuration>

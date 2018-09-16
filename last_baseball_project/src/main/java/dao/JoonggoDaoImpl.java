@@ -29,11 +29,15 @@ public class JoonggoDaoImpl implements JoonggoDao  {
 		
 		return list;
 	}
-
+   /*페이지 조회*/
 	@Override
 	public List<JoonggoVo> selectList(Map map) {
 		// TODO Auto-generated method stub
-		return null;
+		List<JoonggoVo> list = null;
+		
+		list = sqlSession.selectList("joonggo.joonggo_page_list", map);
+		
+		return list;
 	}
 	
     /*게시물 1건 얻어오기*/
@@ -82,8 +86,30 @@ public class JoonggoDaoImpl implements JoonggoDao  {
 	@Override
 	public int readhits(int j_idx) {
 		// TODO Auto-generated method stub
-		return 0;
+		int res = 0;
+		
+		res = sqlSession.insert("joonggo.joonggo_readhits", j_idx);
+		return res;
 	}
+
+	@Override
+	public int selectRowTotal(Map map) {
+		// TODO Auto-generated method stub
+		int count = 0;
+		
+		count = sqlSession.selectOne("joonggo.joonggo_total_count", map);
+		return count;
+	}
+
+/*	@Override
+	public int reply(JoonggoVo vo) {
+		// TODO Auto-generated method stub
+		
+		int res = 0;
+		res = sqlSession.insert("joonggo.joonggo_reply", vo);
+		
+		return res;
+	}*/
 
 
 	

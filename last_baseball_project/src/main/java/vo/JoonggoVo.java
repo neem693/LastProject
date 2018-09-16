@@ -1,8 +1,10 @@
 package vo;
 
-import org.springframework.web.multipart.MultipartFile;
+import java.io.Serializable;
 
-public class JoonggoVo {
+import org.springframework.web.multipart.MultipartFile;
+//                            Object Á÷·ÄÈ­
+public class JoonggoVo implements Serializable{
 	
     //callback URL
     private String callback;
@@ -31,6 +33,7 @@ public class JoonggoVo {
     String m_email;
     String m_nick;
     
+    int c_count; // ´ñ±Û °¹¼ö
     
 	public String getCallback() {
 		return callback;
@@ -133,6 +136,12 @@ public class JoonggoVo {
 	}
 	public void setM_nick(String m_nick) {
 		this.m_nick = m_nick;
+	}
+	public int getC_count() {
+		return c_count;
+	}
+	public void setC_count(int c_count) {
+		this.c_count = c_count;
 	}
 	
     

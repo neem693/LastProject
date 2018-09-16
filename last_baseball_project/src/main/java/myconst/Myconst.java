@@ -33,5 +33,12 @@ public class Myconst {
 	public static class PhotoUpload {
 		public static String PHOTO_WEB_PATH_LOOT = "/pickBaseball/resources/photo_upload/";
 	}
+	
+
+	public static class JoonggoPage
+	{
+		public static int BLOCK_LIST = 10; // page당 게시물수
+		public static int BLOCK_PAGE = 3; //page당 보여지는 메뉴 갯수
+	}
 
 }

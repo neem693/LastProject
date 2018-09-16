@@ -21,6 +21,7 @@
 <body>
 <form method="post" id="insertBoardFrm" enctype="multipart/form-data">
 <input type = "hidden" name = "idx" value="1">
+
 	<div  id = main_insert_form align="center">
 		<div class="container">
 		<div class="panel panel-default">

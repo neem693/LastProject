@@ -34,6 +34,79 @@ function send(f)
 		
 	}
 	
+//댓글쓰기
+function comment_send(){
+/* 	
+	//로그인이 안된경우
+	if('${ empty user }'=='true'){
+		
+		if(confirm('댓글은 로그인하신후에 사용가능합니다\n로그인 하시겠습니까?')==false) return;
+		
+		//alert(location.href);
+		
+		// 로그인후에 현재 위치로 다시 돌아올 목적
+		location.href='../member/login_form.do?url=' + encodeURIComponent(location.href);
+		
+		return;
+	} */
+	
+	//댓글쓰기
+	var b_idx = '${ vo.idx }';
+	var id    = '${ user.id }';
+	var name  = '${ user.name }';
+	var content = $('#c_comment').val(); // document.getElementById("content").value
+	if(content==''){
+		alert('댓글 내용을 입력하세요');
+		$('#c_comment').focus();
+		return;
+	}
+	
+	//Ajax전송
+	$.ajax({
+		url: 'comment_insert.do', //CommentInsertAction
+		data:{'j_idx': j_idx,'m_id':m_id,'m_nick':m_nick,'c_comment':c_commnet},
+		dataType: 'json',
+		success:function(data){
+			// data = {"result":"success"}  or {"result":"fail"}
+			if(data.result == 'fail'){
+				alert('댓글달기 실패!!');
+				return;
+			}
+			
+			
+							
+			//이전내용 지우기
+			$('#comment').val('');
+			$('#comment').focus();
+			
+			
+			//성공=> 댓글목록 가져오기
+			comment_list(1);
+			
+		}
+	});
+	
+}
+
+
+//댓글목록 가져오기(Ajax)   
+function comment_list(page){
+	
+	var j_idx = '${ vo.idx }';
+	$.ajax({
+		url: 'comment_list.do', //CommentListAction
+		data:{'j_idx' : jc_idx ,'page': page},
+		success:function(data){
+			$('#disp').html(data);
+		}
+	});
+	
+	//초기화 이벤트
+	$(document).ready(function(){
+		comment_list(1);
+	});
+}
+
 
 
 </script>
@@ -41,6 +114,7 @@ function send(f)
 
 <form method="post">
 <input type = "hidden" name ="j_idx" value = "${vo.j_idx }">
+<input type = "hidden" name = "page" value = "${param.page}">
 <div class="container">
 
     <div class="row">
@@ -118,6 +192,23 @@ function send(f)
 
  </div>
  </form>
+ 
+ <p><br>
+ <!-- 댓글작성  -->
+<div id="comment_box">
+    <div id="#comment_input_box">
+        <div>
+              작성자: <c:if test="${ not empty user }">${ user.name }(${ user.id })</c:if>
+        </div>
+        <textarea id="content"></textarea>
+        <input id="bt_reg" type="button" value="댓글쓰기"  onclick="comment_send();">
+    </div>
+    
+    <hr>
+    <!--댓글목록을 출력  -->
+    <div id="disp"></div>
+    
+</div>
 </body>
 
 </html>
