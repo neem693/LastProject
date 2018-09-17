@@ -22,7 +22,7 @@
 	    <mapper resource="config/mybatis/mapper/joonggo.xml"/>
 	    
 	    <!-- 중고 댓글 mapper -->
-	    <mapper resource = "config/mybatis/mapper/j_comment.xml"/>
+	    <mapper resource = "config/mybatis/mapper/comment.xml"/>
 	    
 		<!--<mapper resource="config/mybatis/mapper/board.xml" /> -->
 	</mappers>

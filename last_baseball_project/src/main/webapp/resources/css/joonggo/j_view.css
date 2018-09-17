@@ -102,5 +102,15 @@ img {
   line-height: 10px;
 }
 
+#comment_box
+{
+width : 680px;
+border : 1px solid red;
 
+}
 
+#comment_input_box
+{
+width : 100%;
+
+}

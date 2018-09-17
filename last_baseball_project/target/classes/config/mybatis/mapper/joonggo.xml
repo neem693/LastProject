@@ -11,30 +11,26 @@ select * from joonggo order by ref desc, step asc
 
 <!-- 페이지별 목록 조회 -->
 <select id = "joonggo_page_list" parameterType="java.util.Map" resultType="joonggo">
-select * 
-from
-(
-select
-rank() over(order by ref desc,step asc) no,
-j.*,
-(select count(*) from comment where j_idx=j.idx) c_count
-from
-(
-select * from joonggo
-<trim prefix="where" prefixOverrides="or">
-<if test="title!=null">
-title like '%' || #{title} || '%'
-</if>
-<if test="nick!=null">
-nick like '%' || #{nick} || '%'
-</if>
-<if test="content!=null">
-content like '%' || #{content} || '%'
-</if>
-</trim>
-)j
-)
-where no between #{start} and ${end}
+
+	select
+	j.* ,
+	(select count(*) from comment where j_idx=j.j_idx) c_count
+	from
+	( 
+	select * from joonggo
+	<trim prefix="where" prefixOverrides="or">
+		<if test="title!=null">
+			title like concat('%' , #{ title }, '%')
+		</if>
+		<if test="nick!=null">
+			or nick like concat('%' , #{ nick } , '%')
+		</if>
+		<if test="content!=null">
+			or content like concat('%' , #{ content } , '%')
+		</if>
+	</trim>
+	)j
+	limit #{start} , #{ end }
 </select>
 
 <!-- 게시물 1건 얻어오기 -->
@@ -83,11 +79,11 @@ where j_idx=#{j_idx}
 </update> 
  
 	<!-- 전체레코드수 구하기 -->
-	<select id="joonggo_total_count"  parameterType="Map" resultType="int">
-		select nvl(count(*),0) from joonggo
+<select id="joonggo_total_count"  parameterType="Map" resultType="int">
+		select ifnull(count(*), 0) from joonggo
 		<trim prefix="where"  prefixOverrides="or">
-			<if test="name!=null">
-			   name like '%' || #{ name } || '%'
+			<if test="title!=null">
+			   title like '%' || #{ title } || '%'
 			</if>
 			<if test="nick!=null">
 			   or nick like '%' || #{ nick } || '%'

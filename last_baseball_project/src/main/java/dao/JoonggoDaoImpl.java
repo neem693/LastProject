@@ -98,6 +98,7 @@ public class JoonggoDaoImpl implements JoonggoDao  {
 		int count = 0;
 		
 		count = sqlSession.selectOne("joonggo.joonggo_total_count", map);
+		
 		return count;
 	}
 

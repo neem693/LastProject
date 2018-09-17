@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import dao.JoonggoDao;
-import util.page.Paging;
+import util.Paging;
 import vo.JoonggoVo;
 
 @Controller
@@ -71,7 +71,7 @@ public String delete(int j_idx)
 {
 	int res = joonggo_dao.delete(j_idx);
 	
-	return "redirect:list.do";
+	return "redirect:list.do?page=\" + page";
 }
 
 /*조회*/
@@ -82,15 +82,21 @@ public String list(String search, String search_text, Integer page, Model model)
 	JoonggoVo vo = new JoonggoVo();
 	
 	int nowPage = 1;
+	
 	if(page!=null)
 		nowPage = page;
 	
-	int start = (nowPage-1) * myconst.Myconst.JoonggoPage.BLOCK_LIST + 1;
-	int end = start + myconst.Myconst.JoonggoPage.BLOCK_LIST -1;
+	//int start = (nowPage-1) * myconst.Myconst.JoonggoPage.BLOCK_LIST + 1;
+	//int end = start + myconst.Myconst.JoonggoPage.BLOCK_LIST -1;
+	int start = (nowPage-1) * myconst.Myconst.JoonggoPage.BLOCK_LIST;
+	int end  = myconst.Myconst.JoonggoPage.BLOCK_LIST;
 	
 	Map map = new HashMap();
 	map.put("start", start);
 	map.put("end", end);
+	
+	//map.put("start", start);
+	//map.put("display", display);
 	
 	//디버깅 경로 확인
 	System.out.println(application.getRealPath(web_path));
@@ -115,14 +121,22 @@ public String list(String search, String search_text, Integer page, Model model)
 			map.put("nick", search_text);
 	}
 	}
-	
+	//게시판 목록가져오기
 	List<JoonggoVo> list = joonggo_dao.selectList(map);
-	
+	//세션에 게시물을 봤냐에 대한정보(show)삭제
 	session.removeAttribute("show");
 	
-	int rowTotal = joonggo_dao.selectRowTotal(map);
+	//페이지 메뉴 생성
+	int rowTotal = joonggo_dao.selectRowTotal(map); // 전체레코드수
 	
-	String pageMenu = Paging.getPaging("list.do", nowPage, rowTotal, search, search_text, myconst.Myconst.JoonggoPage.BLOCK_LIST, myconst.Myconst.JoonggoPage.BLOCK_PAGE);
+	//paging에도 검색조건 넣어서 작성해야됨.
+	String pageMenu = Paging.getPaging("list.do", 
+			nowPage, 
+			rowTotal, 
+			search, 
+			search_text, 
+			myconst.Myconst.JoonggoPage.BLOCK_LIST, 
+			myconst.Myconst.JoonggoPage.BLOCK_PAGE);
 	
 	model.addAttribute("list", list);
 	model.addAttribute("pageMenu", pageMenu);

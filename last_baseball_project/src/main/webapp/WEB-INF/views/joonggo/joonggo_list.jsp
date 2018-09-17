@@ -30,6 +30,17 @@ function search(){
 	location.href = 'list.do?search=' + search + '&search+text=' + encodeURIComponent(search_text);
 	
 }
+window.onload = function()
+{
+	var search = document.getElementById("search");
+	
+	var serach_array = ['', 'title','nick','content', 'title_content'];
+	  for(var i=0;i<search_array.length;i++){
+	    	if("${ param.search }" == search_array[i]){
+	    		search[i].selected = true;
+	    	}
+	    }
+	}
 
 </script>
 
@@ -96,13 +107,14 @@ function search(){
 <option value = "all">전체</option>
 <option value = "title">제목</option>
 <option value = "nick">작성자</option>
+<option value = "content">내용</option>
 <option value = "title_content">제목+내용</option>
 </select>
-<input id = "search_text" value=${ (param.search_text =='null') } ? '' : param.search_text }>
+ <input id="search_text" value=${ (param.search_text =='null') ? '' : param.search_text }>
 <input type = "button" value = "검색" onclick = "search();">
 </div>
 		<div>
-				<div width="7"><img src="${ pageContext.request.contextPath }/resources/img/search_bg_01.gif"></div>
+				<div width="7"></div>
    				<div class="f11" align="center">
                     <!-- 페이지 메뉴  -->
                     ${ pageMenu }

@@ -51,7 +51,7 @@ function comment_send(){
 	} */
 	
 	//댓글쓰기
-	var b_idx = '${ vo.idx }';
+	var j_idx = '${ vo.j_idx }';
 	var id    = '${ user.id }';
 	var name  = '${ user.name }';
 	var content = $('#c_comment').val(); // document.getElementById("content").value
@@ -92,10 +92,10 @@ function comment_send(){
 //댓글목록 가져오기(Ajax)   
 function comment_list(page){
 	
-	var j_idx = '${ vo.idx }';
+	var j_idx = '${ vo.j_idx }';
 	$.ajax({
 		url: 'comment_list.do', //CommentListAction
-		data:{'j_idx' : jc_idx ,'page': page},
+		data:{'j_idx' : j_idx ,'page': page},
 		success:function(data){
 			$('#disp').html(data);
 		}
@@ -111,8 +111,8 @@ function comment_list(page){
 
 </script>
 <body>
-
-<form method="post">
+<!-- method="post" -->
+<form>
 <input type = "hidden" name ="j_idx" value = "${vo.j_idx }">
 <input type = "hidden" name = "page" value = "${param.page}">
 <div class="container">

@@ -1,4 +1,4 @@
-package util.page;
+package util;
 /*
         pageURL:페이징처리할 리스트페이지      
         nowPage:현재페이지
