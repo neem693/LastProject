@@ -1,18 +1,28 @@
-.center {
-	text-align:center;
-	width: 1000px;
-	height:100%;
-	margin-left:auto; 
-	margin-right:auto;
-	margin-top: 30px;
+
+
+.center_c{
 	
+	
+	margin-right:15%;
+	margin-left:15%; 
+
+	
+}
+
+.center {
+	
+	width: 1000px;
+	margin-right:25%;
+	margin-left:25%; 
+
 }
 
 .center_form {
 	
-	position:relative;
-	left:40%;
-	margin-top: 30px;
+
+	margin-right:25%;
+	margin-left:25%; 
+	
 	
 }
 

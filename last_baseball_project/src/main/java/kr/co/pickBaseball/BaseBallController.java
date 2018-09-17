@@ -1,22 +1,33 @@
 package kr.co.pickBaseball;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import myconst.Myconst;
 import service.PartyServiceInterface;
 import service.member.MemberServiceInterface;
+import util.parsing.DateUtil;
 import util.parsing.TeamParsing;
 import vo.MemberVo;
 import vo.TeamVo;
@@ -166,9 +177,83 @@ public class BaseBallController {
 		Map  map = new HashMap();
 	  		 map.put("m_nick", m_nick);
 		
-	  		 System.out.println(m_nick);
 		String json=memberservice.selectOne(map);
 		return json;
 	}
+	
+	@RequestMapping("/photo_upload.do")
+	@ResponseBody
+	public String photo_up(MultipartHttpServletRequest multi) {	
+		
+		String file_name=memberservice.photo_upload(multi);
+	
+
+		return file_name;
+	}
+	
+	@RequestMapping("/parsing_test.do")
+	@ResponseBody
+	public String parsing1() throws IOException {	
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date match_day;
+		Date today = new Date();
+		DateUtil dateUtil = new DateUtil();
+
+		String month_str = "08";
+
+		String year_str = "2018";
+		//System.out.println(month_str);
+		//System.out.println(year_str);
+
+		// System.out.println(month_str);
+		String str_url = "https://www.koreabaseball.com/ws/Schedule.asmx/GetScheduleList?gameMonth=" + month_str
+				+ "&leId=1&seasonId=" + year_str + "&srIdList=0,9&teamId=";
+		URL url = new URL(str_url);
+
+		// System.out.println(str_url);
+
+		// System.out.println(new Date().toString());
+
+		InputStream is = url.openStream();
+		InputStreamReader isr = new InputStreamReader(is, "utf-8");
+
+		BufferedReader br = new BufferedReader(isr);
+
+		StringBuffer sb = new StringBuffer();
+		while (true) {
+			String str = br.readLine();
+
+			if (str == null)
+				break;
+			sb.append(str);
+
+		}
+
+		String json_str = sb.toString();
+
+		//System.out.println(json_str);
+		JSONObject jb = new JSONObject(json_str);
+		//json 구조의 text를 JSONOBJECT로 객체를 생성하게 되면 KEY ,VALUE 형태로 값을 읽거나 분류할 수 있다.
+		
+		System.out.println(json_str);
+		JSONArray rows = jb.getJSONArray("rows");//json 데이터에서 key가 rows인 값을 갖고있는 배열을 가져온다.
+		System.out.println(rows.toString());
+		
+		
+	
+
+	
+		
+		return "ok";
+	
+	
+	
+	
+	
+	
+	}
+	
+	
 	
 }

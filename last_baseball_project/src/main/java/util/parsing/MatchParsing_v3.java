@@ -16,7 +16,7 @@ import org.json.JSONObject;
 import myconst.Myconst;
 import vo.PlayVo;
 
-public class MatchParsing_v2 {
+public class MatchParsing_v3 {
 	String str_url;
 
 	public PlayVo[] matchParsing(int month, int thisyear) throws Exception {
@@ -55,12 +55,28 @@ public class MatchParsing_v2 {
 
 		}
 
+	
+		
+		
 		String json_str = sb.toString();
-		System.out.println("Á¦ÀÌ½¼°ª");
+		//System.out.println("Á¦ÀÌ½¼°ª");
+		//System.out.println(json_str);
 		System.out.println(json_str);
+		
+		System.out.println("**************************************");
+		System.out.println("**************************************");
+		System.out.println("**************************************");
+		System.out.println("**************************************");
+		System.out.println("**************************************");
+		
+		
 		JSONObject jb = new JSONObject(json_str);
+		System.out.println(jb.toString());
+	
 		
 		JSONArray rows = jb.getJSONArray("rows");
+		
+		
 		JSONObject rows_seq;
 		JSONArray row;
 		JSONObject text;
@@ -82,7 +98,8 @@ public class MatchParsing_v2 {
 
 		/*
 		 * 
-		 * 9ÀÏ¶§ 0(³¯Â¥),1(½Ã°£),2(ÆÀ,Á¡¼ö),7(°æ±âÀå),8(Ãë¼ÒµÉ °æ¿ì »çÀ¯) 8ÀÏ¶§ 0(½Ã°£),1(ÆÀ,Á¡¼ö),6(°æ±âÀå),7(ºñ°í Ãë¼ÒµÉ
+		 * 9ÀÏ¶§ 0(³¯Â¥),1(½Ã°£),2(ÆÀ,Á¡¼ö),7(°æ±âÀå),8(Ãë¼ÒµÉ °æ¿ì »çÀ¯)
+			8ÀÏ¶§ 0(½Ã°£),1(ÆÀ,Á¡¼ö),6(°æ±âÀå),7(ºñ°í Ãë¼ÒµÉ
 		 * °æ¿ì »çÀ¯) Á¤±ÔÇ¥Çö½Ä ([a-zA-Z°¡-ÆR]+)([0-9]*)vs([0-9]*)([a-zA-Z°¡-ÆR]+)
 		 */
 

@@ -105,7 +105,7 @@ public class ServicePartyimpl implements PartyServiceInterface {
 		long current_m = System.currentTimeMillis();
 		
 		long def = current_m - time_m;
-		System.out.println(def + "밀리초 지났습니다. (파싱까지 대기)");
+		//System.out.println(def + "밀리초 지났습니다. (파싱까지 대기)");
 		if (def >= (long) (Myconst.ParsingDateCheck.ONE_HOUR_MILESECOND*Myconst.ParsingDateCheck.PARSING_INTERVAL)) {// 작동시작
 
 			Calendar cal = Calendar.getInstance();
@@ -141,7 +141,7 @@ public class ServicePartyimpl implements PartyServiceInterface {
 			result =0;
 			return result;
 		// 1시간이 체크되어있지 않음으로 자동파싱안함
-
+		
 	}
 
 	@Override
