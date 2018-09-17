@@ -73,7 +73,7 @@ function make_map() {
 				marker.setPosition(mouseEvent.latLng);
 				marker.setMap(map);
 				//////name 추가////
-				real_addr.value = !!result[0].road_address ? result[0].road_address.address_name + "/": ''
+				real_addr.value = !!result[0].road_address ? result[0].road_address.address_name + "_": ''
 				real_addr.value += result[0].address.address_name;
 				coor_x.value = mouseEvent.latLng.ib;
 				coor_y.value = mouseEvent.latLng.jb;

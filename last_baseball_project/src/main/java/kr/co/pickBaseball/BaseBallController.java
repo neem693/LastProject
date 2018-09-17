@@ -1,7 +1,10 @@
 package kr.co.pickBaseball;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.HashMap;
 
 import java.util.Calendar;
@@ -9,14 +12,19 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import myconst.Myconst;
 
@@ -37,6 +45,10 @@ public class BaseBallController {
 
 	@Autowired
 	HttpServletRequest request;
+	@Autowired
+	ServletContext application;
+
+	
 
 	public MemberServiceInterface getMemberservice() {
 		return memberservice;
@@ -62,16 +74,20 @@ public class BaseBallController {
 		// String addr = request.getRequestURI();
 		// System.out.println("출력된다.이건 언제 어디서나 디폴트로 출력된다. :" + addr);
 		System.out.println("파싱실행");
-		int res = partyService.check_parsing();
-		if (res == 1)
-			System.out.println("모든 파싱 완료");
-		else if (res == 0)
-			System.out.println("지금은 파싱을 할 수 없습니다.(맞는 월이 아님, n시간 카운트가 안지남)");
-		else if (res == -1)
-			System.out.println("파싱 오류발생");
 
-		System.out.println("----------파싱작업끝----------");
-
+		//// 이 작업은 한 사람만이 할 수 있게 잠궈놓는다.
+		//// 그렇지 않으면 한번 파싱할 때 여러명이서 파싱할 수도 있고
+		//// 이는 해당 kbo 사이트에 디도스 공격 하는 꼴이다.
+		synchronized (this) {
+			int res = partyService.check_parsing();
+			if (res == 1)
+				System.out.println("모든 파싱 완료");
+			else if (res == 0)
+				System.out.println("지금은 파싱을 할 수 없습니다.(맞는 월이 아님, n시간 카운트가 안지남)");
+			else if (res == -1)
+				System.out.println("파싱 오류발생");
+			System.out.println("----------파싱작업끝----------");
+		}
 	}
 
 	@RequestMapping("/parsing_match.do")
@@ -203,7 +219,7 @@ public class BaseBallController {
 	}
 
 	@RequestMapping("/party/insert_party.do")
-	public String insert_party(String year, String month, String day,Model model) {
+	public String insert_party(String year, String month, String day, Model model) {
 
 		if (year == null || month == null || day == null)
 			return "redirect:/party/party_list.do?fail=not_found";
@@ -215,25 +231,75 @@ public class BaseBallController {
 		List match_list = partyService.take_play_list(year, month, day);
 		if (match_list == null || match_list.size() == 0)
 			return "redirect:/party/party_list.do?fail=not_found";
-		
-		
-		model.addAttribute("match_list",match_list);
-		
+
+		model.addAttribute("match_list", match_list);
+
 		return Myconst.BaseBall.PARTY_DIR + "party_create.jsp";
 
 	}
-	
-	
-	@RequestMapping(value = "/party/select_stadium.do" ,produces = "text/plain;charset=UTF-8")
+
+	@RequestMapping(value = "/party/select_stadium.do", produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public String select_stadium(String p_idx) {
-		
-		
+
 		String stadium = partyService.selectStadium(p_idx);
 		String result = String.format("[{'result':'%s'}]", stadium);
-		
-		
+
 		return result;
+	}
+
+	
+	
+
+	
+	@RequestMapping(value = "/party_image_upload.do", method = RequestMethod.POST)
+	public void ckeditorImageUpload2(
+			@RequestParam MultipartFile upload, HttpServletResponse response) throws Exception {
+		OutputStream out = null;
+		PrintWriter printWriter = null;
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		try {
+			String fileName = upload.getOriginalFilename();
+			byte[] bytes = upload.getBytes();
+			String web_path = "/resources/party_upload/";
+			String abs_path = application.getRealPath(web_path);
+			// String uploadPath = "저장경로/" + fileName;//저장경로
+			File f = new File(abs_path, fileName);
+			// 동일화일이 있는경우
+			System.out.println("테스트 " + abs_path + fileName);
+			if (f.exists()) {
+				long time = System.currentTimeMillis();
+				int index = fileName.lastIndexOf('.');
+				String f_name = fileName.substring(0, index);
+				String f_ext = fileName.substring(index);
+				fileName = String.format("%s_%d%s", f_name, time, f_ext);
+				f = new File(abs_path, fileName);
+			}
+			out = new FileOutputStream(f);
+			out.write(bytes);
+			String callback = request.getParameter("CKEditorFuncNum");
+			printWriter = response.getWriter();
+			String url = request.getRequestURL().toString().replaceAll("/party_image_upload.do", "");
+			// System.out.println(url);
+			String fileUrl = url + web_path + fileName;// url경로
+			printWriter.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction(" + callback
+					+ ",'" + fileUrl + "','이미지를 업로드 하였습니다.'" + ")</script>");
+			printWriter.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (out != null) {
+					out.close();
+				}
+				if (printWriter != null) {
+					printWriter.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }
