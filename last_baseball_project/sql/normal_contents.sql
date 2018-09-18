@@ -1,12 +1,10 @@
-create table normal_contents
+create table normal
 (
 	nc_idx int unsigned auto_increment,
 	nc_title varchar(60),
 	nc_contents varchar(1000),
-	nc_regdate varchar(30),
+	nc_regdate datetime,
 	nc_views int,
-	nc_like int,
-	nc_bad int,
 	nc_likeno int,
 	nc_badno int,
 	m_idx int unsigned,
@@ -15,3 +13,5 @@ create table normal_contents
 	constraint fk_normal_m_idx foreign key(m_idx)
 	references member(m_idx) on update cascade 
 )
+
+select * from normal

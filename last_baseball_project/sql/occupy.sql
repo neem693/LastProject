@@ -10,3 +10,8 @@ create table occupy
 	constraint fk_occupy_s_idx foreign key(s_idx)
 	references studium(s_idx) on update cascade
 )
+
+select * from occupy
+
+--¡∂¿Œ
+

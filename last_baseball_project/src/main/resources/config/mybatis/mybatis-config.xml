@@ -14,6 +14,7 @@
 		<mapper resource="config/mybatis/mapper/team.xml" />
 		<mapper resource="config/mybatis/mapper/play.xml"/>
 		<mapper resource="config/mybatis/mapper/parsing.xml"/>
+		<mapper resource="config/mybatis/mapper/normal.xml"/>
 	
 		<!--<mapper resource="config/mybatis/mapper/board.xml" /> -->
 		<!-- 회원 관련 mapper -->

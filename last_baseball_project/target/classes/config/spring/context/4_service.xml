@@ -18,5 +18,8 @@
 	
 	</bean>
 
+	<bean id="normalService" class="service.normal.NormalServiceImpl">
+		<property name="normal_dao" ref="normal_dao"></property>
+	</bean>
 
 </beans>

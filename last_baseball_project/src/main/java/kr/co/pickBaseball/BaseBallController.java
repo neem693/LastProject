@@ -10,34 +10,45 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import myconst.Myconst;
-
+import myconst.Paging;
 import service.member.MemberServiceInterface;
-
+import service.normal.NormalServiceImpl;
+import service.normal.NormalServiceInterface;
 import service.party.PartyServiceInterface;
 
 import util.parsing.TeamParsing;
 import vo.MemberVo;
+import vo.NormalVo;
 import vo.TeamVo;
 
 @Controller
 public class BaseBallController {
+	
+	
+	NormalServiceInterface normalService;
+	
+	
 	PartyServiceInterface partyService;
+	
+	
 	
 	//회원가입 서비스 호출 객체 ( 3단계 구조)
 	MemberServiceInterface memberservice;
 	
 	@Autowired
 	HttpServletRequest request;
-
+	
 	public MemberServiceInterface getMemberservice() {
 		return memberservice;
 	}
@@ -52,6 +63,14 @@ public class BaseBallController {
 
 	public void setPartyService(PartyServiceInterface partyService) {
 		this.partyService = partyService;
+	}
+
+	public NormalServiceInterface getNormalService() {
+		return normalService;
+	}
+
+	public void setNormalService(NormalServiceInterface normalService) {
+		this.normalService = normalService;
 	}
 
 	@ModelAttribute
@@ -203,9 +222,46 @@ public class BaseBallController {
 	@RequestMapping("/party/insert_party.do")
 	public String insert_party() {
 		
+		System.out.println(Myconst.BaseBall.PARTY_DIR);
 		return Myconst.BaseBall.PARTY_DIR + "party_create.jsp";
 		
 	}
+	
+	@RequestMapping("/normal/list.do")
+	public String normal_list(Model model,Integer page,String nc_search,String nc_search_text) {
+		
+		List list = normalService.getList(page,nc_search,nc_search_text);
+		
+		model.addAttribute("list",list);
+		//기억 해봐 여기주소
+		return "/WEB-INF/views/normal/normal_list.jsp";
+	}
+	
+	@RequestMapping("/normal/insert_form.do")
+	public String normal_insertform() {
+		
+		return "/WEB-INF/views/normal/normal_insert_form.jsp";
+		
+	}
+	
+	@RequestMapping("/normal/insert.do")
+	public String normal_insert(NormalVo vo, HttpServletRequest request,String editor) {
+		
+		normalService.insert(vo, request, editor);
+		return "/WEB-INF/views/normal/normal_list.jsp";
+	}
+	
+	@RequestMapping("/file_uploader_html5.do")
+	@ResponseBody
+	public String multiplePhotoUpload(HttpServletRequest request,StringBuffer sb) {
+		
+		normalService.file_up(request);
+		return sb.toString();
+	}
+	
+	
+	
+	
 
 
 }

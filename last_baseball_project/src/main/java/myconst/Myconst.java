@@ -40,8 +40,19 @@ public class Myconst {
 		
 	}
 	
+	public static class NormalPageing{
+		public static final int BLOCK_LIST = 15;//page당 게시물 수
+		public static final int BLOCK_PAGE = 10;//page당 보여지는 메뉴갯수
+	}
+	
+	public static class Normal{
+		public static String VIEW_PATH = "/WEB-INF/views/normal/";
+	}
+	
 	public static class Main{
 		public static String VIEW_PATH = "/WEB-INF/views/main/";
 	}
 
+	
+	
 }

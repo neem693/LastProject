@@ -22,6 +22,8 @@
 		<property name="session" ref="sql_template"></property>
 	</bean>
 
-
+	<bean id="normal_dao" class="dao.normal.NormalDaoImpl">
+		<property name="session" ref="sql_template"></property>
+	</bean>
 
 </beans>
