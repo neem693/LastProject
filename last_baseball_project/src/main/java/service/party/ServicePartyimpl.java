@@ -19,13 +19,10 @@ import vo.TeamVo;
 
 public class ServicePartyimpl implements PartyServiceInterface {
 
-	PartyDaoInerface team_dao, play_dao, parsing_second_dao,party_dao;
+	PartyDaoInerface team_dao, play_dao, parsing_second_dao, party_dao;
 	MatchParsing_v2 match_parsing = new MatchParsing_v2();
 	TeamParsing team_parsing = new TeamParsing();
 
-	
-	
-	
 	public PartyDaoInerface getParty_dao() {
 		return party_dao;
 	}
@@ -271,7 +268,7 @@ public class ServicePartyimpl implements PartyServiceInterface {
 	@Override
 	public String selectStadium(String p_idx) {
 		// TODO Auto-generated method stub
-//스타디움 뿐만 아니라 팀도 가져온다.
+		// 스타디움 뿐만 아니라 팀도 가져온다.
 		String stadium_team = (String) play_dao.selectOne(p_idx);
 
 		return stadium_team;
@@ -296,45 +293,42 @@ public class ServicePartyimpl implements PartyServiceInterface {
 			System.out.println("day로 했군");
 			long time = match_day.getTime() + ((long) Myconst.ParsingDateCheck.ONE_DAY_MILESECOND) * ((long) pt_day);
 			match_day = new Date(time);
-		
+
 		} else if (date.equals("time")) {
 			System.out.println("time으로 했군");
 			long time = match_day.getTime() + ((long) Myconst.ParsingDateCheck.ONE_HOUR_MILESECOND) * ((long) pt_day);
 			match_day = new Date(time);
-		}else
+		} else
 			return -1;
-		
+
 		vo.setPt_day(Myconst.DateCheck.DATE_FORMAT.format(match_day));
 		System.out.println(vo.getPt_day());
-		
-		////////목적////////
+
+		//////// 목적////////
 		int purpose = Integer.parseInt(vo.getPt_purpose());
-		if(purpose==10) {
+		if (purpose == 10) {
 			vo.setPt_purpose(Myconst.Party.ETC);
-		}else if(purpose==3)
+		} else if (purpose == 3)
 			vo.setPt_purpose(Myconst.Party.LETS_GET_IN);
-		else if(purpose==2)
+		else if (purpose == 2)
 			vo.setPt_purpose(Myconst.Party.CHEER);
-		else if(purpose==1)
+		else if (purpose == 1)
 			vo.setPt_purpose(Myconst.Party.USE_SPECIAL_FAC);
-		else return -1;
-		
-		///////상태 세팅/////////
+		else
+			return -1;
+
+		/////// 상태 세팅/////////
 		vo.setPt_condition("모집중");
-		if(play_vo.getDate().getTime()<=(long)Myconst.ParsingDateCheck.ONE_DAY_MILESECOND)
+		if (play_vo.getDate().getTime() <= (long) Myconst.ParsingDateCheck.ONE_DAY_MILESECOND)
 			vo.setPt_condition("임박");
-		
-		
-		/////////인서트 실시///////////
-		
-		
+		/////////// 팀 세팅////////
+		boolean team_set = vo.getT_name().equals(play_vo.getT_home()) || vo.getT_name().equals(play_vo.getT_away());
+		if (!(team_set))
+			vo.setT_name(null);
+
+		///////// 인서트 실시///////////
+
 		int res = party_dao.insert(vo);
-		
-			
-		
-		
-		
-		
 
 		return res;
 	}
@@ -346,6 +340,32 @@ public class ServicePartyimpl implements PartyServiceInterface {
 		PlayVo vo = (PlayVo) play_dao.selectOne2(p_idx);
 
 		return vo;
+	}
+
+	@Override
+	public boolean check_long_time_in_match(String year, String month, String day) {
+		// TODO Auto-generated method stub
+
+		Date date = new Date();
+		long current = date.getTime();
+
+		Calendar cal = Calendar.getInstance();
+
+		int year_int = Integer.parseInt(year);
+		int month_int = Integer.parseInt(month);
+		int day_int = Integer.parseInt(day);
+		cal.set(year_int, month_int - 1, day_int, 0, 0, 0);
+
+		long time = cal.getTime().getTime();
+		// System.out.println(time);
+		// System.out.println(current);
+		// System.out.println(time-current);
+		// System.out.println(Myconst.ParsingDateCheck.ONE_DAY_MILESECOND*4);
+		if ((time - current) > (long) (Myconst.ParsingDateCheck.ONE_DAY_MILESECOND * (long) 4))
+			return true;
+		else
+			return false;
+
 	}
 
 }

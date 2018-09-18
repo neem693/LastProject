@@ -49,8 +49,6 @@ public class BaseBallController {
 	@Autowired
 	ServletContext application;
 
-	
-
 	public MemberServiceInterface getMemberservice() {
 		return memberservice;
 	}
@@ -232,8 +230,16 @@ public class BaseBallController {
 		List match_list = partyService.take_play_list(year, month, day);
 		if (match_list == null || match_list.size() == 0)
 			return "redirect:/party/party_list.do?fail=not_found";
+		/////// 날짜로 잡을 수 있을 정도로 경기 날짜가 여유가 있는지//////
+		boolean long_promise = partyService.check_long_time_in_match(year, month, day);
 
+		System.out.println(year);
+		System.out.println(month);
+		System.out.println(day);
 		model.addAttribute("match_list", match_list);
+		model.addAttribute("is_long", long_promise);
+
+		System.out.println(long_promise);
 
 		return Myconst.BaseBall.PARTY_DIR + "party_create.jsp";
 
@@ -249,13 +255,9 @@ public class BaseBallController {
 		return result;
 	}
 
-	
-	
-
-	
 	@RequestMapping(value = "/party_image_upload.do", method = RequestMethod.POST)
-	public void ckeditor_image_upload(
-			@RequestParam MultipartFile upload, HttpServletResponse response) throws Exception {
+	public void ckeditor_image_upload(@RequestParam MultipartFile upload, HttpServletResponse response)
+			throws Exception {
 		OutputStream out = null;
 		PrintWriter printWriter = null;
 		response.setCharacterEncoding("utf-8");
@@ -302,18 +304,13 @@ public class BaseBallController {
 			}
 		}
 	}
-	
-	
+
 	@RequestMapping("/party/insert_party_one.do")
-	public String insert_party_one(PartyVo vo,String year, String month, String day) {
-		
+	public String insert_party_one(PartyVo vo, String year, String month, String day) {
+
 		int res = partyService.insert_party(vo, year, month, day);
-		
-		
-		
-		
+
 		return "redirect:party_list.do";
 	}
-
 
 }

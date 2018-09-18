@@ -187,10 +187,12 @@ function create_party(day_num){
 													</c:forEach>
 												</ul>
 												<ul class="match_button">
-													<c:if
-														test="${this_month==month&&this_year==year&&today+1 <=day}">
+													<c:choose><c:when
+														test="${(this_month==month&&this_year==year&&today <=day)||(this_month<=month&&this_year==year)}">
 														<li><button onclick="create_party(${day})">파티생성</button></li>
-													</c:if>
+														</c:when>
+														
+													</c:choose>
 													<li><button>파티리스트보기</button></li>
 												</ul>
 										</c:if> </a>

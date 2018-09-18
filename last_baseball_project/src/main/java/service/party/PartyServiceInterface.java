@@ -24,6 +24,7 @@ Map getWeekday(String year, String month);
 String selectStadium(String p_idx);
 int insert_party(PartyVo vo,String year,String month,String day);
 PlayVo select_play_one(String p_idx);
+boolean check_long_time_in_match(String year, String month, String day);
 
 
 

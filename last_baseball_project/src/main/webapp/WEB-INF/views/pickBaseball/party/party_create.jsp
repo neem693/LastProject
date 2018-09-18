@@ -114,12 +114,16 @@
 
 		var p_idx = play.value;
 		var res;
-		
+
 		var t_home;
 		var t_away;
 		var text;
-		
+
 		var team = document.getElementById("select_team");
+		if (team.length > 1) {
+			team.removeChild(team[1]);
+			team.removeChild(team[1]);
+		}
 		var stadium = document.getElementById("stadium");
 
 		var op = {
@@ -134,24 +138,23 @@
 				console.log(result);
 				res = result[0].result; //경기장
 				res = res.split("/");
-				
+
 				stadium.value = res[0];
-				
+
 				t_home = document.createElement("option");
 				t_home.value = res[1];
+				t_home.id = "t_home";
 				text = document.createTextNode(res[1]);
 				t_home.appendChild(text);
 				team.appendChild(t_home);
-				
+
 				t_away = document.createElement("option");
 				t_away.value = res[2];
+				t_away.id = "t_away";
 				text = document.createTextNode(res[2]);
 				t_away.appendChild(text);
 				team.appendChild(t_away);
-				
-				
-				
-				
+
 				console.log(res[1]);
 				console.log(res[2]);
 				/////////검색결과로
@@ -271,12 +274,14 @@ table {
 				<td>골라주세요<input type="radio" name="date" value="none"
 					checked="checked" onclick="check_radio(this)"><br>
 					시간으로 잡기<input type="radio" name="date" value="time"
-					onclick="check_radio(this)"><br> 날짜로 잡기<input
+					onclick="check_radio(this)"><br> <c:if test="${is_long eq 'true'}"> 날짜로 잡기<input
 					type="radio" name="date" value="day" onclick="check_radio(this)"><br>
 					<select name="pt_day1" id="day" class="hide">
 						<option value="-1" selected="selected">경기시작 1일 전</option>
 						<option value="-2">경기시작 2일 전</option>
 						<option value="-10">경기시작 3일 전 이상</option>
+						</c:if>
+						<c:if test="${is_long eq 'false'}"><input id = "day" type = "hidden"></c:if>
 				</select> <select name="pt_day2" id="hour" class="hide">
 
 						<option value="+2">경기시작 2시간 후</option>
@@ -332,8 +337,8 @@ table {
 			</tr>
 			<tr>
 				<td>팀 선택</td>
-				<td><select id = "select_team" name = "pt_team">
-				<option value = "no" selected="selected">상관없음</option>
+				<td><select id="select_team" name="t_name">
+						<option value="no" selected="selected">상관없음</option>
 				</select></td>
 			</tr>
 
