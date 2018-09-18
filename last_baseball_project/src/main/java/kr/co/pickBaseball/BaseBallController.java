@@ -207,5 +207,9 @@ public class BaseBallController {
 		
 	}
 
+	@RequestMapping("/main/main_list.do")
+	public String insert_form() {
+		return myconst.Myconst.Main.VIEW_PATH + "main_list.jsp";
+	}
 
 }

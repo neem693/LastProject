@@ -12,67 +12,12 @@ body {
     margin-right:15% ;
 }
 
-/* Header/Blog Title */
-
-.header {
-    width:100%;
-    
-    border:1px solid black;
-    
-}
-
-#header_img{
-	
-	width:100%;
-	height: 200px; 
-	border : 1px solid red;
-	background-image: url("/pickBaseball/resources/images/main/header/bone.png"),url("/pickBaseball/resources/images/main/header/baseballheader.jpg");
-	background-repeat: no-repeat;
-	background-size:contain, cover;
-	
-}
-.login_join{
-
-	/* background-color: blue; */
-}
-
-
-/* Style the top navigation bar */
-.topnav {
-    overflow: hidden;
-    background-color: #333;
-    width:100%;
-}
-/* Style the topnav links */
-.topnav a {
-    float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    width:25%;
-}
-
-/* Change color on hover */
-.topnav a:hover {
-    background-color: #ddd;
-    color: black;
-}
-
-
-
 /* Create two unequal columns that floats next to each other */
 /* Left column */
 .leftcolumn {   
     float: left;
     width: 75%;
 }
-
-
-
-
-
 
 
 /* * {box-sizing: border-box;}
@@ -176,14 +121,6 @@ img {vertical-align: middle;} */
     content: "";
     display: table;
     clear: both;
-}
-
-/* Footer */
-.footer {
-    padding: 20px;
-    text-align: left;
-    background: #ddd;
-    margin-top: 20px;
 }
 
 /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
