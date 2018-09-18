@@ -118,6 +118,12 @@ public class TeamDaoImpl implements PartyDaoInerface{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Object selectOne2(Object map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

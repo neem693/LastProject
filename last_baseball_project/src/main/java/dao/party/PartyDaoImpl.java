@@ -4,11 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-public class parsing_update_dao implements PartyDaoInerface {
+public class PartyDaoImpl implements PartyDaoInerface {
 	
 	SqlSession session;
-	
-	
 	
 	
 
@@ -19,15 +17,6 @@ public class parsing_update_dao implements PartyDaoInerface {
 	public void setSession(SqlSession session) {
 		this.session = session;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	@Override
 	public List selectList(Object map) {
@@ -38,12 +27,19 @@ public class parsing_update_dao implements PartyDaoInerface {
 	@Override
 	public Object selectOne() {
 		// TODO Auto-generated method stub
-		
-		long time =0;
-		
-		time = session.selectOne("parsing.get_second");
-		
-		return time;
+		return null;
+	}
+
+	@Override
+	public Object selectOne(Object map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object selectOne2(Object map) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -61,17 +57,16 @@ public class parsing_update_dao implements PartyDaoInerface {
 	@Override
 	public int update(Object ob) {
 		// TODO Auto-generated method stub
-		
-		int res = session.update("parsing.update_parsing_key",ob);
-		
-		return res;
+		return 0;
 	}
 
 	@Override
 	public int insert(Object ob) {
 		// TODO Auto-generated method stub
 		
-	return 0;
+		int res = session.insert("party_insert_one",ob);
+		
+		return res;
 	}
 
 	@Override
@@ -90,18 +85,6 @@ public class parsing_update_dao implements PartyDaoInerface {
 	public int delete() {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	@Override
-	public Object selectOne(Object map) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Object selectOne2(Object map) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

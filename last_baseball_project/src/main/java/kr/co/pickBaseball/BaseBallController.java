@@ -34,6 +34,7 @@ import service.party.PartyServiceInterface;
 
 import util.parsing.TeamParsing;
 import vo.MemberVo;
+import vo.PartyVo;
 import vo.TeamVo;
 
 @Controller
@@ -238,12 +239,12 @@ public class BaseBallController {
 
 	}
 
-	@RequestMapping(value = "/party/select_stadium.do", produces = "text/plain;charset=UTF-8")
+	@RequestMapping(value = "/party/select_stadium_team.do", produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public String select_stadium(String p_idx) {
 
-		String stadium = partyService.selectStadium(p_idx);
-		String result = String.format("[{'result':'%s'}]", stadium);
+		String stadium_team = partyService.selectStadium(p_idx);
+		String result = String.format("[{'result':'%s'}]", stadium_team);
 
 		return result;
 	}
@@ -253,7 +254,7 @@ public class BaseBallController {
 
 	
 	@RequestMapping(value = "/party_image_upload.do", method = RequestMethod.POST)
-	public void ckeditorImageUpload2(
+	public void ckeditor_image_upload(
 			@RequestParam MultipartFile upload, HttpServletResponse response) throws Exception {
 		OutputStream out = null;
 		PrintWriter printWriter = null;
@@ -301,5 +302,18 @@ public class BaseBallController {
 			}
 		}
 	}
+	
+	
+	@RequestMapping("/party/insert_party_one.do")
+	public String insert_party_one(PartyVo vo,String year, String month, String day) {
+		
+		int res = partyService.insert_party(vo, year, month, day);
+		
+		
+		
+		
+		return "redirect:party_list.do";
+	}
+
 
 }

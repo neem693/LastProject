@@ -5,56 +5,65 @@
 <mapper namespace="play">
 
 
-<insert id="play_insert" parameterType="Play">
-insert into play(p_idx,p_date,p_score,p_rts,s_idx,t_home,t_away)
-		values(	#{p_idx},
-				#{p_date},
-				#{p_score},
-				#{p_rts},
-				#{s_idx},
-				#{t_home},
-				#{t_away}
-		
-)
-</insert>
+	<insert id="play_insert" parameterType="Play">
+		insert into play(p_idx,p_date,p_score,p_rts,s_idx,t_home,t_away)
+		values(
+		#{p_idx},
+		#{p_date},
+		#{p_score},
+		#{p_rts},
+		#{s_idx},
+		#{t_home},
+		#{t_away}
+
+		)
+	</insert>
 
 
 
 
-<update id="play_update" parameterType="Play">
+	<update id="play_update" parameterType="Play">
 
-update play
-set p_date = #{p_date},
-	p_score = #{p_score},
-	p_rts = #{p_rts},
-	s_idx = #{s_idx},
-	t_home = #{t_home},
-	t_away = #{t_away}
-	where p_idx = #{p_idx}
+		update play
+		set p_date = #{p_date},
+		p_score = #{p_score},
+		p_rts = #{p_rts},
+		s_idx = #{s_idx},
+		t_home = #{t_home},
+		t_away = #{t_away}
+		where p_idx = #{p_idx}
 
-</update>
+	</update>
 
-<select id="all_count" parameterType="java.util.Map" resultType="int">
-select count(*)
-from play 
-where p_idx like concat(#{year},#{month},'%')
-</select>
-
-
-<select id = "play_list" parameterType="java.util.Map" resultType="Play">
-
-select * from play
-where p_idx like concat(#{year_month},'%')
-
-</select>
-
-	<select id ="select_stadium" parameterType="java.lang.String" resultType="java.lang.String">
-	select s.s_name from
-	play p inner join studium s
-	on p.s_idx = s.s_idx
-	where p.p_idx = #{p_idx};
+	<select id="all_count" parameterType="java.util.Map"
+		resultType="int">
+		select count(*)
+		from play
+		where p_idx like concat(#{year},#{month},'%')
 	</select>
 
+
+	<select id="play_list" parameterType="java.util.Map"
+		resultType="Play">
+
+		select * from play
+		where p_idx like concat(#{year_month},'%')
+
+	</select>
+
+	<select id="select_stadium_team" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select concat(s.s_name,'/',p.t_home,'/',p.t_away)
+		from play p inner join studium s
+		on p.s_idx = s.s_idx
+		where p.p_idx = #{p_idx};
+	</select>
+	
+	<select id="select_play" parameterType="java.lang.String"
+		resultType="Play">
+		select * from play where p_idx =#{p_idx}
+
+	</select>
 
 
 

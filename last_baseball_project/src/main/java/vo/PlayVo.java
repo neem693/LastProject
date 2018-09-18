@@ -57,6 +57,8 @@ public class PlayVo {
 			e.printStackTrace();
 		}
 		
+		
+		
 		setDay(Integer.parseInt(day_format.format(this.date)));
 		
 	}

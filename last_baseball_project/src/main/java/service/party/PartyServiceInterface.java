@@ -3,6 +3,8 @@ package service.party;
 import java.util.List;
 import java.util.Map;
 
+import vo.PartyVo;
+import vo.PlayVo;
 import vo.TeamVo;
 
 public interface PartyServiceInterface {
@@ -20,7 +22,8 @@ List take_play_list(String year, String month, String day);
 
 Map getWeekday(String year, String month);
 String selectStadium(String p_idx);
-
+int insert_party(PartyVo vo,String year,String month,String day);
+PlayVo select_play_one(String p_idx);
 
 
 

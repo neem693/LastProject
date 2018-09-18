@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 <script type="text/javascript"
 	src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=1025388614b7b8c70d0002c6339d84f4&libraries=services
@@ -25,24 +25,61 @@
 		var f = document.getElementById("baseball_party");
 		//console.log(f.date);
 		var date = f.date.value;
-		
-		
-		
-		if(date == "time")
+		var title = f.pt_name.value;
+
+		if (title == "") {
+			alert("파티명을 입력해주세요");
+			return;
+		} else if (title.length > 20) {
+			alert("파티명이 너무 깁니다. 20자리 내로 해주세요");
+			return;
+		}
+
+		if (date == "time")
 			f.pt_day.value = f.pt_day2.value;
-		else if(date == "day")
+		else if (date == "day")
 			f.pt_day.value = f.pt_day1.value;
 		else {
 			alert("예약유형을 선택해주세요");
 			return;
 		}
-		console.log(f.pt_name.value);
-		console.log(f.date.value);
-		console.log(f.pt_day.value);
-		
-			
 
-		//form_dd.submit();
+		if (f.pt_purpose.value == 0) {
+			alert("파티 목적을 선택해주세요");
+			return;
+		}
+
+		if (f.p_idx.value == "") {
+			alert("경기를 필수적으로 선택해주세요");
+			return;
+		}
+
+		if (f.addr3.value == "") {
+			alert("지도에서 모일 장소를 필수적으로 선택해주세요");
+			return;
+		}
+
+		if (f.addr2.value == "")
+			f.pt_location.value = f.addr1.value + "/" + f.addr3.value + "/"
+					+ f.addr4.value;
+		else
+			f.pt_location.value = f.addr1.value + "/" + f.addr3.value + "/"
+					+ f.addr4.value + "[" + f.addr2.value + "]";
+
+		//모일 장소에 대한 개념은 주소1/x좌표/y좌표[메모]로 진행된다.
+		/* 
+		 console.log(f.pt_name.value);
+		 console.log(f.date.value);
+		 console.log(f.pt_day.value);
+		 console.log(f.pt_purpose.value);
+		 console.log(f.pt_maxPeople.value);
+		 console.log(f.p_idx.value);
+		 console.log(f.pt_location.value);
+		 console.log(CKEDITOR.instances.pt_text.getData());
+		 */
+		f.action = "insert_party_one.do";
+		f.method = "POST";
+		f.submit();
 	}
 	function check_radio(radio) {
 		var value = radio.value;
@@ -73,14 +110,20 @@
 		ps.keywordSearch(search_text, placesSearchCB);
 	}
 
-	function ajax_for_stadium(play) {
+	function ajax_for_stadium_team(play) {
 
 		var p_idx = play.value;
 		var res;
+		
+		var t_home;
+		var t_away;
+		var text;
+		
+		var team = document.getElementById("select_team");
 		var stadium = document.getElementById("stadium");
 
 		var op = {
-			url : 'select_stadium.do',
+			url : 'select_stadium_team.do',
 			data : {
 				'p_idx' : p_idx
 			},
@@ -89,10 +132,30 @@
 
 				result = eval(result);
 				console.log(result);
-				res = result[0].result;
-				stadium.value = res;
+				res = result[0].result; //경기장
+				res = res.split("/");
+				
+				stadium.value = res[0];
+				
+				t_home = document.createElement("option");
+				t_home.value = res[1];
+				text = document.createTextNode(res[1]);
+				t_home.appendChild(text);
+				team.appendChild(t_home);
+				
+				t_away = document.createElement("option");
+				t_away.value = res[2];
+				text = document.createTextNode(res[2]);
+				t_away.appendChild(text);
+				team.appendChild(t_away);
+				
+				
+				
+				
+				console.log(res[1]);
+				console.log(res[2]);
 				/////////검색결과로
-				ps.keywordSearch(res, placesSearchCB);
+				ps.keywordSearch(res[0], placesSearchCB);
 				////////해당 맵으로 이동만 함
 				if (map_class.style.opacity == 0) {
 					map_class.style.opacity = "1";
@@ -134,7 +197,7 @@
 
 						CKEDITOR
 								.replace(
-										'party_editor',
+										'pt_text',
 										{
 											filebrowserUploadUrl : '${pageContext.request.contextPath}/party_image_upload.do',
 											filebrowserUploadMethod : 'form',
@@ -196,6 +259,8 @@ table {
 	</p>
 
 	<form id="baseball_party">
+		<input type="hidden" name="year"> <input type="hidden"
+			name="month"> <input type="hidden" name="day">
 		<table class="form_table">
 			<tr>
 				<td>파티 이름</td>
@@ -225,8 +290,7 @@ table {
 						<option value="-6">경기시작 6시간 전</option>
 						<option value="-12">그 이상</option>
 
-				</select><br>
-				<input type="hidden" name="pt_day"></td>
+				</select><br> <input type="hidden" name="pt_day"></td>
 			</tr>
 			<tr>
 				<td>파티 목적</td>
@@ -242,7 +306,8 @@ table {
 			<tr>
 				<td>최대인원수</td>
 				<td>※해당 인원수는 본인 포함입니다.<br> <select name="pt_maxPeople"
-					id="max_size"><option value="2">2</option>
+					id="max_size">
+						<option value="2">2</option>
 						<option value="3">3</option>
 						<option value="4">4</option>
 						<option value="5">5</option>
@@ -258,7 +323,7 @@ table {
 			<tr>
 				<td>경기 선택</td>
 				<td><select id="select_match" name="p_idx"
-					onchange="ajax_for_stadium(this);">
+					onchange="ajax_for_stadium_team(this);">
 						<option value="0" selected="selected">경기 선택</option>
 						<c:forEach var="o" items="${match_list}">
 							<option value="${o.p_idx}">${o.t_away}VS${o.t_home}</option>
@@ -266,18 +331,22 @@ table {
 				</select></td>
 			</tr>
 			<tr>
-				<td>파티 설명</td>
-				<td><textarea id="party_editor" name="pt_text"></textarea></td>
+				<td>팀 선택</td>
+				<td><select id = "select_team" name = "pt_team">
+				<option value = "no" selected="selected">상관없음</option>
+				</select></td>
 			</tr>
+
 
 			<tr>
 				<td>모일장소</td>
 
 				<td><label id="stadium_label">경기장:</label><input name="stadium"
 					id="stadium" disabled="disabled"> <select
-					onchange="location_pick(this);"><option
-							selected="selected" value="0">경기장 주위</option>
-						<option value="1">경기장 외부</option></select><input id="search_addr">
+					onchange="location_pick(this);">
+						<option selected="selected" value="0">경기장 주위</option>
+						<option value="1">경기장 외부</option>
+				</select><input id="search_addr">
 					<button value="버튼" id="search_addr_b"
 						onclick="search_location();return false;">위치 검색</button> <br>
 					<p id="search_help">※위치를 검색하면 해당 주소로 맵이 이동합니다.</p>
@@ -290,6 +359,11 @@ table {
 					id="coor_x" name="addr3"><input readonly="readonly"
 					type="hidden" id="coor_y" name="addr4"> <input
 					type="hidden" name="pt_location"> <!-- addr1은 도로명 주소_번지주소\ addr2는 메모주소 \ 가장 중요한 addr3는 x좌표 \ 또 중요한 addr4는 y좌표 -->
+				</td>
+			</tr>
+			<tr>
+				<td>파티 설명</td>
+				<td><textarea id="pt_text" name="pt_text">※경기장 좌석 정보에 대해서 필수적으로 입력해 주세요^^</textarea>
 				</td>
 			</tr>
 
