@@ -46,13 +46,27 @@ public class Test {
 		//끝
 		
 		try {
-			vo = match.matchParsing(9, 2018);
+	//		vo = match.matchParsing(9, 2018);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 		//	e.printStackTrace();
 		}
-		System.out.println("완료" + vo.toString());
+	//	System.out.println("완료" + vo.toString());
 		//System.out.println(System.currentTimeMillis());
+		
+		Calendar cal = Calendar.getInstance();
+		
+		cal.set(2018, 8-1 , 1);
+		int week_day = cal.get(Calendar.DAY_OF_WEEK);
+		System.out.println("week_day : " + week_day);
+		
+		System.out.println(Calendar.getInstance().getFirstDayOfWeek());
+		System.out.println(Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
+//		int cal = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+		System.out.println(Calendar.SUNDAY);
+		System.out.println(Calendar.MONDAY);
+		System.out.println(Calendar.TUESDAY);
+		
 	}
 
 }

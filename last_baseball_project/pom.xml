@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>kr.co</groupId>
 	<artifactId>pickBaseball</artifactId>
-	<name>last_basball_project</name>
+	<name>last_baseball_project</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
@@ -115,7 +115,7 @@
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
 			<scope>test</scope>
-		</dependency>        
+		</dependency>   
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
@@ -185,7 +185,7 @@
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 			<version>20180813</version>
-		</dependency>
+</dependency>  
 
 
 		<dependency>
@@ -198,6 +198,7 @@
 			<artifactId>jsoup</artifactId>
 			<version>1.10.1</version>
 		</dependency>
+
 	</dependencies>
     <build>
         <plugins>

@@ -1,13 +1,18 @@
 package vo;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class PlayVo {
+	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	SimpleDateFormat day_format = new SimpleDateFormat("dd");
 	
+	int day;
 	String p_idx;
 	String p_date;
 	Date date;
-	String p_score; //"예정" "T" "C" 라는 값이 들어온다. 예정은 말그대로 예정, T는 Today 오늘, C는 cancle 한다는 경기취소의미 
+	String p_score; //"예정" "T" "C" 라는 값이 들어온다. 예정은 말그대로 예정(오늘 경기라도 지금 진행중이 아니면 예정), T는 진행중 , C는 cancle 한다는 경기취소의미 
 					//특수한 상황이 아니라면 "원정점수-홈점수" 로 되어있다. ex) "13-5"
 	String p_rts;//결과 원정기준으로 승 일떄 W 패 일때 L 무승부일 떄 D
 	int s_idx;
@@ -45,6 +50,17 @@ public class PlayVo {
 
 	public void setP_date(String p_date) {
 		this.p_date = p_date;
+		try {
+			setDate(this.format.parse(p_date));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		setDay(Integer.parseInt(day_format.format(this.date)));
+		
 	}
 
 	public Date getDate() {
@@ -93,6 +109,20 @@ public class PlayVo {
 
 	public void setT_away(String t_away) {
 		this.t_away = t_away;
+	}
+
+	
+	
+	
+	
+	public int getDay() {
+		
+		
+		return day;
+	}
+
+	public void setDay(int day) {
+		this.day = day;
 	}
 	
 	

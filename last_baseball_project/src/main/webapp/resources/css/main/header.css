@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+/* Header/Blog Title */
+
+.header {
+    width:100%;
+    
+    border:1px solid black;
+    
+}
+
+#header_img{
+	cursor: pointer;
+	width:100%;
+	height: 200px; 
+	background-image: url("/pickBaseball/resources/images/main/header/title4.png"),url("/pickBaseball/resources/images/main/header/header_1.jpg");
+	background-repeat: no-repeat;
+	background-size:contain,cover;
+	background-position: right,center;
+	
+		
+}
+.login_join{
+
+	/* background-color: blue; */
+}
+
+
+/* Style the top navigation bar */
+.topnav {
+    overflow: hidden;
+    background-color: #333;
+    width:100%;
+    font-size:20px;
+    font-weight: 900;
+}
+/* Style the topnav links */
+.topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    width:25%;
+}
+
+/* Change color on hover */
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
