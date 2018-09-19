@@ -1,33 +1,50 @@
 @charset "UTF-8";
 
-
+body{
+	background-image: url('/pickBaseball/resources/images/input/baseball_login.jpg');
+	background-repeat: repeat;
+	background-size: cover;
+	
+}
 
 .container{
+	margin: auto;
+	margin-top: 10%;
 	
-	height: 300px;
-	padding:  8px;
-	width:500px;
+
+	left:0;
+	right:0;
+	position:fixed;
+	height: 400px;
+	padding:  3% 0 0 0;
+	width:50%;
 	text-align:center;	
-	color: #804000!important;
-	background-color: #fdf5e6 !important
+	color: white;
+	/* color: #804000!important; */
+	background-color: rgba(0,0,0,0.5);
 
 }
 
 .text_brown{
-	color: #795548 !important
+	color: #00ff00!important
 }
 
 .login_input {
 	
-	margin-left:90px;	
+	
+	margin: 0 auto;	
 	display: block;
 	height:35px;
 	border: none;
 	border-bottom: 2px solid #ccc;
    	width:300px;
-    color: #000 !important;
-	background-color: #fdf5e6 !important
+    color: #ffffff!important;
+	background-color: rgba(0,0,0,0);
     
+}
+.login_input:active{
+	
+	
 }
 .pading {
 

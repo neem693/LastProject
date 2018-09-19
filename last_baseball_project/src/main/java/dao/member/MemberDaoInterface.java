@@ -15,6 +15,8 @@ public interface MemberDaoInterface {
 	int update(MemberVo vo);	
 	int insert(MemberVo vo);
 	int delete(int idx);
+
+	MemberVo selectOne_login(MemberVo vo);
 	
 
 	

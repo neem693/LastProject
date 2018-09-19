@@ -13,6 +13,7 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,7 +38,8 @@ import vo.TeamVo;
 @Controller
 public class BaseBallController {
 	
-	
+	@Autowired
+	HttpSession session;
 	@Autowired
 	HttpServletRequest request;
 	@Autowired
@@ -48,6 +50,7 @@ public class BaseBallController {
 
 	// 회원가입 서비스 호출 객체 ( 3단계 구조)
 	MemberServiceInterface memberservice;
+
 	//토토 서비스 호출 객체 
 	TotoServiceInterface totoservice;
 	
@@ -58,8 +61,6 @@ public class BaseBallController {
 	public void setTotoservice(TotoServiceInterface totoservice) {
 		this.totoservice = totoservice;
 	}
-
-
 
 	public MemberServiceInterface getMemberservice() {
 		return memberservice;
@@ -138,11 +139,24 @@ public class BaseBallController {
 
 	}
 
-	@RequestMapping("/login.do")
+	@RequestMapping("/member/login.do")
 	public String login() {
 
 		return Myconst.Member.MEMBER_DIR + "login.jsp";
 
+	}
+
+	@RequestMapping("/member/login_action.do")
+	public String login_action(MemberVo vo) {
+
+		MemberVo voo = memberservice.login_action(vo);
+		if(vo==null)
+			return "redirect:login.do?fail=cantUser";
+		else
+			session.setAttribute("user", voo);
+		
+
+		return Myconst.Main.VIEW_PATH + "main_list.jsp";
 	}
 
 	@RequestMapping("/test_list.do")
@@ -225,7 +239,7 @@ public class BaseBallController {
 	}
 
 	@RequestMapping("/party/party_list.do")
-	public String party_list(String year, String month, Model model,String team) {
+	public String party_list(String year, String month, Model model, String team) {
 
 		if (year == null && month == null) {
 			year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
@@ -233,7 +247,7 @@ public class BaseBallController {
 		}
 
 		List list = partyService.take_play_list(year, month);
-		Map party_count = partyService.get_party_count(year,month,team);
+		Map party_count = partyService.get_party_count(year, month, team);
 		Map map;
 		// String cal = partyService.make_cal(list);
 		model.addAttribute("list", list);
@@ -248,11 +262,9 @@ public class BaseBallController {
 		model.addAttribute("first_day", map.get("first_day"));
 		model.addAttribute("last_day", map.get("last_day"));
 		model.addAttribute("party_count", party_count);
-		model.addAttribute("team",team);
-		
-		
+		model.addAttribute("team", team);
+
 		System.out.println(team);
-		
 
 		return Myconst.BaseBall.PARTY_DIR + "list.jsp";
 	}
@@ -279,7 +291,7 @@ public class BaseBallController {
 		model.addAttribute("match_list", match_list);
 		model.addAttribute("is_long", long_promise);
 
-		//System.out.println(long_promise);
+		// System.out.println(long_promise);
 
 		return Myconst.BaseBall.PARTY_DIR + "party_create.jsp";
 
@@ -289,6 +301,7 @@ public class BaseBallController {
 	public String insert_form() {
 		return myconst.Myconst.Main.VIEW_PATH + "main_list.jsp";
 	}
+
 	@RequestMapping(value = "/party/select_stadium_team.do", produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public String select_stadium(String p_idx) {
@@ -356,18 +369,13 @@ public class BaseBallController {
 
 		return "redirect:party_list.do";
 	}
-	
-	
+
 	@RequestMapping("/party/show_party_list.do")
-	public String show_party_list(String year,String month,String day,String team) {
-		
+	public String show_party_list(String year, String month, String day, String team) {
+
 		System.out.println("쇼 파티 리스트 두");
-		
-		
-		
-		
+
 		return Myconst.BaseBall.PARTY_DIR + "show_party_list.jsp";
-		
 
 	}
 

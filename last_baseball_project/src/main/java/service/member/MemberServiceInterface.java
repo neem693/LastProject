@@ -19,6 +19,7 @@ public interface MemberServiceInterface {
 	int update(MemberVo vo);	
 	int insert(MemberVo vo);
 	int delete(int idx);
+	public MemberVo login_action(MemberVo vo);
 	
 	
 	
