@@ -13,6 +13,8 @@ public class PartyVo {
 	String pt_location; //인서트 할떄 이 값을 수정해야 한다. 이 값은 월래 mysql전용의 데이트time값이 들어가 있어야 한다.
 	String pt_text;
 	String t_name;
+	String day;
+	int match_count;
 	
 	public PartyVo() {
 		// TODO Auto-generated constructor stub
@@ -127,6 +129,34 @@ public class PartyVo {
 
 	public void setT_name(String t_name) {
 		this.t_name = t_name;
+	}
+
+
+
+
+	public String getDay() {
+		return day;
+	}
+
+
+
+
+	public void setDay(String day) {
+		this.day = day;
+	}
+
+
+
+
+	public int getMatch_count() {
+		return match_count;
+	}
+
+
+
+
+	public void setMatch_count(int match_count) {
+		this.match_count = match_count;
 	}
 	
 	

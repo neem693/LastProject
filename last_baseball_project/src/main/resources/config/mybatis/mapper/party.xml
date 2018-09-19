@@ -2,26 +2,45 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="Party">
+<mapper namespace="party">
 
-<insert id="party_insert_one" parameterType="party">
-insert into party(pt_people,pt_day,pt_condition,pt_purpose,p_idx,pt_maxPeople,pt_location,pt_text,t_name,pt_date)
-values(
-1,
-#{pt_day},
-#{pt_condition},
-#{pt_purpose},
-#{p_idx},
-#{pt_maxPeople},
-#{pt_location},
-#{pt_text},
-#{t_name},
-now()
+	<insert id="party_insert_one" parameterType="party">
+		insert into
+		party(pt_people,pt_day,pt_condition,pt_purpose,p_idx,pt_maxPeople,pt_location,pt_text,t_name,pt_date)
+		values(
+		1,
+		#{pt_day},
+		#{pt_condition},
+		#{pt_purpose},
+		#{p_idx},
+		#{pt_maxPeople},
+		#{pt_location},
+		#{pt_text},
+		#{t_name},
+		now()
 
-)
+		)
 
 
-</insert>
+	</insert>
+
+
+	<select id="select_match_count" parameterType="party"
+		resultType="party">
+
+		select day(p.p_date) as day, count(*) as match_count
+		from play p right outer join party pt
+		on p.p_idx =pt.p_idx
+		<trim prefix="where" prefixOverrides="and">
+		    p.p_idx like concat(#{p_idx},'%') 
+			<if test="t_name!=null">
+			     and pt.t_name = #{t_name}
+		   </if>
+		</trim>
+		group by day(p.p_date)
+
+
+	</select>
 
 
 

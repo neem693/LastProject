@@ -350,7 +350,6 @@ public class ServicePartyimpl implements PartyServiceInterface {
 		long current = date.getTime();
 
 		Calendar cal = Calendar.getInstance();
-
 		int year_int = Integer.parseInt(year);
 		int month_int = Integer.parseInt(month);
 		int day_int = Integer.parseInt(day);
@@ -366,6 +365,31 @@ public class ServicePartyimpl implements PartyServiceInterface {
 		else
 			return false;
 
+	}
+
+	@Override
+	public Map get_party_count(String year, String month, String team) {
+		// TODO Auto-generated method stub
+//		System.out.println("month:" + month);
+
+		String year_month = String.format("%s%02d", year, Integer.parseInt(month));
+
+		PartyVo vo = new PartyVo();
+
+		vo.setP_idx(year_month);
+		if (team != null)
+			vo.setT_name(team);
+
+		List<PartyVo> list = party_dao.selectList(vo);
+		Map map = new HashMap<String, Integer>();
+
+		for (int i = 0; i < list.size(); i++) {
+			map.put(list.get(i).getDay(), list.get(i).getMatch_count());
+		}
+//		System.out.println(list.size());
+//		System.out.println(map);
+
+		return map;
 	}
 
 }

@@ -42,12 +42,21 @@ group by p_date
 select * from party;
 
 
-select day(p.p_date), count(*) as match_count
-from play p right outer join party pt
+select day(p.p_date) as day, count(*) as match_count
+from play p inner join party pt
 on p.p_idx =pt.p_idx
 where p.p_idx like "201809%" and
 pt.t_name = "³Ø¼¾"
 group by day(p.p_date)
+
+
+
+select day(p.p_date) as day, count(*) as match_count
+from play p right outer join party pt
+on p.p_idx =pt.p_idx
+where p.p_idx like "201809%"
+group by day(p.p_date)
+
 
 
 select concat(t_home,t_away,s_idx)
@@ -57,6 +66,17 @@ from play
 
 
 
+	select day(p.p_date) as day, count(*) as match_count
+		from play p right outer join party pt
+		on p.p_idx =pt.p_idx
+		where p.p_idx like '201809%'
+			
+	
+		group by day(p.p_date)
 
+		
+		
+		select * from party
+		where p_idx = ""
 
 

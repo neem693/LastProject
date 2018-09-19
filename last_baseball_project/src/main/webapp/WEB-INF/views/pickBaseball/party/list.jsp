@@ -55,12 +55,18 @@ tr, td, th {
 	cursor: pointer;
 }
 
-.match_button {
-	// display:none; 
+.match_button { //
+	display: none;
 	visibility: hidden;
 	opacity: 0;
-	height:0;
+	height: 0;
 	transition: all 0.3s;
+}
+
+.match_count {
+	float: right;
+	font-weight: bold;
+	font-size: large;
 }
 </style>
 <script
@@ -74,6 +80,32 @@ $(document).ready(function(){
 	bs = document.getElementsByClassName("match_button");
 });
 
+function show_party_list(d){
+	
+	var op = {
+		    url:'show_party_list.do',
+		    data:{
+		        'year':'${year}',
+		        'month':'${month}',
+		        'team':'${team}',
+		        'day':d
+		        
+		    },
+		    async:false,
+		    success:function(result){
+		        //alert(result);
+		        var res= result;
+		        res = eval(res);
+		  
+		    }
+	}
+
+	
+	$.ajax(op);
+	
+	
+	
+}
 
 function showButton(m){
 	for(var i=0;i<bs.length;i++){
@@ -135,10 +167,11 @@ function create_party(day_num){
 									<td></td>
 								</c:when>
 								<c:otherwise>
-									<td>
-									<c:set var="day" value="${day+1 }"></c:set>
-										 ${ day}<c:if
-											test="${fisrt_day != 0}">
+									<td><c:set var="day" value="${day+1 }"></c:set> ${ day}<span
+										class="match_count"><c:set var="day_key">${day}</c:set>
+											<%-- day를 key값으로 설정해주기 위한 것이다. --%> <c:out
+												value="${ party_count[day_key]}" /> </span>
+									<c:if test="${fisrt_day != 0}">
 											<c:set var="first_day" value="0"></c:set>
 										</c:if> <c:forEach var="i" begin="${n}" end="${n+4}">
 											<c:if test="${list[i].day eq day}">
@@ -150,6 +183,8 @@ function create_party(day_num){
 											<!-- 경기가 있을 떄마다 c를 증가 밑 foreach문이 해당 c값 만큼 경기 갯수 출력 -->
 
 										</c:forEach> <c:if test="${c>n}">
+											<!-- 매치에 해당하는 파티 갯수를 출력하는 것을 말한다. -->
+
 											<a class="match_day" onclick="showButton(this);">
 												<ul class="play_ul">
 													<c:forEach var="i" begin="${n}" end="${c-1}">
@@ -187,16 +222,17 @@ function create_party(day_num){
 													</c:forEach>
 												</ul>
 												<ul class="match_button">
-													<c:choose><c:when
-														test="${(this_month==month&&this_year==year&&today <=day)||(this_month<=month&&this_year==year)}">
-														<li><button onclick="create_party(${day})">파티생성</button></li>
+													<c:choose>
+														<c:when
+															test="${(this_month==month&&this_year==year&&today <=day)||(this_month<=month&&this_year==year)}">
+															<li><button onclick="create_party(${day})">파티생성</button></li>
 														</c:when>
-														
+
 													</c:choose>
-													<li><button>파티리스트보기</button></li>
+													<li><button
+															onclick="show_party_list(${day}); return false;">파티리스트보기</button></li>
 												</ul>
-										</c:if> </a>
-									</td>
+										</c:if> </a></td>
 
 
 
