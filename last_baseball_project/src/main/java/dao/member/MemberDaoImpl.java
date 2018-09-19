@@ -90,6 +90,16 @@ public class MemberDaoImpl implements MemberDaoInterface {
 
 		return res;
 	}
+
+	@Override
+	public MemberVo selectOne_login(MemberVo vo) {
+		// TODO Auto-generated method stub
+		
+		
+		MemberVo voo = session.selectOne("member.member_login",vo);
+		
+		return voo;
+	}
 	
 	
 	

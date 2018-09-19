@@ -10,6 +10,7 @@
 		<typeAlias type="vo.PlayVo" alias = "Play"/>
 		<typeAlias type = "vo.Parsing_updateVo" alias = "Parsing"/>
 		<typeAlias type="vo.PartyVo" alias = "Party"/>
+		<typeAlias type="vo.MemberVo" alias="member"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="config/mybatis/mapper/team.xml" />

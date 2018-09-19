@@ -91,4 +91,15 @@ public class MemberService implements MemberServiceInterface {
 		return res;
 	}
 
+	@Override
+	public MemberVo login_action(MemberVo vo) {
+		// TODO Auto-generated method stub
+		
+		
+		MemberVo voo = member_dao.selectOne_login(vo);
+		
+		
+		return voo;
+	}
+
 }
