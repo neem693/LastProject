@@ -102,15 +102,21 @@ img {
   line-height: 10px;
 }
 
-#comment_box
+.comment_box
 {
-width : 680px;
+margin : 0 auto;
+width : 500px;
 border : 1px solid red;
+text-align: center;
 
 }
 
 #comment_input_box
 {
-width : 100%;
-
+width : auto;
+}
+#content
+{
+	width : auto;
+	higth : auto;
 }

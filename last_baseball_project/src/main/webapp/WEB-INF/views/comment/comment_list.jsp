@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-  function del(idx){
+  function del1(idx){
 	  //alert('삭제할 idx='+ idx );
 	  
 	  if(confirm('정말삭제 하시겠습니까?')==false)return;
@@ -52,7 +52,7 @@
   <div>
         작성자: ${ vo.m_nick }(${ vo.m_id }) 
         <c:if test="${ user.id eq vo.m_id }">
-            <input type="button"  value="x" onclick="del('${ vo.c_idx }');">
+            <input type="button"  value="x" onclick="del1('${ vo.c_idx }');">
         </c:if>
   </div>
   <div><pre>${ vo.content }</pre></div>

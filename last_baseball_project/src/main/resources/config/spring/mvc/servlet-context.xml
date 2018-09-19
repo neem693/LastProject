@@ -39,6 +39,11 @@
     <beans:property name="joonggo_dao" ref = "joonggo_dao"/>
     </beans:bean>
     
+    <!-- 댓글 -->
+    <beans:bean id = "CommentConterller" class = "kr.co.pickBaseball.CommentController">
+    <beans:property name="comment_dao" ref = "comment_dao"/>
+    </beans:bean>
+    
     <!-- 스마트에디터 파일 업로드 컨트롤러 -->
     <beans:bean id = "FileUploadController" class = "kr.co.pickBaseball.FileUploadController">
     </beans:bean>

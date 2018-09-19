@@ -36,7 +36,7 @@ function send(f)
 	
 //댓글쓰기
 function comment_send(){
-/* 	
+/*
 	//로그인이 안된경우
 	if('${ empty user }'=='true'){
 		
@@ -50,10 +50,10 @@ function comment_send(){
 		return;
 	} */
 	
-	//댓글쓰기
+ 	//댓글쓰기
 	var j_idx = '${ vo.j_idx }';
-	var id    = '${ user.id }';
-	var name  = '${ user.name }';
+	var id    = '${ user.m_id }';
+	var name  = '${ user.m_nick }';
 	var content = $('#c_comment').val(); // document.getElementById("content").value
 	if(content==''){
 		alert('댓글 내용을 입력하세요');
@@ -87,6 +87,11 @@ function comment_send(){
 	});
 	
 }
+
+function buy(f)
+{
+	
+	}
 
 
 //댓글목록 가져오기(Ajax)   
@@ -187,6 +192,10 @@ function comment_list(page){
 <div class="pull-right">
 <button class="btn btn-primary btn-block" onclick ="send(this.form)">수정</button>
 </div>
+
+<div class="pull-right">
+<button class="btn btn-primary btn-block" onclick ="buy(this.form)">판매완료</button>
+</div>
 	</div>	
 <br>
 
@@ -195,10 +204,10 @@ function comment_list(page){
  
  <p><br>
  <!-- 댓글작성  -->
-<div id="comment_box">
+<div class="comment_box">
     <div id="#comment_input_box">
         <div>
-              작성자: <c:if test="${ not empty user }">${ user.name }(${ user.id })</c:if>
+              작성자: <c:if test="${ not empty user }">${ user.m_nick }(${ user.m_id })</c:if>
         </div>
         <textarea id="content"></textarea>
         <input id="bt_reg" type="button" value="댓글쓰기"  onclick="comment_send();">

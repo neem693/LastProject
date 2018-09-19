@@ -34,6 +34,10 @@ public class Myconst {
 		public static String PHOTO_WEB_PATH_LOOT = "/pickBaseball/resources/photo_upload/";
 	}
 	
+	public static class Comment {
+		public static String VIEW_PATH = "/WEB-INF/views/comment/";
+	}
+	
 
 	public static class JoonggoPage
 	{

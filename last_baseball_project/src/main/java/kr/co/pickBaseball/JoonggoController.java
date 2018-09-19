@@ -47,14 +47,14 @@ public JoonggoDao getJoonggo_dao() {
 	
 
 /*입력 폼*/
-@RequestMapping("/insert_form.do")
+@RequestMapping("/joonggo/insert_form.do")
 public String insert_form()
 {
 	return myconst.Myconst.Joonggo.VIEW_PATH + "joonggo_insert_form.jsp";
 }
 
 /*보기*/ 
-@RequestMapping("/view.do")
+@RequestMapping("/joonggo/view.do")
 public String view(int j_idx, Model model)
 {
 	JoonggoVo vo = joonggo_dao.selectOne(j_idx);
@@ -66,7 +66,7 @@ public String view(int j_idx, Model model)
 }
 
 /*삭제*/
-@RequestMapping("/delete.do")
+@RequestMapping("/joonggo/delete.do")
 public String delete(int j_idx)
 {
 	int res = joonggo_dao.delete(j_idx);
@@ -75,7 +75,7 @@ public String delete(int j_idx)
 }
 
 /*조회*/
-@RequestMapping("/list.do")
+@RequestMapping("/joonggo/list.do")
 public String list(String search, String search_text, Integer page, Model model)
 {
 	String web_path = "/resources/photo_upload/";
@@ -102,8 +102,7 @@ public String list(String search, String search_text, Integer page, Model model)
 	System.out.println(application.getRealPath(web_path));
 	System.out.println(   request.getRequestURI());
     System.out.println(   request.getRequestURL());
-	//
-	
+
 	
 	if(search!=null && !search.equals("all"))
 	{
@@ -112,11 +111,15 @@ public String list(String search, String search_text, Integer page, Model model)
 			map.put("title", search_text);
 			map.put("content", search_text);
 		}
+		else if(search.equals("content")) //내용
+		{
+		   map.put("content", search_text);
+		}
 		else if(search.equals("title")) //제목
 		{
 		   map.put("title", search_text);
 		}
-		else if(search.equals("nick")) // 내용
+		else if(search.equals("nick")) // 닉네임
 		{
 			map.put("nick", search_text);
 	}
@@ -136,8 +139,10 @@ public String list(String search, String search_text, Integer page, Model model)
 			search, 
 			search_text, 
 			myconst.Myconst.JoonggoPage.BLOCK_LIST, 
-			myconst.Myconst.JoonggoPage.BLOCK_PAGE);
+			myconst.Myconst.JoonggoPage.BLOCK_PAGE
+			);
 	
+	//결과적으로 request binding
 	model.addAttribute("list", list);
 	model.addAttribute("pageMenu", pageMenu);
 	
@@ -145,7 +150,7 @@ public String list(String search, String search_text, Integer page, Model model)
 }
 
 /*입력*/
-@RequestMapping("/insert.do")
+@RequestMapping("/joonggo/insert.do")
 public String insert(JoonggoVo vo, Model model) throws IllegalStateException, IOException
 {
 
@@ -198,7 +203,7 @@ public String insert(JoonggoVo vo, Model model) throws IllegalStateException, IO
 }
 
 /*수정 폼*/
-@RequestMapping("/update_form.do")
+@RequestMapping("/joonggo/update_form.do")
 public String update_form(int j_idx, Model model)
 {
 
@@ -211,7 +216,7 @@ public String update_form(int j_idx, Model model)
 }
 
 /*수정*/
-@RequestMapping("/update.do")
+@RequestMapping("/joonggo/update.do")
 public String updata(JoonggoVo vo, Model model) throws IllegalStateException, IOException
 {
 	// ip 수신

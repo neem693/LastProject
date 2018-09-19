@@ -14,7 +14,20 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/joonggo/joonggo.css">
 <script type="text/javascript">
-
+window.onload = function()
+{
+	var search = document.getElementById("search");
+	
+	var search_array = ['', 'title','nick','content', 'title_content'];
+	  for(var i=0; i<search_array.length; i++)
+	  {
+	    	if("${ param.search }" == search_array[i])
+	    	{
+	    		search[i].selected = true;
+	    	}
+	    }
+	}
+	
 function search(){
 	
 	var search = document.getElementById("search").value;
@@ -27,20 +40,10 @@ function search(){
 		}
 	
 	// 검색 요청
-	location.href = 'list.do?search=' + search + '&search+text=' + encodeURIComponent(search_text);
+	location.href = 'list.do?search=' + search + '&search_text=' + encodeURIComponent(search_text);
 	
 }
-window.onload = function()
-{
-	var search = document.getElementById("search");
-	
-	var serach_array = ['', 'title','nick','content', 'title_content'];
-	  for(var i=0;i<search_array.length;i++){
-	    	if("${ param.search }" == search_array[i]){
-	    		search[i].selected = true;
-	    	}
-	    }
-	}
+
 
 </script>
 
@@ -110,7 +113,7 @@ window.onload = function()
 <option value = "content">내용</option>
 <option value = "title_content">제목+내용</option>
 </select>
- <input id="search_text" value=${ (param.search_text =='null') ? '' : param.search_text }>
+<input id="search_text" value=${ (param.search_text =='null') ? '' : param.search_text }>
 <input type = "button" value = "검색" onclick = "search();">
 </div>
 		<div>
