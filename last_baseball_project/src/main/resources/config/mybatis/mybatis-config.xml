@@ -36,6 +36,7 @@
 		<!--<mapper resource="config/mybatis/mapper/board.xml" /> -->
 		<!-- 회원 관련 mapper -->
  		<mapper resource="config/mybatis/mapper/member.xml"/>
+		<mapper resource="config/mybatis/mapper/toto.xml"/>
 
 	</mappers>
 </configuration>

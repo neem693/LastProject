@@ -1,7 +1,12 @@
 package service.member;
 
+import java.io.File;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import dao.member.MemberDaoInterface;
 import vo.MemberVo;
@@ -46,6 +51,58 @@ public class MemberService implements MemberServiceInterface {
 	}
 
 	
+	
+	@Override
+	public String photo_upload(MultipartHttpServletRequest multi) {
+		
+		//실제 파일명
+		String real_filename="";
+		
+		//웹상의 사진이 올라갈 경로
+		String root=multi.getSession().getServletContext().getRealPath("/");  
+		String webPath =root+"resources/photo_image/"; 		
+	   //C:\My_Study\WEB_Study\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\pickBaseball\
+	
+		//파일명이 중복되면 추상적인 이름을 가진 폴더를 생성해서 만든다.
+		 File dir = new File(webPath);
+	        if(!dir.isDirectory()){
+	            dir.mkdir();
+	        }
+
+	        
+	     Iterator<String> file_name = multi.getFileNames(); 
+	     //해당파일의 네임을 가져온다. 해당방식의 변수로 받게되어있다.(그렇게되있음)
+
+	     while(file_name.hasNext()){
+	            String uploadFile = file_name.next();
+	                         
+	            MultipartFile mFile = multi.getFile(uploadFile);
+	            //해당 객체를이용에 어플리케이션 영역에 올라간 이미지를 가져온다.
+	            String fileName = mFile.getOriginalFilename();
+	            System.out.println("실제 파일 이름 : " +fileName);
+	            //실제 파일명을 가져온다.
+	            
+	       /*     real_filename = System.currentTimeMillis()+"."
+	                    +fileName.substring(fileName.lastIndexOf(".")+1);*/    
+	            real_filename = System.currentTimeMillis()+fileName;
+	            //파일명에 저장된 시간과 함께 실제 저장될 파일명 생성	
+	         
+	            try {
+	                mFile.transferTo(new File(webPath+real_filename));
+	              //실제 경로에 파일을 생성한다. (저장될경로 + 실제 파일네임)
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        }
+	         
+		//저장경로
+		//System.out.println(webPath);
+		
+		String result= "/pickBaseball/resources/photo_image/" + real_filename;
+		
+		return result;
+	}
+
 	@Override
 	public String selectOne(Map map) {
 	

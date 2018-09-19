@@ -28,24 +28,26 @@
 	}
 
 	$(document).ready(function() {
+		
+		document.getElementById('sub').onclick = function() {
+	       
+			if (check_val() && check_input_value()) {
+				// 유효성검사
+				
+				check_id();
+				alert("ok");
+				document.getElementById('join_form').submit();
+				return false;
+			}
+				
+			
+	        
+		}
 
 	});
 
 	//백엔드 파트 script
 
-	function send(f) {
-
-		if (check_val() && check_input_value()) {
-			// 유효성검사
-			
-			check_id();
-			alert("ok");
-			f.method = 'POST';
-			f.action = 'test_insert.do';
-			f.submit();//전송	
-
-		}
-	};
 
 	function check_input_value() {
 		//정규식 체크
@@ -161,8 +163,7 @@
 			 }
 			
 		});	 
-		
-
+	
 	
 	}
 	
@@ -190,10 +191,39 @@
 	}
 	
 	
-	
-	
-	
-	
+		function photo_upload(){
+		
+			if ($('#photo_up').val() == '') {
+				alert('사진을  올려주세요');
+				return;
+			}
+			
+		
+			var formData = new FormData( $("#photo_form")[0]); //해당 업로드된 파일을 ajax를 통해 보낸다.
+			// FormData 객체는 각 폼을 네임과 값 한쌍으로 1:1 키 형식으로 저장한다.(파일명,파일 포함 파일도 가능)
+
+			alert('클릭');
+			$.ajax({ 
+				 type:'post',		 //파일 객체도 보낼때 사용함
+				 url:'photo_upload.do', 
+				 data:formData,//not jason 
+				 processData : false,//파일보낼때 써주어야됨
+		         contentType : false,//파일보낼때 써주어야됨
+				 success:function(data){ 
+	 
+					 alert(data);	
+				 
+					 $("#img_form_url").attr("src", data);
+
+			
+				 
+				 }
+				 
+			});	 
+			
+
+		}
+		
 	
 </script>
 
@@ -201,22 +231,21 @@
 </head>
 
 <!--배경 이미지 셋팅-->
-<body
-	background="${pageContext.request.contextPath}/resources/images/back_join_form.png">
+<body >
 
-	<div>
-		<div style="max-width: 100%; max-heght: 100%;"></div>
+	<div class="center_c" style="background-image : url('${pageContext.request.contextPath}/resources/images/back_join_form.png')" >
+	
 
 
 		<div class="center">
 			<label class="welcom_font">WELCOME B.B JOIN~♥♥♥</label>
 		</div>
 
-
-		<form>
+		<div class="center_form">
+		<form action = 'test_insert.do' id="join_form"  method="post">
 
 			<!-- input:입력창 css , input_s 입력창 크기  -->
-			<div class="center_form">
+			
 				<span> <input id="id" name="m_id" value="a11111"
 					class="input input_s" placeholder="아이디(4~10자리)"> 
 				
@@ -236,29 +265,21 @@
 
 				<input id="pwd" name="m_pwd" value="aaa111" class="input input_s"
 					type="password" placeholder="비밀번호(영어 숫자 포함  4~10)"><br>
-				
 				<input id="pwd_check" value="aaa111" class="input input_s"
 					type="password" placeholder="비밀번호 확인"><br> 
 					<input	id="e_mail" value="xxx@xxx.com" name="m_email"
 					class="input input_m" placeholder="E-MAIL(XXXX@XXXX.XXX형식입니다.)"><br>
 				<input id="tel" name="m_tel" class="input input_s" placeholder="연락처"><br>
-
-				
 				<!-- 코멘트입력   -->
 				<input id="comment" name="m_comment"
 					class="input input_s" type="text" placeholder="자기소개"> <br>
-
-
 				<!-- 주소검색 버튼  -->
 				<input id="zip_code" value="홈" name="m_zip_code"
 					class="input input_s" type="text" placeholder="우편번호"> <input
 					type="button" class="button button_id" value="검색" onclick="pop();"><br>
-
-
-				<input id="addr" value="홈" name="m_addr" class="input input_m"
-					placeholder="주소"> <br> <input class="input input_s"
-					type="text" placeholder="프로필사진"> <br>
-
+				<input id="addr" value="홈" name="m_addr" class="input input_m"placeholder="주소"> <br> 
+					
+				
 				<div class="green_text">
 					<h2 style="text-shadow: 1px 1px 0 #444">선호 팀 선택</h2>
 				</div>
@@ -293,13 +314,25 @@
 				<input type="radio" name="t_name" value="KT"> <img
 					class="picture_size"
 					src="${pageContext.request.contextPath}/resources/images/한화.png">
-				<input type="radio" name="t_name" value="한화"><br> <input
-					id="sub" type="button" class="button button_id"
-					value="     	   가입    	     " onclick="send(this.form);"><br>
+				<input type="radio" name="t_name" value="한화"><br> 
 		</form>
 
-	</div>
+		<form id="photo_form" enctype="multipart/form-data"  method="post" >
+		<input id="photo_up"  type="file" name="m_photo" class="input input_s" placeholder="프로필사진">			
+		</form>
+			<input  class="button button_id" type="button" value="업로드하기" onclick="photo_upload();">
+			<img id="img_form_url">
+			<br>
+	
+		<input
+					id="sub" type="button" class="button button_id"
+					value="     	   가입    	     "><br>	
+	
+	
+	
+		</div>
 
+		</div>
 
 
 
