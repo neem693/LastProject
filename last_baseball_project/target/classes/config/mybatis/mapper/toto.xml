@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="toto">
+
+
+<insert id="insert_toto_schdule" parameterType="java.util.Map">
+
+   INSERT INTO toto_schdule(home_team,away_team,winner_ratio,lost_ratio,toto_place) VALUES                                           
+                         <!-- list는 map으로 보낸 데이터의 키값이다.-->
+     
+                       <foreach collection="list" item="vo" separator=",">
+           				(
+           				 #{vo.home_team}, 
+           				 #{vo.away_team},
+           				 #{vo.winner_ratio},
+           				 #{vo.lost_ratio},
+           				 #{vo.toto_place}      				 
+        				    )
+        				</foreach>   
+  
+</insert>
+	
+	<select id="select_row" resultType="int">
+		 SELECT COUNT(*)FROM toto_schdule 
+	</select>
+
+	<delete id="delete_table">
+
+	truncate table toto_schdule
+	</delete>
+
+											     			
+	<update id="update_table" parameterType="vo.TotoSchduleVo">
+		<!-- 미사용 -->
+          			update toto_schdule set	    			 
+           			home_team= #{home_team}, 
+           	     	away_team= #{away_team},
+           			winner_ratio=#{winner_ratio},
+           		    lost_ratio= #{lost_ratio},
+           			toto_place=#{toto_place}              			
+           			where toto_idx=#{toto_idx}        		    				 		  
+ 
+	  </update>
+
+</mapper>

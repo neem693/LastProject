@@ -21,6 +21,11 @@
 	<bean id="member_dao" class="dao.member.MemberDaoImpl">
 		<property name="session" ref="sql_template"></property>
 	</bean>
+	
+	<bean id="toto_dao" class="dao.toto.TotoDaoImpl">
+		<property name="session" ref="sql_template"></property>
+	</bean>
+	
 
 
 

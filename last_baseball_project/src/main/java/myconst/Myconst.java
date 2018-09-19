@@ -12,6 +12,12 @@ public class Myconst {
 
 	}
 
+	public static class Toto {
+		public static String TOTO = "/WEB-INF/views/pickBaseball/toto/";
+
+	}
+	
+	
 	public static class ParsingDateCheck {
 		public static int YEAR = 2018;
 		public static int PARSING_INTERVAL = 1;
