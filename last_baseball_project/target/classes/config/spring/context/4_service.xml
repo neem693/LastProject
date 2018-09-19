@@ -10,6 +10,7 @@
 		<property name="team_dao" ref="team_dao"></property>
 		<property name="play_dao" ref="play_dao"></property>
 		<property name="parsing_second_dao" ref="parsing_dao"></property>
+		<property name="party_dao" ref="party_dao"></property>
 	</bean>
 
 	<bean id="memberService" class="service.member.MemberService">

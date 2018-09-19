@@ -22,6 +22,12 @@
 		<property name="session" ref="sql_template"></property>
 	</bean>
 
+	<bean id="party_dao" class="dao.party.PartyDaoImpl">
+		<property name="session" ref="sql_template"></property>
+	</bean>
+
+
+
 
 
 </beans>
