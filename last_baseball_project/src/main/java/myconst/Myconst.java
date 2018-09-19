@@ -35,11 +35,15 @@ public class Myconst {
 
 	}
 
-	public static class MEMBER {
-		public static String MEMBER = "/WEB-INF/views/pickBaseball/input/";
+	public static class Member {
+		public static String MEMBER_DIR = "/WEB-INF/views/pickBaseball/input/";
 
 	}
 
+	public static class Toto {
+		public static String TOTO = "/WEB-INF/views/pickBaseball/toto/";
+
+	}
 
 
 	public static class Joonggo {
