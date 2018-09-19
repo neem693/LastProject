@@ -27,7 +27,7 @@ public class IsToday {
 		int year = Calendar.getInstance().YEAR;
 		int month = Calendar.getInstance().MONTH;
 		int dayOfMonth = Calendar.getInstance().DAY_OF_MONTH;
-System.out.println(year + " " + month + " " + dayOfMonth);
+ //System.out.println(year + " " + month + " " + dayOfMonth);
 		// reuse the calendar to set user specified date
 		c.set(Calendar.YEAR, year);
 		c.set(Calendar.MONTH, month);
@@ -39,9 +39,9 @@ System.out.println(year + " " + month + " " + dayOfMonth);
 		// test your condition
 	
 		if (dateSpecified.before(today)) {
-		  System.out.println("Date specified [" + dateSpecified + "] is before today [" + today + "]");
+	//	  System.out.println("Date specified [" + dateSpecified + "] is before today [" + today + "]");
 		} else {
-		  System.out.println("Date specified [" + dateSpecified + "] is NOT before today [" + today + "]");
+	//	  System.out.println("Date specified [" + dateSpecified + "] is NOT before today [" + today + "]");
 		}
 	}
 }

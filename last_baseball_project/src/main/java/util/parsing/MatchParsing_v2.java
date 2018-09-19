@@ -28,15 +28,15 @@ public class MatchParsing_v2 {
 		String month_str = String.format("%02d", month);
 
 		String year_str = String.format("%d", thisyear);
-		System.out.println(month_str);
-		System.out.println(year_str);
+		//System.out.println(month_str);
+		//System.out.println(year_str);
 
 		// System.out.println(month_str);
 		String str_url = "https://www.koreabaseball.com/ws/Schedule.asmx/GetScheduleList?gameMonth=" + month_str
 				+ "&leId=1&seasonId=" + year_str + "&srIdList=0,9&teamId=";
 		URL url = new URL(str_url);
 
-		// System.out.println(Da);
+		// System.out.println(str_url);
 
 		// System.out.println(new Date().toString());
 
@@ -56,8 +56,10 @@ public class MatchParsing_v2 {
 		}
 
 		String json_str = sb.toString();
-		// System.out.println(json_str);
+		System.out.println("Á¦ÀÌ½¼°ª");
+		System.out.println(json_str);
 		JSONObject jb = new JSONObject(json_str);
+		
 		JSONArray rows = jb.getJSONArray("rows");
 		JSONObject rows_seq;
 		JSONArray row;
