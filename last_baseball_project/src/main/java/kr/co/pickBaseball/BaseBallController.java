@@ -122,14 +122,14 @@ public class BaseBallController {
 	@RequestMapping("/join.do")
 	public String join() {
 
-		return Myconst.Member.MEMBER_DIR + "member_join_form.jsp";
+		return Myconst.MEMBER.MEMBER + "member_join_form.jsp";
 
 	}
 
 	@RequestMapping("/login.do")
 	public String login() {
 
-		return Myconst.Member.MEMBER_DIR + "login.jsp";
+		return Myconst.MEMBER.MEMBER + "login.jsp";
 
 	}
 
@@ -139,7 +139,7 @@ public class BaseBallController {
 		List<MemberVo> list = null;
 		list = memberservice.selectList();
 		model.addAttribute("list", list);
-		return Myconst.Member.MEMBER_DIR + "testlist.jsp";
+		return Myconst.MEMBER.MEMBER + "testlist.jsp";
 	}
 
 	@RequestMapping("/test_insert.do")
@@ -161,7 +161,7 @@ public class BaseBallController {
 
 		MemberVo vo = memberservice.selectOne(m_idx);
 		model.addAttribute("vo", vo);
-		return Myconst.Member.MEMBER_DIR + "member_modify_form.jsp";
+		return Myconst.MEMBER.MEMBER + "member_modify_form.jsp";
 	}
 
 	@RequestMapping("/test_modify.do")
