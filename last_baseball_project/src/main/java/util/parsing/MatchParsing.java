@@ -190,7 +190,7 @@ public class MatchParsing {
 		// }
 		// }
 		//
-		System.out.println("경기 파싱 완료");
+		//System.out.println("경기 파싱 완료");
 
 	}
 }
