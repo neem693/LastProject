@@ -27,7 +27,12 @@
 	</bean>
 
 
+    <bean id = "joonggo_dao" class = "dao.JoonggoDaoImpl">
+    <property name="sqlSession" ref ="sql_template"/>
+    </bean>
 
-
-
+    <bean id = "comment_dao" class = "dao.CommentDaoImpl">
+    <property name="sqlSession" ref = "sql_template"></property>
+    </bean>
+    
 </beans>

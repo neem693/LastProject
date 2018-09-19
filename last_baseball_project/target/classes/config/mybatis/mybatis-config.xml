@@ -8,15 +8,31 @@
 		<!-- <typeAlias type="vo.VisitVo" alias="visit"/> -->
 		<typeAlias type="vo.TeamVo" alias="Team" />
 		<typeAlias type="vo.PlayVo" alias = "Play"/>
-		<typeAlias type = "vo.Parsing_updateVo" alias = "Parsing"/>
+
 		<typeAlias type="vo.PartyVo" alias = "Party"/>
+
+		<typeAlias type="vo.Parsing_updateVo" alias = "Parsing"/>
+		<typeAlias type="vo.JoonggoVo" alias = "joonggo"/>
+		<typeAlias type="vo.CommentVo" alias = "comment"/>
+		
+
 	</typeAliases>
 	<mappers>
 		<mapper resource="config/mybatis/mapper/team.xml" />
 		<mapper resource="config/mybatis/mapper/play.xml"/>
 		<mapper resource="config/mybatis/mapper/parsing.xml"/>
+
 		<mapper resource="config/mybatis/mapper/party.xml"/>
 	
+
+		
+		<!-- 중고 mapper -->
+	    <mapper resource="config/mybatis/mapper/joonggo.xml"/>
+	    
+	    <!-- 중고 댓글 mapper -->
+	    <mapper resource = "config/mybatis/mapper/comment.xml"/>
+	    
+
 		<!--<mapper resource="config/mybatis/mapper/board.xml" /> -->
 		<!-- 회원 관련 mapper -->
  		<mapper resource="config/mybatis/mapper/member.xml"/>

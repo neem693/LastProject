@@ -10,13 +10,6 @@ public class TeamDaoImpl implements PartyDaoInerface{
 	
 	
 	SqlSession session;
-	
-	
-	
-	
-	
-	
-	
 
 	public SqlSession getSession() {
 		return session;
