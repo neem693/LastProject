@@ -5,10 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.HashMap;
-
 import java.util.Calendar;
-
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,13 +23,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import myconst.Myconst;
-
 import service.member.MemberServiceInterface;
-
 import service.party.PartyServiceInterface;
-
+import service.toto.TotoServiceInterface;
 import util.parsing.TeamParsing;
 import vo.MemberVo;
 import vo.PartyVo;
@@ -39,15 +36,30 @@ import vo.TeamVo;
 
 @Controller
 public class BaseBallController {
-	PartyServiceInterface partyService;
-
-	// 회원가입 서비스 호출 객체 ( 3단계 구조)
-	MemberServiceInterface memberservice;
-
+	
+	
 	@Autowired
 	HttpServletRequest request;
 	@Autowired
 	ServletContext application;
+	
+	
+	PartyServiceInterface partyService;
+
+	// 회원가입 서비스 호출 객체 ( 3단계 구조)
+	MemberServiceInterface memberservice;
+	//토토 서비스 호출 객체 
+	TotoServiceInterface totoservice;
+	
+	public TotoServiceInterface getTotoservice() {
+		return totoservice;
+	}
+
+	public void setTotoservice(TotoServiceInterface totoservice) {
+		this.totoservice = totoservice;
+	}
+
+
 
 	public MemberServiceInterface getMemberservice() {
 		return memberservice;
@@ -122,14 +134,14 @@ public class BaseBallController {
 	@RequestMapping("/join.do")
 	public String join() {
 
-		return Myconst.MEMBER.MEMBER + "member_join_form.jsp";
+		return Myconst.Member.MEMBER_DIR + "member_join_form.jsp";
 
 	}
 
 	@RequestMapping("/login.do")
 	public String login() {
 
-		return Myconst.MEMBER.MEMBER + "login.jsp";
+		return Myconst.Member.MEMBER_DIR + "login.jsp";
 
 	}
 
@@ -139,7 +151,7 @@ public class BaseBallController {
 		List<MemberVo> list = null;
 		list = memberservice.selectList();
 		model.addAttribute("list", list);
-		return Myconst.MEMBER.MEMBER + "testlist.jsp";
+		return Myconst.Member.MEMBER_DIR + "testlist.jsp";
 	}
 
 	@RequestMapping("/test_insert.do")
@@ -161,7 +173,7 @@ public class BaseBallController {
 
 		MemberVo vo = memberservice.selectOne(m_idx);
 		model.addAttribute("vo", vo);
-		return Myconst.MEMBER.MEMBER + "member_modify_form.jsp";
+		return Myconst.Member.MEMBER_DIR + "member_modify_form.jsp";
 	}
 
 	@RequestMapping("/test_modify.do")
@@ -189,6 +201,27 @@ public class BaseBallController {
 		System.out.println(m_nick);
 		String json = memberservice.selectOne(map);
 		return json;
+	}
+	
+		@RequestMapping("/photo_upload.do")
+	@ResponseBody
+	public String photo_up(MultipartHttpServletRequest multi) {
+
+		String file_name = memberservice.photo_upload(multi);
+
+		return file_name;
+	}
+
+
+	@RequestMapping("/parsing_toto.do")
+	public String parsing_toto(Model model) throws IOException {
+		//Jsoup lib를 사용하여 HTML 문서를 파싱한다.
+		//batmen--toto 점수 파밍
+		String result=totoservice.MakeToToScore();
+		
+		
+		System.out.println(result);
+		return Myconst.Toto.TOTO+"toto_game.jsp";
 	}
 
 	@RequestMapping("/party/party_list.do")
