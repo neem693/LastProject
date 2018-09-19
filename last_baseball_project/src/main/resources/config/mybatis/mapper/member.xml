@@ -88,7 +88,7 @@
 	<select id="member_login" resultType="member" parameterType="member">
 		select * 
 		from member
-		where m_idx = #{m_idx}
+		where m_id = #{m_id}
 		and m_pwd = #{m_pwd}
 	</select>
 

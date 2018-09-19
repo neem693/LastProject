@@ -44,7 +44,7 @@ function login(){
 				<label class="text_brown lobster"><b> ID2</b></label> <input
 					class="login_input" name="m_id" type="text"> <label
 					class="text_brown  lobster">PASSWORD</label> <input
-					class="login_input" name="m_pwd" type="text">
+					class="login_input"  name="m_pwd" type="password">
 			</div>
 
 

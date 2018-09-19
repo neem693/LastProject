@@ -11,10 +11,14 @@
 
 
 		<typeAlias type="vo.PartyVo" alias = "Party"/>
+
 		<typeAlias type="vo.Parsing_updateVo" alias = "Parsing"/>
 		<typeAlias type="vo.JoonggoVo" alias = "joonggo"/>
 		<typeAlias type="vo.CommentVo" alias = "comment"/>
 		
+
+
+		<typeAlias type="vo.MemberVo" alias="member"/>
 
 	</typeAliases>
 	<mappers>

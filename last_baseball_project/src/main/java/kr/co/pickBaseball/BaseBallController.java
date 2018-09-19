@@ -149,9 +149,12 @@ public class BaseBallController {
 	@RequestMapping("/member/login_action.do")
 	public String login_action(MemberVo vo) {
 
+		System.out.println(vo.getM_id());
+		System.out.println(vo.getM_pwd());
 		MemberVo voo = memberservice.login_action(vo);
-		if(vo==null)
-			return "redirect:login.do?fail=cantUser";
+		
+		if(voo==null)
+			return "redirect:login.do?fail=CFU";
 		else
 			session.setAttribute("user", voo);
 		
