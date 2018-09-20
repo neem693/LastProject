@@ -19,6 +19,16 @@ public class PartyVo {
 	
 	
 	
+	///list를 뽑아오기 위해서 해야 할것//
+	String m_nick;
+	String p_date;
+	String s_name;
+	//////해당leader가 얼마나 지금까지 파티를 만들었는지에 대한 카운트///
+	int leader_count;
+	
+	String m_idx;
+	
+	
 	//////party_book도 여기서 관리한다.
 	int b_leader;
 	
@@ -169,6 +179,90 @@ public class PartyVo {
 
 	public void setMatch_count(int match_count) {
 		this.match_count = match_count;
+	}
+
+
+
+
+	public String getM_nick() {
+		return m_nick;
+	}
+
+
+
+
+	public void setM_nick(String m_nick) {
+		this.m_nick = m_nick;
+	}
+
+
+
+
+	public String getP_date() {
+		return p_date;
+	}
+
+
+
+
+	public void setP_date(String p_date) {
+		this.p_date = p_date;
+	}
+
+
+
+
+	public String getS_name() {
+		return s_name;
+	}
+
+
+
+
+	public void setS_name(String s_name) {
+		this.s_name = s_name;
+	}
+
+
+
+
+	public int getB_leader() {
+		return b_leader;
+	}
+
+
+
+
+	public void setB_leader(int b_leader) {
+		this.b_leader = b_leader;
+	}
+
+
+
+
+	public int getLeader_count() {
+		return leader_count;
+	}
+
+
+
+
+	public void setLeader_count(int leader_count) {
+		this.leader_count = leader_count;
+	}
+
+
+
+
+	public String getM_idx() {
+		return m_idx;
+	}
+
+
+
+
+	public void setM_idx(String m_idx) {
+		this.m_idx = m_idx;
 	}
 	
 	

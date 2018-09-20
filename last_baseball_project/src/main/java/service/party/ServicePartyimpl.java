@@ -23,9 +23,6 @@ public class ServicePartyimpl implements PartyServiceInterface {
 	PartyDaoInerface team_dao, play_dao, parsing_second_dao, party_dao, party_book_dao;
 	MatchParsing_v2 match_parsing = new MatchParsing_v2();
 	TeamParsing team_parsing = new TeamParsing();
-	
-	
-	
 
 	public PartyDaoInerface getParty_book_dao() {
 		return party_book_dao;
@@ -382,7 +379,7 @@ public class ServicePartyimpl implements PartyServiceInterface {
 	@Override
 	public Map get_party_count(String year, String month, String team) {
 		// TODO Auto-generated method stub
-//		System.out.println("month:" + month);
+		// System.out.println("month:" + month);
 
 		String year_month = String.format("%s%02d", year, Integer.parseInt(month));
 
@@ -398,8 +395,8 @@ public class ServicePartyimpl implements PartyServiceInterface {
 		for (int i = 0; i < list.size(); i++) {
 			map.put(list.get(i).getDay(), list.get(i).getMatch_count());
 		}
-//		System.out.println(list.size());
-//		System.out.println(map);
+		// System.out.println(list.size());
+		// System.out.println(map);
 
 		return map;
 	}
@@ -407,18 +404,35 @@ public class ServicePartyimpl implements PartyServiceInterface {
 	@Override
 	public int insert_party_book(MemberVo member) {
 		// TODO Auto-generated method stub
-		
-		Integer idx_party = (Integer)party_dao.selectOne();
+
+		Integer idx_party = (Integer) party_dao.selectOne();
 		int pt_idx = idx_party.intValue();
-//		System.out.println("파티북 인서트");
-		Map map =new HashMap<String,Integer>();
+		// System.out.println("파티북 인서트");
+		Map map = new HashMap<String, Integer>();
 		map.put("m_idx", member.getM_idx());
 		map.put("pt_idx", pt_idx);
 		map.put("b_leader", 10);
 		int res = party_book_dao.insert(map);
-		
-		
+
 		return res;
+	}
+
+	@Override
+	public List take_party_list(String year, String month, String day, String team) {
+		// TODO Auto-generated method stub
+
+		int month_int = Integer.parseInt(month);
+		int day_int = Integer.parseInt(day);
+
+		String year_month_day = String.format("%s%02d%02d", year, month_int, day_int);
+		Map map = new HashMap<String, String>();
+		map.put("ymd", year_month_day);
+		if (team != null && (team.isEmpty()==false))
+			map.put("team", team);
+
+		List list = party_dao.selectList2(map);
+
+		return list;
 	}
 
 }

@@ -98,4 +98,19 @@ public class PartyDaoImpl implements PartyDaoInerface {
 		return 0;
 	}
 
+	@Override
+	public List selectList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List selectList2(Object map) {
+		// TODO Auto-generated method stub
+		
+		List list= session.selectList("party.party_show_list",map);
+		
+		return list;
+	}
+
 }

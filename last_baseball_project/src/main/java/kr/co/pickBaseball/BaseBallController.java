@@ -37,23 +37,22 @@ import vo.TeamVo;
 
 @Controller
 public class BaseBallController {
-	
+
 	@Autowired
 	HttpSession session;
 	@Autowired
 	HttpServletRequest request;
 	@Autowired
 	ServletContext application;
-	
-	
+
 	PartyServiceInterface partyService;
 
 	// 회원가입 서비스 호출 객체 ( 3단계 구조)
 	MemberServiceInterface memberservice;
 
-	//토토 서비스 호출 객체 
+	// 토토 서비스 호출 객체
 	TotoServiceInterface totoservice;
-	
+
 	public TotoServiceInterface getTotoservice() {
 		return totoservice;
 	}
@@ -152,12 +151,11 @@ public class BaseBallController {
 		System.out.println(vo.getM_id());
 		System.out.println(vo.getM_pwd());
 		MemberVo voo = memberservice.login_action(vo);
-		
-		if(voo==null)
-			return "redirect:login.do?fail="+Myconst.Login.USER_CANNOT_FIND;
+
+		if (voo == null)
+			return "redirect:login.do?fail=" + Myconst.Login.USER_CANNOT_FIND;
 		else
 			session.setAttribute("user", voo);
-		
 
 		return "redirect:/main/main_list.do";
 	}
@@ -219,8 +217,8 @@ public class BaseBallController {
 		String json = memberservice.selectOne(map);
 		return json;
 	}
-	
-		@RequestMapping("/photo_upload.do")
+
+	@RequestMapping("/photo_upload.do")
 	@ResponseBody
 	public String photo_up(MultipartHttpServletRequest multi) {
 
@@ -229,16 +227,14 @@ public class BaseBallController {
 		return file_name;
 	}
 
-
 	@RequestMapping("/parsing_toto.do")
 	public String parsing_toto(Model model) throws IOException {
-		//Jsoup lib를 사용하여 HTML 문서를 파싱한다.
-		//batmen--toto 점수 파밍
-		String result=totoservice.MakeToToScore();
-		
-		
+		// Jsoup lib를 사용하여 HTML 문서를 파싱한다.
+		// batmen--toto 점수 파밍
+		String result = totoservice.MakeToToScore();
+
 		System.out.println(result);
-		return Myconst.Toto.TOTO+"toto_game.jsp";
+		return Myconst.Toto.TOTO + "toto_game.jsp";
 	}
 
 	@RequestMapping("/party/party_list.do")
@@ -274,9 +270,9 @@ public class BaseBallController {
 
 	@RequestMapping("/party/insert_party.do")
 	public String insert_party(String year, String month, String day, Model model) {
-		
-		MemberVo vo = (MemberVo)session.getAttribute("user");
-		if(vo == null)
+
+		MemberVo vo = (MemberVo) session.getAttribute("user");
+		if (vo == null)
 			return "redirect:/member/login.do?fail=" + Myconst.Login.YOU_MUST_LOGIN;
 
 		if (year == null || month == null || day == null)
@@ -371,12 +367,12 @@ public class BaseBallController {
 
 	@RequestMapping("/party/insert_party_one.do")
 	public String insert_party_one(PartyVo vo, MemberVo voo, String year, String month, String day) {
-		
+
 		MemberVo member = memberservice.selectOne_id_idx(voo);
-		if(member==null)
-			return "redirect:/member/member_list.do?fail=" + Myconst.Login.ERROR;		
+		if (member == null)
+			return "redirect:/member/member_list.do?fail=" + Myconst.Login.ERROR;
 		int res = partyService.insert_party(vo, year, month, day);
-		if(res ==1)
+		if (res == 1)
 			res = partyService.insert_party_book(member);
 
 		return "redirect:party_list.do";
@@ -387,10 +383,11 @@ public class BaseBallController {
 
 		System.out.println("쇼 파티 리스트 두");
 		
-		
-		
+		List list = partyService.take_party_list(year,month,day,team);
+		System.out.println(list.size());
 
 		return Myconst.BaseBall.PARTY_DIR + "show_party_list.jsp";
 
+	}
 
 }

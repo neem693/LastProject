@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 
 public class PartyBookDaoImpl implements PartyDaoInerface {
 	
+	
 	SqlSession session;
 	
 	
@@ -87,6 +88,18 @@ public class PartyBookDaoImpl implements PartyDaoInerface {
 	public int delete() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List selectList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List selectList2(Object map) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

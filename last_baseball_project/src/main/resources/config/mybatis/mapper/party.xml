@@ -29,25 +29,56 @@
 		resultType="party">
 
 		select day(p.p_date) as day, count(*) as match_count
-		from play p right outer join party pt
+		from play p right
+		outer join party pt
 		on p.p_idx =pt.p_idx
 		<trim prefix="where" prefixOverrides="and">
-		    p.p_idx like concat(#{p_idx},'%') 
+			p.p_idx like concat(#{p_idx},'%')
 			<if test="t_name!=null">
-			     and pt.t_name = #{t_name}
-		   </if>
+				and pt.t_name = #{t_name}
+			</if>
 		</trim>
 		group by day(p.p_date)
 
 
 	</select>
-	
-	
-	<select id = "recently_insert" resultType="Integer">
-	select max(pt_idx) from party
+
+
+	<select id="recently_insert" resultType="Integer">
+		select max(pt_idx) from party
 	</select>
 
 
+	<select id="party_show_list" parameterType="Map"
+		resultMap="leader_count_map">
+		select pt.*,m.m_nick,m.m_idx,p.p_date,s.s_name
+		from party pt inner join party_book b
+		on pt.pt_idx = b.pt_idx
+		inner join member m
+		on b.m_idx = m.m_idx
+		inner join play p
+		on pt.p_idx = p.p_idx
+		inner join studium s
+		on p.s_idx = s.s_idx
+		<trim prefix="where" prefixOverrides="and">
+		pt.p_idx like concat(#{ymd},'%')
+		<if test="team!=null">
+			and pt.t_name = #{team}
+			</if>
+		</trim>
+	</select>
 
+<resultMap type="party" id="leader_count_map">
+<association property="leader_count" column="{idx=m_idx}" javaType="int" select="leader_count_select"   />
+</resultMap>
+
+<select id="leader_count_select" resultType="int"  >
+select count(*)
+from party pt inner join party_book b
+on pt.pt_idx = b.pt_idx
+inner join member m
+on b.m_idx = m.m_idx
+where m.m_idx = #{idx}
+</select>
 
 </mapper>

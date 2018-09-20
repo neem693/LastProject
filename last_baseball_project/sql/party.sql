@@ -84,16 +84,29 @@ select max(pt_idx) from party
 
 delete from party;
 
+select * from play
+select * from studium
+select * from member
 
-
-select *
-from party p inner join party_book b
-on p.pt_idx = b.pt_idx
+select pt.*,m.m_nick,p.p_date,s.s_name
+from party pt inner join party_book b
+on pt.pt_idx = b.pt_idx
 inner join member m
 on b.m_idx = m.m_idx
-where p.t_name = "³Ø¼¾"
+inner join play p
+on pt.p_idx = p.p_idx
+inner join studium s
+on p.s_idx = s.s_idx
+where 
+pt.p_idx like "20180921%" and
+pt.t_name = "³Ø¼¾"
 
 
 
-
+select count(*)
+from party pt inner join party_book b
+on pt.pt_idx = b.pt_idx
+inner join member m
+on b.m_idx = m.m_idx
+where m.m_idx = 41
 
