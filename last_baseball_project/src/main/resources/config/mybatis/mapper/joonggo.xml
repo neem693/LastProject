@@ -60,7 +60,7 @@ select * from joonggo where j_idx=#{j_idx}
 
 <!-- 중고 물품 등록 -->
 <insert id="joonggo_insert" parameterType="joonggo">
-insert into joonggo(j_category, j_title, j_content, j_price, j_ip, j_filename, j_readhits, j_date) values(
+insert into joonggo(j_category, j_title, j_content, j_price, j_ip, j_filename, j_readhits, j_sell_yn, j_date) values(
                                                                                               #{j_category},
                                                                                               #{j_title},
                                                                                               #{j_content},
@@ -68,6 +68,7 @@ insert into joonggo(j_category, j_title, j_content, j_price, j_ip, j_filename, j
                                                                                               #{j_ip},
                                                                                               #{j_filename},
                                                                                               0,
+                                                                                              'n',
                                                                                               NOW())
 
 </insert>
@@ -97,6 +98,13 @@ update joonggo set readhits = readhits + 1
 where j_idx=#{j_idx}
 </update> 
  
+ <!-- 수정 -->
+<update id="joonggo_sell" parameterType="joonggo">
+update joonggo set                                                                                              
+j_sell_yn = 'y'
+where j_idx = #{j_idx}
+
+</update>
 
 
 

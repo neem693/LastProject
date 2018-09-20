@@ -16,7 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
-
 import dao.JoonggoDao;
 import util.Paging;
 import vo.JoonggoVo;
@@ -56,6 +55,37 @@ public String insert_form()
 	return myconst.Myconst.Joonggo.VIEW_PATH + "joonggo_insert_form.jsp";
 }
 
+/*판매완료*/
+@RequestMapping("/joonggo/sell.do")
+public String sell(JoonggoVo vo)
+{
+	/*int idx = Integer.parseInt(request.getParameter("idx"));
+	String c_pwd = request.getParameter("c_pwd");// 확인 비번
+*/	/*System.out.println("["+ c_pwd + "]");*/
+	
+	//idx에 해당되는 게시물 정보 얻기
+//	JoonggoVo vo = joonggo_dao.selectOne(j_idx);
+	
+	String result = "n";//
+	
+	// 판매 체크
+	// 체크일치 : yes, 불일치 : no
+//	if(vo.getJ_sell_yn().equals(result)==true)
+//	{
+//		result = "y";
+//	}
+//	
+	
+	int res = joonggo_dao.sell(vo);
+	if(res !=1)
+		return "redirect:/joonggo/view.do?j_idx="+vo.getJ_idx() + "&fail=update_sellFail";
+	
+	// 요청한 Ajax에게 결과 전송
+/*	response.getWriter().println(result);*/
+	
+	return "redirect:/joonggo/view.do?j_idx="+vo.getJ_idx(); 
+
+}
 /*보기*/ 
 @RequestMapping("/joonggo/view.do")
 public String view(int j_idx, Model model)
@@ -65,7 +95,7 @@ public String view(int j_idx, Model model)
 	model.addAttribute("vo", vo);
 	
 	
-	return myconst.Myconst.Joonggo.VIEW_PATH + "j_view_form.jsp";
+	return myconst.Myconst.Joonggo.VIEW_PATH + "joonggo_view.jsp";
 }
 
 /*삭제*/
@@ -202,6 +232,7 @@ public String insert(JoonggoVo vo, Model model) throws IllegalStateException, IO
 	//return MyConstant.PhotoGalleryController.VIEW_PATH + "photo_list.jsp";
 	//목록보기이동
 	//response.sendRedirect("list.do");
+    
     return "redirect:list.do";
 }
 
@@ -214,7 +245,7 @@ public String update_form(int j_idx, Model model)
 	 
 	 model.addAttribute("vo", vo);
 	 
-	return myconst.Myconst.Joonggo.UPDATA_VIEW_PATH + "j_update_form.jsp";	
+	return myconst.Myconst.Joonggo.UPDATA_VIEW_PATH + "joonggo_update_form.jsp";	
 	
 }
 

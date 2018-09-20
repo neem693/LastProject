@@ -102,6 +102,15 @@ public class JoonggoDaoImpl implements JoonggoDao  {
 		return count;
 	}
 
+	@Override
+	public int sell(JoonggoVo vo) {
+		// TODO Auto-generated method stub
+		int res = 0;
+		res = sqlSession.update("joonggo.joonggo_sell", vo);
+		
+		return res;
+	}
+
 /*	@Override
 	public int reply(JoonggoVo vo) {
 		// TODO Auto-generated method stub

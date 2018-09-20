@@ -44,8 +44,9 @@ function search(){
 	
 }
 
-
 </script>
+
+
 
 
 </head>
@@ -56,10 +57,17 @@ function search(){
 <div class = "content" >
 <c:forEach var = "vo" items = "${list }">
 			<ul>
-
+			<div class="s_container">
 				<li><img src="${ pageContext.request.contextPath }/resources/photo_upload/${ vo.j_filename}">
-
-					<div class="caption">
+				 <c:if test="${vo.j_sell_yn eq 'y'}">
+                  <div class="s_center"><div class ="s_mid"></div></div>
+			    </c:if>
+			    </div>
+			    
+			     <p class = "s_content"></p>
+                </div>
+                
+					<div class="s_caption">
 						<h6>${vo.j_title }</h6>
 						<p> ${vo.j_price }</p>
 						<p align="center">
@@ -68,10 +76,12 @@ function search(){
 					</div>
 					</li>
 			</ul>
+			
+			
 
 </c:forEach>
 
-
+</div>
       <!-- 게시글이 없으면 -->           
             <c:if test="${ empty list }">
 				<tr>
@@ -81,13 +91,13 @@ function search(){
 				</tr>
 			</c:if>
 
-</div>
+
 
 
 <div class = "footer">
 
 <!-- 페이지 처리 -->	
-<!-- <div class="page">
+<div class="page">
               <ul id = "q" class="pagination" >
 				<li class="disabled"><a href="#">«</a></li>
 				<li class="active"><a href="list.do?page=1">1 <span class="sr-only">(current)</span></a></li>
@@ -98,7 +108,7 @@ function search(){
 				<li><a href="#">»</a></li>
 			</ul>
 
-</div> -->
+</div>
 
 
  <!-- 글쓰기 -->
@@ -131,8 +141,8 @@ function search(){
 			</div>
 			</div>		
 
-	
 </div>
+
 </div>
 
 
