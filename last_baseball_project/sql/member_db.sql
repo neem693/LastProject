@@ -19,3 +19,7 @@ CREATE TABLE member
 	constraint fk_team_t_name foreign key(t_name)
 	references team(t_name) on update cascade
 )
+
+
+
+select * from member;

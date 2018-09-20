@@ -10,13 +10,6 @@ public class TeamDaoImpl implements PartyDaoInerface{
 	
 	
 	SqlSession session;
-	
-	
-	
-	
-	
-	
-	
 
 	public SqlSession getSession() {
 		return session;
@@ -111,6 +104,18 @@ public class TeamDaoImpl implements PartyDaoInerface{
 	public int selectCount(Object ob) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public Object selectOne(Object map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object selectOne2(Object map) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

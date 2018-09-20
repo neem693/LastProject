@@ -9,37 +9,59 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
 
+<script>
+function login(){
+	var f = document.getElementById("login");
+	
+	var id = f.m_id.value;
+	var pwd = f.m_pwd.value;
+	
+	f.method = "POST";
+	f.action = "login_action.do";
+	f.submit();
+	
+	
+}
+
+
+</script>
+
 
 </head>
 <body>
 
 
- 
-  <div class="container ">
-     <label class="text_brown lobster_title">LOGIN</label>
- 
-  
-  
-  <form class="login_box" action="#">
-     
-     <div class="pading">    
-    <label class="text_brown lobster" ><b> ID2</b></label>
-    <input class="login_input" name="id" type="text">      
-    <label class="text_brown  lobster">PASSWORD</label>
-    <input class="login_input" name="pwd" type="text">
-    </div>
-    
-    
-    <button class="btn_join cyan "><b>회원가입</b></button>
-    <button class="btn_return cyan"><b>목록으로</b></button>
-    	
-     	
-    	
-    
-  
-  </form>
 
-</div>
+
+	<div class="container ">
+		<label class="text_brown lobster_title">LOGIN</label>
+
+
+
+		<form id = "login" class="login_box" >
+		
+			<div class="pading">
+				<label class="text_brown lobster"><b> ID2</b></label> <input
+					class="login_input" name="m_id" type="text"> <label
+					class="text_brown  lobster">PASSWORD</label> <input
+					class="login_input"  name="m_pwd" type="password">
+			</div>
+
+
+			<button class="btn_join cyan ">
+				<b>회원가입</b>
+			</button>
+			<button onclick="login();return false;" class="btn_return cyan">
+				<b>로그인</b>
+			</button>
+
+
+
+
+
+		</form>
+
+	</div>
 
 
 

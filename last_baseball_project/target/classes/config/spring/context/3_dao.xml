@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
- 
+
 	<!-- 입고 dao -->
 
 	<bean id="team_dao" class="dao.party.TeamDaoImpl">
@@ -22,6 +22,22 @@
 		<property name="session" ref="sql_template"></property>
 	</bean>
 
+	<bean id="toto_dao" class="dao.toto.TotoDaoImpl">
+		<property name="session" ref="sql_template"></property>
+	</bean>
 
+
+	<bean id="party_dao" class="dao.party.PartyDaoImpl">
+		<property name="session" ref="sql_template"></property>
+	</bean>
+
+
+	<bean id="joonggo_dao" class="dao.JoonggoDaoImpl">
+		<property name="sqlSession" ref="sql_template" />
+	</bean>
+
+	<bean id="comment_dao" class="dao.CommentDaoImpl">
+		<property name="sqlSession" ref="sql_template"></property>
+	</bean>
 
 </beans>
