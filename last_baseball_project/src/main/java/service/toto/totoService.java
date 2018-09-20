@@ -35,8 +35,10 @@ public class totoService implements TotoServiceInterface {
 		     
 	      
 	        	 //jsoup lib를 이용해 해당 url의 내용을doc로 가져온다     
-	        	Document doc=Jsoup.connect(
-	        	"https://www.betman.co.kr/gameSchedule.so?method=basic&gameId=G101&gameRound=180071&innerRound=180071&outerRound=71&saleYear=2018&searchType=S&searchDay=&searchLeague=KBO"
+	        	
+	
+				Document doc=Jsoup.connect(
+	        	"https://www.betman.co.kr/gameSchedule.so?method=basic&gameId=G101&gameRound=180073&innerRound=180073&outerRound=73&saleYear=2018&searchType=S&searchDay=&searchLeague=KBO"
 	        			).get();
 	        	//해당주소는 크롬 개발자모드에서 웹페이지상의 호출된 주소를 network영역에서 확인해서 입력한다.(주소창엔 노출안됨)   	
 	        	//System.out.println(doc);//	
@@ -64,35 +66,66 @@ public class totoService implements TotoServiceInterface {
 	            	
 	            	
 	            	Elements date_buf = doc.select("td.date");	//split 하기 까다로운구조라 태그요소 그대로 받았음
+	            	
 	            	date_buf.removeAttr("class");               //split을 위해 class 태그 제거 
 	        	    String date=date_buf.toString().replaceAll("<td>"," ").replaceAll("<br>"," ").trim(); 
-	        	    String[] date_arr=date.split("</td>"); //날짜 데이터 split</td>기준
-	            	
+	        	    String[] date_arr=date.split("</td>"); //날짜 데이터 split</td>기준	      
 	        	    String win =  doc.select("td.win").text().replaceAll("-","  0").replaceAll("승"," "); //데이터를 제외한 값 제거(split을 하기위한 규칙생성) 
-
 	        	    String win_arr[] = win.split("   ");  //데이터를 자르기 위해 간격을 조절
- 	        
-	        	    String lose =  doc.select("td.lose").text().replaceAll("-","  0").replaceAll("패"," "); 
+ 	      	        String lose =  doc.select("td.lose").text().replaceAll("-","  0").replaceAll("패"," "); 
 	        	    String lose_arr[] = lose.split("   ");
 	        	    
 	        	    List<TotoSchduleVo> list= new ArrayList<TotoSchduleVo>();        	    
-	        	    
-	        	
-	        	
+     	
 	        	    for(int k=0; k<win_arr.length; k++) {
 	        	    	
 	        	   	TotoSchduleVo vo=new TotoSchduleVo();
-	        	   		vo.setToto_idx(k+1);
-	     	    	   
+	        	   		vo.setToto_idx(k+1);   
 	        	   		vo.setHome_team(home_arr[k]);
 	     	            vo.setHome_team(home_arr[k]);
 	     	            vo.setWinner_ratio(win_arr[k]);
 		        	    vo.setLost_ratio(lose_arr[k]);   
 	     	            vo.setAway_team(away_arr[k]);    	    	
-	        	    	vo.setToto_place(date_arr[k].trim());    	        
-	        	    	list.add(vo);
-	 
-	            	}
+  	                     
+	     	            System.out.println(date_arr[k].toString().trim());
+	     	        
+	     	            
+	     	            
+	     	           String[] date_buffer=date_arr[k].trim().split(" ");
+	     	          
+	     	            for(int i=0; i<date_buffer.length;i++) {
+	     	            	
+	     	            	System.out.println(date_buffer[i].toString());
+	     	            }
+	     	
+	
+	     	           //JAN FEB MAR APR MAY JUN JUL AUG SEP OCT NOV DEC
+	     	           switch(date_buffer[1]) {     
+	     	          case "Jan":  date_buffer[1] = "01"; break;
+		     	      case "Feb":  date_buffer[1] = "02"; break;
+		     	      case "Mar":  date_buffer[1] = "03"; break;
+		     	      case "Apr":  date_buffer[1] = "04"; break;
+		     	      case "May":  date_buffer[1] = "05"; break;
+		     	      case "Jun":  date_buffer[1] = "06"; break;
+		     	      case "Jul":  date_buffer[1] = "07"; break;
+		     	      case "Aug":  date_buffer[1] = "08"; break;
+		     	      case "Sep":  date_buffer[1] = "09"; break;
+	     	          case "Oct":  date_buffer[1] = "10"; break;
+	     	          case "Nov":  date_buffer[1] = "11"; break;
+	     	          case "Dec":  date_buffer[1] = "12"; break;
+	                    default : date_buffer[1] =  "00"; break;
+	     	           }
+	     	           //play_vo테이블과 p_idx를 일치시키기위해2018			월 				일			어웨이 		홈팀 
+	     	        
+	     	          String buf_date= date_buffer[5]+date_buffer[1]+date_buffer[2]+'_'+away_arr[k]+home_arr[k];
+	   
+	     	       	  vo.setToto_p_idx(buf_date);     	 
+	     	         
+	     	       	  vo.setToto_place(date_buffer[8]);        
+	        	    	       	    	
+	     	          list.add(vo);
+	        	    }
+	            	
 	        	    	
 	        	    Map map = new HashMap<String, List<TotoSchduleVo>>();
 	        	   

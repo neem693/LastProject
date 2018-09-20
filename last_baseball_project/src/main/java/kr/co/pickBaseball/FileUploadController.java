@@ -36,7 +36,7 @@ public class FileUploadController {
 	            //파일 기본경로 _ 상세경로        경로 : resources\photo_upload 
 	            String path = defaultPath + "resources" + File.separator + "photo_upload" + File.separator;             
 	            File file = new File(path);
-	            System.out.println("path:"+path);
+	            //System.out.println("path:"+path);
 	            //디렉토리 존재하지 않을경우 디렉토리 생성
 	            if(!file.exists()) {
 	                file.mkdirs();
@@ -47,8 +47,8 @@ public class FileUploadController {
 	            vo.getFiledata().transferTo(new File(path+realname));
 	            /*서버 경로에 이미지가 존재해야 이미지가 뜬다 .그래서  "http://localhost:9090/pickBaseball/resources/photo_upload/" 요렇게 잡아줬다.*/
 	            file_result += "&bNewLine=true&sFileName="+original_name+"&sFileURL=http://localhost:9090/pickBaseball/resources/photo_upload/"+realname;
-	        	System.out.println(   request.getRequestURI());
-	            System.out.println(   request.getRequestURL());
+	        	//System.out.println(   request.getRequestURI());
+	            //System.out.println(   request.getRequestURL());
 	        } else {
 	            file_result += "&errstr=error";
 	        }

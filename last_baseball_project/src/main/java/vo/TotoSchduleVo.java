@@ -8,8 +8,19 @@ public class TotoSchduleVo {
 	String winner_ratio;
 	String lost_ratio;
 	String toto_place;
+	String toto_p_idx;
 	
 	
+	public String getToto_p_idx() {
+		return toto_p_idx;
+	}
+
+
+	public void setToto_p_idx(String toto_p_idx) {
+		this.toto_p_idx = toto_p_idx;
+	}
+
+
 	public TotoSchduleVo(int toto_idx, String home_team, String away_team, String winner_ratio, String lost_ratio,
 			String toto_place) {
 		super();

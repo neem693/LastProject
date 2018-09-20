@@ -7,7 +7,7 @@
 
 <insert id="insert_toto_schdule" parameterType="java.util.Map">
 
-   INSERT INTO toto_schdule(home_team,away_team,winner_ratio,lost_ratio,toto_place) VALUES                                           
+   INSERT INTO toto_schdule(home_team,away_team,winner_ratio,lost_ratio,toto_place,toto_p_idx) VALUES                                           
                          <!-- list는 map으로 보낸 데이터의 키값이다.-->
      
                        <foreach collection="list" item="vo" separator=",">
@@ -16,7 +16,8 @@
            				 #{vo.away_team},
            				 #{vo.winner_ratio},
            				 #{vo.lost_ratio},
-           				 #{vo.toto_place}      				 
+           				 #{vo.toto_place},  
+           				 #{vo.toto_p_idx}    				 
         				    )
         				</foreach>   
   

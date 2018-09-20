@@ -230,7 +230,7 @@ public String updata(JoonggoVo vo, Model model) throws IllegalStateException, IO
 		String web_path = "/resources/photo_upload/";
 		String abs_path = application.getRealPath(web_path);
 		
-		System.out.println(abs_path);
+		//System.out.println(abs_path);
 		
 		String filename = "no_file";
 		MultipartFile Filedata = vo.getFiledata();

@@ -124,7 +124,7 @@ public class BaseBallController {
 	@RequestMapping("/parsing.do")
 	@ResponseBody
 	public String parsing() throws IOException {
-		System.out.println("파싱두");
+		//System.out.println("파싱두");
 		TeamVo[] vo = new TeamParsing().parsing_url();
 
 		partyService.team_update(vo);
@@ -230,16 +230,7 @@ public class BaseBallController {
 	}
 
 
-	@RequestMapping("/parsing_toto.do")
-	public String parsing_toto(Model model) throws IOException {
-		//Jsoup lib를 사용하여 HTML 문서를 파싱한다.
-		//batmen--toto 점수 파밍
-		String result=totoservice.MakeToToScore();
-		
-		
-		System.out.println(result);
-		return Myconst.Toto.TOTO+"toto_game.jsp";
-	}
+	
 
 	@RequestMapping("/party/party_list.do")
 	public String party_list(String year, String month, Model model, String team) {
@@ -381,5 +372,18 @@ public class BaseBallController {
 		return Myconst.BaseBall.PARTY_DIR + "show_party_list.jsp";
 
 	}
+
+
+	@RequestMapping("/parsing_toto.do")
+	public String parsing_toto(Model model) throws IOException {
+		//Jsoup lib를 사용하여 HTML 문서를 파싱한다.
+		//batmen--toto 점수 파밍
+		String result=totoservice.MakeToToScore();
+			
+		System.out.println(result);
+		return Myconst.Toto.TOTO+"toto_game.jsp";
+	}
+
+
 
 }
