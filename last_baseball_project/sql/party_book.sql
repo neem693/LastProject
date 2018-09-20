@@ -10,4 +10,7 @@ constraint fk_pt_idx_in_party_book foreign key(pt_idx)
 references party(pt_idx) on delete cascade
 )
 
+select * from party_book
+
+
 drop table party_book

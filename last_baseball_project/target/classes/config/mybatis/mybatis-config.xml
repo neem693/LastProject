@@ -8,16 +8,10 @@
 		<!-- <typeAlias type="vo.VisitVo" alias="visit"/> -->
 		<typeAlias type="vo.TeamVo" alias="Team" />
 		<typeAlias type="vo.PlayVo" alias = "Play"/>
-
-
 		<typeAlias type="vo.PartyVo" alias = "Party"/>
-
 		<typeAlias type="vo.Parsing_updateVo" alias = "Parsing"/>
 		<typeAlias type="vo.JoonggoVo" alias = "joonggo"/>
 		<typeAlias type="vo.CommentVo" alias = "comment"/>
-		
-
-
 		<typeAlias type="vo.MemberVo" alias="member"/>
 
 	</typeAliases>
@@ -25,8 +19,8 @@
 		<mapper resource="config/mybatis/mapper/team.xml" />
 		<mapper resource="config/mybatis/mapper/play.xml"/>
 		<mapper resource="config/mybatis/mapper/parsing.xml"/>
-
 		<mapper resource="config/mybatis/mapper/party.xml"/>
+		<mapper resource="config/mybatis/mapper/party_book.xml"/>
 	
 
 		

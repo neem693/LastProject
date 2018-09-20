@@ -100,6 +100,16 @@ public class MemberDaoImpl implements MemberDaoInterface {
 		
 		return voo;
 	}
+
+	@Override
+	public MemberVo selectOne_IdIdx(MemberVo vo) {
+		// TODO Auto-generated method stub
+		
+		MemberVo voo = session.selectOne("member.select_id_idx",vo);
+		
+		
+		return voo;
+	}
 	
 	
 	

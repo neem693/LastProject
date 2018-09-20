@@ -3,6 +3,7 @@ package service.party;
 import java.util.List;
 import java.util.Map;
 
+import vo.MemberVo;
 import vo.PartyVo;
 import vo.PlayVo;
 import vo.TeamVo;
@@ -26,6 +27,7 @@ int insert_party(PartyVo vo,String year,String month,String day);
 PlayVo select_play_one(String p_idx);
 boolean check_long_time_in_match(String year, String month, String day);
 Map get_party_count(String year,String month,String team);
+int insert_party_book(MemberVo member);
 
 
 

@@ -154,12 +154,12 @@ public class BaseBallController {
 		MemberVo voo = memberservice.login_action(vo);
 		
 		if(voo==null)
-			return "redirect:login.do?fail=CFU";
+			return "redirect:login.do?fail="+Myconst.Login.USER_CANNOT_FIND;
 		else
 			session.setAttribute("user", voo);
 		
 
-		return Myconst.Main.VIEW_PATH + "main_list.jsp";
+		return "redirect:/main/main_list.do";
 	}
 
 	@RequestMapping("/test_list.do")
@@ -274,6 +274,10 @@ public class BaseBallController {
 
 	@RequestMapping("/party/insert_party.do")
 	public String insert_party(String year, String month, String day, Model model) {
+		
+		MemberVo vo = (MemberVo)session.getAttribute("user");
+		if(vo == null)
+			return "redirect:/member/login.do?fail=" + Myconst.Login.YOU_MUST_LOGIN;
 
 		if (year == null || month == null || day == null)
 			return "redirect:/party/party_list.do?fail=not_found";
@@ -284,7 +288,7 @@ public class BaseBallController {
 
 		List match_list = partyService.take_play_list(year, month, day);
 		if (match_list == null || match_list.size() == 0)
-			return "redirect:/party/party_list.do?fail=not_found";
+			return "redirect:/party/party_list.do?fail=" + Myconst.Login.USER_CANNOT_FIND;
 		/////// 날짜로 잡을 수 있을 정도로 경기 날짜가 여유가 있는지//////
 		boolean long_promise = partyService.check_long_time_in_match(year, month, day);
 
@@ -366,9 +370,14 @@ public class BaseBallController {
 	}
 
 	@RequestMapping("/party/insert_party_one.do")
-	public String insert_party_one(PartyVo vo, String year, String month, String day) {
-
+	public String insert_party_one(PartyVo vo, MemberVo voo, String year, String month, String day) {
+		
+		MemberVo member = memberservice.selectOne_id_idx(voo);
+		if(member==null)
+			return "redirect:/member/member_list.do?fail=" + Myconst.Login.ERROR;		
 		int res = partyService.insert_party(vo, year, month, day);
+		if(res ==1)
+			res = partyService.insert_party_book(member);
 
 		return "redirect:party_list.do";
 	}
@@ -377,9 +386,11 @@ public class BaseBallController {
 	public String show_party_list(String year, String month, String day, String team) {
 
 		System.out.println("쇼 파티 리스트 두");
+		
+		
+		
 
 		return Myconst.BaseBall.PARTY_DIR + "show_party_list.jsp";
 
-	}
 
 }

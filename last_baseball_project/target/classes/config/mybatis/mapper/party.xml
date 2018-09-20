@@ -41,6 +41,11 @@
 
 
 	</select>
+	
+	
+	<select id = "recently_insert" resultType="Integer">
+	select max(pt_idx) from party
+	</select>
 
 
 

@@ -224,7 +224,7 @@ function create_party(day_num){
 												<ul class="match_button">
 													<c:choose>
 														<c:when
-															test="${(this_month==month&&this_year==year&&today <=day)||(this_month<=month&&this_year==year)}">
+															test="${(this_month==month&&this_year==year&&today <=day)||(this_month<month&&this_year==year)}">
 															<li><button onclick="create_party(${day})">파티생성</button></li>
 														</c:when>
 

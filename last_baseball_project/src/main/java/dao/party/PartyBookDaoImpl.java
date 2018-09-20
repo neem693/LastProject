@@ -4,9 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import vo.PartyVo;
-
-public class PartyDaoImpl implements PartyDaoInerface {
+public class PartyBookDaoImpl implements PartyDaoInerface {
 	
 	SqlSession session;
 	
@@ -21,24 +19,17 @@ public class PartyDaoImpl implements PartyDaoInerface {
 	}
 
 	@Override
-	//달력에 표시되는 매치카운트 갯수를 출력할 것이다.
-	public List selectList(Object vo) {
+	public List selectList(Object map) {
 		// TODO Auto-generated method stub
-		
-		List<PartyVo> list = session.selectList("party.select_match_count",vo);
-		
-		
-		return list;
+		return null;
 	}
 
 	@Override
 	public Object selectOne() {
 		// TODO Auto-generated method stub
 		
-		Integer pt_idx = session.selectOne("party.recently_insert");
 		
-		
-		return pt_idx;
+		return null;
 	}
 
 	@Override
@@ -75,7 +66,7 @@ public class PartyDaoImpl implements PartyDaoInerface {
 	public int insert(Object ob) {
 		// TODO Auto-generated method stub
 		
-		int res = session.insert("party.party_insert_one",ob);
+		int res = session.insert("party_book.insert_party_book_leader",ob);
 		
 		return res;
 	}

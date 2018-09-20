@@ -16,6 +16,18 @@ public class PartyVo {
 	String day;
 	int match_count;
 	
+	
+	
+	
+	//////party_book도 여기서 관리한다.
+	int b_leader;
+	
+	
+	
+	
+	
+	
+	
 	public PartyVo() {
 		// TODO Auto-generated constructor stub
 	}

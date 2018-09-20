@@ -13,15 +13,27 @@ import dao.party.PartyDaoInerface;
 import myconst.Myconst;
 import util.parsing.MatchParsing_v2;
 import util.parsing.TeamParsing;
+import vo.MemberVo;
 import vo.PartyVo;
 import vo.PlayVo;
 import vo.TeamVo;
 
 public class ServicePartyimpl implements PartyServiceInterface {
 
-	PartyDaoInerface team_dao, play_dao, parsing_second_dao, party_dao;
+	PartyDaoInerface team_dao, play_dao, parsing_second_dao, party_dao, party_book_dao;
 	MatchParsing_v2 match_parsing = new MatchParsing_v2();
 	TeamParsing team_parsing = new TeamParsing();
+	
+	
+	
+
+	public PartyDaoInerface getParty_book_dao() {
+		return party_book_dao;
+	}
+
+	public void setParty_book_dao(PartyDaoInerface party_book_dao) {
+		this.party_book_dao = party_book_dao;
+	}
 
 	public PartyDaoInerface getParty_dao() {
 		return party_dao;
@@ -390,6 +402,23 @@ public class ServicePartyimpl implements PartyServiceInterface {
 //		System.out.println(map);
 
 		return map;
+	}
+
+	@Override
+	public int insert_party_book(MemberVo member) {
+		// TODO Auto-generated method stub
+		
+		Integer idx_party = (Integer)party_dao.selectOne();
+		int pt_idx = idx_party.intValue();
+//		System.out.println("파티북 인서트");
+		Map map =new HashMap<String,Integer>();
+		map.put("m_idx", member.getM_idx());
+		map.put("pt_idx", pt_idx);
+		map.put("b_leader", 10);
+		int res = party_book_dao.insert(map);
+		
+		
+		return res;
 	}
 
 }

@@ -22,6 +22,9 @@ public interface MemberServiceInterface {
 	public MemberVo login_action(MemberVo vo);
 	
 	
+	MemberVo selectOne_id_idx(MemberVo vo);
+	
+	
 	
 	
 	

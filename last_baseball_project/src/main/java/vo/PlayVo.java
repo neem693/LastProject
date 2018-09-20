@@ -14,7 +14,7 @@ public class PlayVo {
 	Date date;
 	String p_score; //"예정" "T" "C" 라는 값이 들어온다. 예정은 말그대로 예정(오늘 경기라도 지금 진행중이 아니면 예정), T는 진행중 , C는 cancle 한다는 경기취소의미 
 					//특수한 상황이 아니라면 "원정점수-홈점수" 로 되어있다. ex) "13-5"
-	String p_rts;//결과 원정기준으로 승 일떄 W 패 일때 L 무승부일 떄 D
+	String p_rts;//결과 원정기준으로 승 일떄 W 패 일때 L 무승부일 떄 D 우천취소
 	int s_idx;
 	String t_home;
 	String t_away;

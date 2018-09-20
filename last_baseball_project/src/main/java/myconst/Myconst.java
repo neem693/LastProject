@@ -56,12 +56,27 @@ public class Myconst {
 		
 		public static int CALENDAR_ROW =7;
 		public static int CALENDAR_COL =7;
+		
+		////목적/////
 		public static String USE_SPECIAL_FAC = "특수시설";
+		public static int USE_SPECIAL_FAC_INT = 1;
 		public static String CHEER = "응원";
+		public static int CHEER_INT = 2;
 		public static String LETS_GET_IN = "모여라";
+		public static int LETS_GET_IN_INT = 3;
 		public static String ETC = "기타";
+		public static int ETC_INT = 10;
+		
+		/////인원수 제한없음/////
+		public static int UNLIMITED_MAXIMUM_PEOPLE = 0;
+		
+		
+		////
 		public static String MOD_DAY = "day";
 		public static String MOD_HOUR = "time";
+		
+		
+		public static int PARTY_LEADER = 10;
 		
 		
 
@@ -87,5 +102,14 @@ public class Myconst {
 		public static int BLOCK_PAGE = 3; //page당 보여지는 메뉴 갯수
 
 	}
+	
+	public static class Login
+	{
+		public static String YOU_MUST_LOGIN = "login_req";
+		public static String USER_CANNOT_FIND = "cannot_find";
+		public static String ERROR = "error1";
+		
+	}
+	
 
 }
