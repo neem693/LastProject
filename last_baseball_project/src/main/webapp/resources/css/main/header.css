@@ -3,10 +3,7 @@
 /* Header/Blog Title */
 
 .header {
-    width:100%;
-    
-    border:1px solid black;
-    
+   /*  width:100%; */
 }
 
 #header_img{
@@ -20,18 +17,22 @@
 	
 		
 }
-.login_join{
-
+.login_button{
+	
 	/* background-color: blue; */
 }
+.join_button{
+	
+	/* background-color: blue; */
 
+}
 
 /* Style the top navigation bar */
 .topnav {
     overflow: hidden;
     background-color: #333;
     width:100%;
-    font-size:20px;
+    font-size:30px;
     font-weight: 900;
 }
 /* Style the topnav links */
@@ -40,11 +41,10 @@
     display: block;
     color: #f2f2f2;
     text-align: center;
-    padding: 14px 16px;
+    padding: 10px 16px ;
     text-decoration: none;
     width:25%;
 }
-
 /* Change color on hover */
 .topnav a:hover {
     background-color: #ddd;

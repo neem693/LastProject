@@ -30,30 +30,32 @@ function send_main(){
 
 <body>
 
-
-
 <div class = "header" onclick="send_main()">
-		<div id="header_img">
-			<div class="login_join">
-				<%-- <a href="${pageContext.request.contextPath}/경로확인 login_form.do"> --%>
-				<a href="http://www.naver.com">
-					<span class="login">로그인</span>
-				</a> 
-				<%-- <a href="${pageContext.request.contextPath}/경로확인 join_form.do"> --%>
-				<a href="http://www.naver.com">
-					<span class="join">회원가입</span>
-				</a>
-			</div>
-		</div>
+	
+	<div id="header_img">
 		
-		<div class="topnav">
-			<a href="${ pageContext.request.contextPath }/joonggo/list.do">중고거래</a>
-			<a href="${ pageContext.request.contextPath }/toto/toto_list.do">토토</a>
-			<a href="${ pageContext.request.contextPath }/party/party_list.do">파티</a>
-			<a href="${ pageContext.request.contextPath }/borad/baord_list.do">게시판</a>
-		</div>
-
+			<span id="login_button">
+				<!-- 로그인 -->
+				<a href="${pageContext.request.contextPath}/member/login.do"><img src="${pageContext.request.contextPath}/resources/images/main/header/helmet.png" /></a>
+			</span>
+			<br>	
+			
+			<span id="join_button">
+				<!-- 회원가입 -->
+				<a href="${pageContext.request.contextPath}/join.do"><img src="${pageContext.request.contextPath}/resources/images/main/header/glove.png" /></a> 
+			</span>	
+			
 	</div>
+		
+	<div class="topnav">
+		<a href="${ pageContext.request.contextPath }/joonggo/list.do">중고거래</a>
+		<a href="${ pageContext.request.contextPath }/toto/toto_list.do">토토</a>
+		<a href="${ pageContext.request.contextPath }/party/party_list.do">파티</a>
+		<a href="${ pageContext.request.contextPath }/borad/baord_list.do">게시판</a>
+	</div>
+	
+	
+</div>
 	
 </body>
 </html>
