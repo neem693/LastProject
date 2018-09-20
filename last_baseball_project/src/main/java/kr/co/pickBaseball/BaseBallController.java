@@ -143,8 +143,13 @@ public class BaseBallController {
 	public String login() {
 
 		return Myconst.Member.MEMBER_DIR + "login.jsp";
-
 	}
+	
+	@RequestMapping("/member/logout.do")
+	public String logout() {
+		return Myconst.Member.MEMBER_DIR+ "logout.jsp";
+	}
+	
 
 	@RequestMapping("/member/login_action.do")
 	public String login_action(MemberVo vo) {

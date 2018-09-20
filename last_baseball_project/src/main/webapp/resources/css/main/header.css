@@ -10,7 +10,7 @@
 	cursor: pointer;
 	width:100%;
 	height: 200px; 
-	background-image: url("/pickBaseball/resources/images/main/header/title4.png"),url("/pickBaseball/resources/images/main/header/header_1.jpg");
+	background-image: url("/pickBaseball/resources/images/main/header/title4.png"),url("/pickBaseball/resources/images/main/header/header_2.jpg");
 	background-repeat: no-repeat;
 	background-size:contain,cover;
 	background-position: right,center;

@@ -33,17 +33,33 @@ function send_main(){
 <div class = "header" onclick="send_main()">
 	
 	<div id="header_img">
-		
-			<span id="login_button">
-				<!-- 로그인 -->
-				<a href="${pageContext.request.contextPath}/member/login.do"><img src="${pageContext.request.contextPath}/resources/images/main/header/helmet.png" /></a>
+						
+						
+
+	        <!-- 로그인이 안된 상태 -->
+	        <c:if test="${ empty user }">						
+			<span id="login_button" value='로그인'>
+				<a href="${pageContext.request.contextPath}/member/login.do"><img src="${pageContext.request.contextPath}/resources/images/main/header/login.png" /></a>
 			</span>
-			<br>	
-			
+			<br>
 			<span id="join_button">
 				<!-- 회원가입 -->
-				<a href="${pageContext.request.contextPath}/join.do"><img src="${pageContext.request.contextPath}/resources/images/main/header/glove.png" /></a> 
-			</span>	
+				<a href="${pageContext.request.contextPath}/join.do"><img src="${pageContext.request.contextPath}/resources/images/main/header/join.png" /></a> 
+			</span>
+			</c:if>   
+				
+			
+			<!-- 로그인이 되어있으면 -->
+  			<c:if test="${ not empty user }">
+  		    <a href="${pageContext.request.contextPath}/main/logout.do"><img src="${pageContext.request.contextPath}/resources/images/main/header/logout.png" /></a><br>
+  		    ${ user.m_name }님 환영합니다	
+       	    </c:if>
+       	    
+       	    
+			
+			
+			
+  		  				
 			
 	</div>
 		
