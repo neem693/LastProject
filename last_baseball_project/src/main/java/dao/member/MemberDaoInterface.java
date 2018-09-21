@@ -3,6 +3,8 @@ package dao.member;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import vo.MemberVo;
 
 public interface MemberDaoInterface {
@@ -17,7 +19,6 @@ public interface MemberDaoInterface {
 	int delete(int idx);
 
 	MemberVo selectOne_login(MemberVo vo);
-	
 
-	
+
 }

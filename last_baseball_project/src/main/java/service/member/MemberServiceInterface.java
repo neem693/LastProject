@@ -3,6 +3,8 @@ package service.member;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import vo.MemberVo;
@@ -20,8 +22,9 @@ public interface MemberServiceInterface {
 	int insert(MemberVo vo);
 	int delete(int idx);
 	public MemberVo login_action(MemberVo vo);
+
 	
-	
+
 	
 	
 	

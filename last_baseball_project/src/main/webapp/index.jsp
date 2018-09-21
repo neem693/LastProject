@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 
-location.href = "joonggo/list.do";
+location.href = "main/main_list.do";
+
 
 </script>
 </head>
