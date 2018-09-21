@@ -9,6 +9,7 @@
 
 location.href = "main/main_list.do";
 
+
 </script>
 </head>
 <body>

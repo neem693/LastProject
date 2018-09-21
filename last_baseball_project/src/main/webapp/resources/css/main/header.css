@@ -4,6 +4,7 @@
 
 .header {
    /*  width:100%; */
+   
 }
 
 #header_img{
@@ -14,13 +15,11 @@
 	background-repeat: no-repeat;
 	background-size:contain,cover;
 	background-position: right,center;
+	border-radius: 10px;
 	
 		
 }
-.login_button{
-	
-	/* background-color: blue; */
-}
+
 .join_button{
 	
 	/* background-color: blue; */
@@ -34,6 +33,7 @@
     width:100%;
     font-size:30px;
     font-weight: 900;
+    border-radius: 10px;
 }
 /* Style the topnav links */
 .topnav a {

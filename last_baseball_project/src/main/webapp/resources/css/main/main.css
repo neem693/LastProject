@@ -2,8 +2,8 @@
 
  * {
     box-sizing: border-box; 
-    /* border: 2px solid #80ff00; 
-      */
+/*     border: 2px solid #80ff00; */ 
+      
      }
 
 body {
@@ -14,6 +14,19 @@ body {
 
   
 }
+
+
+
+.quick{
+	
+}
+
+
+
+
+
+
+
 
 /* Create two unequal columns that floats next to each other */
 /* Left column */

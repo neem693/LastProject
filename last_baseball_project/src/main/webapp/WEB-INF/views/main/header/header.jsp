@@ -14,35 +14,46 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="${ pageContext.request.contextPath }/resources/css/main/header.css"> 
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 <title>pickBaseball</title>
 
 <%-- 현재 Context Root : ${ pageContext.request.contextPath } <br> --%>
+
+
 
 <script type="text/javascript">
 function send_main(){
 	location.href = "${ pageContext.request.contextPath }/main/main_list.do";
 	
 }
-
 </script>
+
+
 
 </head>
 
 <body>
 
 <div class = "header" onclick="send_main()">
+
 	
 	<div id="header_img">
+	
 						
 						
 
-	        <!-- 로그인이 안된 상태 -->
+	        <!-- 로그인이 안된 상태 -->	
 	        <c:if test="${ empty user }">						
-			<span id="login_button" value='로그인'>
-				<a href="${pageContext.request.contextPath}/member/login.do"><img src="${pageContext.request.contextPath}/resources/images/main/header/login.png" /></a>
-			</span>
+			
+				<span id="login_button"  title="로그인">
+					<a href="${pageContext.request.contextPath}/member/login.do"><img src="${pageContext.request.contextPath}/resources/images/main/header/login.png" /></a>
+				</span>
+			
+			
 			<br>
-			<span id="join_button">
+			<span id="join_button" title="회원가입">
 				<!-- 회원가입 -->
 				<a href="${pageContext.request.contextPath}/join.do"><img src="${pageContext.request.contextPath}/resources/images/main/header/join.png" /></a> 
 			</span>
@@ -50,24 +61,23 @@ function send_main(){
 				
 			
 			<!-- 로그인이 되어있으면 -->
-  			<c:if test="${ not empty user }">
-  		    <a href="${pageContext.request.contextPath}/main/logout.do"><img src="${pageContext.request.contextPath}/resources/images/main/header/logout.png" /></a><br>
-  		    ${ user.m_name }님 환영합니다	
-       	    </c:if>
-       	    
-       	    
-			
+			<c:if test="${ not empty user }">
+			<span id="logout" title="logout">
+  				<a href="${pageContext.request.contextPath}/member/logout.do"><img src="${pageContext.request.contextPath}/resources/images/main/header/logout.png" /></a><br>
+	  		    ${ user.m_name }님 환영합니다	
+      	    </span>
+      	    </c:if>
 			
 			
   		  				
-			
+				
 	</div>
 		
 	<div class="topnav">
 		<a href="${ pageContext.request.contextPath }/joonggo/list.do">중고거래</a>
-		<a href="${ pageContext.request.contextPath }/toto/toto_list.do">토토</a>
-		<a href="${ pageContext.request.contextPath }/party/party_list.do">파티</a>
-		<a href="${ pageContext.request.contextPath }/borad/baord_list.do">게시판</a>
+		<a href="${ pageContext.request.contextPath }/toto/toto_list.do">BETTING</a>
+		<a href="${ pageContext.request.contextPath }/party/party_list.do">PARTY</a>
+		<a href="${ pageContext.request.contextPath }/borad/baord_list.do">자유게시판</a>
 	</div>
 	
 	
