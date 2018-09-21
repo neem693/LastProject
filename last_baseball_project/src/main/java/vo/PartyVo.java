@@ -1,13 +1,26 @@
 package vo;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import myconst.Myconst;
+
 public class PartyVo {
+	
+	SimpleDateFormat out_put_format_p_date = new SimpleDateFormat("yyyy/MM/dd[HH:mm]");
+	SimpleDateFormat day_format = new SimpleDateFormat("(MM/dd)");
+	SimpleDateFormat Hour_format = new SimpleDateFormat("(HH:mm)");
 	
 	int pt_idx;
 	String pt_condition;
 	String pt_name;
 	String date;//날짜로 할지, 아니면 시간으로 할지를 정하는 것
 	String pt_day;
+	Date pt_day_date;
+	String datetime;//리스트를 출력하는 용도로만 사용하는 pt_day전용의 datetime이다.
 	String pt_purpose; //인서트 받을 때 이건 처음에 숫자로 나오니 주의
+	int pt_people;
 	int pt_maxPeople; // 이것도 숫자로 나오니 주의 하라
 	String p_idx;
 	String pt_location; //인서트 할떄 이 값을 수정해야 한다. 이 값은 월래 mysql전용의 데이트time값이 들어가 있어야 한다.
@@ -18,10 +31,13 @@ public class PartyVo {
 	
 	
 	
-	
+
+
+
 	///list를 뽑아오기 위해서 해야 할것//
 	String m_nick;
 	String p_date;
+	Date p_date_date;
 	String s_name;
 	//////해당leader가 얼마나 지금까지 파티를 만들었는지에 대한 카운트///
 	int leader_count;
@@ -61,7 +77,20 @@ public class PartyVo {
 		return pt_day;
 	}
 	public void setPt_day(String pt_day) {
+		
+		try {
+			this.setPt_day_date(Myconst.DateCheck.DATE_FORMAT.parse(pt_day));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.pt_day = pt_day;
+		
+		
+		
+		
+		
+		
 	}
 	public String getPt_purpose() {
 		return pt_purpose;
@@ -199,6 +228,7 @@ public class PartyVo {
 
 
 	public String getP_date() {
+		
 		return p_date;
 	}
 
@@ -206,7 +236,16 @@ public class PartyVo {
 
 
 	public void setP_date(String p_date) {
-		this.p_date = p_date;
+	
+	
+		try {
+			this.setP_date_date(Myconst.DateCheck.DATE_FORMAT.parse(p_date));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.p_date = out_put_format_p_date.format(this.getP_date_date());
+		
 	}
 
 
@@ -264,13 +303,98 @@ public class PartyVo {
 	public void setM_idx(String m_idx) {
 		this.m_idx = m_idx;
 	}
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+	public int getPt_people() {
+		return pt_people;
+	}
+
+
+
+
+	public void setPt_people(int pt_people) {
+		this.pt_people = pt_people;
+	}
+
+
+
+
+	public Date getPt_day_date() {
+		return pt_day_date;
+	}
+
+
+
+
+	public void setPt_day_date(Date pt_day_date) {
+		this.pt_day_date = pt_day_date;
+	}
+
+
+
+
+	public Date getP_date_date() {
+		return p_date_date;
+	}
+
+
+
+
+	public void setP_date_date(Date p_date_date) {
+		this.p_date_date = p_date_date;
+	}
+
+	public String getDatetime() {
+		setting_datetime();
+		
+		return datetime;
+	}
+
+
+
+
+	public void setDatetime(String datetime) {
+		this.datetime = datetime;
+	}
+
+
+	public void setting_datetime() {
+
+		long party_time = this.pt_day_date.getTime();
+		long match_time = this.p_date_date.getTime();
+		
+		if(party_time==match_time) {
+			datetime = Myconst.Party.SAME_MATCH_TIME;
+			return;
+		}
+		
+		party_time = party_time - match_time;
+		
+		if(party_time>=Myconst.ParsingDateCheck.ONE_HOUR_MILESECOND) {
+			long day = party_time/(long)Myconst.ParsingDateCheck.ONE_HOUR_MILESECOND;
+			datetime = String.format("%o일전", day);
+			datetime += day_format.format(this.pt_day_date);
+			return;
+		}
+		else{
+			if(party_time>0) {
+				
+				long time = party_time/(long)Myconst.ParsingDateCheck.ONE_HOUR_MILESECOND ;
+				datetime = String.format("경기시작%o시간후", time);
+				
+			}
+			else if(party_time<0) {
+				party_time = -1* party_time;
+				long time = party_time/(long)Myconst.ParsingDateCheck.ONE_HOUR_MILESECOND ;
+				datetime = String.format("경기시작%o시간전", time);
+			}
+				datetime += Hour_format.format(this.pt_day_date);
+				
+		}
+			
+	}
  
 	
 	

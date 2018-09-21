@@ -379,15 +379,26 @@ public class BaseBallController {
 	}
 
 	@RequestMapping("/party/show_party_list.do")
-	public String show_party_list(String year, String month, String day, String team) {
+	public String show_party_list(String year, String month, String day, String team,Model model) {
 
 		System.out.println("쇼 파티 리스트 두");
 		
 		List list = partyService.take_party_list(year,month,day,team);
 		System.out.println(list.size());
+		
+		model.addAttribute("list", list);
 
 		return Myconst.BaseBall.PARTY_DIR + "show_party_list.jsp";
 
+	}
+	
+	
+	@RequestMapping("/member/logout.do")
+	public String logout() {
+		
+		session.removeAttribute("user");
+		
+		return "redirect:/main/main_list.do";
 	}
 
 }

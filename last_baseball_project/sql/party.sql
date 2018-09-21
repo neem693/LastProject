@@ -1,5 +1,6 @@
 create table party(
 pt_idx int unsigned auto_increment,
+pt_name varchar(100) not null,
 pt_people int(3) unsigned ,
 pt_day datetime,
 pt_condition varchar(60) ,
@@ -110,3 +111,9 @@ inner join member m
 on b.m_idx = m.m_idx
 where m.m_idx = 41
 
+select * from team
+
+
+alter table party add pt_name varchar(100) not null
+delete from party
+commit

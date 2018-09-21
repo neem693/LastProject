@@ -79,6 +79,9 @@ public class Myconst {
 		public static int PARTY_LEADER = 10;
 		
 		
+		public static String SAME_MATCH_TIME = "경기시작시간";
+		
+		
 
 	
 	}

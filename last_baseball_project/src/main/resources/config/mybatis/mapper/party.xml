@@ -6,10 +6,11 @@
 
 	<insert id="party_insert_one" parameterType="party">
 		insert into
-		party(pt_people,pt_day,pt_condition,pt_purpose,p_idx,pt_maxPeople,pt_location,pt_text,t_name,pt_date)
+		party(pt_people,pt_day,pt_name,pt_condition,pt_purpose,p_idx,pt_maxPeople,pt_location,pt_text,t_name,pt_date)
 		values(
 		1,
 		#{pt_day},
+		#{pt_name},
 		#{pt_condition},
 		#{pt_purpose},
 		#{p_idx},
