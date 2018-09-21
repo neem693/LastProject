@@ -375,15 +375,32 @@ public class BaseBallController {
 
 
 	@RequestMapping("/parsing_toto.do")
-	public String parsing_toto(Model model) throws IOException {
+	public String parsing_toto() throws IOException {
 		//Jsoup lib를 사용하여 HTML 문서를 파싱한다.
 		//batmen--toto 점수 파밍
 		String result=totoservice.MakeToToScore();
 			
 		System.out.println(result);
+		return "";
+	}
+
+	@RequestMapping("/toto_view.do")
+	public String view(Model model) throws IOException{
+		//메인 페이지 출력 
+		
+		
+		
+		List list=totoservice.Select_gamelist();
+
+		model.addAttribute("list",list);
+		
 		return Myconst.Toto.TOTO+"toto_game.jsp";
 	}
 
 
-
+	
+	
+	
+	
+	
 }

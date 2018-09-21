@@ -7,7 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import vo.MemberVo;
-import vo.TotoSchduleVo;
+import vo.TotoValueVo;
 
 
 public class TotoDaoImpl implements TotoDaoInterface {
@@ -29,10 +29,11 @@ public class TotoDaoImpl implements TotoDaoInterface {
 	
 	
 	@Override
-	public int Select_list_row() {
+	public List select_gamelist() {
 		// TODO Auto-generated method stub	
-		int result= session.selectOne("toto.select_row");	//현재 데이터 베이스에 값이 있나 확인
-		return result;
+		List list= session.selectList("toto.select_game_list");	//현재 데이터 베이스에 값이 있나 확인
+	
+		return list;
 	}
 
 
@@ -68,7 +69,7 @@ public class TotoDaoImpl implements TotoDaoInterface {
 
 
 	@Override
-	public int update(TotoSchduleVo vo) {
+	public int update(TotoValueVo vo) {
 	
 		int result =session.update("toto.update_table",vo);
 		
@@ -77,8 +78,8 @@ public class TotoDaoImpl implements TotoDaoInterface {
 	
 	}
 
-	
-	
+
+
 	
 /*	@Override
 	public MemberVo selectOne(Map map) {
