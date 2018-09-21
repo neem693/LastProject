@@ -63,61 +63,35 @@ function search(){
                   <div class="s_center"><div class ="s_mid"></div></div>
 			    </c:if>
 			    </div>
-			    
 			     <p class = "s_content"></p>
-                </div>
+               
                 
 					<div class="s_caption">
 						<h6>${vo.j_title }</h6>
 						<p> ${vo.j_price }</p>
 						<p align="center">
-							<a class="btn btn-primary btn-block" onclick ="location.href='view.do?j_idx=${vo.j_idx}'">Open</a>
+							<a class="btn btn-primary btn-block" onclick ="location.href='view.do?j_idx=${vo.j_idx}&page=${ (empty param.page) ? 1 : param.page }&search=${ param.search}&search_text=${ param.search_text}'">Open</a>
 						</p>
 					</div>
 					</li>
 			</ul>
-			
-			
-
+		
 </c:forEach>
-
-</div>
-      <!-- 게시글이 없으면 -->           
+	 </div>
+     	 <!-- 게시글이 없으면 -->           
             <c:if test="${ empty list }">
 				<tr>
-					<td align="center" colspan="11" width="100%" height="50" style="border:1 solid #efefef">
+					<td class ="null">
 						현재 등록된 글이 없습니다.
 					</td>
 				</tr>
 			</c:if>
 
-
+</div>
 
 
 <div class = "footer">
 
-<!-- 페이지 처리 -->	
-<div class="page">
-              <ul id = "q" class="pagination" >
-				<li class="disabled"><a href="#">«</a></li>
-				<li class="active"><a href="list.do?page=1">1 <span class="sr-only">(current)</span></a></li>
-				<li><a href="list.do?page=2">2</a></li>
-				<li><a href="list.do?page=3">3</a></li>
-				<li><a href="list.do?page=4">4</a></li>
-				<li><a href="list.do?page=5">5</a></li>
-				<li><a href="#">»</a></li>
-			</ul>
-
-</div>
-
-
- <!-- 글쓰기 -->
-<div class="pull-right">
-              <button type="submit" class="btn btn-primary" onclick ="location.href='insert_form.do'">글쓰기</button>
-          </div> 
-          
-
- 
  <!-- 검색메뉴 -->
 <div align = "center">
 <select id = "search">
@@ -139,7 +113,23 @@ function search(){
                     ${ pageMenu }
                     
 			</div>
-			</div>		
+			</div>	
+			
+			
+<!-- 페이지 처리 -->	
+<div class="page">
+              <ul id = "q" class="pagination" >
+				<li class="disabled"><a href="#">«</a></li>
+				<li class="active"><a href="list.do?page=1">1 <span class="sr-only">(current)</span></a></li>
+				<li><a href="list.do?page=2">2</a></li>
+				<li><a href="list.do?page=3">3</a></li>
+				<li><a href="list.do?page=4">4</a></li>
+				<li><a href="list.do?page=5">5</a></li>
+				<li><a href="#">»</a></li>
+			</ul>
+ <!-- 글쓰기 -->
+<button type="submit" class="btn btn-primary" onclick ="location.href='insert_form.do'">글쓰기</button>
+</div>	
 
 </div>
 

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import dao.CommentDao;
 import util.Paging;
@@ -34,7 +35,7 @@ public class CommentController {
 	
 	
 	
-	@RequestMapping("/comment/comment_list.do")
+	@RequestMapping("/joonggo/comment_list.do")
 	public String comment_list(Model model, int j_idx, Integer page)
 	{
 		
@@ -93,8 +94,9 @@ public class CommentController {
 		return myconst.Myconst.Comment.VIEW_PATH + "comment_list.jsp";
 	}
 	
-	@RequestMapping("/comment/comment_insert.do")
-	public String comment_insert(CommentVo vo, Model model, String result_json)
+	@RequestMapping("/joonggo/comment_insert.do")
+
+	public String comment_insert(CommentVo vo, Model model)
 	{
 		
 		String ip = request.getRemoteAddr();
@@ -132,12 +134,12 @@ public class CommentController {
 		if(res==0)
 			result = "fail";
 
-		result_json = String.format("{\"result\":\"%s}", result);
+		String result_json = String.format("{\"result\":\"%s}", result);
 		 
 		return result_json;
 		
 	}
-	@RequestMapping("/comment/comment_delete.do")
+	@RequestMapping("/joonggo/comment_delete.do")
 	public String comment_delete(int c_idx, String result_json)
 	{
      /*int idx = Integer.parseInt(request.getParameter("idx"));

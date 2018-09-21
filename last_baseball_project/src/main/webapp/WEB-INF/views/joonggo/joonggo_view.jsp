@@ -14,7 +14,7 @@
 <script
 	src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css" />
@@ -40,7 +40,7 @@
 		/* f.submit(); */
 
 	}
-
+    // 판매 완료
 	function sell(f) {
 		var j_sell_yn = $('#j_sell_yn').val();
 		var j_idx = $('#j_idx').val();
@@ -53,23 +53,11 @@
 		f.action = "sell.do";
 		f.method = 'GET';
 		f.subimt();
-
-		/* 	$.ajax({
-		 type : 'GET',
-		 url: 'sell.do', //CommentInsertAction
-		 data:{'j_idx': j_idx, 'j_sell_yn': j_sell_yn},
-		 dataType: 'json', 
-		 success:function(data){
-		
-		 }
-		
-		 }); */
 	}
 
 	//댓글쓰기
 	function comment_send() {
-		/*
-		 //로그인이 안된경우
+/* 		 //로그인이 안된경우
 		 if('${ empty user }'=='true'){
 		
 		 if(confirm('댓글은 로그인하신후에 사용가능합니다\n로그인 하시겠습니까?')==false) return;
@@ -77,42 +65,37 @@
 		 //alert(location.href);
 		
 		 // 로그인후에 현재 위치로 다시 돌아올 목적
-		 location.href='../member/login_form.do?url=' + encodeURIComponent(location.href);
+		 location.href='../member/login.do?url=' + encodeURIComponent(location.href);
 		
 		 return;
-		 } */
+		 }  */
 
 		//댓글쓰기
 		var j_idx = '${ vo.j_idx }';
-		var id = '${ user.m_id }';
-		var name = '${ user.m_nick }';
-		var content = $('#c_comment').val(); // document.getElementById("content").value
-		if (content == '') {
+		var m_id = '${ user.m_id }';
+		var m_nick = '${ user.m_nick }';
+		var c_content = $('#c_content').val(); // document.getElementById("content").value
+		if (c_content == '') {
 			alert('댓글 내용을 입력하세요');
-			$('#c_comment').focus();
+			$('#c_content').focus();
 			return;
 		}
 
 		//Ajax전송
 		$.ajax({
 			url : 'comment_insert.do', //CommentInsertAction
-			data : {
-				'j_idx' : j_idx,
-				'm_id' : m_id,
-				'm_nick' : m_nick,
-				'c_comment' : c_commnet
-			},
-			dataType : 'json',
+			data : {'j_idx' : j_idx,'m_id' : m_id,'m_nick' : m_nick,'c_content' : c_content},
+		 	/* dataType : 'json', */
 			success : function(data) {
-				// data = {"result":"success"}  or {"result":"fail"}
+			  /*  //data = {"result":"success"}  or {"result":"fail"},  */
 				if (data.result == 'fail') {
 					alert('댓글달기 실패!!');
 					return;
 				}
 
 				//이전내용 지우기
-				$('#comment').val('');
-				$('#comment').focus();
+				$('#c_content').val('');
+				$('#c_content').focus();
 
 				//성공=> 댓글목록 가져오기
 				comment_list(1);
@@ -128,41 +111,32 @@
 		var j_idx = '${ vo.j_idx }';
 		$.ajax({
 			url : 'comment_list.do', //CommentListAction
-			data : {
-				'j_idx' : j_idx,
-				'page' : page
-			},
-			success : function(data) {
+			data : {'j_idx' : j_idx,'page' : page},
+			success : function(data) 
+			{
 				$('#disp').html(data);
 			}
 		});
 
-		//초기화 이벤트
-		$(document).ready(function() {
-			comment_list(1);
-		});
 	}
 </script>
 <body>
 	<!-- method="post" -->
 	<form>
-		<input type="hidden" name="j_idx" value="${vo.j_idx }"> <input
-			type="hidden" name="page" value="${param.page}">
+		<input type="hidden" name="j_idx" value="${vo.j_idx }">
+<%-- 	    <input type="hidden" name="m_idx" value="${user.m_idx }"> --%>
+		<input type="hidden" name="page" value="${param.page}">
 		<div class="container">
-
-
-			<div class="row">
-				<div id="container" class="form-group col-md-12">
+			
+				<div id="s_container" class="form-group col-md-12">
 					<img src="${pageContext.request.contextPath }/resources/photo_upload/${vo.j_filename}">
 					<c:if test="${vo.j_sell_yn eq 'y'}">
-						<div class="center1">
+						<div class="center">
 							<div class="mid"></div>
 						</div>
 					</c:if>
-
 				</div>
 				<p class="content"></p>
-			</div>
 
 			<div class="title">
 				<label class="col-sm-10">${vo.j_title }</label>
@@ -243,7 +217,7 @@
 		</div>
 		<br>
 
-		</div>
+		
 	</form>
 
 	<p>
@@ -255,7 +229,7 @@
 				작성자:
 				<c:if test="${ not empty user }">${ user.m_nick }(${ user.m_id })</c:if>
 			</div>
-			<textarea id="content"></textarea>
+			<textarea id="c_content" ></textarea>
 			<input id="bt_reg" type="button" value="댓글쓰기"
 				onclick="comment_send();">
 		</div>

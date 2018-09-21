@@ -7,35 +7,35 @@
 	<!-- 댓글목록 조회(게시글별(j_idx)조회) -->
 	<select id="comment_list"  parameterType="int" resultType="comment">
 		select * from comment where j_idx=#{ j_idx }
-		order by idx desc
+		order by c_idx desc
 	</select>
-	
-	<!-- 댓글목록 조회(게시글별 페이징 조회) -->
+<!-- 	
+	댓글목록 조회(게시글별 페이징 조회)
 	<select id="comment_page_list"  parameterType="java.util.Map"  resultType="comment">
-		select * from
-		(
+			select * from
+			(
 			select 
-			       rank() over(order by idx desc) no,
 			       c.*
 			from       
-			       ( select * from comment where j_idx=#{ j_idx } ) c
+			       ( select * from comment where j_idx=#{ j_idx } )c
 		)
-		where no between #{ start } and #{ end }
+		limit #{start}, #{end}
 	</select>
-	
+	 -->
 	<!-- 게시글별 댓글의 갯수 -->
 	<select id="comment_row_total"  parameterType="int"  resultType="int">
-	    select nvl(count(*),0) from comment where j_idx=#{ j_idx }
+	    select ifnull(count(*),0) from comment where j_idx=#{ j_idx }
 	</select>
 	
 	<!-- 댓글등록 -->
 	<insert id="comment_insert"  parameterType="comment">
-		insert into comment(c_comment, c_ip, c_regdate, j_idx, m_idx) values(
-		#{c_comment},
+		insert into comment(c_content, m_nick, m_id, c_ip, j_idx, c_date) values(
+		#{c_content},
+		#{m_nick},
+		#{m_id},
 		#{c_ip},
-		now(),
 		#{j_idx},
-		#{m_idx}	       
+		now()       
 		)
 	</insert>
 	

@@ -21,7 +21,7 @@
 </head>
 <body>
 <form method="post" id="insertBoardFrm" enctype="multipart/form-data">
-<input type = "hidden" name = "idx" value="1">
+<input type = "hidden" name = "m_idx" value="${user.m_idx }">
 
 
 	<div  id = main_insert_form align="center">
@@ -60,23 +60,23 @@
                 </div>
                 <br>
                   <div class="form-group">
-                  <label class="col-sm-2">이름</label>
+                  <label class="col-sm-2">닉네임</label>
 
-                  <div class="col-sm-10"><input type="text" class="form-control" name="m_name" placeholder="이름을 입력하세요." value=""></div><br>
+                  <div class="col-sm-10"><input type="text" class="form-control" name="m_nick" placeholder="이름을 입력하세요." value="${user.m_nick } [${user.m_name}]"></div><br>
 
                 </div>
                 <br>
                   <div class="form-group">
                   <label class="col-sm-2">연락처</label>
 
-                  <div class="col-sm-10"><input type="text" class="form-control" name="m_tel" placeholder="연락처를 입력하세요." value=""></div><br>
+                  <div class="col-sm-10"><input class="form-control" name="m_tel" placeholder="연락처를 입력하세요." value="${user.m_tel }"></div><br>
 
                 </div>
                 <br>
                   <div class="form-group">
                   <label class="col-sm-2">이메일</label>
 
-                  <div class="col-sm-10"><input type="text" class="form-control" name="m_email" placeholder="E_MAIL을 입력하세요." value=""></div><br>
+                  <div class="col-sm-10"><input class="form-control" name="m_email" placeholder="E_MAIL을 입력하세요." value="${user.m_email }"></div><br>
 
                 </div>
                 

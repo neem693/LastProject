@@ -18,7 +18,7 @@ div#header {
 	background-color: #ff8080;
 }
 
-.c_content {
+.content {
 	min-height: 80%; /* 컨텐츠 최소 크기를 400px 만큼 늘린다. */
 	width: 100%;
 	height: 100%; /* auto로 하면 데이터를가 많아지면 content사이즈가 증가하면서 스크롤로이 생긴다. */
@@ -79,13 +79,13 @@ display: inline-block;
 
 .page {
 	clear:both;
-border:1px solid yellow;
+    border:1px solid yellow;
 	text-align: center;
 	width: 100%;
 	height : 30%;
 	display: block;
 	margin: 0 auto;
-	align: center;
+	
 }
 
 /* page  */
@@ -116,6 +116,19 @@ width: auto;
 height: auto;
 }
 
+/* 등록된 글 없을때 */
+.null
+{
+	
+	width : 100%; 
+	height : 100%; 
+	align :center;
+	border : 1px solid black;
+	font-size: 30pt;
+	font-weight: bold;
+	
+}
+
 /* 판매완료 */
 .s_container {
 	width: 150px;
@@ -135,7 +148,7 @@ height: auto;
 	width: 150px;
  	height:150px;
     border:1px solid black; 
-    opacity: 0.5;
+    opacity: 5;
     /* background-color:black; */
        
 }
@@ -152,5 +165,7 @@ content: '판매완료';
  font-weight: bold;
  
 }
+
+
 
 

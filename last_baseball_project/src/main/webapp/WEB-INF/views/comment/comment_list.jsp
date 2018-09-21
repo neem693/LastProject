@@ -55,7 +55,7 @@
             <input type="button"  value="x" onclick="del1('${ vo.c_idx }');">
         </c:if>
   </div>
-  <div><pre>${ vo.content }</pre></div>
+  <div><pre>${ vo.c_content }</pre></div>
   <hr> 
   <br>
   <br>
