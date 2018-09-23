@@ -28,7 +28,9 @@ PlayVo select_play_one(String p_idx);
 boolean check_long_time_in_match(String year, String month, String day);
 Map get_party_count(String year,String month,String team);
 int insert_party_book(MemberVo member);
-List take_party_list(String year, String month, String day, String team);
+List take_party_list(String year, String month, String day, String team, int nowPage);
+String return_party_paging(int nowPage,String day, int page_total_count);
+int total_page_count(String year, String month, String day,String team);
 
 
 

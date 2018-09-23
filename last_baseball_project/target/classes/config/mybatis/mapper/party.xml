@@ -46,40 +46,64 @@
 
 
 	<select id="recently_insert" resultType="Integer">
-		select max(pt_idx) from party
+		select max(pt_idx) from
+		party
 	</select>
 
 
 	<select id="party_show_list" parameterType="Map"
 		resultMap="leader_count_map">
 		select pt.*,m.m_nick,m.m_idx,p.p_date,s.s_name
-		from party pt inner join party_book b
+		from party pt inner join
+		party_book b
 		on pt.pt_idx = b.pt_idx
 		inner join member m
-		on b.m_idx = m.m_idx
+		on b.m_idx =
+		m.m_idx
 		inner join play p
 		on pt.p_idx = p.p_idx
 		inner join studium s
-		on p.s_idx = s.s_idx
+		on
+		p.s_idx = s.s_idx
 		<trim prefix="where" prefixOverrides="and">
-		pt.p_idx like concat(#{ymd},'%')
-		<if test="team!=null">
-			and pt.t_name = #{team}
+			pt.p_idx like concat(#{ymd},'%')
+			<if test="team!=null">
+				and pt.t_name = #{team}
 			</if>
 		</trim>
+		limit #{start},#{page_count}
 	</select>
 
-<resultMap type="party" id="leader_count_map">
-<association property="leader_count" column="{idx=m_idx}" javaType="int" select="leader_count_select"   />
-</resultMap>
+	<resultMap type="party" id="leader_count_map">
+		<association property="leader_count" column="{idx=m_idx}"
+			javaType="int" select="leader_count_select" />
+	</resultMap>
 
-<select id="leader_count_select" resultType="int"  >
-select count(*)
-from party pt inner join party_book b
-on pt.pt_idx = b.pt_idx
-inner join member m
-on b.m_idx = m.m_idx
-where m.m_idx = #{idx}
-</select>
+	<select id="leader_count_select" resultType="int">
+		select count(*)
+		from
+		party pt inner join party_book b
+		on pt.pt_idx = b.pt_idx
+		inner join
+		member m
+		on b.m_idx = m.m_idx
+		where m.m_idx = #{idx}
+	</select>
+
+	<select id="party_list_total_count" parameterType="Map"
+		resultType="int">
+
+		select count(*)
+		from party pt inner join play p
+		on pt.p_idx = p.p_idx
+		<trim prefix="where" prefixOverrides="and|or">
+			pt.p_idx like concat(#{ymd},'%')
+			<if test="team!=null">
+				and pt.t_name = #{team}
+			</if>
+		</trim>
+
+
+	</select>
 
 </mapper>

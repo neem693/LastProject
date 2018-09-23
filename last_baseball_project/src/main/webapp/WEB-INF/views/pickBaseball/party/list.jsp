@@ -4,18 +4,29 @@
 
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+@font-face {
+	font-family: notoFont;
+	src: url('/pickBaseball/resources/font/NotoSerifKR-Regular.otf');
+}
+
+
+*{
+font-family: notoFont;
+}
+
 .main {
 	margin-left: 15%;
 	margin-right: 15%;
 }
 
 .play_ul {
+	width: 100%;
 	border: 1px solid black;
 	padding-left: 1px;
 	list-style: none;
@@ -68,6 +79,37 @@ tr, td, th {
 	font-weight: bold;
 	font-size: large;
 }
+
+.show_party_list {
+	float: left;
+	width: 70%;
+	box-sizing: border-box;
+}
+
+@media screen and (max-width: 1200px) {
+	.play_list_main {
+		float: none;
+		width: 100%;
+	}
+	.right_side {
+		float: none;
+		width: 100%;
+		margin-left: 0;
+	}
+	.show_party_list {
+		float: none;
+		width: 100%;
+	}
+}
+
+@media screen and (max-width: 750px) {
+	.main {
+		margin: 0 2px;
+	}
+	.calendar {
+		table-layout: fixed;
+	}
+}
 </style>
 <script
 	src="${pageContext.request.contextPath}/resources/jquery/jquery-3.3.1.min.js"></script>
@@ -75,12 +117,39 @@ tr, td, th {
 var bs;
 var month_num = ${month};
 var year_num = ${year};
+var party_list_section;
+var party_list_top_offset;
 
 $(document).ready(function(){
 	bs = document.getElementsByClassName("match_button");
+	$party_list_section = $("#party_list");
+	
+	setTimeout(function(){
+		party_list_top_offset = $party_list_section.offset().top;
+	//	alert(party_list_top_offset);
+		
+	},800);
+	
+
+	
+	$(window).resize(function(){
+		setTimeout(function(){
+		party_list_top_offset = $party_list_section.offset().top;
+		//console.log(party_list_top_offset);
+		},300);
+	});
+	
+	
 });
 
+
+
+
 function show_party_list(d){
+	
+	
+	
+
 	
 	var op = {
 		    url:'show_party_list.do',
@@ -94,8 +163,45 @@ function show_party_list(d){
 		    async:false,
 		    success:function(result){
 		        //alert(result);
-		        var res= result;
-		        res = eval(res);
+		    	$party_list_section.html(result);
+		    	//밑으로 자연스럽게 옮겨주는 것
+		    	party_list_top_offset = $party_list_section.offset().top;
+		    	$('html,body').animate({scrollTop: party_list_top_offset},800);
+		  
+		    }
+	}
+
+	
+	$.ajax(op);
+	
+	
+	
+}
+
+
+function party_list_page(d,page){
+	
+	
+	
+
+	
+	var op = {
+		    url:'show_party_list.do',
+		    data:{
+		        'year':'${year}',
+		        'month':'${month}',
+		        'team':'${team}',
+		        'day':d,
+		        'page':page
+		        
+		    },
+		    async:false,
+		    success:function(result){
+		        //alert(result);
+		    	$party_list_section.html(result);
+		    	//밑으로 자연스럽게 옮겨주는 것
+		    	party_list_top_offset = $party_list_section.offset().top;
+		    	$('html,body').animate({scrollTop: party_list_top_offset},800);
 		  
 		    }
 	}
@@ -170,17 +276,18 @@ function create_party(day_num){
 									<td><c:set var="day" value="${day+1 }"></c:set> ${ day}<span
 										class="match_count"><c:set var="day_key">${day}</c:set>
 											<%-- day를 key값으로 설정해주기 위한 것이다. --%> <c:out
-												value="${ party_count[day_key]}" /> </span>
-									<c:if test="${fisrt_day != 0}">
+												value="${ party_count[day_key]}" /> </span> <c:if
+											test="${fisrt_day != 0}">
 											<c:set var="first_day" value="0"></c:set>
 										</c:if> <c:forEach var="i" begin="${n}" end="${n+4}">
 											<c:if test="${list[i].day eq day}">
-												<p>
-													<%--${ list[i].day}${day } ${i}${c} --%>
-												</p>
+												<%-- <!-- 경기가 있을 떄마다 c를 증가 밑 foreach문이 해당 c값 만큼 경기 갯수 출력 -->	
+											<p>
+													${ list[i].day}${day } ${i}${c}
+												</p> --%>
 												<c:set var="c" value="${c+1}" />
 											</c:if>
-											<!-- 경기가 있을 떄마다 c를 증가 밑 foreach문이 해당 c값 만큼 경기 갯수 출력 -->
+
 
 										</c:forEach> <c:if test="${c>n}">
 											<!-- 매치에 해당하는 파티 갯수를 출력하는 것을 말한다. -->
@@ -246,8 +353,10 @@ function create_party(day_num){
 			</table>
 		</div>
 
-		<div class="right_side">이곳은 팀이 올 자리이다.</div>
+		<aside class="right_side">이곳은 팀이 올 자리이다.</aside>
+		<div class="show_party_list" id="party_list"></div>
 	</div>
+
 
 </body>
 </html>

@@ -62,7 +62,10 @@ public class PartyDaoImpl implements PartyDaoInerface {
 	@Override
 	public int selectCount(Object ob) {
 		// TODO Auto-generated method stub
-		return 0;
+		
+		int res = session.selectOne("party.party_list_total_count",ob);
+		
+		return res;
 	}
 
 	@Override

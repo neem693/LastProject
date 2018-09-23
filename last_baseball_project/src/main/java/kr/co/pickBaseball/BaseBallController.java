@@ -31,6 +31,7 @@ import service.member.MemberServiceInterface;
 import service.party.PartyServiceInterface;
 import service.toto.TotoServiceInterface;
 import util.parsing.TeamParsing;
+import util.party.Paging;
 import vo.MemberVo;
 import vo.PartyVo;
 import vo.TeamVo;
@@ -379,14 +380,25 @@ public class BaseBallController {
 	}
 
 	@RequestMapping("/party/show_party_list.do")
-	public String show_party_list(String year, String month, String day, String team,Model model) {
+	public String show_party_list(String year, String month, String day, String team,Model model, String page) {
 
 		System.out.println("쇼 파티 리스트 두");
+		int nowPage=1;
+		if((page == null || page.isEmpty())==false)
+		{
+			nowPage = Integer.parseInt(page);
+		}
 		
-		List list = partyService.take_party_list(year,month,day,team);
+		
+		
+		
+		int page_total_count = partyService.total_page_count(year,month,day,team);
+		String page_html = partyService.return_party_paging(nowPage,day,page_total_count);
+		List list = partyService.take_party_list(year,month,day,team,nowPage);
 		System.out.println(list.size());
 		
 		model.addAttribute("list", list);
+		model.addAttribute("page_html",page_html);
 
 		return Myconst.BaseBall.PARTY_DIR + "show_party_list.jsp";
 
@@ -400,5 +412,7 @@ public class BaseBallController {
 		
 		return "redirect:/main/main_list.do";
 	}
+	
+	
 
 }

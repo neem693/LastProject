@@ -117,3 +117,10 @@ select * from team
 alter table party add pt_name varchar(100) not null
 delete from party
 commit
+
+
+
+select*
+from party pt inner join play p
+on pt.p_idx = p.p_idx
+where pt.p_idx like "20180925%"

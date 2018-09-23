@@ -85,6 +85,12 @@ public class Myconst {
 
 	
 	}
+	
+	public static class PartyListPage{
+		public static String PARTY_PAGING_URL = "/pickBaseball/party/show_party_list.do";
+		public static int BLOCK_LIST = 3; // page당 게시물수
+		public static int BLOCK_PAGE = 3; //page당 보여지는 메뉴 갯수
+	}
 
 	public static class PhotoUpload {
 		public static String PHOTO_WEB_PATH_LOOT = "/pickBaseball/resources/photo_upload/";

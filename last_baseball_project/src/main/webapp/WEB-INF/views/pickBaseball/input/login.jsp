@@ -41,18 +41,18 @@ function login(){
 		<form id = "login" class="login_box" >
 		
 			<div class="pading">
-				<label class="text_brown lobster"><b> ID2</b></label> <input
+				<label class="text_brown lobster"><b>ID</b></label> <input
 					class="login_input" name="m_id" type="text"> <label
 					class="text_brown  lobster">PASSWORD</label> <input
 					class="login_input"  name="m_pwd" type="password">
 			</div>
 
 
-			<button class="btn_join cyan ">
-				<b>회원가입</b>
-			</button>
-			<button onclick="login();return false;" class="btn_return cyan">
+			<button onclick="login();return false;" class="btn_return cyan ">
 				<b>로그인</b>
+			</button>
+			<button class="btn_join cyan">
+				<b>회원가입</b>
 			</button>
 
 
