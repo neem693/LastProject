@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,7 +13,7 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/joonggo/joonggo.css">
+<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/joonggo/joonggo.css?ver=1" rel = "stylesheet">
 <script type="text/javascript">
 window.onload = function()
 {
@@ -67,8 +68,8 @@ function search(){
                
                 
 					<div class="s_caption">
-						<h6>${vo.j_title }</h6>
-						<p> ${vo.j_price }</p>
+						<p>${vo.j_title }</p>
+						<p> <fmt:formatNumber  value="${vo.j_price }"/>원</p>
 						<p align="center">
 							<a class="btn btn-primary btn-block" onclick ="location.href='view.do?j_idx=${vo.j_idx}&page=${ (empty param.page) ? 1 : param.page }&search=${ param.search}&search_text=${ param.search_text}'">Open</a>
 						</p>

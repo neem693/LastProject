@@ -16,7 +16,6 @@
 <!-- smart_editor2 -->
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
-<!-- <script src='js/SE2B_imgupload.js' charset='utf-8'></script> -->
 
 </head>
 <body>
@@ -62,7 +61,7 @@
                   <div class="form-group">
                   <label class="col-sm-2">닉네임</label>
 
-                  <div class="col-sm-10"><input type="text" class="form-control" name="m_nick" placeholder="이름을 입력하세요." value="${user.m_nick } [${user.m_name}]"></div><br>
+                  <div class="col-sm-10"><input type="text" class="form-control" name="m_nick" placeholder="이름을 입력하세요." value="${user.m_nick }"></div><br>
 
                 </div>
                 <br>
@@ -99,11 +98,6 @@
 
 </div>
               <div class="pull-right" aling = "centor">
-             <!--  <button type="submit" id="insertBoard" class="btn btn-primary">확인</button>
-             <input type="button" id="savebutton" name="savebutton" value="전송" /> -->
-
-            <!--  <input type="button" id="insertBoard" value="등록" /> -->
-          <!--   <input type = "button" value = "좀 들어가" onclick = "send1(this.form)"> -->
               <input type="button" id="insertBoard" class="btn btn-primary" value="등록" /> 
 
                 <button type="submit" class="btn btn-default">취소</button>
@@ -113,14 +107,14 @@
 </form>
 </body>
 <script type="text/javascript">
-$(function(){
+ $(function(){
     //전역변수
     var obj = [];              
     //스마트에디터 프레임생성
     nhn.husky.EZCreator.createInIFrame({
         oAppRef: obj,
         elPlaceHolder: "editor",
-        sSkinURI: "<%=request.getContextPath()%>/resources/editor/SmartEditor2Skin.html",
+    sSkinURI: "<%=request.getContextPath()%>/resources/editor/SmartEditor2Skin.html",
         htParams : {
             // 툴바 사용 여부
             bUseToolbar : true,            
@@ -129,7 +123,7 @@ $(function(){
             // 모드 탭(Editor | HTML | TEXT) 사용 여부
             bUseModeChanger : true,
         }
-    });
+    }); 
     //전송버튼
     $("#insertBoard").click(function(){
         //id가 smarteditor인 textarea에 에디터에서 대입

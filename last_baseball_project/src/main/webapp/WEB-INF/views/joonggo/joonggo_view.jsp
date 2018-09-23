@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -21,7 +23,7 @@
 <link rel="stylesheet"
 	href="${ pageContext.request.contextPath }/resources/css/joonggo/joonggo_view.css">
 
-</head>
+
 <script type="text/javascript">
 	function del(f) {
 		if (confirm('정말 삭제하시겠습니까?') == false)
@@ -57,7 +59,7 @@
 
 	//댓글쓰기
 	function comment_send() {
-/* 		 //로그인이 안된경우
+		 //로그인이 안된경우
 		 if('${ empty user }'=='true'){
 		
 		 if(confirm('댓글은 로그인하신후에 사용가능합니다\n로그인 하시겠습니까?')==false) return;
@@ -68,7 +70,7 @@
 		 location.href='../member/login.do?url=' + encodeURIComponent(location.href);
 		
 		 return;
-		 }  */
+		 }
 
 		//댓글쓰기
 		var j_idx = '${ vo.j_idx }';
@@ -86,13 +88,15 @@
 			url : 'comment_insert.do', //CommentInsertAction
 			data : {'j_idx' : j_idx,'m_id' : m_id,'m_nick' : m_nick,'c_content' : c_content},
 		 	/* dataType : 'json', */
-			success : function(data) {
-			  /*  //data = {"result":"success"}  or {"result":"fail"},  */
-				if (data.result == 'fail') {
+			success : function(data) 
+			{
+			  //Controller 값 받아와서 결과값 처리
+			  //data = {"result_json":"success"}  or {"result_json":"fail"},
+				if (data.result_json == 'fail') 
+				{
 					alert('댓글달기 실패!!');
 					return;
 				}
-
 				//이전내용 지우기
 				$('#c_content').val('');
 				$('#c_content').focus();
@@ -114,12 +118,22 @@
 			data : {'j_idx' : j_idx,'page' : page},
 			success : function(data) 
 			{
+				//데이터를 가져와서 div id = disp 부분에 data 값을 출력한다.
 				$('#disp').html(data);
+				
 			}
 		});
 
 	}
+
+	//초기화 이벤트
+	$(document).ready(function(){
+		comment_list(1);
+	});
+
+	
 </script>
+</head>
 <body>
 	<!-- method="post" -->
 	<form>
@@ -143,7 +157,7 @@
 			</div>
 
 			<div class="price">
-				<label class="col-sm-10">${ vo.j_price}</label>
+				<label class="col-sm-10"><fmt:formatNumber  value="${vo.j_price }"/>원</label>
 			</div>
 
 			<div class="row">
@@ -175,7 +189,7 @@
 				<div class="col-md-4">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="material-icons">access_time</i></span>
-						<input class="form-control" value="${vo.j_date }"
+						<input class="form-control" value="${fn:substring(vo.j_date,0,16)}"
 							placeholder="  등록일자">
 					</div>
 				</div>
@@ -201,37 +215,18 @@
 				</div>
 			</div>
 
-			<div class="pull-right">
-				<button class="btn btn-primary btn-block" onclick="del(this.form)">삭제</button>
-			</div>
 
-
-			<div class="pull-right">
-				<button class="btn btn-primary btn-block" onclick="send(this.form)">수정</button>
-			</div>
-
-			<div class="pull-right">
-				<button class="btn btn-primary btn-block" onclick="sell(this.form)">판매완료</button>
-			</div>
-
-		</div>
-		<br>
-
-		
-	</form>
-
-	<p>
 		<br>
 		<!-- 댓글작성  -->
 	<div class="comment_box">
-		<div id="#comment_input_box">
+		<div id="comment_input_box">
 			<div>
-				작성자:
-				<c:if test="${ not empty user }">${ user.m_nick }(${ user.m_id })</c:if>
+<%-- 				작성자:
+				<c:if test="${ not empty user }">${ user.m_nick }(${ user.m_id })</c:if> --%>
 			</div>
 			<textarea id="c_content" ></textarea>
-			<input id="bt_reg" type="button" value="댓글쓰기"
-				onclick="comment_send();">
+			<input id="bt_reg" type="button" value="등록"
+				onclick="comment_send(); ">
 		</div>
 
 		<hr>
@@ -239,6 +234,46 @@
 		<div id="disp"></div>
 
 	</div>
+		</div>
+		<br>
+		<div class = "button">
+		 <c:if test="${requestScope.vo.m_nick eq sessionScope.user.m_nick }"><!-- (1 eq 1) : true를 만들어줘서 삭제 버튼을 보여줌 -->
+			<div class="pull-right">
+			<!-- <img> tag form tag가 아닌 form tag인 <input type="image">이용하던지 
+                                                  <button><button> 이용하던지 
+                                                  주의사항) 기본이벤트 onsubmit() call
+                                                  onclick = "retrun false;" <= 자동submit() 하지말아라-->
+	<!-- 	<img src="../img/btn_delete.gif" alt="답변 또는 댓글이 있을 경우 삭제가 되지 않습니다."> -->
+				<button class="btn btn-primary btn-block" onclick="del(this.form); return false;">삭제</button>
+			</div>
+			
+			<div class="pull-right">
+				<button class="btn btn-primary btn-block" onclick="send(this.form); return false;">수정</button>
+			</div>
+
+			
+	
+			<!-- 글쓰기 -->
+			<div class="pull-right">
+            <button type="submit" class="btn btn-primary" onclick ="location.href='insert_form.do'; return false;">글쓰기</button>
+			</div>
+			</c:if>
+			
+		
+			<div class="pull-right">
+				<button class="btn btn-primary btn-block" onclick="sell(this.form); return false;">판매완료</button>
+			</div>
+			
+			
+			<div class="pull-right">
+			<button type = "submit" class="btn btn-primary btn-block" onclick="location.href='list.do?page=${param.page}&search=${ param.search}&search_text=${ param.search_text}'; return false;"">목록보기</button>
+			</div>
+		</div>
+		
+	</form>
+
+	<p>
+
 </body>
 
 </html>

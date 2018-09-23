@@ -83,7 +83,7 @@ public String sell(JoonggoVo vo)
 	// 요청한 Ajax에게 결과 전송
 /*	response.getWriter().println(result);*/
 	
-	return "redirect:/joonggo/view.do?j_idx="+vo.getJ_idx(); 
+	return "redirect:/joonggo/view.do?j_idx="+vo.getJ_idx();
 
 }
 /*보기*/ 
@@ -119,18 +119,13 @@ public String list(String search, String search_text, Integer page, Model model)
 	if(page!=null)
 		nowPage = page;
 	
-	//int start = (nowPage-1) * myconst.Myconst.JoonggoPage.BLOCK_LIST + 1;
-	//int end = start + myconst.Myconst.JoonggoPage.BLOCK_LIST -1;
 	int start = (nowPage-1) * myconst.Myconst.JoonggoPage.BLOCK_LIST;
 	int end  = myconst.Myconst.JoonggoPage.BLOCK_LIST;
 	
 	Map map = new HashMap();
 	map.put("start", start);
 	map.put("end", end);
-	
-	//map.put("start", start);
-	//map.put("display", display);
-	
+
 	//디버깅 경로 확인
 	System.out.println(application.getRealPath(web_path));
 	System.out.println(   request.getRequestURI());

@@ -20,6 +20,21 @@ public class CommentVo {
 	}
 
 	
+	public CommentVo(int no, int c_idx, String m_nick, String m_id, String c_content, String c_ip, int j_idx, int m_idx,
+			int nc_idx) {
+		super();
+		this.no = no;
+		this.c_idx = c_idx;
+		this.m_nick = m_nick;
+		this.m_id = m_id;
+		this.c_content = c_content;
+		this.c_ip = c_ip;
+		this.j_idx = j_idx;
+		this.m_idx = m_idx;
+		this.nc_idx = nc_idx;
+	}
+
+
 	public int getNo() {
 		return no;
 	}

@@ -9,19 +9,18 @@
 		select * from comment where j_idx=#{ j_idx }
 		order by c_idx desc
 	</select>
-<!-- 	
-	댓글목록 조회(게시글별 페이징 조회)
+
+	<!-- 댓글목록 조회(게시글별 페이징 조회) -->
 	<select id="comment_page_list"  parameterType="java.util.Map"  resultType="comment">
-			select * from
-			(
-			select 
+		SELECT 
 			       c.*
-			from       
-			       ( select * from comment where j_idx=#{ j_idx } )c
-		)
-		limit #{start}, #{end}
+			FROM       
+			       ( SELECT * FROM COMMENT WHERE j_idx=#{j_idx} ) c
+		ORDER BY c_idx DESC
+		LIMIT #{start}, #{end}
+		
 	</select>
-	 -->
+	 
 	<!-- 게시글별 댓글의 갯수 -->
 	<select id="comment_row_total"  parameterType="int"  resultType="int">
 	    select ifnull(count(*),0) from comment where j_idx=#{ j_idx }
