@@ -17,11 +17,12 @@ import util.party.Paging;
 import vo.MemberVo;
 import vo.PartyVo;
 import vo.PlayVo;
+import vo.StadiumVo;
 import vo.TeamVo;
 
 public class ServicePartyimpl implements PartyServiceInterface {
 
-	PartyDaoInerface team_dao, play_dao, parsing_second_dao, party_dao, party_book_dao;
+	PartyDaoInerface team_dao, play_dao, parsing_second_dao, party_dao, party_book_dao,stadium_dao;
 	MatchParsing_v2 match_parsing = new MatchParsing_v2();
 	TeamParsing team_parsing = new TeamParsing();
 
@@ -63,6 +64,16 @@ public class ServicePartyimpl implements PartyServiceInterface {
 
 	public void setParsing_second_dao(PartyDaoInerface parsing_second_dao) {
 		this.parsing_second_dao = parsing_second_dao;
+	}
+	
+	
+
+	public PartyDaoInerface getStadium_dao() {
+		return stadium_dao;
+	}
+
+	public void setStadium_dao(PartyDaoInerface stadium_dao) {
+		this.stadium_dao = stadium_dao;
 	}
 
 	@Override
@@ -492,6 +503,29 @@ System.out.println(paging_html);
 		int count = party_dao.selectCount(map);
 
 		return count;
+	}
+
+	@Override
+	public PartyVo selectPartyOne(int pt_idx) {
+		// TODO Auto-generated method stub
+		
+		PartyVo vo = (PartyVo)party_dao.selectOne(pt_idx);
+		
+		
+		
+		return vo;
+	}
+
+	@Override
+	public StadiumVo select_stadium_one(int s_idx) {
+		// TODO Auto-generated method stub
+		
+		Integer s_idx_int = new Integer(s_idx);
+		StadiumVo vo = (StadiumVo)stadium_dao.selectOne(s_idx_int);
+		
+		
+		
+		return vo;
 	}
 
 }

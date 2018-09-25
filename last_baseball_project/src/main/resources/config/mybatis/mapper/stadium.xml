@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="stadium">
+
+	<select id="select_stadium_one" parameterType="Integer" resultType="stadium">
+	
+	select s.*,o.o_secondQ
+	from studium s inner join occupy o
+	on s.s_idx = o.s_idx
+	where s.s_idx = #{s_idx}
+	
+	</select>
+
+</mapper>

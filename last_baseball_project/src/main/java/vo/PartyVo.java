@@ -39,6 +39,7 @@ public class PartyVo {
 	String p_date;
 	Date p_date_date;
 	String s_name;
+	String addr1; //모임장소 출력하기 위한 것
 	//////해당leader가 얼마나 지금까지 파티를 만들었는지에 대한 카운트///
 	int leader_count;
 	
@@ -395,6 +396,24 @@ public class PartyVo {
 		}
 			
 	}
+
+
+
+
+	public String getAddr1() {
+		this.setAddr1(this.getPt_location().split("/")[0]);
+		return addr1;
+	}
+
+
+
+
+	public void setAddr1(String addr1) {
+		this.addr1 = addr1;
+	}
+	
+	
+	
  
 	
 	

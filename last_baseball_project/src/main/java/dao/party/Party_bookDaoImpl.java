@@ -4,13 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import vo.PartyVo;
-
-public class PartyDaoImpl implements PartyDaoInerface {
+public class Party_bookDaoImpl implements PartyDaoInerface {
 	
 	SqlSession session;
-	
-	
 
 	public SqlSession getSession() {
 		return session;
@@ -21,33 +17,33 @@ public class PartyDaoImpl implements PartyDaoInerface {
 	}
 
 	@Override
-	//달력에 표시되는 매치카운트 갯수를 출력할 것이다.
-	public List selectList(Object vo) {
+	public List selectList() {
 		// TODO Auto-generated method stub
-		
-		List<PartyVo> list = session.selectList("party.select_match_count",vo);
-		
-		
-		return list;
+		return null;
+	}
+
+	@Override
+	public List selectList2(Object map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List selectList(Object map) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public Object selectOne() {
 		// TODO Auto-generated method stub
-		
-		Integer pt_idx = session.selectOne("party.recently_insert");
-		
-		
-		return pt_idx;
+		return null;
 	}
 
 	@Override
-	public Object selectOne(Object pt_idx) {
+	public Object selectOne(Object map) {
 		// TODO Auto-generated method stub
-		
-		PartyVo vo = session.selectOne("party.select_one_party",pt_idx);
-		
-		return vo;
+		return null;
 	}
 
 	@Override
@@ -65,10 +61,7 @@ public class PartyDaoImpl implements PartyDaoInerface {
 	@Override
 	public int selectCount(Object ob) {
 		// TODO Auto-generated method stub
-		
-		int res = session.selectOne("party.party_list_total_count",ob);
-		
-		return res;
+		return 0;
 	}
 
 	@Override
@@ -80,10 +73,7 @@ public class PartyDaoImpl implements PartyDaoInerface {
 	@Override
 	public int insert(Object ob) {
 		// TODO Auto-generated method stub
-		
-		int res = session.insert("party.party_insert_one",ob);
-		
-		return res;
+		return 0;
 	}
 
 	@Override
@@ -103,20 +93,8 @@ public class PartyDaoImpl implements PartyDaoInerface {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-	@Override
-	public List selectList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List selectList2(Object map) {
-		// TODO Auto-generated method stub
-		
-		List list= session.selectList("party.party_show_list",map);
-		
-		return list;
-	}
+	
+	
+	
 
 }

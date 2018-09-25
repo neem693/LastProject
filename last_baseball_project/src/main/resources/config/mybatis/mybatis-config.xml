@@ -13,6 +13,7 @@
 		<typeAlias type="vo.JoonggoVo" alias = "joonggo"/>
 		<typeAlias type="vo.CommentVo" alias = "comment"/>
 		<typeAlias type="vo.MemberVo" alias="member"/>
+		<typeAlias type="vo.StadiumVo" alias="stadium"/>
 
 	</typeAliases>
 	<mappers>
@@ -21,6 +22,7 @@
 		<mapper resource="config/mybatis/mapper/parsing.xml"/>
 		<mapper resource="config/mybatis/mapper/party.xml"/>
 		<mapper resource="config/mybatis/mapper/party_book.xml"/>
+		<mapper resource="config/mybatis/mapper/stadium.xml"/>
 	
 
 		

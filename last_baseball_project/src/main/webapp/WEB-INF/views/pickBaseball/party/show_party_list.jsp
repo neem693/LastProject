@@ -112,9 +112,11 @@
 }
 
 .party_name {
-	text-align: center;
+	cursor: pointer; 
+	text-align : center;
 	font-weight: bold;
 	font-size: xx-large;
+	text-align: center;
 }
 
 .p_date {
@@ -127,19 +129,31 @@
 	color: black;
 }
 
-.pt_date:before {
-	content: "모임시간:";
+.pt_date:before, .pt_location:before {
 	color: black;
 	font-weight: bold;
 }
 
-.pt_date {
+.pt_date:before {
+	content: "<모임시간>:"
+}
+
+.pt_location:before {
+	content: "<모일장소>:"
+}
+
+.pt_date, .pt_location {
 	background-color: WhiteSmoke;
 	color: SlateBlue;
 }
 
+.pt_location {
+	display: block;
+}
+
 .paging {
-	margin: 20px 0; text-align : center;
+	margin: 20px 0;
+	text-align: center;
 	font-size: x-large;
 	text-align: center;
 }
@@ -149,41 +163,31 @@
 }
 
 .page {
-
 	margin: 0 1px;
 	height: 10px;
-	
 	padding: 0 5px;
 	border: 1px solid #ddd;
 }
-.groupPage{
-height: 10px;
 
+.groupPage {
+	height: 10px;
 }
 
-
-
-.next_page,.change_page,.pre_page{
-
-cursor: pointer;
-transition: all 0.5s;
+.next_page, .change_page, .pre_page {
+	cursor: pointer;
+	transition: all 0.5s;
 }
 
-.current_page{
-background-color: #3399ff;
-font-weight: bold;
-color: white;
+.current_page {
+	background-color: #3399ff;
+	font-weight: bold;
+	color: white;
 }
 
-
-.next_page:hover,.change_page:hover,.pre_page:hover{
-
-background-color: #3399ff;
-color: white;
+.next_page:hover, .change_page:hover, .pre_page:hover {
+	background-color: #3399ff;
+	color: white;
 }
-
-
-
 
 @media screen and (max-width: 850px) {
 	.party_template>.team_img {
@@ -287,7 +291,7 @@ color: white;
 
 		<div class="party_template"
 			style="background-color:${team_back_color};">
-			<div class="party_name" style="${team_color_css}">${vo.pt_name }</div>
+			<div onclick="show_view(${vo.pt_idx})" class="party_name" style="${team_color_css}">${vo.pt_name }</div>
 			<div class="team_img">
 				<img alt="team_logo" src="${team_img}">
 			</div>
@@ -302,7 +306,7 @@ color: white;
 
 			<div class="dates">
 				<span class="p_date">${vo.p_date}</span><span class="s_name">${vo.s_name}</span>
-				<span class="pt_date">${vo.datetime}</span>
+				<span class="pt_date">${vo.datetime}</span><span class="pt_location">${vo.addr1}</span>
 			</div>
 		</div>
 	</c:forEach>

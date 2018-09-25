@@ -44,4 +44,10 @@
 		<property name="session" ref="sql_template"></property>
 	</bean>
 
+	<bean id="stadium_dao" class="dao.party.StadiumDaoImpl">
+		<property name="session" ref="sql_template"></property>
+
+	</bean>
+
+
 </beans>

@@ -34,6 +34,8 @@ import util.parsing.TeamParsing;
 import util.party.Paging;
 import vo.MemberVo;
 import vo.PartyVo;
+import vo.PlayVo;
+import vo.StadiumVo;
 import vo.TeamVo;
 
 @Controller
@@ -411,6 +413,35 @@ public class BaseBallController {
 		session.removeAttribute("user");
 		
 		return "redirect:/main/main_list.do";
+	}
+	
+	
+	@RequestMapping("/party/view.do")
+	public String party_view(String year, String month, String day,String team,String pt_idx) {
+		
+		int month_int,day_int,pt_idx_int;
+		month_int=day_int=pt_idx_int = 0;
+		
+		if(pt_idx == null || pt_idx.isEmpty())
+			return "redirect:/main/main_list.do";
+		try {
+			month_int = Integer.parseInt(month);
+			day_int = Integer.parseInt(day);
+			pt_idx_int = Integer.parseInt(pt_idx);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "redirect:/main/main_list.do";
+		}
+		
+		PartyVo party = partyService.selectPartyOne(pt_idx_int);
+		PlayVo play = partyService.select_play_one(party.getP_idx());
+		StadiumVo stadium = partyService.select_stadium_one(play.getS_idx());
+		
+		
+			
+		
+		return Myconst.BaseBall.PARTY_DIR + "party_view.jsp";
 	}
 	
 	

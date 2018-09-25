@@ -13,4 +13,13 @@ references party(pt_idx) on delete cascade
 select * from party_book
 
 
+
 drop table party_book
+
+select *
+from member m inner join party_book b
+on m.m_idx = b.m_idx
+
+
+
+
