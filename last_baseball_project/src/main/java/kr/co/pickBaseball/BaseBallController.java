@@ -425,14 +425,7 @@ public class BaseBallController {
 	}
 	
 	
-	@RequestMapping("/member/logout.do")
-	public String logout() {
-		
-		session.removeAttribute("user");
-		
-		return "redirect:/main/main_list.do";
-	}
-	
+
 	
 	@RequestMapping("/party/view.do")
 	public String party_view(String year, String month, String day,String team,String pt_idx,Model model) {
