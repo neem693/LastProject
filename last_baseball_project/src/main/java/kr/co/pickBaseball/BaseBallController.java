@@ -332,7 +332,10 @@ public class BaseBallController {
 			String web_path = "/resources/party_upload/";
 			String abs_path = application.getRealPath(web_path);
 			// String uploadPath = "저장경로/" + fileName;//저장경로
+			File dir = new File(abs_path);
+			System.out.println(dir.mkdirs());
 			File f = new File(abs_path, fileName);
+			
 			// 동일화일이 있는경우
 			System.out.println("테스트 " + abs_path + fileName);
 			if (f.exists()) {
@@ -418,7 +421,7 @@ public class BaseBallController {
 	
 	
 	@RequestMapping("/party/view.do")
-	public String party_view(String year, String month, String day,String team,String pt_idx) {
+	public String party_view(String year, String month, String day,String team,String pt_idx,Model model) {
 		
 		int month_int,day_int,pt_idx_int;
 		month_int=day_int=pt_idx_int = 0;
@@ -438,8 +441,20 @@ public class BaseBallController {
 		List party_member = partyService.getPartyMember(pt_idx_int);//리더포함
 		PartyVo party = partyService.selectPartyOne(pt_idx_int);
 		PlayVo play = partyService.select_play_one(party.getP_idx());
-		StadiumVo stadium = partyService.select_stadium_one(play.getS_idx());
+		StadiumVo stadium = partyService.select_stadium_one(play);
+		int leaderCount = partyService.getleaderCount(party_leader.getM_idx());
 		
+		
+		party.setP_date(play.getP_date());
+		party = partyService.setting_datetime(party);
+		
+		/*System.out.println(leaderCount);*/
+		model.addAttribute("party_leader", party_leader);
+		model.addAttribute("party_member",party_member);
+		model.addAttribute("party",party);
+		model.addAttribute("play",play);
+		model.addAttribute("stadium",stadium);
+		model.addAttribute("leader_count",leaderCount);
 		
 			
 		

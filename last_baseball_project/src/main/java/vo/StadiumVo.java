@@ -8,6 +8,7 @@ public class StadiumVo {
 	String s_open;
 	String s_seat;
 	int o_secondQ;
+	String t_name;
 	
 	
 	public StadiumVo() {
@@ -51,6 +52,14 @@ public class StadiumVo {
 
 	public void setO_secondQ(int o_secondQ) {
 		this.o_secondQ = o_secondQ;
+	}
+
+	public String getT_name() {
+		return t_name;
+	}
+
+	public void setT_name(String t_name) {
+		this.t_name = t_name;
 	}
 	
 	

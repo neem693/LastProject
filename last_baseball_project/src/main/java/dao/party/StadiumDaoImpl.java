@@ -44,10 +44,10 @@ public class StadiumDaoImpl implements PartyDaoInerface {
 	}
 
 	@Override
-	public Object selectOne(Object s_idx) {
+	public Object selectOne(Object play) {
 		// TODO Auto-generated method stub
 		
-		StadiumVo vo = session.selectOne("stadium.select_stadium_one",s_idx);
+		StadiumVo vo = session.selectOne("stadium.select_stadium_one",play);
 		
 		return vo;
 	}
@@ -96,6 +96,12 @@ public class StadiumDaoImpl implements PartyDaoInerface {
 
 	@Override
 	public int delete() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int selectCount2(Object ob) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

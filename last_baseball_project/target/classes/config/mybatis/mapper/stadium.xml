@@ -4,12 +4,13 @@
 
 <mapper namespace="stadium">
 
-	<select id="select_stadium_one" parameterType="Integer" resultType="stadium">
+	<select id="select_stadium_one" parameterType="play" resultType="stadium">
 	
-	select s.*,o.o_secondQ
+	select s.*,o.o_secondQ,o.t_name
 	from studium s inner join occupy o
 	on s.s_idx = o.s_idx
-	where s.s_idx = #{s_idx}
+	where s.s_idx = #{s_idx} and
+	o.t_name = #{t_home}
 	
 	</select>
 

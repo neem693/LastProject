@@ -87,8 +87,22 @@
 		inner join
 		member m
 		on b.m_idx = m.m_idx
-		where m.m_idx = #{idx}
+		where m.m_idx = #{idx} and  b.b_leader = 10
 	</select>
+	
+	<select id="leader_count_select2" parameterType="int" resultType="int">
+		select count(*)
+		from
+		party pt inner join party_book b
+		on pt.pt_idx = b.pt_idx
+		inner join
+		member m
+		on b.m_idx = m.m_idx
+		where m.m_idx = #{idx} and  b.b_leader = 10
+	</select>
+	
+	
+	
 
 	<select id="party_list_total_count" parameterType="Map"
 		resultType="int">

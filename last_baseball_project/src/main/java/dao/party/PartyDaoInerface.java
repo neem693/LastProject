@@ -11,6 +11,7 @@ public interface PartyDaoInerface {
 	Object selectOne2(Object map);
 	int selectCount();
 	int selectCount(Object ob);
+	int selectCount2(Object ob);
 	int update(Object ob);
 	int insert(Object ob);
 	int update_all(Object [] ob);

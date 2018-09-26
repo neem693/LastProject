@@ -119,4 +119,13 @@ public class PartyDaoImpl implements PartyDaoInerface {
 		return list;
 	}
 
+	@Override
+	public int selectCount2(Object m_idx) {
+		// TODO Auto-generated method stub
+		
+		int leader_count = session.selectOne("party.leader_count_select2",m_idx);
+		
+		return leader_count;
+	}
+
 }

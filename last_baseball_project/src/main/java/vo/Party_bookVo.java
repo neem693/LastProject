@@ -12,6 +12,7 @@ public class Party_bookVo {
 	String m_tel;
 	String m_comment;
 	String m_photo;
+	String m_email;
 	
 	
 	public Party_bookVo() {
@@ -73,6 +74,14 @@ public class Party_bookVo {
 
 	public void setM_id(String m_id) {
 		this.m_id = m_id;
+	}
+
+	public String getM_email() {
+		return m_email;
+	}
+
+	public void setM_email(String m_email) {
+		this.m_email = m_email;
 	}
 	
 	

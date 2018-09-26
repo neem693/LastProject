@@ -12,15 +12,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Insert title here</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/party/font.css">
 <style>
-@font-face {
-	font-family: notoFont;
-	src: url('/pickBaseball/resources/font/NotoSerifKR-Regular.otf');
-}
-
-* {
-	font-family: notoFont;
-}
 
 .ajaxLoadingModal {
 	z-index: 1000;

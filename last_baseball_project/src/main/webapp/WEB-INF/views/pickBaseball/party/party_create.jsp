@@ -297,7 +297,7 @@ table {
 						<option value="-4">경기시작 4시간 전</option>
 						<option value="-5">경기시작 5시간 전</option>
 						<option value="-6">경기시작 6시간 전</option>
-						<option value="-12">그 이상</option>
+						<option value="-12">그 이상(12시간 전으로 체크됨)</option>
 
 				</select><br> <input type="hidden" name="pt_day"></td>
 			</tr>

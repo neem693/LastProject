@@ -34,10 +34,11 @@ List take_party_list(String year, String month, String day, String team, int now
 String return_party_paging(int nowPage,String day, int page_total_count);
 int total_page_count(String year, String month, String day,String team);
 PartyVo selectPartyOne(int pt_idx);
-StadiumVo select_stadium_one(int s_idx);
+StadiumVo select_stadium_one(PlayVo vo);
 Party_bookVo getPartyLeader(int pt_idx_int);
 List getPartyMember(int pt_idx_int);
-
+int getleaderCount(int m_idx);
+public PartyVo setting_datetime(PartyVo vo);
 
 
 

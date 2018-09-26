@@ -12,7 +12,7 @@
 
 	<select id="select_one_leader" parameterType="int"
 		resultType="party_book">
-		select b.*, m.m_id,m.m_nick,m.m_tel,m.m_photo,m.m_comment
+		select b.*, m.m_id,m.m_nick,m.m_tel,m.m_photo,m.m_comment,m.m_email
 		from party_book b inner join member m
 		on b.m_idx = m.m_idx
 		where b.pt_idx = #{pt_idx} and
@@ -21,7 +21,7 @@
 	
 	
  	<select id="select_party_member" parameterType="int" resultType="party_book">
-	 	select b.*, m.m_id,m.m_nick,m.m_tel,m.m_photo,m.m_comment
+	 	select b.*, m.m_id,m.m_nick,m.m_tel,m.m_photo,m.m_comment,m.m_email
 		from party_book b inner join member m
 		on b.m_idx = m.m_idx
 		where b.pt_idx = #{pt_idx}

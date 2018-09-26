@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import myconst.Myconst;
+
 public class PlayVo {
 	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	SimpleDateFormat day_format = new SimpleDateFormat("dd");
@@ -18,6 +20,12 @@ public class PlayVo {
 	int s_idx;
 	String t_home;
 	String t_away;
+	
+	
+	
+	String t_home_image_dir;
+	String t_away_image_dir;
+	////해당 팀들의 이미지 파일들을 가져오는 곳이다.
 	
 	public PlayVo() {
 		// TODO Auto-generated constructor stub
@@ -123,6 +131,27 @@ public class PlayVo {
 
 	public void setDay(int day) {
 		this.day = day;
+	}
+
+	public String getT_home_image_dir() {
+		this.t_home_image_dir = Myconst.Function.GET_TEAM_IMAGE_DIR(t_home);
+		
+		return t_home_image_dir;
+	}
+
+	public void setT_home_image_dir(String t_home_image_dir) {
+		this.t_home_image_dir = t_home_image_dir;
+	}
+
+	public String getT_away_image_dir() {
+		
+		this.t_away_image_dir = Myconst.Function.GET_TEAM_IMAGE_DIR(t_away);
+		
+		return t_away_image_dir;
+	}
+
+	public void setT_away_image_dir(String t_away_image_dir) {
+		this.t_away_image_dir = t_away_image_dir;
 	}
 	
 	

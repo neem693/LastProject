@@ -129,6 +129,12 @@ public class TeamDaoImpl implements PartyDaoInerface{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public int selectCount2(Object ob) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 
 }

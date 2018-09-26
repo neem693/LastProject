@@ -116,4 +116,10 @@ public class parsing_update_dao implements PartyDaoInerface {
 		return null;
 	}
 
+	@Override
+	public int selectCount2(Object ob) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
