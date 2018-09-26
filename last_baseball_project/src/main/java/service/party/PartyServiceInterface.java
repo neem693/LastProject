@@ -3,8 +3,11 @@ package service.party;
 import java.util.List;
 import java.util.Map;
 
+import vo.MemberVo;
 import vo.PartyVo;
+import vo.Party_bookVo;
 import vo.PlayVo;
+import vo.StadiumVo;
 import vo.TeamVo;
 
 public interface PartyServiceInterface {
@@ -26,7 +29,16 @@ int insert_party(PartyVo vo,String year,String month,String day);
 PlayVo select_play_one(String p_idx);
 boolean check_long_time_in_match(String year, String month, String day);
 Map get_party_count(String year,String month,String team);
-
+int insert_party_book(MemberVo member);
+List take_party_list(String year, String month, String day, String team, int nowPage);
+String return_party_paging(int nowPage,String day, int page_total_count);
+int total_page_count(String year, String month, String day,String team);
+PartyVo selectPartyOne(int pt_idx);
+StadiumVo select_stadium_one(PlayVo vo);
+Party_bookVo getPartyLeader(int pt_idx_int);
+List getPartyMember(int pt_idx_int);
+int getleaderCount(int m_idx);
+public PartyVo setting_datetime(PartyVo vo);
 
 
 

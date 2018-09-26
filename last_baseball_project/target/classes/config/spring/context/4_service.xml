@@ -11,6 +11,8 @@
 		<property name="play_dao" ref="play_dao"></property>
 		<property name="parsing_second_dao" ref="parsing_dao"></property>
 		<property name="party_dao" ref="party_dao"></property>
+		<property name="party_book_dao" ref="party_book_dao"></property>
+		<property name="stadium_dao" ref="stadium_dao"></property>
 	</bean>
 
 	<bean id="memberService" class="service.member.MemberService">

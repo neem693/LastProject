@@ -161,5 +161,19 @@ public class MemberService implements MemberServiceInterface {
 		return voo;
 	}
 
+
+	@Override
+	public MemberVo selectOne_id_idx(MemberVo vo) {
+		// TODO Auto-generated method stub
+		
+		
+		MemberVo voo = member_dao.selectOne_IdIdx(vo);
+		
+		
+		return voo;
+	}
+
+
 	
+
 }

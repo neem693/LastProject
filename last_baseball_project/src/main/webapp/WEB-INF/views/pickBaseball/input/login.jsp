@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta  charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title> </title>
 <link rel = "stylesheet" href="${pageContext.request.contextPath}/resources/css/login_form.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -41,18 +42,18 @@ function login(){
 		<form id = "login" class="login_box" >
 		
 			<div class="pading">
-				<label class="text_brown lobster"><b> ID2</b></label> <input
+				<label class="text_brown lobster"><b>ID</b></label> <input
 					class="login_input" name="m_id" type="text"> <label
 					class="text_brown  lobster">PASSWORD</label> <input
 					class="login_input"  name="m_pwd" type="password">
 			</div>
 
 
-			<button class="btn_join cyan ">
-				<b>회원가입</b>
-			</button>
-			<button onclick="login();return false;" class="btn_return cyan">
+			<button onclick="login();return false;" class="btn_return cyan ">
 				<b>로그인</b>
+			</button>
+			<button class="btn_join cyan">
+				<b>회원가입</b>
 			</button>
 
 

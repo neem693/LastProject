@@ -1,73 +1,63 @@
 @charset "UTF-8";
 
-body{
-	background-image: url('/pickBaseball/resources/images/input/baseball_login.jpg');
+body {
+	background-image:
+		url('/pickBaseball/resources/images/input/baseball_login.jpg');
 	background-repeat: repeat;
-	background-size: cover;
-	
 }
 
-.container{
+.container {
 	margin: auto;
 	margin-top: 10%;
-	
-
-	left:0;
-	right:0;
-	position:fixed;
+	left: 0;
+	right: 0;
+	position: fixed;
 	height: 400px;
-	padding:  3% 0 0 0;
-	width:50%;
-	text-align:center;	
+	padding: 3% 0 0 0;
+	width: 50%;
+	text-align: center;
 	color: white;
 	/* color: #804000!important; */
-	background-color: rgba(0,0,0,0.5);
-
+	background-color: rgba(0, 0, 0, 0.5);
 }
 
-.text_brown{
-	color: #00ff00!important
+.text_brown {
+	color: #00ff00 !important
 }
 
 .login_input {
-	
-	
-	margin: 0 auto;	
+	margin: 0 auto;
 	display: block;
-	height:35px;
+	height: 35px;
 	border: none;
 	border-bottom: 2px solid #ccc;
-   	width:300px;
-    color: #ffffff!important;
-	background-color: rgba(0,0,0,0);
-    
+	width: 300px;
+	color: #ffffff !important;
+	background-color: rgba(0, 0, 0, 0);
 }
-.login_input:active{
-	
-	
-}
-.pading {
 
-    padding:15px;
- 
+.login_input:active {
+	
 }
+
+.pading {
+	padding: 15px;
+}
+
 .lobster_title {
-   
-    padding:3px;
-    font-family: "Lobster", serif;
-    font-size:30px;
- 
+	padding: 3px;
+	font-family: "Lobster", serif;
+	font-size: 30px;
 }
 
 .lobster {
-     
-    font-family: "Lobster", serif;
-    font-size:20px;
+	font-family: "Lobster", serif;
+	font-size: 20px;
 }
 
 .btn_join {
-	margin:10px;
-	margin-right:30px;
+	
+		margin: 10px 0;
 	border-radius: 16px;
 	border: none;
 	display: inline-block;
@@ -79,12 +69,12 @@ body{
 	background-color: inherit;
 	text-align: center;
 	cursor: pointer;
-	white-space: nowrap
+	white-space: nowrap;
 }
 
 .btn_return {
-	margin:10px;
 	
+	margin: 10px 0;
 	border-radius: 16px;
 	border: none;
 	display: inline-block;
@@ -96,18 +86,30 @@ body{
 	background-color: inherit;
 	text-align: center;
 	cursor: pointer;
-	white-space: nowrap
+	white-space: nowrap;
 }
 
-
-
-
-.cyan{
+.cyan {
 	color: #000 !important;
-	background-color: #e6c4db!important
+	background-color: #e6c4db !important
 }
 
 .cyan:hover {
 	color: #fff !important;
 	background-color: #000 !important
+}
+
+@media screen and (max-width: 630px) {
+	.login_input {
+		width: 100%;
+	}
+	
+	.btn_join{
+	display: block;
+	width:100%;
+	}
+	.btn_return{
+	display:block;
+	width: 100%;
+	}
 }

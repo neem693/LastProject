@@ -26,6 +26,13 @@ public interface MemberServiceInterface {
 	
 
 	
+	MemberVo selectOne_id_idx(MemberVo vo);
+	
+	
+
+
+
+	
 	
 	
 }

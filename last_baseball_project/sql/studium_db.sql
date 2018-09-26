@@ -11,6 +11,16 @@ CREATE TABLE studium
 select * from studium
 drop table studium
 
+
+select s.*,o.o_secondQ
+	from studium s left outer join occupy o
+	on s.s_idx = o.s_idx;
+	
+	select s.*,o.o_secondQ from studium s right outer join occupy o on s.s_idx = o.s_idx where s.s_idx = 9
+
+
+
+
 insert into studium(s_name,s_addr,s_open,s_seat) values(
 							'대전한화생명이글스파크',
 							'대전 중구 대종로 373',

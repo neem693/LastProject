@@ -13,15 +13,27 @@ import dao.party.PartyDaoInerface;
 import myconst.Myconst;
 import util.parsing.MatchParsing_v2;
 import util.parsing.TeamParsing;
+import util.party.Paging;
+import vo.MemberVo;
 import vo.PartyVo;
+import vo.Party_bookVo;
 import vo.PlayVo;
+import vo.StadiumVo;
 import vo.TeamVo;
 
 public class ServicePartyimpl implements PartyServiceInterface {
 
-	PartyDaoInerface team_dao, play_dao, parsing_second_dao, party_dao;
+	PartyDaoInerface team_dao, play_dao, parsing_second_dao, party_dao, party_book_dao, stadium_dao;
 	MatchParsing_v2 match_parsing = new MatchParsing_v2();
 	TeamParsing team_parsing = new TeamParsing();
+
+	public PartyDaoInerface getParty_book_dao() {
+		return party_book_dao;
+	}
+
+	public void setParty_book_dao(PartyDaoInerface party_book_dao) {
+		this.party_book_dao = party_book_dao;
+	}
 
 	public PartyDaoInerface getParty_dao() {
 		return party_dao;
@@ -53,6 +65,14 @@ public class ServicePartyimpl implements PartyServiceInterface {
 
 	public void setParsing_second_dao(PartyDaoInerface parsing_second_dao) {
 		this.parsing_second_dao = parsing_second_dao;
+	}
+
+	public PartyDaoInerface getStadium_dao() {
+		return stadium_dao;
+	}
+
+	public void setStadium_dao(PartyDaoInerface stadium_dao) {
+		this.stadium_dao = stadium_dao;
 	}
 
 	@Override
@@ -284,6 +304,7 @@ public class ServicePartyimpl implements PartyServiceInterface {
 		PlayVo play_vo = select_play_one(p_idx);
 		// System.out.println(play_vo.getDate());
 		Date match_day = play_vo.getDate();
+
 		int pt_day = Integer.parseInt(vo.getPt_day());
 		System.out.println(pt_day);
 		// System.out.println(date);
@@ -370,7 +391,7 @@ public class ServicePartyimpl implements PartyServiceInterface {
 	@Override
 	public Map get_party_count(String year, String month, String team) {
 		// TODO Auto-generated method stub
-//		System.out.println("month:" + month);
+		// System.out.println("month:" + month);
 
 		String year_month = String.format("%s%02d", year, Integer.parseInt(month));
 
@@ -386,10 +407,213 @@ public class ServicePartyimpl implements PartyServiceInterface {
 		for (int i = 0; i < list.size(); i++) {
 			map.put(list.get(i).getDay(), list.get(i).getMatch_count());
 		}
-//		System.out.println(list.size());
-//		System.out.println(map);
+		// System.out.println(list.size());
+		// System.out.println(map);
 
 		return map;
+	}
+
+	@Override
+	public int insert_party_book(MemberVo member) {
+		// TODO Auto-generated method stub
+
+		Integer idx_party = (Integer) party_dao.selectOne();
+		int pt_idx = idx_party.intValue();
+		// System.out.println("파티북 인서트");
+		Map map = new HashMap<String, Integer>();
+		map.put("m_idx", member.getM_idx());
+		map.put("pt_idx", pt_idx);
+		map.put("b_leader", 10);
+		int res = party_book_dao.insert(map);
+
+		return res;
+	}
+
+	@Override
+	public List take_party_list(String year, String month, String day, String team, int nowPage) {
+		// TODO Auto-generated method stub
+
+		//// 페이징//////
+
+		int start = (nowPage - 1) * Myconst.PartyListPage.BLOCK_LIST;// mysql은 limit이 0부터 시작한다.
+		int page_count = Myconst.PartyListPage.BLOCK_LIST;/// 불러올 페이지 갯수니까 이게맞다.
+
+		// 달, 일/////
+		int month_int = Integer.parseInt(month);
+		int day_int = Integer.parseInt(day);
+
+		String year_month_day = String.format("%s%02d%02d", year, month_int, day_int);
+		Map map = new HashMap<String, String>();
+		map.put("ymd", year_month_day);
+		if (team != null && (team.isEmpty() == false))
+			map.put("team", team);
+
+		map.put("start", start);
+		map.put("page_count", page_count);
+
+		List list = party_dao.selectList2(map);
+		for (int i = 0; i < list.size(); i++) {
+			PartyVo vo = (PartyVo) list.get(i);
+			list.set(i, setting_datetime(vo));
+		}
+
+		return list;
+	}
+
+	@Override
+	public String return_party_paging(int nowPage, String day, int total_count) {
+		// TODO Auto-generated method stub
+		int day_int = 0;
+
+		try {
+			day_int = Integer.parseInt(day);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			day_int = 1;
+		}
+
+		// int rowTotal = party_dao.selectOne(map);
+
+		Paging page_set = new Paging();
+		String paging_html = page_set.getPaging(nowPage, total_count, Myconst.PartyListPage.BLOCK_LIST,
+				Myconst.PartyListPage.BLOCK_PAGE, day_int);
+		System.out.println(paging_html);
+		return paging_html;
+	}
+
+	@Override
+	public int total_page_count(String year, String month, String day, String team) {
+		// TODO Auto-generated method stub
+		int day_int, month_int;
+		day_int = month_int = 0;
+		try {
+			day_int = Integer.parseInt(day);
+			month_int = Integer.parseInt(month);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			day_int = 1;
+			month_int = 1;
+		}
+
+		Map map = new HashMap<String, String>();
+
+		String year_month_day = String.format("%s%02d%02d", year, month_int, day_int);
+		map.put("ymd", year_month_day);
+		if (team != null && (team.isEmpty() == false))
+			map.put("team", team);
+
+		int count = party_dao.selectCount(map);
+
+		return count;
+	}
+
+	@Override
+	public PartyVo selectPartyOne(int pt_idx) {
+		// TODO Auto-generated method stub
+
+		PartyVo vo = (PartyVo) party_dao.selectOne(pt_idx);
+
+		return vo;
+	}
+
+	/*
+	 * 해당하는 함수는 파티 시간을 제대로 맞추고 그 결과를 쉽게 보여주기 위함이다.
+	 * 
+	 */
+	public PartyVo setting_datetime(PartyVo vo) {
+		// TODO Auto-generated method stub
+		try {
+			vo.setPt_day_date(Myconst.DateCheck.DATE_FORMAT.parse(vo.getPt_day()));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		long party_time = vo.getPt_day_date().getTime();
+		long match_time = vo.getP_date_date().getTime();
+
+		if (party_time == match_time) {
+			vo.setDatetime(Myconst.Party.SAME_MATCH_TIME);
+			return vo;
+		}
+		// System.out.println(party_time);
+		party_time = party_time - match_time;
+		// System.out.println(party_time);
+		if (Math.abs(party_time) >= Myconst.ParsingDateCheck.ONE_DAY_MILESECOND) {
+			party_time = Math.abs(party_time);
+			long day = (long) party_time / (long) Myconst.ParsingDateCheck.ONE_DAY_MILESECOND;
+			String date_time;
+			if (day >= 3) {
+				date_time = "경기시작 3일전 이상(리더가 작성한 문서 참고 필요)";
+			} else {
+				date_time = String.format("%o일전", day);
+				date_time += vo.day_format.format(vo.getPt_day_date());
+				vo.setPt_day_str(vo.out_put_format_p_date.format(vo.getPt_day_date()));// 해당 항목은 옆에서 정확한 시간을 설정해 주기 위해서
+																						// 지정해놨으나, 만약 범위가 벗어났다면, 굳이 설정해
+																						// 줄 필요없이 NULL이 어울림
+			}
+			vo.setDatetime(date_time);
+			return vo;
+		} else {
+			if (party_time > 0) {
+
+				long time = party_time / (long) Myconst.ParsingDateCheck.ONE_HOUR_MILESECOND;
+				vo.setDatetime(String.format("경기시작%o시간후", time));
+				vo.setPt_day_str(vo.out_put_format_p_date.format(vo.getPt_day_date()));
+			} else if (party_time < 0) {
+				party_time = -1 * party_time;
+				long time = party_time / (long) Myconst.ParsingDateCheck.ONE_HOUR_MILESECOND;
+
+				if (time >= 7) {
+					vo.setDatetime("경기시작 6시간 전 이상(리더가 작성한 문서 참고 필요)");
+				} else {
+					String date_time = String.format("경기시작%o시간전", time);
+					date_time += vo.Hour_format.format(vo.getPt_day_date());
+					vo.setDatetime(date_time);
+					vo.setPt_day_str(vo.out_put_format_p_date.format(vo.getPt_day_date()));
+				}
+
+			}
+		}
+		return vo;
+	}
+
+	@Override
+	public StadiumVo select_stadium_one(PlayVo play) {
+		// TODO Auto-generated method stub
+
+		StadiumVo vo = (StadiumVo) stadium_dao.selectOne(play);
+
+		return vo;
+	}
+
+	@Override
+	public Party_bookVo getPartyLeader(int pt_idx_int) {
+		// TODO Auto-generated method stub
+
+		Party_bookVo vo = (Party_bookVo) party_book_dao.selectOne(pt_idx_int);
+
+		return vo;
+	}
+
+	@Override
+	public List getPartyMember(int pt_idx_int) {
+		// TODO Auto-generated method stub
+
+		List list = party_book_dao.selectList(pt_idx_int);
+
+		return list;
+	}
+
+	@Override
+	public int getleaderCount(int m_idx) {
+		// TODO Auto-generated method stub
+
+		int res = party_dao.selectCount2(m_idx);
+
+		return res;
 	}
 
 }

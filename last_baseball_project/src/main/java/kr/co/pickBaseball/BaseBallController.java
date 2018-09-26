@@ -32,29 +32,32 @@ import service.member.MemberServiceInterface;
 import service.party.PartyServiceInterface;
 import service.toto.TotoServiceInterface;
 import util.parsing.TeamParsing;
+import util.party.Paging;
 import vo.MemberVo;
 import vo.PartyVo;
+import vo.Party_bookVo;
+import vo.PlayVo;
+import vo.StadiumVo;
 import vo.TeamVo;
 
 @Controller
 public class BaseBallController {
-	
+
 	@Autowired
 	HttpSession session;
 	@Autowired
 	HttpServletRequest request;
 	@Autowired
 	ServletContext application;
-	
-	
+
 	PartyServiceInterface partyService;
 
 	// 회원가입 서비스 호출 객체 ( 3단계 구조)
 	MemberServiceInterface memberservice;
 
-	//토토 서비스 호출 객체 
+	// 토토 서비스 호출 객체
 	TotoServiceInterface totoservice;
-	
+
 	public TotoServiceInterface getTotoservice() {
 		return totoservice;
 	}
@@ -155,12 +158,11 @@ public class BaseBallController {
 		System.out.println(vo.getM_id());
 		System.out.println(vo.getM_pwd());
 		MemberVo voo = memberservice.login_action(vo);
-		
-		if(voo==null)
-			return "redirect:login.do?fail=CFU";
+
+		if (voo == null)
+			return "redirect:login.do?fail=" + Myconst.Login.USER_CANNOT_FIND;
 		else
 			session.setAttribute("user", voo);
-		
 
 		return "redirect:/main/main_list.do";
 	}
@@ -233,8 +235,8 @@ public class BaseBallController {
 		String json = memberservice.selectOne(map);
 		return json;
 	}
-	
-		@RequestMapping("/photo_upload.do")
+
+	@RequestMapping("/photo_upload.do")
 	@ResponseBody
 	public String photo_up(MultipartHttpServletRequest multi) {
 
@@ -243,16 +245,14 @@ public class BaseBallController {
 		return file_name;
 	}
 
-
 	@RequestMapping("/parsing_toto.do")
 	public String parsing_toto(Model model) throws IOException {
-		//Jsoup lib를 사용하여 HTML 문서를 파싱한다.
-		//batmen--toto 점수 파밍
-		String result=totoservice.MakeToToScore();
-		
-		
+		// Jsoup lib를 사용하여 HTML 문서를 파싱한다.
+		// batmen--toto 점수 파밍
+		String result = totoservice.MakeToToScore();
+
 		System.out.println(result);
-		return Myconst.Toto.TOTO+"toto_game.jsp";
+		return Myconst.Toto.TOTO + "toto_game.jsp";
 	}
 
 	@RequestMapping("/party/party_list.do")
@@ -289,6 +289,10 @@ public class BaseBallController {
 	@RequestMapping("/party/insert_party.do")
 	public String insert_party(String year, String month, String day, Model model) {
 
+		MemberVo vo = (MemberVo) session.getAttribute("user");
+		if (vo == null)
+			return "redirect:/member/login.do?fail=" + Myconst.Login.YOU_MUST_LOGIN;
+
 		if (year == null || month == null || day == null)
 			return "redirect:/party/party_list.do?fail=not_found";
 
@@ -298,7 +302,7 @@ public class BaseBallController {
 
 		List match_list = partyService.take_play_list(year, month, day);
 		if (match_list == null || match_list.size() == 0)
-			return "redirect:/party/party_list.do?fail=not_found";
+			return "redirect:/party/party_list.do?fail=" + Myconst.Login.USER_CANNOT_FIND;
 		/////// 날짜로 잡을 수 있을 정도로 경기 날짜가 여유가 있는지//////
 		boolean long_promise = partyService.check_long_time_in_match(year, month, day);
 
@@ -342,7 +346,10 @@ public class BaseBallController {
 			String web_path = "/resources/party_upload/";
 			String abs_path = application.getRealPath(web_path);
 			// String uploadPath = "저장경로/" + fileName;//저장경로
+			File dir = new File(abs_path);
+			System.out.println(dir.mkdirs());
 			File f = new File(abs_path, fileName);
+			
 			// 동일화일이 있는경우
 			System.out.println("테스트 " + abs_path + fileName);
 			if (f.exists()) {
@@ -380,20 +387,87 @@ public class BaseBallController {
 	}
 
 	@RequestMapping("/party/insert_party_one.do")
-	public String insert_party_one(PartyVo vo, String year, String month, String day) {
+	public String insert_party_one(PartyVo vo, MemberVo voo, String year, String month, String day) {
 
+		MemberVo member = memberservice.selectOne_id_idx(voo);
+		if (member == null)
+			return "redirect:/member/member_list.do?fail=" + Myconst.Login.ERROR;
 		int res = partyService.insert_party(vo, year, month, day);
+		if (res == 1)
+			res = partyService.insert_party_book(member);
 
 		return "redirect:party_list.do";
 	}
 
 	@RequestMapping("/party/show_party_list.do")
-	public String show_party_list(String year, String month, String day, String team) {
+	public String show_party_list(String year, String month, String day, String team,Model model, String page) {
 
 		System.out.println("쇼 파티 리스트 두");
+		int nowPage=1;
+		if((page == null || page.isEmpty())==false)
+		{
+			nowPage = Integer.parseInt(page);
+		}
+		
+		
+		
+		
+		int page_total_count = partyService.total_page_count(year,month,day,team);
+		String page_html = partyService.return_party_paging(nowPage,day,page_total_count);
+		List list = partyService.take_party_list(year,month,day,team,nowPage);
+		System.out.println(list.size());
+		
+		model.addAttribute("list", list);
+		model.addAttribute("page_html",page_html);
 
 		return Myconst.BaseBall.PARTY_DIR + "show_party_list.jsp";
 
 	}
+	
+	
+
+	
+	@RequestMapping("/party/view.do")
+	public String party_view(String year, String month, String day,String team,String pt_idx,Model model) {
+		
+		int month_int,day_int,pt_idx_int;
+		month_int=day_int=pt_idx_int = 0;
+		
+		if(pt_idx == null || pt_idx.isEmpty())
+			return "redirect:/main/main_list.do";
+		try {
+			month_int = Integer.parseInt(month);
+			day_int = Integer.parseInt(day);
+			pt_idx_int = Integer.parseInt(pt_idx);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "redirect:/main/main_list.do";
+		}
+		Party_bookVo party_leader  = partyService.getPartyLeader(pt_idx_int);
+		List party_member = partyService.getPartyMember(pt_idx_int);//리더포함
+		PartyVo party = partyService.selectPartyOne(pt_idx_int);
+		PlayVo play = partyService.select_play_one(party.getP_idx());
+		StadiumVo stadium = partyService.select_stadium_one(play);
+		int leaderCount = partyService.getleaderCount(party_leader.getM_idx());
+		
+		
+		party.setP_date(play.getP_date());
+		party = partyService.setting_datetime(party);
+		
+		/*System.out.println(leaderCount);*/
+		model.addAttribute("party_leader", party_leader);
+		model.addAttribute("party_member",party_member);
+		model.addAttribute("party",party);
+		model.addAttribute("play",play);
+		model.addAttribute("stadium",stadium);
+		model.addAttribute("leader_count",leaderCount);
+		
+			
+		
+		return Myconst.BaseBall.PARTY_DIR + "party_view.jsp";
+	}
+	
+	
 
 }

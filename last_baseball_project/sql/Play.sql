@@ -36,8 +36,14 @@ from play p inner join studium s
 on p.s_idx = s.s_idx
 where p.p_idx like '201809%';
 
+
+
  
 select *
 from play
 where p_score = "0-0"
+
+
+
+
 

@@ -262,6 +262,8 @@ table {
 	</p>
 
 	<form id="baseball_party">
+		<input type = "hidden" name = "m_idx" value ="${user.m_idx}">
+		<input type = "hidden" name = "m_id" value ="${user.m_id}">
 		<input type="hidden" name="year"> <input type="hidden"
 			name="month"> <input type="hidden" name="day">
 		<table class="form_table">
@@ -274,15 +276,17 @@ table {
 				<td>골라주세요<input type="radio" name="date" value="none"
 					checked="checked" onclick="check_radio(this)"><br>
 					시간으로 잡기<input type="radio" name="date" value="time"
-					onclick="check_radio(this)"><br> <c:if test="${is_long eq 'true'}"> 날짜로 잡기<input
-					type="radio" name="date" value="day" onclick="check_radio(this)"><br>
-					<select name="pt_day1" id="day" class="hide">
-						<option value="-1" selected="selected">경기시작 1일 전</option>
-						<option value="-2">경기시작 2일 전</option>
-						<option value="-10">경기시작 3일 전 이상</option>
-						</c:if>
-						<c:if test="${is_long eq 'false'}"><input id = "day" type = "hidden"></c:if>
-				</select> <select name="pt_day2" id="hour" class="hide">
+					onclick="check_radio(this)"><br> <c:if
+						test="${is_long eq 'true'}"> 날짜로 잡기<input type="radio"
+							name="date" value="day" onclick="check_radio(this)">
+						<br>
+						<select name="pt_day1" id="day" class="hide">
+							<option value="-1" selected="selected">경기시작 1일 전</option>
+							<option value="-2">경기시작 2일 전</option>
+							<option value="-10">경기시작 3일 전 이상</option>
+					</c:if> <c:if test="${is_long eq 'false'}">
+						<input id="day" type="hidden">
+					</c:if> </select> <select name="pt_day2" id="hour" class="hide">
 
 						<option value="+2">경기시작 2시간 후</option>
 						<option value="+1">경기시작 1시간 후</option>
@@ -293,7 +297,7 @@ table {
 						<option value="-4">경기시작 4시간 전</option>
 						<option value="-5">경기시작 5시간 전</option>
 						<option value="-6">경기시작 6시간 전</option>
-						<option value="-12">그 이상</option>
+						<option value="-12">그 이상(12시간 전으로 체크됨)</option>
 
 				</select><br> <input type="hidden" name="pt_day"></td>
 			</tr>
@@ -345,7 +349,6 @@ table {
 
 			<tr>
 				<td>모일장소</td>
-
 				<td><label id="stadium_label">경기장:</label><input name="stadium"
 					id="stadium" disabled="disabled"> <select
 					onchange="location_pick(this);">
