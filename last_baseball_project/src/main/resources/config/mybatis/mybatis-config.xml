@@ -14,6 +14,7 @@
 		<typeAlias type="vo.CommentVo" alias = "comment"/>
 		<typeAlias type="vo.MemberVo" alias="member"/>
 		<typeAlias type="vo.StadiumVo" alias="stadium"/>
+		<typeAlias type="vo.Party_bookVo" alias="party_book"/>
 
 	</typeAliases>
 	<mappers>

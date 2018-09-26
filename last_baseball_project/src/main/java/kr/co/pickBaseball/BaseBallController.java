@@ -34,6 +34,7 @@ import util.parsing.TeamParsing;
 import util.party.Paging;
 import vo.MemberVo;
 import vo.PartyVo;
+import vo.Party_bookVo;
 import vo.PlayVo;
 import vo.StadiumVo;
 import vo.TeamVo;
@@ -433,7 +434,8 @@ public class BaseBallController {
 			e.printStackTrace();
 			return "redirect:/main/main_list.do";
 		}
-		
+		Party_bookVo party_leader  = partyService.getPartyLeader(pt_idx_int);
+		List party_member = partyService.getPartyMember(pt_idx_int);//리더포함
 		PartyVo party = partyService.selectPartyOne(pt_idx_int);
 		PlayVo play = partyService.select_play_one(party.getP_idx());
 		StadiumVo stadium = partyService.select_stadium_one(play.getS_idx());

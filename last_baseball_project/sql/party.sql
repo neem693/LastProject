@@ -1,21 +1,21 @@
 create table party(
-pt_idx int unsigned auto_increment,
-pt_name varchar(100) not null,
-pt_people int(3) unsigned ,
-pt_day datetime,
-pt_condition varchar(60) ,
-pt_purpose varchar(60),
-p_idx  varchar(30),
-pt_maxPeople int(3) unsigned,
-pt_location varchar(250),
-pt_text mediumtext,
-pt_date datetime,
-t_name varchar(30),
-constraint pk_party_pt_idx primary key(pt_idx),
-constraint fk_p_idx_in_party foreign key(p_idx)
-references play(p_idx) on delete cascade,
-constraint fk_t_name_in_party foreign key(t_name)
-references team(t_name) on delete cascade
+	pt_idx int unsigned auto_increment,
+	pt_name varchar(100) not null,
+	pt_people int(3) unsigned ,
+	pt_day datetime,
+	pt_condition varchar(60) ,
+	pt_purpose varchar(60),
+	p_idx  varchar(30),
+	pt_maxPeople int(3) unsigned,
+	pt_location varchar(250),
+	pt_text mediumtext,
+	pt_date datetime,
+	t_name varchar(30),
+	constraint pk_party_pt_idx primary key(pt_idx),
+	constraint fk_p_idx_in_party foreign key(p_idx)
+	references play(p_idx) on delete cascade,
+	constraint fk_t_name_in_party foreign key(t_name)
+	references team(t_name) on delete cascade
 )
 
 

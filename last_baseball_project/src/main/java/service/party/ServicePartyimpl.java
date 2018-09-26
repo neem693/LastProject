@@ -16,6 +16,7 @@ import util.parsing.TeamParsing;
 import util.party.Paging;
 import vo.MemberVo;
 import vo.PartyVo;
+import vo.Party_bookVo;
 import vo.PlayVo;
 import vo.StadiumVo;
 import vo.TeamVo;
@@ -526,6 +527,26 @@ System.out.println(paging_html);
 		
 		
 		return vo;
+	}
+
+	@Override
+	public Party_bookVo getPartyLeader(int pt_idx_int) {
+		// TODO Auto-generated method stub
+		
+		Party_bookVo vo = (Party_bookVo)party_book_dao.selectOne(pt_idx_int);
+		
+		
+		return vo;
+	}
+
+	@Override
+	public List getPartyMember(int pt_idx_int) {
+		// TODO Auto-generated method stub
+		
+		
+		List list = party_book_dao.selectList(pt_idx_int);
+		
+		return list;
 	}
 
 }

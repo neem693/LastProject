@@ -5,9 +5,27 @@
 <mapper namespace="party_book">
 
 	<insert id="insert_party_book_leader" parameterType="Map">
-		insert into party_book(m_idx,b_leader,pt_idx)
+		insert into
+		party_book(m_idx,b_leader,pt_idx)
 		values(#{m_idx},#{b_leader},#{pt_idx})
 	</insert>
+
+	<select id="select_one_leader" parameterType="int"
+		resultType="party_book">
+		select b.*, m.m_id,m.m_nick,m.m_tel,m.m_photo,m.m_comment
+		from party_book b inner join member m
+		on b.m_idx = m.m_idx
+		where b.pt_idx = #{pt_idx} and
+		b.b_leader = 10;
+	</select>
+	
+	
+ 	<select id="select_party_member" parameterType="int" resultType="party_book">
+	 	select b.*, m.m_id,m.m_nick,m.m_tel,m.m_photo,m.m_comment
+		from party_book b inner join member m
+		on b.m_idx = m.m_idx
+		where b.pt_idx = #{pt_idx}
+ 	</select>
 
 
 

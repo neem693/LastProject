@@ -22,4 +22,10 @@ on m.m_idx = b.m_idx
 
 
 
+	select b.*, m.m_id,m.m_nick,m.m_tel,m.m_photo,m.m_comment
+	from party_book b inner join member m
+	on b.m_idx = m.m_idx
+	where b.pt_idx = 23 and
+	b.b_leader = 10;
+
 

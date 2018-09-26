@@ -13,8 +13,10 @@ drop table studium
 
 
 select s.*,o.o_secondQ
-	from studium s inner join occupy o
+	from studium s left outer join occupy o
 	on s.s_idx = o.s_idx;
+	
+	select s.*,o.o_secondQ from studium s right outer join occupy o on s.s_idx = o.s_idx where s.s_idx = 9
 
 
 

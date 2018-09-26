@@ -7,7 +7,7 @@ public class Party_bookVo {
 	int pt_idx;
 	int b_leader;
 	
-
+	String m_id;
 	String m_nick;
 	String m_tel;
 	String m_comment;
@@ -65,6 +65,14 @@ public class Party_bookVo {
 	}
 	public void setM_photo(String m_photo) {
 		this.m_photo = m_photo;
+	}
+
+	public String getM_id() {
+		return m_id;
+	}
+
+	public void setM_id(String m_id) {
+		this.m_id = m_id;
 	}
 	
 	

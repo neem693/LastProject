@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import vo.Party_bookVo;
+
 public class PartyBookDaoImpl implements PartyDaoInerface {
 	
 	
@@ -20,9 +22,12 @@ public class PartyBookDaoImpl implements PartyDaoInerface {
 	}
 
 	@Override
-	public List selectList(Object map) {
+	public List selectList(Object pt_idx) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		List list = session.selectList("select_party_member",pt_idx);
+		
+		return list;
 	}
 
 	@Override
@@ -34,9 +39,12 @@ public class PartyBookDaoImpl implements PartyDaoInerface {
 	}
 
 	@Override
-	public Object selectOne(Object map) {
+	public Object selectOne(Object pt_idx) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		Party_bookVo vo = session.selectOne("party_book.select_one_leader",pt_idx);
+		
+		return vo;
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import vo.MemberVo;
 import vo.PartyVo;
+import vo.Party_bookVo;
 import vo.PlayVo;
 import vo.StadiumVo;
 import vo.TeamVo;
@@ -34,6 +35,8 @@ String return_party_paging(int nowPage,String day, int page_total_count);
 int total_page_count(String year, String month, String day,String team);
 PartyVo selectPartyOne(int pt_idx);
 StadiumVo select_stadium_one(int s_idx);
+Party_bookVo getPartyLeader(int pt_idx_int);
+List getPartyMember(int pt_idx_int);
 
 
 
