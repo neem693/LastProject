@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import myconst.Myconst;
+import service.member.MemberService;
 import service.member.MemberServiceInterface;
 import service.party.PartyServiceInterface;
 import service.toto.TotoServiceInterface;
@@ -146,8 +147,10 @@ public class BaseBallController {
 	public String login() {
 
 		return Myconst.Member.MEMBER_DIR + "login.jsp";
-
 	}
+	
+
+	
 
 	@RequestMapping("/member/login_action.do")
 	public String login_action(MemberVo vo) {
@@ -164,6 +167,17 @@ public class BaseBallController {
 		return "redirect:/main/main_list.do";
 	}
 
+	@RequestMapping("/member/logout.do")
+	public String logout(HttpSession session) {
+		session.removeAttribute("user");
+		return "redirect:/main/main_list.do";
+	}
+	
+	
+	
+	
+		
+	
 	@RequestMapping("/test_list.do")
 	public String test_list(Model model) {
 

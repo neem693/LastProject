@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -159,6 +161,7 @@ public class MemberService implements MemberServiceInterface {
 		return voo;
 	}
 
+
 	@Override
 	public MemberVo selectOne_id_idx(MemberVo vo) {
 		// TODO Auto-generated method stub
@@ -169,5 +172,8 @@ public class MemberService implements MemberServiceInterface {
 		
 		return voo;
 	}
+
+
+	
 
 }

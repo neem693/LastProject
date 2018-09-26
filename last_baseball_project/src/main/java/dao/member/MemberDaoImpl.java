@@ -3,6 +3,8 @@ package dao.member;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 
 import vo.MemberVo;
@@ -99,6 +101,7 @@ public class MemberDaoImpl implements MemberDaoInterface {
 		MemberVo voo = session.selectOne("member.member_login",vo);
 		
 		return voo;
+	
 	}
 
 	@Override
@@ -110,6 +113,11 @@ public class MemberDaoImpl implements MemberDaoInterface {
 		
 		return voo;
 	}
+	
+	
+	
+	
+
 	
 	
 	
