@@ -6,8 +6,10 @@ $bSuccessUpload = is_uploaded_file($_FILES['Filedata']['tmp_name']);
 // SUCCESSFUL
 if(bSuccessUpload) {
 	$tmp_name = $_FILES['Filedata']['tmp_name'];
-	$name = $_FILES['Filedata']['name'];
-	
+	//$name = $_FILES['Filedata']['name'];
+	$temp_var= explode(".", rawurldecode($_FILES['Filedata']['name']));
+    $name = str_replace("\0", "", time().'-'.rand(0,100).'.'.$temp_var[1]);
+
 	$filename_ext = strtolower(array_pop(explode('.',$name)));
 	$allow_file = array("jpg", "png", "bmp", "gif");
 	

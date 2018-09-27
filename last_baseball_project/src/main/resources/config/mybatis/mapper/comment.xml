@@ -38,6 +38,16 @@
 		)
 	</insert>
 	
+	<!-- 댓글 수정 -->
+	<update id="comment_update" parameterType="comment">
+	update comment set
+	c_content = #{c_content},
+	c_ip = #{c_ip},
+	j_idx = #{j_idx},
+	c_date = NOW()
+	where c_idx = #{c_idx}
+	</update>
+	
 	<!-- 댓글삭제 -->
 	<delete id="comment_delete" parameterType="int">
 		delete from comment where c_idx=#{ c_idx }

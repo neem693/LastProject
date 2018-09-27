@@ -58,9 +58,15 @@ input, .input-group-addon, button {
     padding: 10px;
 }
 
-img {
+img#image {
     max-width: 100%;
-    height: auto;
+    width : 300px;
+    height: 300px;
+}
+
+.title
+{
+	font-size: 20pt;
 }
 
 /* view 내용 부분 */
@@ -125,14 +131,15 @@ hight : 700px;
 
 /*  판매완료 */
 #s_container {
-	width: 150px;
- 	height: 150px;
+	width: 300px;
+ 	height: 300px;
     position: relative;
     text-align: center;
     color: black;
     
-    border: 1px solid black;
-	outline: 1px solid black;
+  
+   /*  border: 1px solid black; */
+/* 	outline: 1px solid black; */
 
 	 
 }
@@ -140,25 +147,27 @@ hight : 700px;
 .center{
     position: absolute;
     top:0%;
-	width: 100px;
- 	height:100px;
+	width: 300px;
+ 	height:300px;
     border:1px solid black; 
+   /* display: inline-block; */
 
-    background-color:black;  
+    /* background-color:black;  */ 
 }
 
 .mid{
 width: 100%;
 position:absolute;
 top:40%;
-/*  opacity: 0.5; */
+opacity: 1;
 
 }
 .mid:after{
 content: '판매완료';
  font-size : 30pt;
  font-weight: bold;
- border:1px solid black; 
+/*  border:1px solid black;  */
+
 }
 .button
 {
@@ -166,6 +175,14 @@ content: '판매완료';
 	display : inline-block;
 	text-align: center;
 	cursor:pointer;
+	
 }
 
+/* 점선 */
+hr.five
+{
+	border : none;
+	border : 1px dashed #c0c0c0;
+	
+}
  

@@ -21,7 +21,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css" />
 <link rel="stylesheet"
-	href="${ pageContext.request.contextPath }/resources/css/joonggo/joonggo_view.css">
+	href="${ pageContext.request.contextPath }/resources/css/joonggo/joonggo_view.css?ver=1">
 
 
 <script type="text/javascript">
@@ -33,6 +33,7 @@
 		f.submit();
 
 	}
+	
 	function send(f) {
 		if (confirm("정말 수정하시겠습니까") == false)
 			return;
@@ -109,7 +110,9 @@
 
 	}
 
-	//댓글목록 가져오기(Ajax)   
+
+
+ //댓글목록 가져오기(Ajax)   
 	function comment_list(page) {
 
 		var j_idx = '${ vo.j_idx }';
@@ -142,24 +145,53 @@
 		<input type="hidden" name="page" value="${param.page}">
 		<div class="container">
 			
-				<div id="s_container" class="form-group col-md-12">
-					<img src="${pageContext.request.contextPath }/resources/photo_upload/${vo.j_filename}">
+				<div class="title">
+				<label class="col-sm-10">${vo.j_title }</label>
+			</div>
+			<div class="pull-right">
+			<!-- <img> tag form tag가 아닌 form tag인 <input type="image">이용하던지 
+                                                  <button><button> 이용하던지 
+                                                  주의사항) 기본이벤트 onsubmit() call
+                                                  onclick = "retrun false;" <= 자동submit() 하지말아라-->
+	<!-- 	<img src="../img/btn_delete.gif" alt="답변 또는 댓글이 있을 경우 삭제가 되지 않습니다."> -->
+				<button class="btn btn-primary btn-block" onclick="del(this.form); return false;">삭제</button>
+			</div>
+			
+			<div class="pull-right">
+				<button class="btn btn-primary btn-block" onclick="send(this.form);">수정</button>
+			</div>
+			<br>
+			<hr class = "five">
+			<table width="970px" border = "1">
+			<tr>
+				<td width="300"><div id="s_container" >
+					<img id = "image" src="${pageContext.request.contextPath }/resources/photo_upload/${vo.j_filename}">
+            
 					<c:if test="${vo.j_sell_yn eq 'y'}">
 						<div class="center">
 							<div class="mid"></div>
 						</div>
 					</c:if>
-				</div>
+          
+				</div></td>
 				<p class="content"></p>
-
-			<div class="title">
+				
+				
+				<td width="1119">
+				<div class="title">
 				<label class="col-sm-10">${vo.j_title }</label>
-			</div>
-
-			<div class="price">
+			    </div>
+				<div class="price">
 				<label class="col-sm-10"><fmt:formatNumber  value="${vo.j_price }"/>원</label>
-			</div>
+			    </div>
+			    </td>
+				
+  </div>
+		
 
+			
+				</tr>
+</table>
 			<div class="row">
 				<div class="col-md-4">
 					<div class="input-group">
@@ -209,13 +241,11 @@
 				<div class="content">
 					<div class="col-md-6">
 						<div class="form-group">
-							<p value="${vo.j_content }" class="form-control"></p>
+							${vo.j_content }
 						</div>
 					</div>
 				</div>
 			</div>
-
-
 		<br>
 		<!-- 댓글작성  -->
 	<div class="comment_box">
@@ -224,56 +254,39 @@
 <%-- 				작성자:
 				<c:if test="${ not empty user }">${ user.m_nick }(${ user.m_id })</c:if> --%>
 			</div>
+			<span style="text-align: center">
 			<textarea id="c_content" ></textarea>
 			<input id="bt_reg" type="button" value="등록"
 				onclick="comment_send(); ">
-		</div>
-
-		<hr>
+	    </span></div>
 		<!--댓글목록을 출력  -->
-		<div id="disp"></div>
+	  <div id="disp"></div>
 
 	</div>
 		</div>
 		<br>
+
 		<div class = "button">
 		 <c:if test="${requestScope.vo.m_nick eq sessionScope.user.m_nick }"><!-- (1 eq 1) : true를 만들어줘서 삭제 버튼을 보여줌 -->
-			<div class="pull-right">
-			<!-- <img> tag form tag가 아닌 form tag인 <input type="image">이용하던지 
-                                                  <button><button> 이용하던지 
-                                                  주의사항) 기본이벤트 onsubmit() call
-                                                  onclick = "retrun false;" <= 자동submit() 하지말아라-->
-	<!-- 	<img src="../img/btn_delete.gif" alt="답변 또는 댓글이 있을 경우 삭제가 되지 않습니다."> -->
-				<button class="btn btn-primary btn-block" onclick="del(this.form); return false;">삭제</button>
-			</div>
 			
-			<div class="pull-right">
-				<button class="btn btn-primary btn-block" onclick="send(this.form); return false;">수정</button>
-			</div>
 
-			
-	
 			<!-- 글쓰기 -->
 			<div class="pull-right">
-            <button type="submit" class="btn btn-primary" onclick ="location.href='insert_form.do'; return false;">글쓰기</button>
+            <button type="submit" class="btn btn-primary" onclick ="location.href='insert_form.do';">글쓰기</button>
 			</div>
 			</c:if>
 			
-		
 			<div class="pull-right">
 				<button class="btn btn-primary btn-block" onclick="sell(this.form); return false;">판매완료</button>
 			</div>
 			
-			
+			<hr>
 			<div class="pull-right">
 			<button type = "submit" class="btn btn-primary btn-block" onclick="location.href='list.do?page=${param.page}&search=${ param.search}&search_text=${ param.search_text}'; return false;"">목록보기</button>
 			</div>
 		</div>
 		
 	</form>
-
-	<p>
-
 </body>
 
 </html>

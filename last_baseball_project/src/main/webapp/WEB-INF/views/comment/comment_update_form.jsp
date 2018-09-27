@@ -10,10 +10,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-  function del1(c_idx){
+ /*  function comment_update(c_idx){
 	  //alert('삭제할 idx='+ idx );
 	  
-	  if(confirm('정말삭제 하시겠습니까?')==false)return;
+	  if(confirm('정말 수정하시겠습니까?')==false)return;
 	  
 	  $.ajax({
 		  url:'comment_delete.do', //CommentDeleteAction
@@ -32,23 +32,13 @@
 		  }
 	  });
 	  
-  }
-  
-  
-  function update(c_idx)
-  {
-	  if (confirm("정말 수정하시겠습니까") == false)
-			return;
-/* 
-		 */f.action = "comment_update_form.do?c_idx=${vo.c_idx}";
-		/*  location.href='update_form.do?j_idx=' + j_idx;  */
-		/* f.submit(); */
-  }
+  } */
 </script>
 </head>
 <body>
 <input type="hidden" name="j_idx" value="${vo.j_idx }">
 <input type="hidden" name="m_id" value="${user.m_id }">
+
 <!-- 페이징 메뉴 작성 -->
 <%-- <c:if test="${ not empty list }">
 	<div align="right">${ pageMenu }</div>
@@ -57,24 +47,27 @@
 <!-- <a  onclick="comment_list('1')">1</a> &nbsp;
 <a  onclick="comment_list('2')">2</a> &nbsp;
 <a  onclick="comment_list('3')">3</a> &nbsp; -->
-
-
-<!--  for(CommentVo vo : list ) -->
-<c:forEach var="vo" items="${ list }">
-  
-  <div>
+ <div class="comment_box">
+		<div id="comment_input_box">
+			<div>
          ${ vo.m_nick }[${fn:substring(vo.c_date,0,16)}]
          <c:if test="${ user.m_id eq vo.m_id }">
-            <input type="button"  value="삭제" onclick="del1('${ vo.c_idx }');">
-            <input type="button"  value="수정" onclick ="location.href='comment_update_form.do?c_idx=${vo.c_idx}">
-            <input type="button"  value="답글" onclick="reply('${ vo.c_idx }');">
+            <input type="button"  value="등록" onclick="update('${ vo.c_idx }');">
+            <input type="button"  value="수정취소" onclick="reply('${ vo.c_idx }');">
         </c:if>
   </div>
-  <div><pre>${ vo.c_content }</pre></div>
+  <div ><textarea name = "c_content" value = "${vo.c_content }"></textarea></div>
   <hr> 
   <br>
-  <br>
-</c:forEach>
+  <br>	
+		<hr>
+		<!--댓글목록을 출력  -->
+		<div id="disp"></div>
+
+	</div> 
+
+  
+  
 
 </body>
 </html>

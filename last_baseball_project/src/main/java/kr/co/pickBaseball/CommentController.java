@@ -1,20 +1,15 @@
 package kr.co.pickBaseball;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -93,6 +88,17 @@ public class CommentController {
 		//forward시킬 페이지 : DispatcherServlet에서 해줌
 		
 		return myconst.Myconst.Comment.VIEW_PATH + "comment_list.jsp";
+	}
+	
+	@RequestMapping("/joonggo/comment_update_form.do")
+	public String comment_update_form(int c_idx, Model model)
+	{
+		
+		CommentVo vo = comment_dao.selectOne(c_idx);
+		
+		model.addAttribute("vo", vo);
+	
+		return myconst.Myconst.Comment.VIEW_PATH + "comment_update_form.jsp";
 	}
 	
 	@RequestMapping("/joonggo/comment_insert.do")

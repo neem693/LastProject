@@ -94,6 +94,7 @@ public String view(int j_idx, Model model)
 	
 	model.addAttribute("vo", vo);
 	
+	System.out.println(vo.getJ_content());
 	
 	return myconst.Myconst.Joonggo.VIEW_PATH + "joonggo_view.jsp";
 }
@@ -308,20 +309,5 @@ public void submit(HttpServletRequest request){
 System.out.println("에디터 컨텐츠값:" + request.getParameter("editor"));
 }
 
-
-@RequestMapping("/form")
-public String form(){
-    return "form";
-}
-     
-/**
- * form submit 파일결과 받기
- * @param file
- *//*
-@RequestMapping("/getFiledata")
-public void getFile(JoonggoVo file){
-    System.out.println(file.getFiledata().getOriginalFilename());
-}
-*/
 
 }

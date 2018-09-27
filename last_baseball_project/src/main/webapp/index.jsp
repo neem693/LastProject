@@ -6,10 +6,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-/* 
-location.href = "member/login.do"; */
 
- location.href = "joonggo/list.do"; 
+/* location.href = "member/login.do"; */
+
+location.href = "joonggo/list.do"; 
 
 </script>
 </head>
