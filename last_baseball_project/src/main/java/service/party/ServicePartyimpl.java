@@ -615,23 +615,36 @@ public class ServicePartyimpl implements PartyServiceInterface {
 
 		return res;
 	}
+	@Override
+	public int member_joined_today(String ymd,MemberVo member) {
+		// TODO Auto-generated method stub
+		Map map = new HashMap<String, Object>();
+		String datetime = ymd;
+		map.put("datetime", datetime);
+		map.put("m_idx", member.getM_idx());
+		// 해당 일 중에서 해당 멤버가 있는것만 슬렉트 해옴
+		int count = party_book_dao.selectCount2(map);
+		
+		return count;
+	}
+	
 
 	@Override
 	public int set_join_member_to_party(MemberVo member, String pt_idx) throws Exception {
 		// TODO Auto-generated method stub
-
+		PartyVo party = (PartyVo) party_dao.selectOne(pt_idx);
 		Map map = new HashMap<String, Object>();
-		String datetime = Myconst.DateCheck.DATE_P_IDX_FORMAT.format(new Date());
+		String datetime = party.getP_idx().split("_")[0];
 		map.put("datetime", datetime);
 		map.put("m_idx", member.getM_idx());
 		// 해당 일 중에서 해당 멤버가 있는것만 슬렉트 해옴
-		List party_book_list = party_book_dao.selectList2(map);
-		if (party_book_list.size() != 0) {
+		int member_book_count = party_book_dao.selectCount2(map);
+		if (member_book_count != 0) {
 			throw new Exception("joined");
 			// 이미 오늘 파티를 만들었거나, 오늘 파티에 참여했거나, 해당 파티에 이미 참여가 되어 있는 경우
 		}
 
-		PartyVo party = (PartyVo) party_dao.selectOne(pt_idx);
+	
 
 		///// 마감됬을시/////
 		if (party.getPt_condition().equals(Myconst.Party.PARTY_CLOSED))
@@ -672,7 +685,7 @@ public class ServicePartyimpl implements PartyServiceInterface {
 		int res2 = party_book_dao.insert(map_member);
 		
 		if(res!=res2)
-			throw new Exception("unknownError_insert");
+			throw new Exception("unknownError_join");
 		
 		
 		
@@ -709,23 +722,42 @@ public class ServicePartyimpl implements PartyServiceInterface {
 		
 		int res = party_book_dao.delete(party_member);
 		if(res != 1)
-			throw new Exception("unknownError_delete");
+			throw new Exception("unknownError_leave");
 		
-		
+		//파티를 끌고와서 업데이트 한다//
 		PartyVo party = (PartyVo)party_dao.selectOne(pt_idx_int);
 		
 		int max = party.getPt_maxPeople();
 		int people = party.getPt_people();
-		String str
+		String condition = party.getPt_condition();
+		//파티가 마감되었을때//
+		if(condition.equals(Myconst.Party.PARTY_CLOSED)) {
+			people--;
+		}
+		//파티의 인원이 꽉 찼을 때
+		else if((max==people)&&condition.equals(Myconst.Party.FULL_PEOPLE)) {
+			people--;
+			condition = Myconst.Party.PARTY_OPEN;
+		}else {
+			people--;
+		}
 		
-		if(max==people)
+		party.setPt_maxPeople(max);
+		party.setPt_people(people);
+		party.setPt_condition(condition);
+		
+		
+		res= party_dao.update(party);
+		if(res != 1)
+			throw new Exception("unknownError_leave");
+		
+		
 			
 		
 		
-			
-		
-		
-		return 0;
+		return res;
 	}
+
+
 
 }

@@ -199,6 +199,15 @@ $(document).ready(function(){
 		},300);
 	});
 	
+	var fail = '${param.fail}';
+	setTimeout(function(){
+		if(fail=="joined")
+			alert("이미 이날 파티가 예약되어 있어 파티를 생성하지 못합니다.");
+		else if(fail=='not_found')
+			alert("잘못된 접근입니다.");
+	},500);
+	
+		
 	
 });
 

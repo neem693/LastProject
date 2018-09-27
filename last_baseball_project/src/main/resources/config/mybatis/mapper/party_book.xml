@@ -28,8 +28,8 @@
  	</select>
 
 
-<select id = "select_member_already_join" parameterType="Map" resultType="party_book">
-	select b.*
+<select id = "select_member_already_join" parameterType="Map" resultType="int">
+	select count(*)
 	from party_book b inner join party pt
 	on b.pt_idx = pt.pt_idx
 	where pt.p_idx like concat(#{datetime},'%')

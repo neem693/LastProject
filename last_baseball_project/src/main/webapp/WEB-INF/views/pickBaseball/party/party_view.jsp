@@ -39,11 +39,18 @@
 		if(fail != ''){
 			setTimeout(function(){
 			if(fail == 'joined')
-				alert("이미 오늘 파티가 예약된 파티가 있어 참여하지 못합니다.")
+				alert("이미 이날 파티가 예약되어 있어 참여하지 못합니다.")
 			else if(fail == 'partyFull')
 				alert("파티 인원이 이미 다 찼기 때문에 참여하지 못합니다.");
 			else if(fail == 'partyClosed')
 				alert("파티가 이미 마감되었기 때문에 참가하지 못합니다.");
+			else if(fail == 'userError')
+				alert("해당하는 멤버를 찾을 수 없거나, 잘못된 접근입니다.");
+			else if(fail == 'cantDeleteLeader')
+				alert("파티의 리더는 파티참여해제를 할 수 없습니다.");
+			else 
+				alert("알 수 없는 오류입니다.");
+			
 			
 			
 			},400);
@@ -304,7 +311,7 @@
 				<p class="view_item leader_team">${party.t_name}</p>
 
 			</div>
-			<button id= "party_button" class="accordion">파티</button>
+			<button id="party_button" class="accordion">파티</button>
 			<div class="panel">
 
 				<p class="long_item party_name">${party.pt_name}</p>
@@ -340,10 +347,7 @@
 
 						</c:if>
 
-						<c:if test="${(user.m_idx eq party_leader.m_idx)}">
-							<c:set var="leader_guy" value="true"></c:set>
 
-						</c:if>
 						<c:if test="${vo.b_leader eq 10}">
 							<p class="view_item party_leader">${vo.m_nick}</p>
 						</c:if>
@@ -365,12 +369,15 @@
 						type="hidden" name="team" value="${param.team}"> <input
 						type="hidden" name="pt_idx" value="${party.pt_idx}">
 
+					<c:if test="${(user.m_idx eq party_leader.m_idx)}">
+						<c:set var="leader_guy" value="true"></c:set>
+					</c:if>
 
-					<c:if test="${user ne null && already_join ne true}">
+					<c:if test="${user ne null && already_join ne true && leader_guy ne true}">
 						<button class="view_button join" id="view_join"
 							onclick="party_join(this.form)">참여</button>
 					</c:if>
-					<c:if test="${user ne null }">
+					<c:if test="${leader_guy eq true }">
 						<button class="view_button delete" id="view_delete">삭제</button>
 						<button class="view_button modify" id="view_modify">수정</button>
 					</c:if>

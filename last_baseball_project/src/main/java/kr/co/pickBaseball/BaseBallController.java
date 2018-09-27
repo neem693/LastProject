@@ -295,6 +295,21 @@ public class BaseBallController {
 
 		if (year == null || month == null || day == null)
 			return "redirect:/party/party_list.do?fail=not_found";
+		
+		//파티를 등록하기 전에 오늘 과연 해당 파티가 있는지 없는지 검색해본다.
+		int month_int = Integer.parseInt(month);
+		int day_int = Integer.parseInt(day);
+		String ymd = String.format("%s%02d%02d", year,month_int,day_int);
+		int res = partyService.member_joined_today(ymd,vo);
+		if(res>=1) {
+			model.addAttribute("year",year);
+			model.addAttribute("month",month);
+			model.addAttribute("day",day);
+			model.addAttribute("fail","joined");
+			
+			
+			return "redirect:/party/party_list.do";
+		}
 
 		// int year_int = String.valueOf(year);
 		// int month_int = String.valueOf(month);
@@ -487,7 +502,7 @@ public class BaseBallController {
 			//joined
 			//partyClosed
 			//partyFull
-			//unknownError_insert
+			//unknownError_join
 			
 		}
 		
@@ -517,7 +532,10 @@ public class BaseBallController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			model.addAttribute("fail",e.getMessage());
-
+			//발생가능한 에러들
+			//userError -해당 하는 멤버가 2명이상 되거나, 해당하는 멤버가 없을 때 나온다.
+			//cantDeleteLeader - 리더는 파티에서 참여해제되지 못한다.
+			//unknownError_leave - 파티 참여해제 알수없는 에러
 			
 		}
 		

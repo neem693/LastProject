@@ -110,16 +110,19 @@ public class PartyBookDaoImpl implements PartyDaoInerface {
 	public List selectList2(Object map) {
 		// TODO Auto-generated method stub
 		
-		List list = session.selectList("party_book.select_member_already_join",map);
 		
 		
-		return list;
+		
+		return null;
 	}
 
 	@Override
-	public int selectCount2(Object ob) {
+	public int selectCount2(Object map) {
 		// TODO Auto-generated method stub
-		return 0;
+		
+		int res = session.selectOne("party_book.select_member_already_join",map);
+		
+		return res;
 	}
 
 	@Override
