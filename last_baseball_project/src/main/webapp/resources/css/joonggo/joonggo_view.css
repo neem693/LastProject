@@ -12,14 +12,14 @@ input, .input-group-addon, button {
   border-radius: 0 !important;
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 800px) {
     .reduceleftpadding {
         padding-left: 0px;
     }
 }
 
 .container {
-    padding-top: 25px;    
+   /*  padding-top: 25px;     */
     max-width: 1000px;
     position: relative;
     background-color: #fff;
@@ -52,21 +52,17 @@ input, .input-group-addon, button {
     border-radius: 0;
 }
 
-.btn {
-    text-transform: uppercase; /* 전체 문자를 대문자로 바꿔줌  */
-    letter-spacing: 0.16em; /* letter-spacing 속성은 글자 사이의 간격을 지정합니다. */
-    padding: 10px;
-}
 
 img#image {
     max-width: 100%;
     width : 300px;
     height: 300px;
+    border: 1px solid black;
 }
 
 .title
 {
-	font-size: 20pt;
+	font-size: 15pt;
 }
 
 /* view 내용 부분 */
@@ -112,23 +108,23 @@ img#image {
 .comment_box
 {
 margin : 0 auto;
-width : 1000px;;
-border : 1px solid red;
+width : auto;
+/* border : 1px solid red; */
 text-align: center;
 
 }
 
 #comment_input_box
 {
-width : 700px;
-hight : 700px;
-}
-#c_content
-{
-	width : auto;
-	higth : auto;
+width : auto;
+hight : auto;
 }
 
+table
+{
+	width: auto;
+	/* border: 1px solid red; */
+}
 /*  판매완료 */
 #s_container {
 	width: 300px;
@@ -169,20 +165,84 @@ content: '판매완료';
 /*  border:1px solid black;  */
 
 }
-.button
+#button2
 {
-	width : 1000px;
+/* 	width : auto;
 	display : inline-block;
 	text-align: center;
-	cursor:pointer;
+	cursor:pointer; */
+	border:1px solid black;
+	background-color: #ffffff;
+    color: black;
+    padding: 5px 20px;
+    text-align: center;
+    display: inline-block;
+    font-size: 10px;
+    cursor: pointer;
+    border-radius: 4px;
 	
 }
 
+#button1
+{
+/* 	width : auto;
+	display : inline-block;
+	text-align: center;
+	cursor:pointer; */
+	border:1px solid black;
+	background-color: #ffffff;
+    color: black;
+    padding: 5px 15px;
+    text-align: center;
+    display: inline-block;
+    font-size: 10px;
+    cursor: pointer;
+   border-radius: 4px;
+	
+}
+.button
+{
+	border:1px solid black;
+	background-color: #ffffff;
+    color: black;
+    padding: 5px 15px;
+    text-align: center;
+    display: inline-block;
+    font-size: 10px;
+    cursor: pointer;
+   border-radius: 4px;	
+}
+.button1
+{
+	border:1px solid black;
+	background-color: #ffffff;
+    color: black;
+    padding: 20px 15px;
+    text-align : center;
+    display: inline-block;
+    font-size: 10px;
+    cursor: pointer;
+   border-radius: 4px;	
+}
+
+#bt
+{
+	
+	
+	width : 1000px;
+	higth : 300px;
+	text-align : right;
+	  
+
+}
 /* 점선 */
 hr.five
 {
 	border : none;
 	border : 1px dashed #c0c0c0;
-	
 }
  
+ tr
+ {
+ font-size: 20pt;
+ }

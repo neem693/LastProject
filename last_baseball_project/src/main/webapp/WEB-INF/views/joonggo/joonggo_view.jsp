@@ -21,9 +21,8 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css" />
 <link rel="stylesheet"
-	href="${ pageContext.request.contextPath }/resources/css/joonggo/joonggo_view.css?ver=1">
-
-
+	href="${ pageContext.request.contextPath }/resources/css/joonggo/joonggo_view.css?ver=2">
+	
 <script type="text/javascript">
 	function del(f) {
 		if (confirm('정말 삭제하시겠습니까?') == false)
@@ -147,22 +146,23 @@
 			
 				<div class="title">
 				<label class="col-sm-10">${vo.j_title }</label>
-			</div>
+			
 			<div class="pull-right">
 			<!-- <img> tag form tag가 아닌 form tag인 <input type="image">이용하던지 
                                                   <button><button> 이용하던지 
                                                   주의사항) 기본이벤트 onsubmit() call
                                                   onclick = "retrun false;" <= 자동submit() 하지말아라-->
 	<!-- 	<img src="../img/btn_delete.gif" alt="답변 또는 댓글이 있을 경우 삭제가 되지 않습니다."> -->
-				<button class="btn btn-primary btn-block" onclick="del(this.form); return false;">삭제</button>
+			  <button  id="button1"  onclick="del(this.form); return false;">삭제</button>
 			</div>
 			
 			<div class="pull-right">
-				<button class="btn btn-primary btn-block" onclick="send(this.form);">수정</button>
+				<button  id="button1" onclick="send(this.form);">수정</button>
 			</div>
+		 </div>
 			<br>
 			<hr class = "five">
-			<table width="970px" border = "1">
+	  <table>
 			<tr>
 				<td width="300"><div id="s_container" >
 					<img id = "image" src="${pageContext.request.contextPath }/resources/photo_upload/${vo.j_filename}">
@@ -177,13 +177,17 @@
 				<p class="content"></p>
 				
 				
-				<td width="1119">
-				<div class="title">
-				<label class="col-sm-10">${vo.j_title }</label>
+				<td width="1119" align="left" valign="top">
+				<div class="title1">
+				<label for="c_content" class="col-sm-10">${vo.j_title }</label>
+					<div class="pull-right">
+				<button id="button2" onclick="sell(this.form); return false;">판매완료</button>
+			</div>
 			    </div>
 				<div class="price">
 				<label class="col-sm-10"><fmt:formatNumber  value="${vo.j_price }"/>원</label>
 			    </div>
+						
 			    </td>
 				
   </div>
@@ -199,7 +203,7 @@
 						<input class="form-control" value="${vo.m_nick }"
 							placeholder="  닉네임">
 					</div>
-				</div>
+			  </div>
 				<div class="col-md-4 reduceleftpadding">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="material-icons">call</i></span>
@@ -216,7 +220,7 @@
 							value="${vo.m_email }" data-date-end-date="0d">
 					</div>
 				</div>
-			</div>
+	  </div>
 			<div class="row">
 				<div class="col-md-4">
 					<div class="input-group">
@@ -250,43 +254,40 @@
 		<!-- 댓글작성  -->
 	<div class="comment_box">
 		<div id="comment_input_box">
-			<div>
-<%-- 				작성자:
-				<c:if test="${ not empty user }">${ user.m_nick }(${ user.m_id })</c:if> --%>
+<%-- 			<div>
+				작성자:
+				<c:if test="${ not empty user }">${ user.m_nick }(${ user.m_id })</c:if>
 			</div>
 			<span style="text-align: center">
 			<textarea id="c_content" ></textarea>
 			<input id="bt_reg" type="button" value="등록"
-				onclick="comment_send(); ">
-	    </span></div>
-		<!--댓글목록을 출력  -->
+				onclick="comment_send(); "> --%>
+				
+			<!--댓글목록을 출력  -->
 	  <div id="disp"></div>
+	  		
+      <div class="form-group">
+        <textarea class="form-control" rows="3" ></textarea>
+         <button type="submit" class="btn btn-default" onclick="comment_send(); ">등록</button>
+      </div>
+     
+	   </div>
+	   </div>
+	
 
 	</div>
-		</div>
-		<br>
 
-		<div class = "button">
-		 <c:if test="${requestScope.vo.m_nick eq sessionScope.user.m_nick }"><!-- (1 eq 1) : true를 만들어줘서 삭제 버튼을 보여줌 -->
-			
-
-			<!-- 글쓰기 -->
-			<div class="pull-right">
-            <button type="submit" class="btn btn-primary" onclick ="location.href='insert_form.do';">글쓰기</button>
-			</div>
-			</c:if>
-			
-			<div class="pull-right">
-				<button class="btn btn-primary btn-block" onclick="sell(this.form); return false;">판매완료</button>
-			</div>
-			
-			<hr>
-			<div class="pull-right">
-			<button type = "submit" class="btn btn-primary btn-block" onclick="location.href='list.do?page=${param.page}&search=${ param.search}&search_text=${ param.search_text}'; return false;"">목록보기</button>
-			</div>
-		</div>
+	<div id = "bt" >
+	<div class="pull-right">
+			<button type = "submit" class="button1" onclick="location.href='list.do?page=${param.page}&search=${ param.search}&search_text=${ param.search_text}'; return false;"">목록보기</button>
 		
-	</form>
+		 <c:if test="${requestScope.vo.m_nick eq sessionScope.user.m_nick }"><!-- (1 eq 1) : true를 만들어줘서 삭제 버튼을 보여줌 -->
+			<!-- 글쓰기 -->
+            <button type="submit" class="button1" onclick ="location.href='insert_form.do';">글쓰기</button>
+			</c:if>
+			</div>
+			</div>
+</form>
 </body>
 
 </html>
