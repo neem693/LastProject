@@ -62,7 +62,7 @@
 <body>
 
 
-<%@include file="header/header.jsp" %>	
+<%@include file="${ pageContext.request.contextPath }/WEB-INF/views/main/header/header.jsp"%>	
 	
 
 	<div class="row">
