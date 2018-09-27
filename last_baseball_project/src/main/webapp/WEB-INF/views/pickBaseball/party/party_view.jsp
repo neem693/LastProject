@@ -16,6 +16,8 @@
 	src="${pageContext.request.contextPath}/resources/jquery/jquery-3.3.1.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/daum_map_view_mode.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/party_join.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 
@@ -30,8 +32,39 @@
 			}
 		}
 		make_map(${party.x},${party.y});
+		
+		
+		
+		var fail = '${param.fail}';
+		if(fail != ''){
+			setTimeout(function(){
+			if(fail == 'joined')
+				alert("이미 오늘 파티가 예약된 파티가 있어 참여하지 못합니다.")
+			else if(fail == 'partyFull')
+				alert("파티 인원이 이미 다 찼기 때문에 참여하지 못합니다.");
+			else if(fail == 'partyClosed')
+				alert("파티가 이미 마감되었기 때문에 참가하지 못합니다.");
+			
+			
+			},400);
+		}
+		
+		var party_b= document.getElementById("party_button");
+		
+		setTimeout(function(){
+			party_b.classList.toggle("active");
+			var panel = party_b.nextElementSibling;
+			panel.classList.toggle("show");
+		},800);
+		
+		
 	});
+	
+	
+	
 </script>
+
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/party/button_panel.css">
 <link rel="stylesheet"
@@ -43,14 +76,20 @@
 .view_main {
 	margin-left: 15%;
 	margin-right: 15%;
+	min-height: 1000px;
+	border: 1px solid black;
 }
 
 .view {
 	width: 70%;
+	float: left;
+	border: 1px solid black;
 }
 
-.view_asdie {
+.view_aside {
+	float: right;
 	width: 25%;
+	border: 1px solid black;
 }
 
 .view_item, .long_item {
@@ -123,7 +162,8 @@
 .stadium, .sta_addr, .sta_all_seat, .play_time, .leader_name,
 	.leader_count, .leader_tel, .leader_email, .party_name,
 	.party_condition, .party_purpose, .party_people, .party_addr,
-	.party_time, .party_coordinate, .leader_team, .party_member {
+	.party_time, .party_coordinate, .leader_team, .party_member,
+	.party_leader {
 	text-align: center;
 	font-size: large;
 }
@@ -189,19 +229,33 @@
 	content: "응원 팀";
 }
 
-.party_member {
+.party_member, .party_leader {
 	font-size: x-large;
+}
+
+.party_member:before {
+	content: "멤버";
+}
+
+.party_leader:before {
+	content: "리더";
 }
 
 .map {
 	width: 100%;
 	height: 500px;
 }
+
+.view_buttons {
+	clear: both;
+	text-align: right;
+	display: block;
+}
 </style>
 </head>
 <body>
 
-
+	<%@include file="/WEB-INF/views/main/header/header.jsp"%>
 
 
 	<article class="view_main">
@@ -250,7 +304,7 @@
 				<p class="view_item leader_team">${party.t_name}</p>
 
 			</div>
-			<button class="accordion">파티</button>
+			<button id= "party_button" class="accordion">파티</button>
 			<div class="panel">
 
 				<p class="long_item party_name">${party.pt_name}</p>
@@ -279,18 +333,62 @@
 					</div>
 				</c:if>
 				<c:if test="${(fn:length(party_member)) > 1 }">
+
 					<c:forEach var="vo" items="${party_member}">
-						<p class="view_item party_member">${vo.m_nick}</p>
+						<c:if test="${(user.m_idx eq vo.m_idx)}">
+							<c:set var="already_join" value="true"></c:set>
+
+						</c:if>
+
+						<c:if test="${(user.m_idx eq party_leader.m_idx)}">
+							<c:set var="leader_guy" value="true"></c:set>
+
+						</c:if>
+						<c:if test="${vo.b_leader eq 10}">
+							<p class="view_item party_leader">${vo.m_nick}</p>
+						</c:if>
+						<c:if test="${vo.b_leader eq 1}">
+							<p class="view_item party_member">${vo.m_nick}</p>
+						</c:if>
+
+
 					</c:forEach>
 				</c:if>
 
 			</div>
+
+			<div class="view_buttons">
+				<form method="POST">
+					<input type="hidden" name="year" value="${param.year}"> <input
+						type="hidden" name="month" value="${param.month}"> <input
+						type="hidden" name="day" value="${param.day}"> <input
+						type="hidden" name="team" value="${param.team}"> <input
+						type="hidden" name="pt_idx" value="${party.pt_idx}">
+
+
+					<c:if test="${user ne null && already_join ne true}">
+						<button class="view_button join" id="view_join"
+							onclick="party_join(this.form)">참여</button>
+					</c:if>
+					<c:if test="${user ne null }">
+						<button class="view_button delete" id="view_delete">삭제</button>
+						<button class="view_button modify" id="view_modify">수정</button>
+					</c:if>
+					<c:if test="${already_join eq true && leader_guy ne true }">
+						<button class="view_button delete" id="view_delete"
+							onclick="party_leave(this.form)">참여해제</button>
+					</c:if>
+				</form>
+			</div>
+
+
 		</section>
-		<aside class="view_aside"></aside>
+
+		<aside class="view_aside">이곳은 리스트가 올 것이다.</aside>
 
 	</article>
-
-
+	<div style="clear: both;"></div>
+	<%@include file="/WEB-INF/views/main/footer/footer.jsp"%>
 
 
 </body>

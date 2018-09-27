@@ -469,5 +469,74 @@ public class BaseBallController {
 	}
 	
 	
+	@RequestMapping("/party/party_join.do")
+	public String party_join(String year, String month, String day,String team,String pt_idx,Model model) {
+		MemberVo member = (MemberVo)session.getAttribute("user");
+		if(member == null)
+			return "redirect:/member/login.do?fail=" + Myconst.Login.ERROR;
+		
+		try {
+			int res = partyService.set_join_member_to_party(member, pt_idx);
+			if(res==-1)
+				model.addAttribute("fail","partyFull");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			model.addAttribute("fail",e.getMessage());
+			//현재까지 있는 에러 목록
+			//joined
+			//partyClosed
+			//partyFull
+			//unknownError_insert
+			
+		}
+		
+		model.addAttribute("year",year);
+		model.addAttribute("month",month);
+		model.addAttribute("day",day);
+		model.addAttribute("team",team);
+		model.addAttribute("pt_idx",pt_idx);
+		
+		
+		
+		
+		return "redirect:/party/view.do";
+		
+	}
+	
+	@RequestMapping("/party/party_leave.do")
+	public String party_leave(String year, String month, String day,String team,String pt_idx,Model model) {
+		
+		MemberVo member = (MemberVo)session.getAttribute("user");
+		if(member == null)
+			return "redirect:/member/login.do?fail=" + Myconst.Login.ERROR;
+		
+		try {
+			int res = partyService.member_leave_from_party(member, pt_idx);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			model.addAttribute("fail",e.getMessage());
+
+			
+		}
+		
+		model.addAttribute("year",year);
+		model.addAttribute("month",month);
+		model.addAttribute("day",day);
+		model.addAttribute("team",team);
+		model.addAttribute("pt_idx",pt_idx);
+		
+		
+		
+		
+		
+		return "redirect:/party/view.do";
+	}
+	
+	
+	
+	
+	
 
 }
