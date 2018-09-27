@@ -62,7 +62,7 @@
 <body>
 
 
-<%@include file="${ pageContext.request.contextPath }/WEB-INF/views/main/header/header.jsp"%>	
+<%@include file="/WEB-INF/views/main/header/header.jsp"%>	
 	
 
 	<div class="row">
@@ -147,7 +147,7 @@
 	</div>
 
 	
-	 <%@include file="footer/footer.jsp" %>	
+	 <%@include file="/WEB-INF/views/main/footer/footer.jsp" %>	
 	
 
 </body>
