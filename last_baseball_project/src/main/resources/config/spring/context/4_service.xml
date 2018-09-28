@@ -22,4 +22,7 @@
 		<property name="normal_dao" ref="normal_dao"></property>
 	</bean>
 
+	<bean id="commentService" class="service.comment.CommentServiceImpl">
+		<property name="comment_dao" ref="comment_dao"></property>
+	</bean>
 </beans>

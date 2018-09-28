@@ -4,36 +4,50 @@
 
 <mapper namespace="comment">
 
-	<insert id="comment_insert" parameterType="comment">
-		insert into comment_tb
-		values(comment_seq.nextVal,#{id},#{name},#{ip},#{content},sysdate,#{b_idx})
+	<insert id="normal_comment_insert" parameterType="comment">
+		insert into comment(m_id, m_nick, c_ip, c_comment, c_sysdate,nc_idx,c_ref,c_step,c_depth)
+		values(#{m_id},#{m_nick},#{c_ip},#{c_comment},now(),#{nc_idx},0,0,0)
 	</insert>
 
 
-	<select id="comment_list" parameterType="int"
-		resultType="comment">
-		select * from comment_tb where b_idx = #{b_idx}
-		order by idx
-		desc
+	<select id="normal_comment_list" parameterType="int" resultType="comment">
+		select * form comment where nc_idx=#{nc_idx}
+		order by nc_idx desc
 	</select>
-	<select id="comment_list_page" parameterType="java.util.Map"
-		resultType="comment">
+	
+	<select id="comment_one" parameterType="int" resultType="comment">
+		select * from comment where c_idx =#{c_idx}
+	</select>
+	
+	<select id="comment_list_page" parameterType="java.util.Map" resultType="comment">
 		select *
-		from (select rownum no, c.* from comment_tb c where b_idx =#{b_idx})
-		where no between #{start} and #{end}
+		from
+		(
+			select
+				c.*,
+				(select count(*) from comment where)
+		)
 	</select>
 	<select id="comment_count" parameterType="int" resultType="int">
 		select nvl(count(*),0)
-		from comment_tb
-		where b_idx = #{b_idx}
+		from comment
+		where nc_idx = #{nc_idx}
 	</select>
 
 	<delete id="comment_delete" parameterType="int">
-		delete from comment_tb
-		where idx = #{idx}
+		delete from comment
+		where c_idx = #{c_idx}
 	</delete>
+	
+	<update id="comment_update_step" parameterType="comment">
+		update comment set c_step = c_step + 1
+		where c_ref=#{ c_ref } and c_step > #{ c_step }
+	</update>
 
-
+	<insert id="comment_reply" parameterType="comment">
+		insert into comment(m_id, m_nick, c_ip, c_comment, c_sysdate,nc_idx,c_ref,c_step,c_depth) 
+		values (#{m_id},#{m_nick},#{c_ip},#{c_comment},now(),#{nc_idx},#{c_ref},#{c_step},#{c_depth})
+	</insert>
 	
 
 

@@ -26,4 +26,8 @@
 		<property name="session" ref="sql_template"></property>
 	</bean>
 
+	<bean id="comment_dao" class="dao.comment.CommentDaoImpl">
+		<property name="sqlSession" ref="sql_template"></property>
+	</bean>
+	
 </beans>

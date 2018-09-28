@@ -9,12 +9,10 @@ public interface NormalDaoInterface {
 
 	public List<NormalVo> selectList();
 	/*public List<NormalVo> selectList(Map map);*/
-	/*public NormalVo selectOne(int idx);*/
-	/*public int update_readhit(int idx);*/
+	public NormalVo selectOne(int nc_idx);
+	public int update_views(int nc_idx);
 	public int insert(NormalVo vo);
-	/*public int delete(int idx);*/
-	/*public int update_step(NormalVo normalVo);*/
-	/*public int reply(NormalVo vo);*/
+	public int delete(int nc_idx);
 	public int selctRowTotal(Map map);
-	/*public int update(NormalVo vo);*/
+	public int update(NormalVo vo);
 }

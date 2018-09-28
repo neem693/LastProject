@@ -13,5 +13,47 @@ create table occupy
 
 select * from occupy
 
---¡∂¿Œ
+insert into occupy(o_secondQ,t_name,s_idx) values(
+					'1','«—»≠','1');
+					
+insert into occupy(o_secondQ,t_name,s_idx) values(
+					'2','«—»≠','2');
 
+insert into occupy(o_secondQ,t_name,s_idx) values(
+					'1','ªÔº∫','3');
+					
+insert into occupy(o_secondQ,t_name,s_idx) values(
+					'2','ªÔº∫','4');					
+					
+insert into occupy(o_secondQ,t_name,s_idx) values(
+					'1','∑‘µ•','5');					
+					
+insert into occupy(o_secondQ,t_name,s_idx) values(
+					'2','∑‘µ•','6');					
+					
+insert into occupy(o_secondQ,t_name,s_idx) values(
+					'1','KIA','7');					
+					
+insert into occupy(o_secondQ,t_name,s_idx) values(
+					'1','NC','8');					
+					
+insert into occupy(o_secondQ,t_name,s_idx) values(
+					'1','µŒªÍ','9');
+					
+insert into occupy(o_secondQ,t_name,s_idx) values(
+					'1','LG','9');					
+					
+insert into occupy(o_secondQ,t_name,s_idx) values(
+					'1','SK','10');					
+					
+insert into occupy(o_secondQ,t_name,s_idx) values(
+					'1','≥ÿºæ','11');					
+					
+insert into occupy(o_secondQ,t_name,s_idx) values(
+					'1','KT','12');					
+					
+insert into occupy(o_secondQ,t_name,s_idx) values(
+					'0',NULL,'13');					
+					
+insert into occupy(o_secondQ,t_name,s_idx) values(
+					'2','KIA','14');		

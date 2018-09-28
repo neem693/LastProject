@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.ui.Model;
+
 import vo.NormalVo;
 
 public interface NormalServiceInterface {
@@ -14,9 +16,11 @@ public interface NormalServiceInterface {
 
 	void file_up(HttpServletRequest request);
 
+	NormalVo normal_view(Integer nc_idx, HttpServletRequest request, Model model);
 	
+	int normal_delete(int nc_idx);
 	
-	
-	
+	NormalVo normal_modify_form(int nc_idx,NormalVo vo);
 
+	int normal_modify(String nc_title, String nc_contents, NormalVo vo);
 }

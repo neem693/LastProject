@@ -48,23 +48,23 @@ public class NormalDaoImpl implements NormalDaoInterface{
 		return list;
 	}*/
 	
-	/*public NormalVo selectOne(int idx) {
+	public NormalVo selectOne(int nc_idx) {
 		// TODO Auto-generated method stub
 		NormalVo vo = null;
 		
-		vo = session.selectOne("normal.normal_one",idx);
+		vo = session.selectOne("normal.normal_one",nc_idx);
 		
 		return vo;
-	}*/
+	}
 	
-	/*public int update_readhit(int idx) {
+	public int update_views(int nc_idx) {
 		// TODO Auto-generated method stub
 		int res = 0;
 		
-		res = session.update("normal.normal_update_readhit", idx);
+		res = session.update("normal.normal_update_views", nc_idx);
 		
 		return res;
-	}*/
+	}
 
 	public int insert(NormalVo vo) {
 		// TODO Auto-generated method stub
@@ -75,32 +75,14 @@ public class NormalDaoImpl implements NormalDaoInterface{
 		return res;
 	}
 	
-	/*public int delete(int idx) {
+	public int delete(int nc_idx) {
 		// TODO Auto-generated method stub
 		int res = 0;
 		
-		res = session.update("normal.normal_delete_update", idx);
+		res = session.update("normal.normal_delete", nc_idx);
 		
 		return res;
-	}*/
-
-	/*public int update_step(NormalVo normalVo) {
-		// TODO Auto-generated method stub
-		int res = 0;
-		
-		res = session.update("normal.normal_update_step", normalVo);
-		
-		return res;
-	}*/
-	
-	/*public int reply(NormalVo vo) {
-		// TODO Auto-generated method stub
-		int res = 0;
-		
-		res = session.insert("normal.normal_reply", vo);
-		
-		return res;
-	}*/
+	}
 	
 	public int selctRowTotal(Map map) {
 		// TODO Auto-generated method stub
@@ -111,7 +93,7 @@ public class NormalDaoImpl implements NormalDaoInterface{
 		return count;
 	}
 	
-	/*public int update(NormalVo vo) {
+	public int update(NormalVo vo) {
 		// TODO Auto-generated method stub
 		
 		int res = 0;
@@ -119,6 +101,6 @@ public class NormalDaoImpl implements NormalDaoInterface{
 		res = session.update("normal.normal_update", vo);
 		
 		return res;
-	}*/
+	}
 	
 }

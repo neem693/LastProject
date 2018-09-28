@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 
 import dao.normal.NormalDaoInterface;
 import myconst.Myconst;
@@ -66,7 +67,7 @@ public class NormalServiceImpl implements NormalServiceInterface{
 		
 		List<NormalVo> list = normal_dao.selectList();
 		
-		
+		//session.removeAttribute("show");
 		
 		//int rowTotal = normal_dao.selctRowTotal(map);
 		
@@ -124,10 +125,45 @@ public class NormalServiceImpl implements NormalServiceInterface{
 		
 	}
 	
+	@Override
+	public NormalVo normal_view(Integer nc_idx,HttpServletRequest request, Model model) {
+		// TODO Auto-generated method stub
+		NormalVo vo = normal_dao.selectOne(nc_idx);
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("show")==null) {
+			int res = normal_dao.update_views(nc_idx);
+			session.setAttribute("show", true);
+		}
+		
+		return vo;
+	}
 	
+	@Override
+	public int normal_delete(int nc_idx) {
+		// TODO Auto-generated method stub
+		
+		int res = normal_dao.delete(nc_idx);
+		
+		return res;
+	}
 	
+	@Override
+	public NormalVo normal_modify_form(int nc_idx,NormalVo vo) {
+		// TODO Auto-generated method stub
+		
+		vo = normal_dao.selectOne(nc_idx);
+		
+		return vo;
+	}
+	@Override
+	public int normal_modify(String nc_title, String nc_contents, NormalVo vo) {
+		// TODO Auto-generated method stub
+		
+		int res = normal_dao.update(vo);
+		
+		return res;
+	}
 	
-	
-
 	
 }

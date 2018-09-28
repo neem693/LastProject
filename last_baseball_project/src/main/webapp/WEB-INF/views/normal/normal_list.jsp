@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -57,7 +58,7 @@ window.onload = function(){
 <body>
 
 
-<table width="800" border="0" cellpadding="0" cellspacing="0" bgcolor="#F1F5F4">
+<table width="1000" align="center" border="0" cellpadding="0" cellspacing="0" bgcolor="#F1F5F4">
 <tr>
 	<td align="center">
 	<select id="nc_search">
@@ -75,22 +76,26 @@ window.onload = function(){
 	</td>
 </tr>
 </table>
-<table width="800">
+<table width="1000" align="center">
 	<tr bordercolor="blue">
-		<td width="10%" align="center">글번호</td>
-		<td width="60%" align="center">제목</td>
+		<td width="9%" align="center">글번호</td>
+		<td width="50%" align="center">제목</td>
 		<td width="10%" align="center">작성자</td>
-		<td width="10%" align="center">작성일</td>
-		<td width="10%" align="center">조회수</td>
+		<td width="13%" align="center">작성일</td>
+		<td width="9%" align="center">조회수</td>
+		<td width="9%" align="center">댓글수</td>
 	</tr>
 
 	<c:forEach var="vo" items="${ list }">
+	
+
 	<tr>
-		<td width="10%">${ vo.nc_idx }</td>
-		<td width="60%">${ vo.nc_title }</td>
-		<td width="10%">${ vo.m_nick }</td>
-		<td width="10%">${ vo.nc_regdate }</td>
-		<td width="10%">${ vo.nc_views }</td>
+		<td width="10%" align="center">${ vo.nc_idx }</td>
+		<td width="50%" align="center"><a href="view.do?nc_idx=${ vo.nc_idx }"/>${ vo.nc_title }</td>
+		<td width="10%" align="center">${ vo.m_nick }</td>
+		<td width="13%" align="center">${ fn:substring(vo.nc_regdate,0,10) }</td>
+		<td width="9%" align="center">${ vo.nc_views }</td>
+		<td width="9%" align="center">${ vo.nc_count }</td>
 	</tr>
 	</c:forEach>
 	

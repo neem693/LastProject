@@ -45,6 +45,11 @@ public class Myconst {
 		public static final int BLOCK_PAGE = 10;//page당 보여지는 메뉴갯수
 	}
 	
+	public static class NormalCommentPageing{
+		public static final int BLOCK_LIST = 15;
+		public static final int BLOCK_PAGE = 10;
+	}
+	
 	public static class Normal{
 		public static String VIEW_PATH = "/WEB-INF/views/normal/";
 	}
@@ -53,6 +58,8 @@ public class Myconst {
 		public static String VIEW_PATH = "/WEB-INF/views/main/";
 	}
 
-	
+	public static class NormalComment{
+		public static String VIEW_PATH = "/WEB-INF/views/normal/";
+	}
 	
 }

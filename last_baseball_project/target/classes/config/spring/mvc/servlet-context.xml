@@ -36,7 +36,7 @@
 		<beans:property name="partyService" ref="partyService"></beans:property>
 		<beans:property name="memberservice" ref="memberService"></beans:property>
 		<beans:property name="normalService" ref="normalService"></beans:property>
-	
+		<beans:property name="commentservice" ref="commentService"></beans:property>
 	
 	</beans:bean>
     

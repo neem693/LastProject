@@ -22,12 +22,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import myconst.Myconst;
 import myconst.Paging;
+import service.comment.CommentServiceInterface;
 import service.member.MemberServiceInterface;
 import service.normal.NormalServiceImpl;
 import service.normal.NormalServiceInterface;
 import service.party.PartyServiceInterface;
 
 import util.parsing.TeamParsing;
+import vo.CommentVo_normal;
 import vo.MemberVo;
 import vo.NormalVo;
 import vo.TeamVo;
@@ -41,8 +43,16 @@ public class BaseBallController {
 	
 	PartyServiceInterface partyService;
 	
+	CommentServiceInterface commentservice;
 	
-	
+	public CommentServiceInterface getCommentservice() {
+		return commentservice;
+	}
+
+	public void setCommentservice(CommentServiceInterface commentservice) {
+		this.commentservice = commentservice;
+	}
+
 	//회원가입 서비스 호출 객체 ( 3단계 구조)
 	MemberServiceInterface memberservice;
 	
@@ -259,9 +269,50 @@ public class BaseBallController {
 		return sb.toString();
 	}
 	
+	@RequestMapping("/normal/view.do")
+	public String normal_view(int nc_idx, HttpServletRequest request, Model model) {
+		
+		normalService.normal_view(nc_idx, request, model);
+		NormalVo vo=	normalService.normal_view(nc_idx, request, model);
+		model.addAttribute("vo",vo);
+		
+		return "/WEB-INF/views/normal/normal_view.jsp";
+	}
 	
+	@RequestMapping("/normal/normal_modify_form.do")
+	public String normal_modify_form(int nc_idx,NormalVo vo,Model model) {
+		
+		normalService.normal_modify_form(nc_idx, vo);
+		
+		model.addAttribute("vo",vo);
+		
+		return "/WEB-INF/views/normal/normal_modify.jsp";
+	}
 	
+	@RequestMapping("/normal/normal_modify.do")
+	public String normal_modify(String nc_title, String nc_contents, NormalVo vo) {
+		
+		normalService.normal_modify(nc_title, nc_contents, vo);
+		
+		return "/WEB-INF/views/normal/normal_list.jsp";
+	}
 	
-
-
+	@RequestMapping("/normal/normal_delete.do")
+	public String normal_delete(int nc_idx) {
+	
+		normalService.normal_delete(nc_idx);
+		
+		return "/WEB-INF/views/normal/normal_list.jsp";
+	}
+	
+	@RequestMapping("/comment/normal_comment_list.do")
+	public String normal_comment_list(Integer page, int nc_idx, Model model) {
+		
+		List list = commentservice.normal_comment_list(page, nc_idx);
+		
+		model.addAttribute("list", list);
+		
+		return "/WEB-INF/views/normal/normal_view.jsp" + "normal_comment_list.jsp";
+	}
+	
 }
