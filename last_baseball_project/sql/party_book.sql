@@ -27,5 +27,13 @@ on m.m_idx = b.m_idx
 	on b.m_idx = m.m_idx
 	where b.pt_idx = 23 and
 	b.b_leader = 10;
+	
+	
+	
+	select b.*,pt.*
+	from party_book b inner join party pt
+	on b.pt_idx = pt.pt_idx
+	where pt.p_idx like "20180925%"
+	and b.m_idx = 41
 
 

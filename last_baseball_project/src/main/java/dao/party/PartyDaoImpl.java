@@ -72,9 +72,12 @@ public class PartyDaoImpl implements PartyDaoInerface {
 	}
 
 	@Override
-	public int update(Object ob) {
+	public int update(Object party) {
 		// TODO Auto-generated method stub
-		return 0;
+		
+		int res = session.update("party.update_party_full",party);
+		
+		return res;
 	}
 
 	@Override
@@ -98,11 +101,6 @@ public class PartyDaoImpl implements PartyDaoInerface {
 		return 0;
 	}
 
-	@Override
-	public int delete() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public List selectList() {
@@ -126,6 +124,24 @@ public class PartyDaoImpl implements PartyDaoInerface {
 		int leader_count = session.selectOne("party.leader_count_select2",m_idx);
 		
 		return leader_count;
+	}
+
+	@Override
+	public int insert2(Object ob) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List selectList3(Object map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int delete(Object ob) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

@@ -199,6 +199,15 @@ $(document).ready(function(){
 		},300);
 	});
 	
+	var fail = '${param.fail}';
+	setTimeout(function(){
+		if(fail=="joined")
+			alert("이미 이날 파티가 예약되어 있어 파티를 생성하지 못합니다.");
+		else if(fail=='not_found')
+			alert("잘못된 접근입니다.");
+	},500);
+	
+		
 	
 });
 
@@ -321,11 +330,14 @@ function show_view(pt_idx){
 </script>
 </head>
 <body>
-	<div class="ajaxLoadingModal">
+
+<div class="ajaxLoadingModal">
 		<img
 			src="${pageContext.request.contextPath}/resources/images/ajax_loading/Reload.gif">
 		<p class="loading_text">LOADING</p>
 	</div>
+<%@include file="/WEB-INF/views/main/header/header.jsp" %>	
+	
 	<c:set var="day" value="0"></c:set>
 	<%-- n은 기본적으로 반복문을 위한 것 --%>
 	<c:set var="n" value="0"></c:set>
@@ -461,6 +473,8 @@ function show_view(pt_idx){
 		<aside class="right_side">이곳은 팀이 올 자리이다.</aside>
 		<div class="show_party_list" id="party_list"></div>
 	</div>
+	<div style="clear: both;"></div>
+	<%@include file="/WEB-INF/views/main/footer/footer.jsp" %>	
 
 
 </body>

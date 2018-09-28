@@ -94,14 +94,28 @@ public class StadiumDaoImpl implements PartyDaoInerface {
 		return 0;
 	}
 
+
+
 	@Override
-	public int delete() {
+	public int selectCount2(Object ob) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int selectCount2(Object ob) {
+	public int insert2(Object ob) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List selectList3(Object map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int delete(Object ob) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

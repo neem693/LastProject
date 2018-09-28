@@ -20,7 +20,8 @@ public class Myconst {
 
 	public static class DateCheck {
 		public static int year = 2018;
-		public static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		public static final SimpleDateFormat DATE_P_IDX_FORMAT = new SimpleDateFormat("yyyyMMdd");
 
 	}
 
@@ -55,8 +56,12 @@ public class Myconst {
 		public static String ETC = "기타";
 		public static int ETC_INT = 10;
 
-		///// 인원수 제한없음/////
-		public static int UNLIMITED_MAXIMUM_PEOPLE = 0;
+		//////////// 인원수 관련////////////
+		///////////// 제한없음//////////
+		public static final int UNLIMITED_MAXIMUM_PEOPLE = 0;
+		public static final String FULL_PEOPLE = "인원 다참";
+		public static final String PARTY_CLOSED = "마감";
+		public static final String PARTY_OPEN = "모집중";
 
 		////
 		public static String MOD_DAY = "day";
@@ -96,6 +101,12 @@ public class Myconst {
 		public static String YOU_MUST_LOGIN = "login_req";
 		public static String USER_CANNOT_FIND = "cannot_find";
 		public static String ERROR = "error1";
+
+	}
+
+	public static class PartyBook {
+		public static final int PARTY_LEADER = 10;
+		public static final int PARTY_MEMBER = 1;
 
 	}
 

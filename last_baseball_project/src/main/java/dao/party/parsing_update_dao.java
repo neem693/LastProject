@@ -86,11 +86,7 @@ public class parsing_update_dao implements PartyDaoInerface {
 		return 0;
 	}
 
-	@Override
-	public int delete() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
 
 	@Override
 	public Object selectOne(Object map) {
@@ -118,6 +114,24 @@ public class parsing_update_dao implements PartyDaoInerface {
 
 	@Override
 	public int selectCount2(Object ob) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int insert2(Object ob) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List selectList3(Object map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int delete(Object ob) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

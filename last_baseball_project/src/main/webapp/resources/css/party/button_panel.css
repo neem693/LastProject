@@ -27,7 +27,7 @@ div.panel {
 }
 
 div.panel.show {
-	max-height: 1000px;
+	max-height: 2000px;
 	/*max-height: 0px과 같이 에니메이션의 끝의 표시이며, max이기에 유동적으로 움직일 수 있다.*/
 	opacity: 1;
 	overflow: auto;

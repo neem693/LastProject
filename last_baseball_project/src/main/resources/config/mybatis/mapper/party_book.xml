@@ -4,7 +4,7 @@
 
 <mapper namespace="party_book">
 
-	<insert id="insert_party_book_leader" parameterType="Map">
+	<insert id="insert_party_book" parameterType="Map">
 		insert into
 		party_book(m_idx,b_leader,pt_idx)
 		values(#{m_idx},#{b_leader},#{pt_idx})
@@ -28,7 +28,36 @@
  	</select>
 
 
+<select id = "select_member_already_join" parameterType="Map" resultType="int">
+	select count(*)
+	from party_book b inner join party pt
+	on b.pt_idx = pt.pt_idx
+	where pt.p_idx like concat(#{datetime},'%')
+	and b.m_idx = #{m_idx}
+
+</select>
+
+<select id = "party_member_is_here" parameterType="Map" resultType="int">
+
+select count(*)
+from party_book
+where m_idx = #{m_idx} and pt_idx = ${pt_idx}
+
+</select>
+
+<select id = "select_one_member" parameterType="Map" resultType="party_book">
+select * 
+from party_book
+where m_idx = #{m_idx} and pt_idx = ${pt_idx}
 
 
+</select>
+
+
+
+<delete id="delete_party_member" parameterType="party_book">
+	delete from party_book where b_idx = #{b_idx}
+
+</delete>
 
 </mapper>

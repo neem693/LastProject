@@ -423,7 +423,7 @@ public class ServicePartyimpl implements PartyServiceInterface {
 		Map map = new HashMap<String, Integer>();
 		map.put("m_idx", member.getM_idx());
 		map.put("pt_idx", pt_idx);
-		map.put("b_leader", 10);
+		map.put("b_leader", Myconst.PartyBook.PARTY_LEADER);
 		int res = party_book_dao.insert(map);
 
 		return res;
@@ -615,5 +615,149 @@ public class ServicePartyimpl implements PartyServiceInterface {
 
 		return res;
 	}
+	@Override
+	public int member_joined_today(String ymd,MemberVo member) {
+		// TODO Auto-generated method stub
+		Map map = new HashMap<String, Object>();
+		String datetime = ymd;
+		map.put("datetime", datetime);
+		map.put("m_idx", member.getM_idx());
+		// 해당 일 중에서 해당 멤버가 있는것만 슬렉트 해옴
+		int count = party_book_dao.selectCount2(map);
+		
+		return count;
+	}
+	
+
+	@Override
+	public int set_join_member_to_party(MemberVo member, String pt_idx) throws Exception {
+		// TODO Auto-generated method stub
+		PartyVo party = (PartyVo) party_dao.selectOne(pt_idx);
+		Map map = new HashMap<String, Object>();
+		String datetime = party.getP_idx().split("_")[0];
+		map.put("datetime", datetime);
+		map.put("m_idx", member.getM_idx());
+		// 해당 일 중에서 해당 멤버가 있는것만 슬렉트 해옴
+		int member_book_count = party_book_dao.selectCount2(map);
+		if (member_book_count != 0) {
+			throw new Exception("joined");
+			// 이미 오늘 파티를 만들었거나, 오늘 파티에 참여했거나, 해당 파티에 이미 참여가 되어 있는 경우
+		}
+
+	
+
+		///// 마감됬을시/////
+		if (party.getPt_condition().equals(Myconst.Party.PARTY_CLOSED))
+			throw new Exception("partyClosed");
+		if (party.getPt_condition().equals(Myconst.Party.FULL_PEOPLE))
+			throw new Exception("partyFull");
+
+		int max = party.getPt_maxPeople();
+		int people = party.getPt_people();
+
+		if (max != Myconst.Party.UNLIMITED_MAXIMUM_PEOPLE && max <= people) {
+			party.setPt_condition(Myconst.Party.FULL_PEOPLE);
+			int res = party_dao.update(party);
+			System.out.println("파티가 다 차있는데도 불구하고 상태가 full로 안바뀌어 있을 경우 이를 바꿔줌  업데이트 결과 : " + res);
+			return -1;
+			//사실 이는 굉장히 이상한 상황이므로, 그냥 return 시킴
+			//만약 여기서 excpetion을 발생시킬시 aop가 저 update까지 모조리 잡아서 가루로 만듬
+			//즉 롤벡 시킴 (이거 주의해라 모든 DML이 박살이 난다.)
+			
+		}
+		
+		
+		
+		//////이제야 업데이트 시작///////////
+		///party부터 업데이트///
+		people ++;
+		party.setPt_people(people);
+		if(max == people)
+			party.setPt_condition(Myconst.Party.FULL_PEOPLE);
+		int res = party_dao.update(party);
+		
+		
+		//party_book도 업데이트
+		Map map_member = new HashMap<String, Integer>();
+		map_member.put("m_idx", member.getM_idx());
+		map_member.put("pt_idx", Integer.parseInt( pt_idx));
+		map_member.put("b_leader", Myconst.PartyBook.PARTY_MEMBER);
+		int res2 = party_book_dao.insert(map_member);
+		
+		if(res!=res2)
+			throw new Exception("unknownError_join");
+		
+		
+		
+		
+		
+		
+
+		return res;
+	}
+
+	@Override
+	public int member_leave_from_party(MemberVo member, String pt_idx) throws Exception {
+		// TODO Auto-generated method stub
+		int pt_idx_int = Integer.parseInt(pt_idx);
+		int m_idx = member.getM_idx();
+		Map map = new HashMap<String, Object>();
+		String datetime = Myconst.DateCheck.DATE_P_IDX_FORMAT.format(new Date());
+		map.put("pt_idx", pt_idx_int);
+		map.put("m_idx", m_idx);
+		// 해당 일 중에서 해당 멤버가 있는것만 슬렉트 해옴
+		int list_count = party_book_dao.selectCount(map);
+	
+		if(list_count ==0 || list_count>1)
+			throw new Exception("userError");
+		//userError는 해당 하는 멤버가 2명이상 되거나, 해당하는 멤버가 없을 때 나온다.
+		
+		Party_bookVo party_member = (Party_bookVo)party_book_dao.selectOne2(map);
+		if(party_member.getB_leader() == Myconst.PartyBook.PARTY_LEADER)
+			throw new Exception("cantDeleteLeader");
+		
+		
+		
+		////이제 삭제한다. party_book////
+		
+		int res = party_book_dao.delete(party_member);
+		if(res != 1)
+			throw new Exception("unknownError_leave");
+		
+		//파티를 끌고와서 업데이트 한다//
+		PartyVo party = (PartyVo)party_dao.selectOne(pt_idx_int);
+		
+		int max = party.getPt_maxPeople();
+		int people = party.getPt_people();
+		String condition = party.getPt_condition();
+		//파티가 마감되었을때//
+		if(condition.equals(Myconst.Party.PARTY_CLOSED)) {
+			people--;
+		}
+		//파티의 인원이 꽉 찼을 때
+		else if((max==people)&&condition.equals(Myconst.Party.FULL_PEOPLE)) {
+			people--;
+			condition = Myconst.Party.PARTY_OPEN;
+		}else {
+			people--;
+		}
+		
+		party.setPt_maxPeople(max);
+		party.setPt_people(people);
+		party.setPt_condition(condition);
+		
+		
+		res= party_dao.update(party);
+		if(res != 1)
+			throw new Exception("unknownError_leave");
+		
+		
+			
+		
+		
+		return res;
+	}
+
+
 
 }

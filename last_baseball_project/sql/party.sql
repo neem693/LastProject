@@ -124,3 +124,25 @@ select*
 from party pt inner join play p
 on pt.p_idx = p.p_idx
 where pt.p_idx like "20180925%"
+
+update party set pt_people = 1 where pt_idx = 32
+
+commit
+
+
+
+
+select pt.*,m.m_nick,m.m_idx,p.p_date,s.s_name
+		from party pt inner join
+		party_book b
+		on pt.pt_idx = b.pt_idx
+		inner join member m
+		on b.m_idx =
+		m.m_idx
+		inner join play p
+		on pt.p_idx = p.p_idx
+		inner join studium s
+		on p.s_idx = s.s_idx 
+		where pt.p_idx like "20180927%"
+		
+		limit 0,5
