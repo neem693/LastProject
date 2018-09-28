@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import vo.PlayVo;
+
 public class PlayDaoImpl implements PartyDaoInerface {
 
 	SqlSession session;
@@ -75,11 +77,7 @@ public class PlayDaoImpl implements PartyDaoInerface {
 		return res;
 	}
 
-	@Override
-	public int delete() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
 
 	@Override
 	public int selectCount(Object ob) {
@@ -88,6 +86,65 @@ public class PlayDaoImpl implements PartyDaoInerface {
 		int res = session.selectOne("play.all_count", ob);
 
 		return res;
+	}
+
+	@Override
+	public Object selectOne(Object p_idx) {
+		// TODO Auto-generated method stub
+		
+		
+		Object stadium = session.selectOne("play.select_stadium_team",p_idx);
+		
+		return stadium;
+	}
+
+	@Override
+	public Object selectOne2(Object p_idx) {
+		// TODO Auto-generated method stub
+		
+		PlayVo vo = session.selectOne("play.select_play",p_idx); 
+//		System.out.println(vo.getP_idx());
+//		System.out.println(vo.getP_rts());
+//		System.out.println(vo.getP_rts());
+		
+		
+		return vo;
+	}
+
+	@Override
+	public List selectList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List selectList2(Object map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int selectCount2(Object ob) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int insert2(Object ob) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List selectList3(Object map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int delete(Object ob) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

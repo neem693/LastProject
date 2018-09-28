@@ -23,3 +23,10 @@ CREATE TABLE member
 select * from member
 
 selsct * from normal
+
+
+
+select * from member;
+
+
+

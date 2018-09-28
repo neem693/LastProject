@@ -1,15 +1,15 @@
 `bb`CREATE TABLE joonggo
 (
-	j_idx INT UNSIGNED AUTO_INCREMENT, -- ¿œ∑√π¯»£
-	j_category VARCHAR(100) NOT NULL,    -- ƒ´≈◊∞Ì∏Æ(±€∑Ø∫Í/πÊ∏¡¿Ã/±‚≈∏)
-	j_title VARCHAR(100) NOT NULL,     -- ¡¶∏Ò
-	j_content VARCHAR(2000) NOT NULL,  -- ≥ªøÎ
-	j_price INT NOT NULL,              -- ∞°∞›
-	j_ip VARCHAR(100) NOT NULL,        -- IP¡÷º“
-	j_filename VARCHAR(255) NOT NULL,  -- ¥Î«•ªÁ¡¯ ∆ƒ¿œ ¿Ã∏ß
-	j_image VARCHAR(100) NOT NULL,     -- ¥Î«•ªÁ¡¯ 
-	j_readhits INT,                    -- ¡∂»∏ºˆ
-	j_date DATETIME,                   -- µÓ∑œ¿œ¿⁄
+
+	j_idx INT UNSIGNED AUTO_INCREMENT, -- ÏùºÎ†®Î≤àÌò∏
+	j_category VARCHAR(100) NOT NULL,    -- Ïπ¥ÌÖåÍ≥†Î¶¨(Í∏ÄÎü¨Î∏å/Î∞©ÎßùÏù¥/Í∏∞ÌÉÄ)
+	j_title VARCHAR(100) NOT NULL,     -- Ï†úÎ™©
+	j_content VARCHAR(2000) NOT NULL,  -- ÎÇ¥Ïö©
+	j_price INT NOT NULL,              -- Í∞ÄÍ≤©
+	j_ip VARCHAR(100) NOT NULL,        -- IPÏ£ºÏÜå
+	j_filename VARCHAR(255) NOT NULL,  -- ÎåÄÌëúÏÇ¨ÏßÑ
+	j_readhits INT,                    -- Ï°∞ÌöåÏàò
+	j_date DATETIME,                   -- Îì±Î°ùÏùºÏûê
 	m_idx INT UNSIGNED,
 	CONSTRAINT pk_used_buy_idx PRIMARY KEY(j_idx),
 	CONSTRAINT fk_used_buy_m_idx FOREIGN KEY(m_idx)
@@ -18,13 +18,14 @@
 DROP TABLE joonggo
 SELECT *FROM joonggo
 
-INSERT INTO joonggo(j_category, j_title, j_content, j_price, j_ip, j_filename, j_image, j_readhits, j_date) VALUES(
-                                                                                                                   '¡°∆€',
-                                                                                                                   '∂Û∫– ¡ˆø£ LoveGame ¡¡æ∆~~~¡¶∏Ò',
-                                                                                                                   'LoveGame≥ªøÎ',
+
+INSERT INTO joonggo(j_category, j_title, j_content, j_price, j_ip, j_filename, j_readhits, j_date) VALUES(
+                                                                                                                   'Ï†êÌçº',
+                                                                                                                   'ÎùºÎ∂Ñ ÏßÄÏóî LoveGame Ï¢ãÏïÑ~~~Ï†úÎ™©',
+                                                                                                                   'LoveGameÎÇ¥Ïö©',
                                                                                                                     '5000',
                                                                                                                    '192.120.120.10',
-                                                                                                                   'µŒªÍ',
+
                                                                                                                    '8.png',
                                                                                                                    '0',
                                                                                                                    NOW()); 

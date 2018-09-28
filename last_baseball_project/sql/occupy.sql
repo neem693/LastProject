@@ -11,6 +11,7 @@ create table occupy
 	references studium(s_idx) on update cascade
 )
 
+
 select * from occupy
 
 insert into occupy(o_secondQ,t_name,s_idx) values(

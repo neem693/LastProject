@@ -7,8 +7,8 @@ p_date datetime,
 p_score varchar(8),
 p_rts varchar(10),
 s_idx int unsigned,
-t_home varchar(30) not null,
-t_away varchar(30) not null,
+t_home varchar(30) not null, //이건 널로 바꿔야 할듯 하다.
+t_away varchar(30) not null, //이것도 널로 바꿔야 할듯 하다.
 constraint pk_idx_play primary key(p_idx),
 constraint fk_s_idx_play foreign key(s_idx)
 references studium(s_idx) on update cascade,
@@ -36,8 +36,14 @@ from play p inner join studium s
 on p.s_idx = s.s_idx
 where p.p_idx like '201809%';
 
+
+
  
 select *
 from play
 where p_score = "0-0"
+
+
+
+
 

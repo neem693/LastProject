@@ -47,6 +47,7 @@ ul {
 	padding: 10px;
 	height: auto;
 	display: block;
+
 }
 
 
@@ -104,5 +105,12 @@ ul#q {
 	border-radius: 50% !important;
 	margin: 0 5px;
 }
+/* 스마트 에디터 css */
+.editor
+{
+width: auto; 
+height: auto;" 
+}
+/* 대표이미지 css */
 
 /* 검색 */
