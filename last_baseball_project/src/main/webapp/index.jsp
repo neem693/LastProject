@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 
-location.href = "joonggo/list.do";
+//location.href = "toto_view.do";
 
 </script>
 </head>

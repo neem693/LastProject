@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import vo.MemberVo;
 import vo.TotoValueVo;
+import vo.Toto_Game_Vo;
 
 
 public class TotoDaoImpl implements TotoDaoInterface {
@@ -78,19 +79,69 @@ public class TotoDaoImpl implements TotoDaoInterface {
 	
 	}
 
-
-
+	//여기까지가 파밍을 통한 일정생성 파트
+//---------------------------------------------------------------------------------------------------------
+	//아래부터는 플레이어 생성 게임    파트
 	
-/*	@Override
-	public MemberVo selectOne(Map map) {
+
+	@Override
+	public int insert_totogame(Toto_Game_Vo vo) {
+		
+		int result =session.insert("toto.insert_game",vo);
+		
+		return result;
+	}
+
+
+	@Override
+	public String[] select_toto_game_key(String m_id) {
+		
+		List list=session.selectList("toto_select_game_key",m_id);
+		String[] result= new String[list.size()];
+	
+		for(int i=0; i< list.size();i++) {	
+			result[i]=(String)list.get(i);
+			//System.out.println(result[i].toString());
+		}
+		// TODO Auto-generated method stub
+		return result;
+	}
+
+
+	@Override
+	public List select_pick_gamelist(String game_num) {
+	
+		List list=session.selectList("toto_select_pick_game",game_num);
+		
+		
+		// TODO Auto-generated method stub
+		return list;
+	}
+
+
+	@Override
+	public String Game_Information(String p_idx) {
 		// TODO Auto-generated method stub
 		
-		MemberVo vo=null;
-		vo=session.selectOne("member.member_select_one_nick",map);
-	
-		return vo;
+		String game_result =session.selectOne("toto_select_game_result_info",p_idx);
+		
+		return game_result;
 	}
-*/
+
+
+	@Override
+	public int game_result_update(Toto_Game_Vo vo) {
+		
+	   session.update("toto_game_result_update",vo);
+		
+		// TODO Auto-generated method stub
+		return 1;
+	}
+	
+	
+	
+	
+	
 	
 	
 	

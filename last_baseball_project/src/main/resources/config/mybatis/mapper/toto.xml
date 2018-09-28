@@ -4,6 +4,52 @@
 
 <mapper namespace="toto">
 
+<insert id="insert_game" parameterType="vo.Toto_Game_Vo">
+
+ INSERT INTO toto_gametable(m_id,game_number,bat_price,ratio,p_idx,bat_win_lose,game_result) VALUES    
+  ( 
+   #{m_id},
+   #{game_number},
+   #{bat_price}, 
+   #{ratio},
+   #{p_idx},
+   #{bat_win_lose},
+   #{game_result}
+   )
+
+</insert>
+
+
+
+    <select id="toto_select_game_key" parameterType ="String" resultType="String">
+ 	<!-- 미처리된 게임 key를 가져온다  -->
+		
+		SELECT DISTINCT game_number
+		FROM(
+				SELECT * 
+				FROM toto_gametable
+				WHERE m_id=#{m_idx} AND game_result='T'
+			) g_num
+ 
+    </select>
+
+	    <select id="toto_select_pick_game" parameterType ="String" resultType="vo.Toto_Game_Vo">
+ 	<!--  게임 key를 가지고 해당 게임 리스트를 불러온다.  -->
+		
+			SELECT * FROM toto_gametable
+			WHERE game_number=#{game_num}
+ 
+    </select>
+
+	    <select id="toto_select_game_result_info" parameterType ="String" resultType="String">
+ 	<!--  업데이트 된 게임 결과를 가져온다.  -->
+			SELECT p_rts FROM play
+			WHERE p_idx=#{p_idx}
+
+    </select>
+
+
+
 
 <insert id="insert_toto_schdule" parameterType="java.util.Map">
 
@@ -46,6 +92,11 @@
  
     </select>
 
+	<update id="toto_game_result_update" parameterType="vo.Toto_Game_Vo">
+			UPDATE toto_gametable SET			    
+        	game_result=#{game_result} 
+        	where p_idx=#{p_idx}		
+	</update>
 
 
 </mapper>

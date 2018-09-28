@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Calendar;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -387,17 +388,33 @@ public class BaseBallController {
 	@RequestMapping("/toto_view.do")
 	public String view(Model model) throws IOException{
 		//메인 페이지 출력 
-		
-		
-		
 		List list=totoservice.Select_gamelist();
-
 		model.addAttribute("list",list);
-		
 		return Myconst.Toto.TOTO+"toto_game.jsp";
 	}
 
-
+	@RequestMapping("/bat_game.do")
+	public String bat_game(Model model,HttpServletRequest request){
+		
+	//주기적으로 파라미터명이 변하기때문에(p_idx와동일하므로) 별도로 처리해준다.
+	totoservice.Make_game(request);
+	System.out.println("batting good");	
+	return "toto_view.do";		
+	}
+	
+	@RequestMapping("/game_result.do")
+	public String game_result(Model model,HttpServletRequest request){
+	
+		//HttpSession session = request.getSession(); 세션영역에서 로그인된 사용자의 id를 얻어온다.(9-28 현재 미구현)
+		//session.getAttribute("player");
+		String m_id="player";
+		//사용자가 생선한 게임 가져오기 (미처리된 게임)		
+		totoservice.Game_Result(m_id);	
+			
+		System.out.println("key load good");	
+		return "toto_view.do";		
+	}
+	
 	
 	
 	

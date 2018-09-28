@@ -8,8 +8,6 @@
 		<!-- <typeAlias type="vo.VisitVo" alias="visit"/> -->
 		<typeAlias type="vo.TeamVo" alias="Team" />
 		<typeAlias type="vo.PlayVo" alias = "Play"/>
-
-
 		<typeAlias type="vo.PartyVo" alias = "Party"/>
 
 		<typeAlias type="vo.Parsing_updateVo" alias = "Parsing"/>
