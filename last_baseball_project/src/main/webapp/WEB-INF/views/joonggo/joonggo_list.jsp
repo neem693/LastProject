@@ -92,20 +92,8 @@ function search(){
 
 
 <div class = "footer">
-
- <!-- 검색메뉴 -->
-<div align = "center">
-<select id = "search">
-<option value = "all">전체</option>
-<option value = "title">제목</option>
-<option value = "nick">작성자</option>
-
-<option value = "content">내용</option>
-
-<option value = "title_content">제목+내용</option>
-</select>
-<input id="search_text" value=${ (param.search_text =='null') ? '' : param.search_text }>
-<input type = "button" value = "검색" onclick = "search();">
+<div>
+ <button class="btn btn-primary" onclick ="location.href='insert_form.do'">글쓰기</button>
 </div>
 		<div>
 				<div width="7"></div>
@@ -127,14 +115,28 @@ function search(){
 				<li><a href="list.do?page=4">4</a></li>
 				<li><a href="list.do?page=5">5</a></li>
 				<li><a href="#">»</a></li>
+				
 			</ul>
  <!-- 글쓰기 -->
-<button type="submit" class="btn btn-primary" onclick ="location.href='insert_form.do'">글쓰기</button>
+
 </div>	
+<!-- 검색메뉴 -->
+<div align = "center">
+<select id = "search">
+<option value = "all">전체</option>
+<option value = "title">제목</option>
+<option value = "nick">작성자</option>
 
+<option value = "content">내용</option>
+
+<option value = "title_content">제목+내용</option>
+</select>
+<input id="search_text" value=${ (param.search_text =='null') ? '' : param.search_text }>
+<input type = "button" value = "검색" onclick = "search();">
+</div>
 </div>
 
-</div>
+
 
 
 

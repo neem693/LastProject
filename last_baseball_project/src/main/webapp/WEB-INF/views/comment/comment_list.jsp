@@ -39,15 +39,7 @@
   }
   
   
-  function update(c_idx)
-  {
-	  if (confirm("정말 수정하시겠습니까") == false)
-			return;
-/* 
-		 */f.action = "comment_update_form.do?c_idx=${vo.c_idx}";
-		/*  location.href='update_form.do?j_idx=' + j_idx;  */
-		/* f.submit(); */
-  }
+ 
 </script>
 </head>
 <body>
@@ -105,28 +97,12 @@
                     </li>
                     </c:forEach>
                 </ul>
-               <!--  <a href="#" class="btn btn-primary btn-sm btn-block" role="button"><span class="glyphicon glyphicon-refresh"></span> More</a> -->
+               
             </div>
         </div>
+     
     </div>
 </div>
-<%-- 
-<!--  for(CommentVo vo : list ) -->
-<c:forEach var="vo" items="${ list }">
-  
-  <div>
-         ${ vo.m_nick }[${fn:substring(vo.c_date,0,16)}]
-         <c:if test="${ user.m_id eq vo.m_id }">
-            <input type="button"  value="삭제" onclick="del1('${ vo.c_idx }');">
-            <input type="button"  value="수정" onclick ="location.href='comment_update_form.do?c_idx=${vo.c_idx}">
-            <input type="button"  value="답글" onclick="reply('${ vo.c_idx }');">
-        </c:if>
-  </div>
-  <div><pre>${ vo.c_content }</pre></div>
-  <hr> 
-  <br>
-  <br>
-</c:forEach>
- --%>
+
 </body>
 </html>

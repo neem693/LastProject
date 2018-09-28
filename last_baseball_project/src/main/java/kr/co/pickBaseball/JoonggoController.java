@@ -2,6 +2,9 @@ package kr.co.pickBaseball;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.Base64.Decoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -92,9 +95,15 @@ public String view(int j_idx, Model model)
 {
 	JoonggoVo vo = joonggo_dao.selectOne(j_idx);
 	
-	model.addAttribute("vo", vo);
 	
-	System.out.println(vo.getJ_content());
+	model.addAttribute("vo", vo);
+/*	
+	try {
+		System.out.println( URLDecoder.decode(vo.getJ_content(),"utf-8") );
+	} catch (UnsupportedEncodingException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}*/
 	
 	return myconst.Myconst.Joonggo.VIEW_PATH + "joonggo_view.jsp";
 }

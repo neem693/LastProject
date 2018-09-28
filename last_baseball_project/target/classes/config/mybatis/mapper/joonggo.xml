@@ -6,7 +6,8 @@
 
 <!-- 리스트 조회 -->
 <select id="joonggo_list" resultType="joonggo">
-SELECT j_idx,
+select * from joonggo
+<!-- SELECT j_idx,
 		j_category,
 		j_title,
 		CONVERT(j_content USING utf8),
@@ -20,7 +21,7 @@ SELECT j_idx,
 		j_sell_yn,
 		j_date,
 		m_idx
-		from joonggo
+		from joonggo -->
 </select>
 
 
