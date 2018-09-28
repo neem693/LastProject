@@ -12,16 +12,12 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-
-
 import javax.servlet.http.HttpServletResponse;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,31 +27,18 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import myconst.Myconst;
-
-import myconst.Paging;
 import service.comment.CommentServiceInterface;
 import service.member.MemberServiceInterface;
-import service.normal.NormalServiceImpl;
 import service.normal.NormalServiceInterface;
-
-import service.member.MemberService;
-import service.member.MemberServiceInterface;
-
 import service.party.PartyServiceInterface;
 import service.toto.TotoServiceInterface;
 import util.parsing.TeamParsing;
-
-import vo.CommentVo_normal;
 import vo.MemberVo;
 import vo.NormalVo;
-
-import util.party.Paging;
-import vo.MemberVo;
 import vo.PartyVo;
 import vo.Party_bookVo;
 import vo.PlayVo;
 import vo.StadiumVo;
-
 import vo.TeamVo;
 
 @Controller
@@ -87,14 +70,15 @@ public class BaseBallController {
 	
 	
 	
-	CommentServiceInterface commentservice;
+	CommentServiceInterface commentservice_normal;
 	
-	public CommentServiceInterface getCommentservice() {
-		return commentservice;
+
+	public CommentServiceInterface getCommentservice_normal() {
+		return commentservice_normal;
 	}
 
-	public void setCommentservice(CommentServiceInterface commentservice) {
-		this.commentservice = commentservice;
+	public void setCommentservice_normal(CommentServiceInterface commentservice_normal) {
+		this.commentservice_normal = commentservice_normal;
 	}
 
 	public TotoServiceInterface getTotoservice() {
@@ -561,7 +545,7 @@ public class BaseBallController {
 	@RequestMapping("/comment/normal_comment_list.do")
 	public String normal_comment_list(Integer page, int nc_idx, Model model) {
 		
-		List list = commentservice.normal_comment_list(page, nc_idx);
+		List list = commentservice_normal.normal_comment_list(page, nc_idx);
 		
 		model.addAttribute("list", list);
 		

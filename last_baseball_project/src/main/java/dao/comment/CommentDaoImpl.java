@@ -3,11 +3,7 @@ package dao.comment;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
-
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import vo.CommentVo_normal;
 
@@ -31,7 +27,7 @@ public class CommentDaoImpl implements CommentDaoInterface{
 		
 		List<CommentVo_normal> list = null;
 		
-		list = sqlSession.selectList("comment.comment_normal_list",map);
+		list = sqlSession.selectList("comment_normal.comment_normal_list",map);
 		
 		return list;
 	}
@@ -41,7 +37,7 @@ public class CommentDaoImpl implements CommentDaoInterface{
 		// TODO Auto-generated method stub
 		int count = 0;
 		
-		count = sqlSession.selectOne("comment.comment_row_total",nc_idx);
+		count = sqlSession.selectOne("comment_normal.comment_row_total",nc_idx);
 		
 		return count;
 	}
@@ -51,7 +47,7 @@ public class CommentDaoImpl implements CommentDaoInterface{
 		// TODO Auto-generated method stub
 		int res = 0;
 		
-		res = sqlSession.insert("comment.comment_insert",vo);
+		res = sqlSession.insert("comment_normal.comment_insert",vo);
 		
 		return 0;
 	}
@@ -61,7 +57,7 @@ public class CommentDaoImpl implements CommentDaoInterface{
 		// TODO Auto-generated method stub
 		int res = 0;
 		
-		res = sqlSession.delete("comment.comment_delete",c_idx);
+		res = sqlSession.delete("comment_normal.comment_delete",c_idx);
 		
 		return res;
 	}
@@ -71,7 +67,7 @@ public class CommentDaoImpl implements CommentDaoInterface{
 		// TODO Auto-generated method stub
 		int res = 0;
 		
-		res = sqlSession.insert("comment.comment_reply", vo);
+		res = sqlSession.insert("comment_normal.comment_reply", vo);
 		
 		return res;
 	}
@@ -81,7 +77,7 @@ public class CommentDaoImpl implements CommentDaoInterface{
 		// TODO Auto-generated method stub
 		CommentVo_normal vo = null;
 		
-		vo = sqlSession.selectOne("comment.comment_one",idx);
+		vo = sqlSession.selectOne("comment_normal.comment_one",idx);
 		
 		return vo;
 	}
@@ -91,7 +87,7 @@ public class CommentDaoImpl implements CommentDaoInterface{
 		// TODO Auto-generated method stub
 		int res = 0;
 		
-		res = sqlSession.update("comment.comment_update_step",commentVo);
+		res = sqlSession.update("comment_normal.comment_update_step",commentVo);
 		
 		return res;
 	}

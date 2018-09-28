@@ -29,7 +29,9 @@
 
 	</bean>
 
-	<bean id="commentService" class="service.comment.CommentServiceImpl">
-		<property name="comment_dao" ref="comment_dao"></property>
+	<bean id="commentService_normal" class="service.comment.CommentServiceImpl">
+		<property name="comment_dao" ref="comment_dao_normal"></property>
 	</bean>
+	
+	
 </beans>
