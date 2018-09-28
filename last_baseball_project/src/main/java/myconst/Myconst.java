@@ -4,8 +4,8 @@ import java.text.SimpleDateFormat;
 
 public class Myconst {
 
-	public static class BaseBall {
-		public static String BASEBALL_DIR = "/WEB-INF/views/pickBaseball/";
+	public static class BaseBall{
+		public static String BASEBALL_DIR= "/WEB-INF/views/pickBaseball/";
 		public static String PARTY_DIR = "/WEB-INF/views/pickBaseball/party/";
 
 	}
@@ -20,8 +20,10 @@ public class Myconst {
 
 	public static class DateCheck {
 		public static int year = 2018;
+
 		public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		public static final SimpleDateFormat DATE_P_IDX_FORMAT = new SimpleDateFormat("yyyyMMdd");
+
 
 	}
 

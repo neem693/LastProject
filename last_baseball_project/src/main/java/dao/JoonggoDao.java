@@ -32,6 +32,9 @@ public interface JoonggoDao {
 	// 조회수(readhits)
 	public int readhits(int j_idx);
 	
+	// 판매완료(sell)
+	public int sell(JoonggoVo vo);
+	
 /*	public int reply(JoonggoVo vo);*/
 	
 	

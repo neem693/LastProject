@@ -17,7 +17,8 @@
 		echo "NOTALLOW_".$filename;
 	} else {
 		$file = new stdClass;
-		$file->name = date("YmdHis").mt_rand().".".$filename_ext;
+		$file->name = str_replace("\0", "", rawurldecode($name));
+		//$file->name = date("YmdHis").mt_rand().".".$filename_ext;
 		$file->content = file_get_contents("php://input");
 
 		$uploadDir = '../../upload/';

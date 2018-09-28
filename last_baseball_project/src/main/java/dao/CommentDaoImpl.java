@@ -70,4 +70,27 @@ public class CommentDaoImpl implements CommentDao {
 		return count;
 	}
 
+	@Override
+	public int update(CommentVo vo) {
+		// TODO Auto-generated method stub
+		
+		int res = 0;
+		
+		res = sqlSession.update("comment.comment_update", vo);
+		
+		return res;
+	}
+
+	@Override
+	public CommentVo selectOne(int c_idx) {
+		// TODO Auto-generated method stub
+		
+		CommentVo vo = null;
+		
+		vo = sqlSession.selectOne("comment.comment_one", c_idx);
+		
+		return vo;
+	
+	}
+
 }

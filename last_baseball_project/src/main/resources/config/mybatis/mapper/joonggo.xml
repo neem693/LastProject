@@ -7,6 +7,21 @@
 <!-- 리스트 조회 -->
 <select id="joonggo_list" resultType="joonggo">
 select * from joonggo
+<!-- SELECT j_idx,
+		j_category,
+		j_title,
+		CONVERT(j_content USING utf8),
+		j_price,
+		m_nick,
+		m_tel,
+		m_email,
+		j_ip,
+		j_filename,
+		j_readhits,
+		j_sell_yn,
+		j_date,
+		m_idx
+		from joonggo -->
 </select>
 
 
@@ -60,14 +75,18 @@ select * from joonggo where j_idx=#{j_idx}
 
 <!-- 중고 물품 등록 -->
 <insert id="joonggo_insert" parameterType="joonggo">
-insert into joonggo(j_category, j_title, j_content, j_price, j_ip, j_filename, j_readhits, j_date) values(
+insert into joonggo(j_category, j_title, j_content, j_price, m_nick, m_tel, m_email, j_ip, j_filename, j_readhits, j_sell_yn, j_date) values(
                                                                                               #{j_category},
                                                                                               #{j_title},
                                                                                               #{j_content},
                                                                                               #{j_price},
+                                                                                              #{m_nick},
+                                                                                              #{m_tel},
+                                                                                              #{m_email},
                                                                                               #{j_ip},
                                                                                               #{j_filename},
                                                                                               0,
+                                                                                              'n',
                                                                                               NOW())
 
 </insert>
@@ -97,6 +116,13 @@ update joonggo set readhits = readhits + 1
 where j_idx=#{j_idx}
 </update> 
  
+ <!-- 수정 -->
+<update id="joonggo_sell" parameterType="joonggo">
+update joonggo set                                                                                              
+j_sell_yn = 'y'
+where j_idx = #{j_idx}
+
+</update>
 
 
 

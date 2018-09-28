@@ -60,8 +60,11 @@ function send(f)
 	return;
 	}
 	}
+}
+
 
 </script>
+
 
 
 </head>
@@ -116,9 +119,10 @@ function send(f)
                   <br>
                   <div class="form-group">
                   <label class="col-sm-2" >대표이미지</label>
-                  <div class="col-sm-10"><input type="file" name="Filedata" class = "J_image"></div><br>
-                 <%--  <img src="${ pageContext.request.contextPath }/resources/photo_upload/${ vo.j_filename}"> --%>
-                </div>
+                  <div class="col-sm-10"><input type="file" name="Filedata" class = "J_image"></div>
+                  <img src="${ pageContext.request.contextPath }/resources/photo_upload/${ vo.j_filename}"> 
+
+						</div>
 
 
                 <br>

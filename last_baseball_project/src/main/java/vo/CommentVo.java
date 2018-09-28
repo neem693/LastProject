@@ -4,9 +4,11 @@ public class CommentVo {
 
 	int no; // °Ô½Ã¹° ¼ø¼­
 	int c_idx; // ´ñ±Û ÀÏ·Ã¹øÈ£
-	String c_comment; // ´ñ±Û ³»¿ë
+	String m_nick; // ´ñ±Û ´Ð³×ÀÓ
+	String m_id; // ´ñ±Û ¾ÆÀÌµð
+	String c_content; // ´ñ±Û ³»¿ë
 	String c_ip; // ´ñ±Û ip
-	String c_regdate; // ´ñ±Û ÀÛ¼º ÀÏÀÚ
+	String c_date; // ´ñ±Û ÀÛ¼º ÀÏÀÚ
 	
 	
 	int j_idx; // Áß°í ÀÏ·Ã¹øÈ£
@@ -17,14 +19,16 @@ public class CommentVo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CommentVo(int no, int c_idx, String c_comment, String c_ip, String c_regdate, int j_idx, int m_idx,
+	
+	public CommentVo(int no, int c_idx, String m_nick, String m_id, String c_content, String c_ip, int j_idx, int m_idx,
 			int nc_idx) {
 		super();
 		this.no = no;
 		this.c_idx = c_idx;
-		this.c_comment = c_comment;
+		this.m_nick = m_nick;
+		this.m_id = m_id;
+		this.c_content = c_content;
 		this.c_ip = c_ip;
-		this.c_regdate = c_regdate;
 		this.j_idx = j_idx;
 		this.m_idx = m_idx;
 		this.nc_idx = nc_idx;
@@ -47,12 +51,28 @@ public class CommentVo {
 		this.c_idx = c_idx;
 	}
 
-	public String getC_comment() {
-		return c_comment;
+	public String getM_nick() {
+		return m_nick;
 	}
 
-	public void setC_comment(String c_comment) {
-		this.c_comment = c_comment;
+	public void setM_nick(String m_nick) {
+		this.m_nick = m_nick;
+	}
+
+	public String getM_id() {
+		return m_id;
+	}
+
+	public void setM_id(String m_id) {
+		this.m_id = m_id;
+	}
+
+	public String getC_content() {
+		return c_content;
+	}
+
+	public void setC_content(String c_content) {
+		this.c_content = c_content;
 	}
 
 	public String getC_ip() {
@@ -63,12 +83,12 @@ public class CommentVo {
 		this.c_ip = c_ip;
 	}
 
-	public String getC_regdate() {
-		return c_regdate;
+	public String getC_date() {
+		return c_date;
 	}
 
-	public void setC_regdate(String c_regdate) {
-		this.c_regdate = c_regdate;
+	public void setC_date(String c_date) {
+		this.c_date = c_date;
 	}
 
 	public int getJ_idx() {
@@ -94,9 +114,8 @@ public class CommentVo {
 	public void setNc_idx(int nc_idx) {
 		this.nc_idx = nc_idx;
 	}
-	
-	
 
-	
-	
+
+
+
 }

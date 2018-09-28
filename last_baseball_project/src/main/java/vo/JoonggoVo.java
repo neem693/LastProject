@@ -25,6 +25,7 @@ public class JoonggoVo implements Serializable{
     String j_filename;
     int j_readhits;
     String j_date;
+    String j_sell_yn;
     
     /*È¸¿øvo*/
     int m_idx;
@@ -32,6 +33,7 @@ public class JoonggoVo implements Serializable{
     String m_tel;
     String m_email;
     String m_nick;
+    String m_id;
     
     int c_count; // ´ñ±Û °¹¼ö
     
@@ -143,6 +145,19 @@ public class JoonggoVo implements Serializable{
 	public void setC_count(int c_count) {
 		this.c_count = c_count;
 	}
+	public String getJ_sell_yn() {
+		return j_sell_yn;
+	}
+	public void setJ_sell_yn(String j_sell_yn) {
+		this.j_sell_yn = j_sell_yn;
+	}
+	public String getM_id() {
+		return m_id;
+	}
+	public void setM_id(String m_id) {
+		this.m_id = m_id;
+	}
+
 	
     
     
