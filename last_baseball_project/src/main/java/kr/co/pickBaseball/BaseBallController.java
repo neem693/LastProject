@@ -319,7 +319,10 @@ public class BaseBallController {
 	}
 
 	@RequestMapping("/main/main_list.do")
-	public String insert_form() {
+	public String insert_form(Model model) {
+		List list = partyService.get_team_rank();
+		model.addAttribute("ranking", list);
+		
 		return myconst.Myconst.Main.VIEW_PATH + "main_list.jsp";
 	}
 

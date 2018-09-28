@@ -107,6 +107,9 @@ public class PartyDaoImpl implements PartyDaoInerface {
 	@Override
 	public List selectList() {
 		// TODO Auto-generated method stub
+		
+		
+		
 		return null;
 	}
 

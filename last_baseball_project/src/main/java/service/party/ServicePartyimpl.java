@@ -616,4 +616,13 @@ public class ServicePartyimpl implements PartyServiceInterface {
 		return res;
 	}
 
+	@Override
+	public List get_team_rank() {
+		// TODO Auto-generated method stub
+		
+		List list = team_dao.selectList();
+		
+		return list;
+	}
+
 }

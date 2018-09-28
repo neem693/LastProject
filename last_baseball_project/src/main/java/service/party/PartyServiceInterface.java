@@ -39,6 +39,8 @@ Party_bookVo getPartyLeader(int pt_idx_int);
 List getPartyMember(int pt_idx_int);
 int getleaderCount(int m_idx);
 public PartyVo setting_datetime(PartyVo vo);
+List get_team_rank();
+
 
 
 

@@ -79,3 +79,10 @@ values(
 )
 
 --
+
+
+
+select * 
+from team
+where t_rank <= 10
+order by t_rank asc
