@@ -1,9 +1,14 @@
 package vo;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class PlayVo {
+	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	SimpleDateFormat day_format = new SimpleDateFormat("dd");
 	
+	int day;
 	String p_idx;
 	String p_date;
 	Date date;
@@ -45,6 +50,15 @@ public class PlayVo {
 
 	public void setP_date(String p_date) {
 		this.p_date = p_date;
+		try {
+			setDate(this.format.parse(p_date));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		setDay(Integer.parseInt(day_format.format(this.date)));
+		
 	}
 
 	public Date getDate() {
@@ -93,6 +107,20 @@ public class PlayVo {
 
 	public void setT_away(String t_away) {
 		this.t_away = t_away;
+	}
+
+	
+	
+	
+	
+	public int getDay() {
+		
+		
+		return day;
+	}
+
+	public void setDay(int day) {
+		this.day = day;
 	}
 	
 	

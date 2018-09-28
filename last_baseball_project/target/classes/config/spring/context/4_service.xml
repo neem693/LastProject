@@ -6,13 +6,23 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
 
-	<bean id="partyService" class="service.ServicePartyimpl">
+	<bean id="partyService" class="service.party.ServicePartyimpl">
 		<property name="team_dao" ref="team_dao"></property>
 		<property name="play_dao" ref="play_dao"></property>
 		<property name="parsing_second_dao" ref="parsing_dao"></property>
 	</bean>
 
+	<bean id="memberService" class="service.member.MemberService">
+		<property name="member_dao" ref="member_dao"></property>
+		
 	
+	</bean>
 
+	<bean id="normalService" class="service.normal.NormalServiceImpl">
+		<property name="normal_dao" ref="normal_dao"></property>
+	</bean>
 
+	<bean id="commentService" class="service.comment.CommentServiceImpl">
+		<property name="comment_dao" ref="comment_dao"></property>
+	</bean>
 </beans>
