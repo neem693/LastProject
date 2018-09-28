@@ -39,9 +39,14 @@ Party_bookVo getPartyLeader(int pt_idx_int);
 List getPartyMember(int pt_idx_int);
 int getleaderCount(int m_idx);
 public PartyVo setting_datetime(PartyVo vo);
+
 int set_join_member_to_party(MemberVo member, String pt_idx) throws Exception;
 int member_leave_from_party(MemberVo member, String pt_idx) throws Exception;
 int member_joined_today(String ymd, MemberVo vo);
+
+List get_team_rank();
+
+
 
 
 }

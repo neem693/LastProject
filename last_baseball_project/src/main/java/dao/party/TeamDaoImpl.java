@@ -112,7 +112,10 @@ public class TeamDaoImpl implements PartyDaoInerface{
 	@Override
 	public List selectList() {
 		// TODO Auto-generated method stub
-		return null;
+		
+		List list = session.selectList("team.get_team_rank");
+		
+		return list;
 	}
 
 	@Override

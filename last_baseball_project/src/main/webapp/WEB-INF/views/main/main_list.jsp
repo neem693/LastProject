@@ -45,14 +45,15 @@
 		}
 
 		function clickBtn() {
-			$("title").click(
-					
-				function() {
-						location.href = "http://localhost:9090/pickBaseball/main/main_list.do.jsp";
+			$("title")
+					.click(
+
+							function() {
+								location.href = "http://localhost:9090/pickBaseball/main/main_list.do.jsp";
 							}
-				
-							);
- 
+
+					);
+
 		}
 	}
 </script>
@@ -62,22 +63,21 @@
 <body>
 
 
-<%@include file="/WEB-INF/views/main/header/header.jsp"%>	
-	
+	<%@include file="/WEB-INF/views/main/header/header.jsp"%>
+
 
 	<div class="row">
 
 		<div class="leftcolumn">
 			<div class="card">
 
-				<h2>Automatic Slideshow</h2>
 
 				<div class="slideshow-container">
 
 					<div class="mySlides fade">
 						<div class="numbertext">1 / 4</div>
 						<img
-							src="${ pageContext.request.contextPath }/resources/images/main/slide/pitch.jpg"
+							src="${ pageContext.request.contextPath }/resources/images/main/slide/bench.jpg"
 							style="width: 100%">
 						<div class="text">Caption Text</div>
 					</div>
@@ -101,7 +101,7 @@
 					<div class="mySlides fade">
 						<div class="numbertext">4 / 4</div>
 						<img
-							src="${ pageContext.request.contextPath }/resources/images/main/slide/bench.jpg"
+							src="${ pageContext.request.contextPath }/resources/images/main/slide/pitch.jpg"
 							style="width: 100%">
 						<div class="text">Caption Four</div>
 					</div>
@@ -132,7 +132,33 @@
 
 			</div>
 			<div class="card">
-				<h3>팀 순위</h3>
+				
+				<div class="fakeimg">
+				<span class = "team_item">순위</span>
+				<span class = "team_item">팀</span>
+				<span class = "team_item">경기</span>
+				<span class = "team_item">승</span>
+				<span class = "team_item">무</span>
+				<span class = "team_item">패</span>
+				
+				<div style = "clear:both"></div>
+				<c:forEach var="team" items="${ranking}">
+				
+					<span class = "rank"> ${team.t_rank}</span>
+					<span class = "team">${team.t_name}</span>
+					<span class = "game">${team.t_nom}</span>
+					<span class = "win">${team.t_win}</span>
+					<span class = "draw">${team.t_draw}</span>
+					<span class = "lose">${team.t_lose}</span>
+					
+					<br>
+				</c:forEach>
+				<div style = "clear: both"></div>
+</div>
+			</div>
+
+			<div class="card">
+				<h3>오늘의 소식</h3>
 				<div class="fakeimg">
 					<p>Image</p>
 				</div>
@@ -146,9 +172,9 @@
 		</div>
 	</div>
 
-	
-	 <%@include file="/WEB-INF/views/main/footer/footer.jsp" %>	
-	
+
+	<%@include file="/WEB-INF/views/main/footer/footer.jsp"%>
+
 
 </body>
 </html>
