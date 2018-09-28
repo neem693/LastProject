@@ -362,6 +362,9 @@
 			</div>
 
 			<div class="view_buttons">
+			<c:if test= "${user eq null }">
+			<a href="${pageContext.request.contextPath}/member/login.do">로그인</a>을
+						해야 참여할 수 있습니다.</c:if>
 				<form method="POST">
 					<input type="hidden" name="year" value="${param.year}"> <input
 						type="hidden" name="month" value="${param.month}"> <input
