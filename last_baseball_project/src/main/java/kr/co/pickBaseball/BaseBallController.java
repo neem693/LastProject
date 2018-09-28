@@ -12,12 +12,16 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+
+
 import javax.servlet.http.HttpServletResponse;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,21 +31,41 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import myconst.Myconst;
+
+import myconst.Paging;
+import service.comment.CommentServiceInterface;
+import service.member.MemberServiceInterface;
+import service.normal.NormalServiceImpl;
+import service.normal.NormalServiceInterface;
+
 import service.member.MemberService;
 import service.member.MemberServiceInterface;
+
 import service.party.PartyServiceInterface;
 import service.toto.TotoServiceInterface;
 import util.parsing.TeamParsing;
+
+import vo.CommentVo_normal;
+import vo.MemberVo;
+import vo.NormalVo;
+
 import util.party.Paging;
 import vo.MemberVo;
 import vo.PartyVo;
 import vo.Party_bookVo;
 import vo.PlayVo;
 import vo.StadiumVo;
+
 import vo.TeamVo;
 
 @Controller
 public class BaseBallController {
+
+	
+	
+
+
+
 
 	@Autowired
 	HttpSession session;
@@ -58,6 +82,21 @@ public class BaseBallController {
 	// 토토 서비스 호출 객체
 	TotoServiceInterface totoservice;
 
+
+	NormalServiceInterface normalService;
+	
+	
+	
+	CommentServiceInterface commentservice;
+	
+	public CommentServiceInterface getCommentservice() {
+		return commentservice;
+	}
+
+	public void setCommentservice(CommentServiceInterface commentservice) {
+		this.commentservice = commentservice;
+	}
+
 	public TotoServiceInterface getTotoservice() {
 		return totoservice;
 	}
@@ -65,6 +104,7 @@ public class BaseBallController {
 	public void setTotoservice(TotoServiceInterface totoservice) {
 		this.totoservice = totoservice;
 	}
+
 
 	public MemberServiceInterface getMemberservice() {
 		return memberservice;
@@ -80,6 +120,14 @@ public class BaseBallController {
 
 	public void setPartyService(PartyServiceInterface partyService) {
 		this.partyService = partyService;
+	}
+
+	public NormalServiceInterface getNormalService() {
+		return normalService;
+	}
+
+	public void setNormalService(NormalServiceInterface normalService) {
+		this.normalService = normalService;
 	}
 
 	@ModelAttribute
@@ -296,6 +344,7 @@ public class BaseBallController {
 		if (year == null || month == null || day == null)
 			return "redirect:/party/party_list.do?fail=not_found";
 		
+
 		//파티를 등록하기 전에 오늘 과연 해당 파티가 있는지 없는지 검색해본다.
 		int month_int = Integer.parseInt(month);
 		int day_int = Integer.parseInt(day);
@@ -328,6 +377,7 @@ public class BaseBallController {
 		model.addAttribute("is_long", long_promise);
 
 		// System.out.println(long_promise);
+
 
 		return Myconst.BaseBall.PARTY_DIR + "party_create.jsp";
 
@@ -439,6 +489,86 @@ public class BaseBallController {
 
 	}
 	
+
+	@RequestMapping("/normal/list.do")
+	public String normal_list(Model model,Integer page,String nc_search,String nc_search_text) {
+		
+		List list = normalService.getList(page,nc_search,nc_search_text);
+		
+		model.addAttribute("list",list);
+		//기억 해봐 여기주소
+		return "/WEB-INF/views/normal/normal_list.jsp";
+	}
+	
+	@RequestMapping("/normal/insert_form.do")
+	public String normal_insertform() {
+		
+		return "/WEB-INF/views/normal/normal_insert_form.jsp";
+		
+	}
+	
+	@RequestMapping("/normal/insert.do")
+	public String normal_insert(NormalVo vo, HttpServletRequest request,String editor) {
+		
+		normalService.insert(vo, request, editor);
+		return "/WEB-INF/views/normal/normal_list.jsp";
+	}
+	
+	@RequestMapping("/file_uploader_html5.do")
+	@ResponseBody
+	public String multiplePhotoUpload(HttpServletRequest request,StringBuffer sb) {
+		
+		normalService.file_up(request);
+		return sb.toString();
+	}
+	
+	@RequestMapping("/normal/view.do")
+	public String normal_view(int nc_idx, HttpServletRequest request, Model model) {
+		
+		normalService.normal_view(nc_idx, request, model);
+		NormalVo vo=	normalService.normal_view(nc_idx, request, model);
+		model.addAttribute("vo",vo);
+		
+		return "/WEB-INF/views/normal/normal_view.jsp";
+	}
+	
+	@RequestMapping("/normal/normal_modify_form.do")
+	public String normal_modify_form(int nc_idx,NormalVo vo,Model model) {
+		
+		normalService.normal_modify_form(nc_idx, vo);
+		
+		model.addAttribute("vo",vo);
+		
+		return "/WEB-INF/views/normal/normal_modify.jsp";
+	}
+	
+	@RequestMapping("/normal/normal_modify.do")
+	public String normal_modify(String nc_title, String nc_contents, NormalVo vo) {
+		
+		normalService.normal_modify(nc_title, nc_contents, vo);
+		
+		return "/WEB-INF/views/normal/normal_list.jsp";
+	}
+	
+	@RequestMapping("/normal/normal_delete.do")
+	public String normal_delete(int nc_idx) {
+	
+		normalService.normal_delete(nc_idx);
+		
+		return "/WEB-INF/views/normal/normal_list.jsp";
+	}
+	
+	@RequestMapping("/comment/normal_comment_list.do")
+	public String normal_comment_list(Integer page, int nc_idx, Model model) {
+		
+		List list = commentservice.normal_comment_list(page, nc_idx);
+		
+		model.addAttribute("list", list);
+		
+		return "/WEB-INF/views/normal/normal_view.jsp" + "normal_comment_list.jsp";
+	}
+	
+
 	
 
 	

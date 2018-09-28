@@ -83,22 +83,6 @@
 		m_nick=#{m_nick}	
 		where m_idx =#{m_idx}
 	</update>
-	
-	
-	<select id="member_login" resultType="member" parameterType="member">
-		select * 
-		from member
-		where m_id = #{m_id}
-		and m_pwd = #{m_pwd}
-	</select>
-
-
-<select id="select_id_idx" parameterType="member" resultType="member">
-select * 
-from member
-where m_id = #{m_id} and m_idx = #{m_idx}
-</select>
-
 
 
 </mapper>

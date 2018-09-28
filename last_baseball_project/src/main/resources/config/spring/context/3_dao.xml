@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
@@ -19,6 +19,11 @@
 	</bean>
 
 	<bean id="member_dao" class="dao.member.MemberDaoImpl">
+		<property name="session" ref="sql_template"></property>
+	</bean>
+
+
+	<bean id="normal_dao" class="dao.normal.NormalDaoImpl">
 		<property name="session" ref="sql_template"></property>
 	</bean>
 
@@ -50,4 +55,8 @@
 	</bean>
 
 
+	<bean id="comment_dao" class="dao.comment.CommentDaoImpl">
+		<property name="sqlSession" ref="sql_template"></property>
+	</bean>
+	
 </beans>

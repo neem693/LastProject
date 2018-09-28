@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
@@ -8,6 +8,11 @@
 		<!-- <typeAlias type="vo.VisitVo" alias="visit"/> -->
 		<typeAlias type="vo.TeamVo" alias="Team" />
 		<typeAlias type="vo.PlayVo" alias = "Play"/>
+
+		
+		<typeAlias type="vo.NormalVo" alias = "Normal"/>
+		<typeAlias type="vo.CommentVo_normal" alias = "Comment_normal"/>
+
 		<typeAlias type="vo.PartyVo" alias = "Party"/>
 		<typeAlias type="vo.Parsing_updateVo" alias = "Parsing"/>
 		<typeAlias type="vo.JoonggoVo" alias = "joonggo"/>
@@ -16,14 +21,20 @@
 		<typeAlias type="vo.StadiumVo" alias="stadium"/>
 		<typeAlias type="vo.Party_bookVo" alias="party_book"/>
 
+
 	</typeAliases>
 	<mappers>
 		<mapper resource="config/mybatis/mapper/team.xml" />
 		<mapper resource="config/mybatis/mapper/play.xml"/>
 		<mapper resource="config/mybatis/mapper/parsing.xml"/>
+
+		<mapper resource="config/mybatis/mapper/normal.xml"/>
+		<mapper resource="config/mybatis/mapper/comment_normal.xml"/>
+
 		<mapper resource="config/mybatis/mapper/party.xml"/>
 		<mapper resource="config/mybatis/mapper/party_book.xml"/>
 		<mapper resource="config/mybatis/mapper/stadium.xml"/>
+
 	
 
 		

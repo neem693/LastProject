@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
@@ -33,7 +33,11 @@
 		class="kr.co.pickBaseball.BaseBallController">
 		<beans:property name="partyService" ref="partyService"></beans:property>
 		<beans:property name="memberservice" ref="memberService"></beans:property>
+		<beans:property name="normalService" ref="normalService"></beans:property>
+		<beans:property name="commentservice" ref="commentService"></beans:property>
+
 	<beans:property name="totoservice" ref="totoService"></beans:property>
+
 	
 	</beans:bean>
     
@@ -45,7 +49,7 @@
 
     <beans:bean id = "MainController" class = "kr.co.pickBaseball.MainController"> 
     </beans:bean>
-
+    
    <!--smarteditor  -->
   <resources location="/smarteditor/" mapping="/smarteditor/**/"></resources>
 

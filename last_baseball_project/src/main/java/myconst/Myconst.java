@@ -83,6 +83,29 @@ public class Myconst {
 		public static String PHOTO_WEB_PATH_LOOT = "/pickBaseball/resources/photo_upload/";
 	}
 
+	
+	public static class NormalPageing{
+		public static final int BLOCK_LIST = 15;//page당 게시물 수
+		public static final int BLOCK_PAGE = 10;//page당 보여지는 메뉴갯수
+	}
+	
+	public static class NormalCommentPageing{
+		public static final int BLOCK_LIST = 15;
+		public static final int BLOCK_PAGE = 10;
+	}
+	
+	public static class Normal{
+		public static String VIEW_PATH = "/WEB-INF/views/normal/";
+	}
+	
+
+
+	public static class NormalComment{
+		public static String VIEW_PATH = "/WEB-INF/views/normal/";
+	}
+	
+
+
 	public static class Comment {
 		public static String VIEW_PATH = "/WEB-INF/views/comment/";
 	}
@@ -142,5 +165,6 @@ public class Myconst {
 		}
 
 	}
+
 
 }

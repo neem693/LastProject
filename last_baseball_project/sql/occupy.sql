@@ -57,4 +57,4 @@ insert into occupy(o_secondQ,t_name,s_idx) values(
 					'0',NULL,'13');					
 					
 insert into occupy(o_secondQ,t_name,s_idx) values(
-					'2','KIA','14');	
+					'2','KIA','14');		

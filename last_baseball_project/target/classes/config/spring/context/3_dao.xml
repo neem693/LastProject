@@ -22,32 +22,12 @@
 		<property name="session" ref="sql_template"></property>
 	</bean>
 
-	<bean id="toto_dao" class="dao.toto.TotoDaoImpl">
+	<bean id="normal_dao" class="dao.normal.NormalDaoImpl">
 		<property name="session" ref="sql_template"></property>
 	</bean>
 
-
-	<bean id="party_dao" class="dao.party.PartyDaoImpl">
-		<property name="session" ref="sql_template"></property>
-	</bean>
-
-
-	<bean id="joonggo_dao" class="dao.JoonggoDaoImpl">
-		<property name="sqlSession" ref="sql_template" />
-	</bean>
-
-	<bean id="comment_dao" class="dao.CommentDaoImpl">
+	<bean id="comment_dao" class="dao.comment.CommentDaoImpl">
 		<property name="sqlSession" ref="sql_template"></property>
 	</bean>
-
-	<bean id="party_book_dao" class="dao.party.PartyBookDaoImpl">
-		<property name="session" ref="sql_template"></property>
-	</bean>
-
-	<bean id="stadium_dao" class="dao.party.StadiumDaoImpl">
-		<property name="session" ref="sql_template"></property>
-
-	</bean>
-
-
+	
 </beans>

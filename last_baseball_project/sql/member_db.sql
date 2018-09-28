@@ -20,6 +20,10 @@ CREATE TABLE member
 	references team(t_name) on update cascade
 )
 
+select * from member
+
+selsct * from normal
+
 
 
 select * from member;
