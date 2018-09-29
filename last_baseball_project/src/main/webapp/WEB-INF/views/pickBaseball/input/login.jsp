@@ -29,9 +29,9 @@ function login(){
 
 
 </head>
-<body>
+<body style="background-image:url('${pageContext.request.contextPath}/resources/images/input/baseball_login.jpg');">
 
-
+<%@include file="/WEB-INF/views/main/header/header.jsp" %>	
 
 
 	<div class="container ">
@@ -43,7 +43,7 @@ function login(){
 		
 			<div class="pading">
 				<label class="text_brown lobster"><b>ID</b></label> <input
-					class="login_input" name="m_id" type="text"> <label
+					class="login_input" autofocus="autofocus" name="m_id" type="text"> <label
 					class="text_brown  lobster">PASSWORD</label> <input
 					class="login_input"  name="m_pwd" type="password">
 			</div>
@@ -65,7 +65,7 @@ function login(){
 	</div>
 
 
-
+<%@include file="/WEB-INF/views/main/footer/footer.jsp" %>	
 
 
 

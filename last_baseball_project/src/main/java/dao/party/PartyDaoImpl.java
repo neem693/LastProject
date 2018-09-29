@@ -11,6 +11,7 @@ public class PartyDaoImpl implements PartyDaoInerface {
 	SqlSession session;
 	
 	
+	
 
 	public SqlSession getSession() {
 		return session;
@@ -90,9 +91,23 @@ public class PartyDaoImpl implements PartyDaoInerface {
 	}
 
 	@Override
-	public int update_all(Object[] ob) {
+	public int update_all(Object[] party_array) {
 		// TODO Auto-generated method stub
-		return 0;
+		
+		int res =0;
+		int update=0;
+		
+		
+		for(int i=0; i<party_array.length;i++)
+		{
+			PartyVo vo = (PartyVo)party_array[i];
+			update = session.update("party.update_party_full",vo);
+			res +=update;
+		}
+		
+		
+		
+		return res;
 	}
 
 	@Override
@@ -136,9 +151,12 @@ public class PartyDaoImpl implements PartyDaoInerface {
 	}
 
 	@Override
-	public List selectList3(Object map) {
+	public List selectList3(Object datetime) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		List list = session.selectList("party.select_not_condition_list",datetime);
+		
+		return list;
 	}
 
 	@Override

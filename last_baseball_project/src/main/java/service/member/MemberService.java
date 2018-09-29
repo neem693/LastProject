@@ -1,6 +1,7 @@
 package service.member;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -86,9 +87,9 @@ public class MemberService implements MemberServiceInterface {
 	            
 	       /*     real_filename = System.currentTimeMillis()+"."
 	                    +fileName.substring(fileName.lastIndexOf(".")+1);*/    
-	            real_filename = System.currentTimeMillis()+fileName;
+	            real_filename = String.format("%o%s",System.currentTimeMillis(),fileName);
 	            //파일명에 저장된 시간과 함께 실제 저장될 파일명 생성	
-	         
+	         System.out.println(real_filename);
 	            try {
 	                mFile.transferTo(new File(webPath+real_filename));
 	              //실제 경로에 파일을 생성한다. (저장될경로 + 실제 파일네임)
@@ -100,7 +101,7 @@ public class MemberService implements MemberServiceInterface {
 		//저장경로
 		//System.out.println(webPath);
 		
-		String result= "/pickBaseball/resources/photo_image/" + real_filename;
+		String result= multi.getContextPath() + "/resources/photo_image/" + real_filename;
 		
 		return result;
 	}
@@ -136,7 +137,8 @@ public class MemberService implements MemberServiceInterface {
 		// TODO Auto-generated method stub
 		int res;
 	
-	
+		if(vo.getT_name().equals(""))
+			vo.setT_name(null);
 		res=member_dao.insert(vo);
 		
 		return  res;

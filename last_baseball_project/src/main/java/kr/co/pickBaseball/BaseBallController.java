@@ -118,7 +118,7 @@ public class BaseBallController {
 	// 맵핑을 하기전에 필터로 접근하듯
 	// 이것도 맵핑을 접근하기 전에 기본적으로 하는 것
 	public void default_controller() {
-
+		
 		// String addr = request.getRequestURI();
 		// System.out.println("출력된다.이건 언제 어디서나 디폴트로 출력된다. :" + addr);
 		System.out.println("파싱실행");
@@ -128,8 +128,11 @@ public class BaseBallController {
 		//// 이는 해당 kbo 사이트에 디도스 공격 하는 꼴이다.
 		synchronized (this) {
 			int res = partyService.check_parsing();
-			if (res == 1)
+			if (res == 1) {
 				System.out.println("모든 파싱 완료");
+				int update = partyService.updateParty();
+				System.out.println(update + "개 party 마감 업데이트");
+			}
 			else if (res == 0)
 				System.out.println("지금은 파싱을 할 수 없습니다.(맞는 월이 아님, n시간 카운트가 안지남)");
 			else if (res == -1)
@@ -268,7 +271,7 @@ public class BaseBallController {
 		return json;
 	}
 
-	@RequestMapping("/photo_upload.do")
+	@RequestMapping(value="/photo_upload.do",  produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public String photo_up(MultipartHttpServletRequest multi) {
 

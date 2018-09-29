@@ -66,7 +66,7 @@
 		on
 		p.s_idx = s.s_idx
 		<trim prefix="where" prefixOverrides="and">
-			pt.p_idx like concat(#{ymd},'%') 
+			pt.p_idx like concat(#{ymd},'%')
 			and b.b_leader = 10
 			<if test="team!=null">
 				and pt.t_name = #{team}
@@ -88,22 +88,25 @@
 		inner join
 		member m
 		on b.m_idx = m.m_idx
-		where m.m_idx = #{idx} and  b.b_leader = 10
+		where m.m_idx = #{idx} and b.b_leader = 10
 	</select>
-	
-	<select id="leader_count_select2" parameterType="int" resultType="int">
+
+	<select id="leader_count_select2" parameterType="int"
+		resultType="int">
 		select count(*)
 		from
 		party pt inner join party_book b
-		on pt.pt_idx = b.pt_idx
+		on
+		pt.pt_idx = b.pt_idx
 		inner join
 		member m
 		on b.m_idx = m.m_idx
-		where m.m_idx = #{idx} and  b.b_leader = 10
+		where
+		m.m_idx = #{idx} and b.b_leader = 10
 	</select>
-	
-	
-	
+
+
+
 
 	<select id="party_list_total_count" parameterType="Map"
 		resultType="int">
@@ -120,18 +123,32 @@
 
 
 	</select>
-	
-	
-	<select id="select_one_party" parameterType="int" resultType="party">
-	select * 
-	from party
-	where pt_idx = #{pt_idx};
-	
+
+
+	<select id="select_one_party" parameterType="int"
+		resultType="party">
+		select *
+		from party
+		where pt_idx = #{pt_idx};
+
 	</select>
-	
-	
+
+
 	<update id="update_party_full" parameterType="party">
-	update party set pt_condition =#{pt_condition},pt_people = #{pt_people} where pt_idx = #{pt_idx}
+		update party set pt_condition =#{pt_condition},pt_people = #{pt_people}
+		where pt_idx = #{pt_idx}
 	</update>
 
+
+	<select id="select_not_condition_list" parameterType="String"
+		resultType="party">
+		
+	select pt.*
+	from party pt inner join play p
+	on pt.p_idx = p.p_idx
+	where <![CDATA[p.p_date <= #{datetime}]]> 
+	and <![CDATA[pt_condition <> '마감']]>
+		
+	</select>
+	
 </mapper>

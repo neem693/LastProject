@@ -146,3 +146,10 @@ select pt.*,m.m_nick,m.m_idx,p.p_date,s.s_name
 		where pt.p_idx like "20180927%"
 		
 		limit 0,5
+		
+		
+select pt.*
+from party pt inner join play p
+on pt.p_idx = p.p_idx
+where p.p_date <= "2018-09-29 18:32:30" 
+and pt_condition <> '¸¶°¨'

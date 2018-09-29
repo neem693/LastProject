@@ -45,6 +45,7 @@ int member_leave_from_party(MemberVo member, String pt_idx) throws Exception;
 int member_joined_today(String ymd, MemberVo vo);
 
 List get_team_rank();
+int updateParty();
 
 
 
