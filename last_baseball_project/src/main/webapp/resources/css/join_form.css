@@ -1,23 +1,28 @@
 .center {
-	text-align:center;
-	width: 1000px;
-	height:100%;
-	margin-left:auto; 
-	margin-right:auto;
-	margin-top: 30px;
+	width: 100%;
+	
+}
+.center_c{
+	display: block;
+	margin: 0 !important;
 	
 }
 
 .center_form {
 	
 	position:relative;
-	left:40%;
+	margin-left: 15%;
+	margin-right:15%;
+	padding-left: 23%;
 	margin-top: 30px;
 	
 }
 
 
 .welcom_font {
+	display:block;
+	
+	text-align:center;
 	font-family: "Comic Sans MS", cursive, sans-serif;
 	font-size: 55px !important
 }
@@ -66,6 +71,7 @@
 	height: 50px;
 	width: 350px;
 	padding: 5px;
+	
 }
 
 .input_m {
@@ -83,54 +89,138 @@
 
 .green_text {
 	
-	width:250px;
+	width: 250px;
+text-align: center;
 	color: #fff !important;
+	background-color: gray;
 	
 }
 
 .picture_size{
-	width:100px;
+
 	height:150px;
+	filter:grayscale(100%);
+	opacity: 0.6;
+	transition: all 0.5s;
+	cursor: pointer;
+	box-sizing: border-box;
+	
+	
+}
+.picture_size:hover {
+	opacity:0.8;
+	filter:grayscale(50%);
+}
+.picture_size_selected {
+	opacity:1;
+	filter:grayscale(0%);
+	border: 3px solid yellow;
+}
+.no_team{
+	width: 80%;
+	background-color: black;
+	padding-top: 20px;
+	text-align: center;
+	font-size: x-large;
+	color: white;
+	height: 80px;
 	
 }
 
+@media screen and (max-width: 1050px){
+	
+	.center_form {
+	
+	
+	margin-left: 5%;
+	margin-right:5%;
+	padding-left: 20%;
+	
+}
+}
 
- @media screen and (max-width: 378px) {
+
+@media screen and (max-width: 700px){
+	
+
+
+	.center_form {
+	
+	position:relative;
+	margin-left: 1px;
+	margin-right:1px;
+	padding-left: 13%;
+	
+}
+.input_s{
+	width: 60%;
+	box-sizing: border-box;
 	
 	
+}
+.input_m{
+	width: 80%;
+	box-sizing: border-box;
+}
+}
+
+ @media screen and (max-width: 500px) {
+ .no_team{
+ width: 100%;
+ margin: auto;
+ }
+ 
+ 	.green_text {
+	
+	width: 100%;
+	display:block;
+	margin: auto;
+	
+}
+	
+	form{
+	width:100%;
+	}
 	.welcom_font {
-	font-family: "Comic Sans MS", cursive, sans-serif;
+	
 	font-size: 35px !important
 	}
 
-		.center {
-		text-align:center;
-		width: 500px;
-		height:100%;
-		margin-left:auto; 
-		margin-right:auto;
-		margin-top: 30px;
-		
-	}
+	.center_form {
 	
 	
-	.input_s {
-		
-		height: 50px;
-		width: 200px;
-		padding: 5px;
-	}
+	margin-left: 5px;
+	margin-right:5px;
+	padding-left: 0;
 	
-	.input_m {
-		
-		height: 50px;
-		width: 300px;
-		padding: 5px;
-	}
+}
+.input{
+	display: block;
+	margin: 10px auto;
+	
+}
+.input_s{
+	width: 90%;
+	box-sizing: border-box;
+	
+	
+}
+.input_m{
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.button{
+	display: block;
+	margin: auto;
+	
+}
+	
+	
+
 
 	.picture_size{
-	width:130px;
-	height:140px;
+	height:100px;
 	
 
 }

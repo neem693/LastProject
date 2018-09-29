@@ -769,4 +769,36 @@ public class ServicePartyimpl implements PartyServiceInterface {
 		return list;
 	}
 
+	@Override
+	public int updateParty() {
+		// TODO Auto-generated method stub
+		
+		String datetime = Myconst.DateCheck.DATE_P_IDX_FORMAT.format(new Date());
+		List list = party_dao.selectList3(datetime);
+		int res =0;
+		if(list.size()==0) {
+			return res;
+		}else
+			res = list.size();
+		
+		PartyVo [] party_array = new PartyVo[res];
+		for(int i =0; i<res; i++) {
+			PartyVo vo = (PartyVo)list.get(i);
+			vo.setPt_condition(Myconst.Party.PARTY_CLOSED);
+			list.set(i, vo); //사실 할 필요없는데 그냥 한다.
+			party_array[i] = vo;
+		}
+		System.out.println(res+"개의 파티가 업데이트 될 것입니다.");
+		
+		
+		
+
+		res = party_dao.update_all(party_array);
+		
+			
+		
+		
+		return res;
+	}
+
 }

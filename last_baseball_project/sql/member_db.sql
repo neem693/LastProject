@@ -29,4 +29,4 @@ selsct * from normal
 select * from member;
 
 
-
+alter table member modify column m_photo varchar(255)

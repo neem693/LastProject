@@ -11,14 +11,20 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import myconst.Myconst;
 import vo.JoonggoVo;
 
+
+
 @Controller
 public class FileUploadController {
+	
+
+	
 
 	//단일파일업로드
 	@RequestMapping("/photoUpload")
@@ -106,7 +112,7 @@ public class FileUploadController {
 	         request.getRequestURL();
 	      
 	         /*서버 경로에 이미지가 존재해야 이미지가 뜬다 .그래서  "http://localhost:9090/pickBaseball/resources/photo_upload/" 요렇게 잡아줬다.*/
-	         sFileInfo += "&sFileURL=" + Myconst.PhotoUpload.PHOTO_WEB_PATH_LOOT + realFileNm;
+	         sFileInfo += "&sFileURL=" + request.getContextPath() + realFileNm;
 	         PrintWriter print = response.getWriter();
 	         print.print(sFileInfo);
 	         print.flush();
