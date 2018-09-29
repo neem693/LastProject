@@ -40,12 +40,10 @@
 			WHERE game_number=#{game_num}
  
     </select>
-
 	    <select id="toto_select_game_result_info" parameterType ="String" resultType="String">
  	<!--  업데이트 된 게임 결과를 가져온다.  -->
 			SELECT p_rts FROM play
 			WHERE p_idx=#{p_idx}
-
     </select>
 
 
@@ -98,5 +96,10 @@
         	where p_idx=#{p_idx}		
 	</update>
 
+		<update id="toto_game_result_remove" parameterType="vo.Toto_Game_Vo">
+			UPDATE toto_gametable SET			    
+        	game_result=#{game_result} 
+        	where p_idx=#{p_idx}		
+	</update>
 
 </mapper>

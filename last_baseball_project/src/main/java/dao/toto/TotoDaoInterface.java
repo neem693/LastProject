@@ -23,7 +23,7 @@ public interface TotoDaoInterface {
 	
 	String Game_Information(String p_idx);
 	int game_result_update(Toto_Game_Vo vo);
-	
+	int remove_game_result(Toto_Game_Vo vo);
 	
 	
 }

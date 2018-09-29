@@ -93,8 +93,17 @@ public class BaseBallController {
 		//// 이는 해당 kbo 사이트에 디도스 공격 하는 꼴이다.
 		synchronized (this) {
 			int res = partyService.check_parsing();
-			if (res == 1)
+			if (res == 1) {
 				System.out.println("모든 파싱 완료");
+				try {
+					String result=totoservice.MakeToToScore();
+					System.out.println(result);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
+			
+			}
 			else if (res == 0)
 				System.out.println("지금은 파싱을 할 수 없습니다.(맞는 월이 아님, n시간 카운트가 안지남)");
 			else if (res == -1)

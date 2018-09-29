@@ -137,6 +137,14 @@ public class TotoDaoImpl implements TotoDaoInterface {
 		// TODO Auto-generated method stub
 		return 1;
 	}
+
+	@Override
+	public int remove_game_result(Toto_Game_Vo vo) {
+		//최종처리된 행의 결과값을 처리 완료로 변경 T값일때 미처리 X값일때 처리완료
+		session.update("toto_game_result_remove",vo);
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 	
