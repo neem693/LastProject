@@ -10,8 +10,16 @@ public class Test {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		MatchParsing_v2 match = new MatchParsing_v2();
-		PlayVo [] vo=null;
 		
+		
+		PlayVo [] vo=null;
+		try {
+			vo = match.matchParsing(10, 2018);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		System.out.println(vo);
 		
 //		Calendar c1 = Calendar.getInstance();
 //		c1.set(2018, 9-1, 8);
@@ -54,18 +62,18 @@ public class Test {
 	//	System.out.println("¿Ï·á" + vo.toString());
 		//System.out.println(System.currentTimeMillis());
 		
-		Calendar cal = Calendar.getInstance();
-		
-		cal.set(2018, 8-1 , 1);
-		int week_day = cal.get(Calendar.DAY_OF_WEEK);
-		System.out.println("week_day : " + week_day);
-		
-		System.out.println(Calendar.getInstance().getFirstDayOfWeek());
-		System.out.println(Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
-//		int cal = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
-		System.out.println(Calendar.SUNDAY);
-		System.out.println(Calendar.MONDAY);
-		System.out.println(Calendar.TUESDAY);
+//		Calendar cal = Calendar.getInstance();
+//		
+//		cal.set(2018, 8-1 , 1);
+//		int week_day = cal.get(Calendar.DAY_OF_WEEK);
+//		System.out.println("week_day : " + week_day);
+//		
+//		System.out.println(Calendar.getInstance().getFirstDayOfWeek());
+//		System.out.println(Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
+////		int cal = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+//		System.out.println(Calendar.SUNDAY);
+//		System.out.println(Calendar.MONDAY);
+//		System.out.println(Calendar.TUESDAY);
 		
 	}
 

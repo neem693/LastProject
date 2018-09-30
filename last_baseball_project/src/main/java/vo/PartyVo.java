@@ -51,6 +51,9 @@ public class PartyVo {
 	////// 좌표 x,y축을 정한다.
 	double x;
 	double y;
+	
+	
+
 
 	public PartyVo() {
 		// TODO Auto-generated constructor stub
@@ -315,6 +318,8 @@ public class PartyVo {
 	public void setPt_day_str(String pt_day_str) {
 		this.pt_day_str = pt_day_str;
 	}
+
+
 
 
 	

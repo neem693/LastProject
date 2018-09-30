@@ -141,7 +141,7 @@ public class BaseBallController {
 		}
 	}
 
-	@RequestMapping("/parsing_match.do")
+	@RequestMapping(value="/parsing_match.do", produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public String parsing_match(String pwd, String year, String month) throws Exception {
 

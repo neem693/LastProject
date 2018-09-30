@@ -27,6 +27,12 @@ public class PlayVo {
 	String t_away_image_dir;
 	////해당 팀들의 이미지 파일들을 가져오는 곳이다.
 	
+	
+	
+	//////더블헤더 경기라면, 더블헤더 마크를 달기 위해 
+	String dh;
+
+	
 	public PlayVo() {
 		// TODO Auto-generated constructor stub
 	}
@@ -158,7 +164,21 @@ public class PlayVo {
 	
 	
 
+	public String getDh() {
+		
+		if(this.p_idx.split("_").length ==3)
+			this.dh = p_idx.split("_")[2];
+		else this.dh = null;
+		
+		return dh;
 
+	}
+
+	public void setDh(String dh) {
+		
+		this.dh = dh;
+	
+	}
 
 
 
