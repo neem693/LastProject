@@ -252,6 +252,7 @@ public class ServicePartyimpl implements PartyServiceInterface {
 		int today = cal.get(Calendar.DAY_OF_MONTH);
 		int this_year = cal.get(Calendar.YEAR);
 		int this_month = cal.get(Calendar.MONTH) + 1;
+		int this_day = cal.get(Calendar.DAY_OF_MONTH);
 		cal.setTime(date);
 
 		// cal.set(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH) , 1);
@@ -264,6 +265,7 @@ public class ServicePartyimpl implements PartyServiceInterface {
 		map.put("last_day", last_day);
 		map.put("this_year", this_year);
 		map.put("this_month", this_month);
+		map.put("this_day", this_day);
 
 		return map;
 	}

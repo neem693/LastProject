@@ -3,7 +3,7 @@
 
 @font-face {
 	font-family: notoFont;
-	src: url('/pickBaseball/resources/font/NotoSerifKR-Regular.otf');
+	src: url('../../../resources/font/NotoSerifKR-Regular.otf');
 }
 
 * {

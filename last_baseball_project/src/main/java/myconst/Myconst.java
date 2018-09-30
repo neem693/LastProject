@@ -2,12 +2,10 @@ package myconst;
 
 import java.text.SimpleDateFormat;
 
-
-
 public class Myconst {
 
-	public static class BaseBall{
-		public static String BASEBALL_DIR= "/WEB-INF/views/pickBaseball/";
+	public static class BaseBall {
+		public static String BASEBALL_DIR = "/WEB-INF/views/pickBaseball/";
 		public static String PARTY_DIR = "/WEB-INF/views/pickBaseball/party/";
 
 	}
@@ -25,7 +23,6 @@ public class Myconst {
 
 		public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		public static final SimpleDateFormat DATE_P_IDX_FORMAT = new SimpleDateFormat("yyyyMMdd");
-
 
 	}
 
@@ -78,37 +75,34 @@ public class Myconst {
 	}
 
 	public static class PartyListPage {
-	//public static String PARTY_PAGING_URL = "/pickBaseball/party/show_party_list.do";
+		// public static String PARTY_PAGING_URL =
+		// "/pickBaseball/party/show_party_list.do";
 		public static int BLOCK_LIST = 3; // page당 게시물수
 		public static int BLOCK_PAGE = 3; // page당 보여지는 메뉴 갯수
 	}
 
 	public static class PhotoUpload {
-		//public static String PHOTO_WEB_PATH_LOOT = "/pickBaseball/resources/photo_upload/";
+		// public static String PHOTO_WEB_PATH_LOOT =
+		// "/pickBaseball/resources/photo_upload/";
 	}
 
-	
-	public static class NormalPageing{
-		public static final int BLOCK_LIST = 15;//page당 게시물 수
-		public static final int BLOCK_PAGE = 10;//page당 보여지는 메뉴갯수
+	public static class NormalPageing {
+		public static final int BLOCK_LIST = 15;// page당 게시물 수
+		public static final int BLOCK_PAGE = 10;// page당 보여지는 메뉴갯수
 	}
-	
-	public static class NormalCommentPageing{
+
+	public static class NormalCommentPageing {
 		public static final int BLOCK_LIST = 15;
 		public static final int BLOCK_PAGE = 10;
 	}
-	
-	public static class Normal{
+
+	public static class Normal {
 		public static String VIEW_PATH = "/WEB-INF/views/normal/";
 	}
-	
 
-
-	public static class NormalComment{
+	public static class NormalComment {
 		public static String VIEW_PATH = "/WEB-INF/views/normal/";
 	}
-	
-
 
 	public static class Comment {
 		public static String VIEW_PATH = "/WEB-INF/views/comment/";
@@ -168,7 +162,36 @@ public class Myconst {
 
 		}
 
-	}
+		public static String GET_TEAM_BIG_IMAGE_DIR(String t_name) {
+			String image_dir = null;
 
+			if (t_name.equals("두산"))
+				image_dir = "/resources/images/big/doosan_bears.png";
+			else if (t_name.equals("SK"))
+				image_dir = "/resources/images/big/sk_wyverns.png";
+			else if (t_name.equals("한화"))
+				image_dir = "/resources/images/big/hanwha_eagles.png";
+			else if (t_name.equals("넥센"))
+				image_dir = "/resources/images/big/nexen_heroes.png";
+			else if (t_name.equals("LG"))
+				image_dir = "/resources/images/big/lg_twins.png";
+			else if (t_name.equals("KIA"))
+				image_dir = "/resources/images/big/kia_tigers.png";
+			else if (t_name.equals("삼성"))
+				image_dir = "/resources/images/big/samsung_lions.png";
+			else if (t_name.equals("롯데"))
+				image_dir = "/resources/images/big/lotte_giants.png";
+			else if (t_name.equals("NC"))
+				image_dir = "/resources/images/big/nc_dinos.png";
+			else if (t_name.equals("KT"))
+				image_dir = "/resources/images/big/kt_wiz.png";
+			else
+				image_dir = "/resources/images/big/korean_baseball_organization.png";
+
+			return image_dir;
+
+		}
+
+	}
 
 }
