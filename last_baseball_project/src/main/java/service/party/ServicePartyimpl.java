@@ -775,7 +775,7 @@ public class ServicePartyimpl implements PartyServiceInterface {
 	public int updateParty() {
 		// TODO Auto-generated method stub
 		
-		String datetime = Myconst.DateCheck.DATE_P_IDX_FORMAT.format(new Date());
+		String datetime = Myconst.DateCheck.DATE_FORMAT.format(new Date());
 		List list = party_dao.selectList3(datetime);
 		int res =0;
 		if(list.size()==0) {
