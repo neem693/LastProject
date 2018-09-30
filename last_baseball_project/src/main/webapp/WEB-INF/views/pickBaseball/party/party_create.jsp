@@ -335,7 +335,7 @@ table {
 					onchange="ajax_for_stadium_team(this);">
 						<option value="0" selected="selected">경기 선택</option>
 						<c:forEach var="o" items="${match_list}">
-							<option value="${o.p_idx}">${o.t_away}VS${o.t_home}</option>
+							<option value="${o.p_idx}">${o.t_away}VS${o.t_home}<c:if test="${o.dh ne null}">[DH]</c:if></option>
 						</c:forEach>
 				</select></td>
 			</tr>

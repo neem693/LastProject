@@ -45,5 +45,22 @@ where p_score = "0-0"
 
 
 
+insert into play(p_idx,
+p_date,
+p_score,
+p_rts,
+s_idx,
+t_home, 
+t_away)
+
+values(
+'20181010_KT·Ôµ¥_(DH)',
+'2018-10-10 18:00:00',
+'¿¹Á¤',
+'-',
+5,
+'KT',
+'·Ôµ¥'
+)
 
 

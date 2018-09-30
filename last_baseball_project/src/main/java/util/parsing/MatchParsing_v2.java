@@ -96,6 +96,12 @@ public class MatchParsing_v2 {
 		int home_score = 0, away_score = 0;
 
 		PlayVo[] vo = new PlayVo[match_text.length];
+		
+		
+		int match_change=0; //0은 정상 아니다.
+							//1은 더블헤더
+							//2부터는 추가할것
+							
 
 		for (int i = 0; i < match_text.length; i++) {
 			length = match_text[i].length;
@@ -105,6 +111,20 @@ public class MatchParsing_v2 {
 				day = day.replaceAll("\\(.*\\)", "");
 				day = day.replaceAll("\\.", "-");
 				time = match_text[i][1];
+				
+				
+				
+				//더블헤더 경기이라면
+				if(time.isEmpty()) {
+					match_change = 1;
+					time = "18:00";
+				}
+					
+				
+				
+				
+				
+				
 				time = time.replaceAll("<.*?>", "");
 				day_time = String.format("%d-%s %s:00", thisyear, day, time);
 				vo[i].setP_date(day_time);
@@ -146,11 +166,35 @@ public class MatchParsing_v2 {
 				vo[i].setS_idx(setStadium(match_text[i][7]));
 
 				day_idx = day.replaceAll("-", "");
-				vo[i].setP_idx(String.format("%d%s_%s%s", thisyear, day_idx, m.group(1), m.group(4)));
-
+				
+				
+				
+				//더블헤더라면
+				if(match_change == 1)
+					vo[i].setP_idx(String.format("%d%s_%s%s_(DH)", thisyear, day_idx, m.group(1), m.group(4)));
+				//정상이라면
+				else
+					vo[i].setP_idx(String.format("%d%s_%s%s", thisyear, day_idx, m.group(1), m.group(4)));
+			
+				
+				
 			} else {
 				time = match_text[i][0];
 				time = time.replaceAll("<.*?>", "");
+				
+				
+				
+				
+				//더블헤더 경기이라면
+				if(time.isEmpty()) {
+					match_change = 1;
+					time = "18:00";
+				}
+					
+				
+				
+				
+				
 				day_time = String.format("%d-%s %s:00", thisyear, day, time);
 				vo[i].setP_date(day_time);
 
@@ -188,11 +232,23 @@ public class MatchParsing_v2 {
 					vo[i].setP_score(String.format("%d-%d", away_score, home_score));
 				}
 				vo[i].setS_idx(setStadium(match_text[i][6]));
-				vo[i].setP_idx(String.format("%d%s_%s%s", thisyear, day_idx, m.group(1), m.group(4)));
+				
+				
+				//더블헤더라면
+				if(match_change == 1)
+					vo[i].setP_idx(String.format("%d%s_%s%s_(DH)", thisyear, day_idx, m.group(1), m.group(4)));
+				//정상이라면
+				else
+					vo[i].setP_idx(String.format("%d%s_%s%s", thisyear, day_idx, m.group(1), m.group(4)));
+			
 
 			}
 
 			vo[i].setP_date(day_time);
+			
+			
+			//다시 초기화 할것들 여기에
+			match_change =0;
 
 		}
 
