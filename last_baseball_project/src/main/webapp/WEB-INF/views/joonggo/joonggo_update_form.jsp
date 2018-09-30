@@ -7,10 +7,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/joonggo/joonggo.css">
+<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/joonggo/joonggo.css?var=1" rel="stylesheet" id="bootstrap-css">
 <!-- smart_editor2 -->
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -60,7 +60,7 @@ function send(f)
 	return;
 	}
 	}
-}
+
 
 
 </script>
@@ -69,6 +69,7 @@ function send(f)
 
 </head>
 <body>
+<%@include file="/WEB-INF/views/main/header/header.jsp" %>	
 <form method="post" id="insertBoardFrm" enctype="multipart/form-data">
 <input type = "hidden" name = "j_idx" value="${vo.j_idx }">
 <input type = "hidden" name = "page" value="${param.page }">
@@ -79,16 +80,27 @@ function send(f)
           <h3 class="panel-title">수정</h3>
         </div>
         <br>
-        
-      <div class = "category">  
-        <label class="col-sm-2">카테고리</label>
-        <select id="j_category" name="j_category" align = "list">
+     <table>
+        <tr>
+     <td width = "300px"> <div class="form-group">  
+        <label width = "100px">카테고리</label>
+       <select id="j_category" name="j_category" align = "list">
         		<option value="0">카테고리 선택</option>
         		<option value="1">구매합니다</option>
         		<option value="2">판매합니다</option>
         		<option value="3">교환합니다</option>
         </select>
     </div>
+    </td>
+    <td><div class="form-group">
+                  <label width = "100px">대표이미지</label>
+                 
+                  <img src="${ pageContext.request.contextPath }/resources/photo_upload/${ vo.j_filename}"> 
+                   <div><input type="file" name="Filedata" class = "J_image"></div>
+				</div>
+				</td>
+				</tr>
+    </table>
     
         <div class="panel-body">
                 <div class="form-group">
@@ -102,8 +114,8 @@ function send(f)
                 </div>
                 <br>
                   <div class="form-group">
-                  <label class="col-sm-2">이름</label>
-                  <div class="col-sm-10"><input type="text" class="form-control" name="m_name" value="${vo.m_name }" placeholder="이름을 입력하세요." ></div><br>
+                  <label class="col-sm-2">닉네임</label>
+                  <div class="col-sm-10"><input type="text" class="form-control" name="m_nick" value="${vo.m_nick }" placeholder="닉네임을 입력하세요." ></div><br>
                 </div>
                 <br>
                   <div class="form-group">
@@ -115,19 +127,11 @@ function send(f)
                   <label class="col-sm-2">이메일</label>
                   <div class="col-sm-10"><input type="text" class="form-control" name="m_email" value="${vo.m_email }" placeholder="E_MAIL을 입력하세요." ></div><br>
                 </div>
-                
                   <br>
-                  <div class="form-group">
-                  <label class="col-sm-2" >대표이미지</label>
-                  <div class="col-sm-10"><input type="file" name="Filedata" class = "J_image"></div>
-                  <img src="${ pageContext.request.contextPath }/resources/photo_upload/${ vo.j_filename}"> 
-
-						</div>
-
-
+                  
                 <br>
                       <!-- 스마트 에디터2 -->
-                    <textarea name="j_content" id="editor" class = "editor" value ="${vo.j_content }" ></textarea>
+                    <textarea style="width: auto; height: auto;" name="j_content" id="editor"  value ="${vo.j_content }" ></textarea>
 
 		</div>
 

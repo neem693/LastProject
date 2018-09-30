@@ -9,19 +9,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<link
+
+<!-- <link
 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
+	rel="stylesheet" id="bootstrap-css"> -->
 <script
 	src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-<link
+<!-- <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css" />
+	rel="stylesheet" type="text/css" /> -->
 <link rel="stylesheet"
-	href="${ pageContext.request.contextPath }/resources/css/joonggo/joonggo_view.css?ver=4">
+	href="${ pageContext.request.contextPath }/resources/css/joonggo/joonggo_view.css?ver=1" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 	function del(f) {
 		if (confirm('정말 삭제하시겠습니까?') == false)
@@ -139,28 +139,32 @@
 <body>
 <%@include file="/WEB-INF/views/main/header/header.jsp" %>	
 	<!-- method="post" -->
+	<form>
 	<div class="container center_cont">
-		<form>
+		
 			<input type="hidden" name="j_idx" value="${vo.j_idx }">
 			<%-- 	    <input type="hidden" name="m_idx" value="${user.m_idx }"> --%>
 			<input type="hidden" name="page" value="${param.page}">
+		
 
 
 			<div class="title">
 				<label class="col-sm-10">${vo.j_title }</label>
-
+                <c:if test="${requestScope.vo.m_nick eq sessionScope.user.m_nick }">
+			     <!-- (1 eq 1) : true를 만들어줘서 삭제 버튼을 보여줌 -->
 				<div class="pull-right">
 					<!-- <img> tag form tag가 아닌 form tag인 <input type="image">이용하던지 
                                                   <button><button> 이용하던지 
                                                   주의사항) 기본이벤트 onsubmit() call
                                                   onclick = "retrun false;" <= 자동submit() 하지말아라-->
 					<!-- 	<img src="../img/btn_delete.gif" alt="답변 또는 댓글이 있을 경우 삭제가 되지 않습니다."> -->
-					<button id="button1" onclick="del(this.form); return false;">삭제</button>
+					<button id="button1" onclick="del(this.form);">삭제</button>
 				</div>
 
 				<div class="pull-right">
 					<button id="button1" onclick="send(this.form);">수정</button>
 				</div>
+				</c:if>
 			</div>
 			<br>
 			<hr class="five">
@@ -173,6 +177,7 @@
 							<c:if test="${vo.j_sell_yn eq 'y'}">
 								<div class="center">
 									<div class="mid"></div>
+									
 								</div>
 							</c:if>
 
@@ -180,24 +185,24 @@
 					<p class="content"></p>
 
 
-					<td width="1119" align="left" valign="top">
+					<td width="1119" align="left" valign="top" >
 						<div class="title1">
 							<label class="col-sm-10">${vo.j_title }</label>
+							<c:if test="${requestScope.vo.m_nick eq sessionScope.user.m_nick }">
+		                      	<!-- (1 eq 1) : true를 만들어줘서 삭제 버튼을 보여줌 -->
 							<div class="pull-right">
 								<button id="button2" onclick="sell(this.form); return false;">판매완료</button>
 							</div>
+							</c:if>
 						</div>
+						
 						<div class="price">
 							<label class="col-sm-10"><fmt:formatNumber
-									value="${vo.j_price }" />원</label>
+									value="${vo.j_price }" />원</label><br>
 						</div>
-					</td>
-				</tr>
-			</table>
-
-			<hr class="five">
-			<div class="row">
-				<div class="col-md-4">
+						
+					
+					<div class="col-md-4">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="material-icons">face</i></span>
 						<input class="form-control" value="${vo.m_nick }" readonly>
@@ -209,6 +214,7 @@
 						<input class="form-control" value="${vo.m_tel }" readonly>
 					</div>
 				</div>
+				
 				<div class="col-md-4 reduceleftpadding">
 					<div class="input-group date" data-provide="datepicker">
 						<div class="input-group-addon">
@@ -218,8 +224,7 @@
 							value="${vo.m_email }" readonly>
 					</div>
 				</div>
-			</div>
-			<div class="row">
+				<br>
 				<div class="col-md-4">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="material-icons">access_time</i></span>
@@ -251,20 +256,95 @@
 
 					</div>
 				</div>
+			
+				</td>
+				</tr>
+				
+				
+			</table>
+
+			<hr class="five">
+		<%-- 	<div class="row">
+				<div class="col-md-4">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="material-icons">face</i></span>
+						<input class="form-control" value="${vo.m_nick }" readonly>
+					</div>
+				</div>
 				<div class="col-md-4 reduceleftpadding">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="material-icons">call</i></span>
+						<input class="form-control" value="${vo.m_tel }" readonly>
+					</div>
+				</div>
+				<div class="col-md-4 reduceleftpadding">
+					<div class="input-group date" data-provide="datepicker">
+						<div class="input-group-addon">
+							<i class="material-icons">email</i>
+						</div>
+						<input class="form-control" placeholder="  이메일"
+							value="${vo.m_email }" readonly>
+					</div>
+				</div>
+			</div> --%>
+			<div class="row">
+	<%-- 			<div class="col-md-4">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="material-icons">access_time</i></span>
+						<input class="form-control"
+							value="${fn:substring(vo.j_date,0,16)}" readonly>
+					</div>
+				</div>
+				<c:choose>
+					<c:when test="${vo.j_category eq '1'}">
+						<c:set var="category">구매합니다.</c:set>
+					</c:when>
+					<c:when test="${vo.j_category eq '2'}">
+						<c:set var="category">판매합니다.</c:set>
+					</c:when>
+					<c:when test="${vo.j_category eq '3'}">
+						<c:set var="category">교환합니다.</c:set>
+					</c:when>
+					<c:otherwise>
+						<c:set var="category">카테고리선택</c:set>
+					</c:otherwise>
+
+				</c:choose>
+				<div class="col-md-4 reduceleftpadding">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="material-icons">storage</i></span>
+						<input class="form-control" value="${category}" readonly>
+
+
+
+					</div>
+				</div>
+				<div class="cgg ol-md-4 reduceleftpadding">
 					<div class="input-group">
 						<span class="input-group-addon">@</span> <input
 							class="form-control" placeholder="Username">
 					</div>
-				</div>
+				</div>  --%>
 				<div class="content">
 					<div class="col-md-6">
 						<div class="form-group">${vo.j_content }</div>
 					</div>
 				</div>
 			</div>
-		</form>
 		<br>
+		<table>
+		<tr>
+		<th>댓글</th>
+		<td><!-- 댓글갯수 -->
+        <c:if test="${ vo.c_count ne 0 }">
+	    <font>${ vo.c_count }</font>
+		</c:if>
+		${ vo.c_count }
+		</td>
+		<th>조회수</th>
+		<td>${vo.j_readhits }</td>
+		</tr>
+		</table>
 		<!-- 댓글작성  -->
 		<div class="comment_box">
 			<div id="comment_input_box">
@@ -286,27 +366,32 @@
 
 				</div>
 				<button class="button3" onclick="comment_send();">등록</button>
+			
+				
 			</div>
 		</div>
+		
 	</div>
 
 
-
+   <br>
 
 	<div class="button_div">
 
 		<c:if test="${requestScope.vo.m_nick eq sessionScope.user.m_nick }">
 			<!-- (1 eq 1) : true를 만들어줘서 삭제 버튼을 보여줌 -->
 			<!-- 글쓰기 -->
-			<button type="submit" class="button1"
-				onclick="location.href='insert_form.do';">글쓰기</button>
+			<button type="submit" class="button1"onclick="location.href='insert_form.do';">글쓰기</button>
+		    <button class="button1" onclick="send(this.form);">수정</button>
+		    <button class="button1" onclick="del(this.form);">삭제</button>
 		</c:if>
+	
 
 		<button type="submit" class="button1"
 			onclick="location.href='list.do?page=${param.page}&search=${ param.search}&search_text=${ param.search_text}'; return false;"">목록보기</button>
 
 	</div>
-
+</form>
 </body>
 
 </html>

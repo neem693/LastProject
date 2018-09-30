@@ -7,13 +7,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/joonggo/joonggo.css?ver=1">
+<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/joonggo/joonggo.css?ver=1" rel="stylesheet" id="bootstrap-css">
 <script type="text/javascript">
 window.onload = function()
 {
@@ -52,9 +52,14 @@ function search(){
 
 </head>
 <body>
+
+<%@include file="/WEB-INF/views/main/header/header.jsp" %>	
+
 <div id = "main_box">
 <!-- <div class = "center" id = "header">중고 물품</div> -->
-
+<input type="hidden" name="j_idx" value="${vo.j_idx }">
+<%-- <input type="hidden" name="m_idx" value="${user.m_idx }"> --%>
+<input type="hidden" name="page" value="${param.page}">
 <div class = "content" >
 <c:forEach var = "vo" items = "${list }">
 			<ul>
@@ -79,30 +84,37 @@ function search(){
 		
 </c:forEach>
 	 </div>
+	 <div class ="none">
+	 
      	 <!-- 게시글이 없으면 -->           
             <c:if test="${ empty list }">
 				<tr>
 					<td class ="null">
+					<br>
 						현재 등록된 글이 없습니다.
 					</td>
 				</tr>
 			</c:if>
-
 </div>
+
 
 
 <div class = "footer">
-<div>
+<hr class = "line">
+<div class = "write" >
+<c:if test="${requestScope.vo.m_nick ne sessionScope.user.m_nick }">
+			<!-- (1 eq 1) : true를 만들어줘서 삭제 버튼을 보여줌 -->
  <button class="btn btn-primary" onclick ="location.href='insert_form.do'">글쓰기</button>
+ </c:if>
 </div>
-		<div>
+		<%-- <div>
 				<div width="7"></div>
    				<div class="f11" align="center">
                     <!-- 페이지 메뉴  -->
                     ${ pageMenu }
                     
 			</div>
-			</div>	
+			</div>	 --%>
 			
 			
 <!-- 페이지 처리 -->	
@@ -117,10 +129,8 @@ function search(){
 				<li><a href="#">»</a></li>
 				
 			</ul>
- <!-- 글쓰기 -->
-
 </div>	
-<!-- 검색메뉴 -->
+ <!-- 검색메뉴 -->
 <div align = "center">
 <select id = "search">
 <option value = "all">전체</option>
@@ -132,13 +142,10 @@ function search(){
 <option value = "title_content">제목+내용</option>
 </select>
 <input id="search_text" value=${ (param.search_text =='null') ? '' : param.search_text }>
-<input type = "button" value = "검색" onclick = "search();">
+<input type = "button" id="button1" value = "검색" onclick = "search();">
+</div> 
+
 </div>
 </div>
-
-
-
-
-
 </body>
 </html>
