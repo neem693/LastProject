@@ -16,11 +16,21 @@ public class MemberVo {
 	String t_name;
 	String m_nick; 
 	String m_ip; 
+	String m_money; 
+	
+	
+	public String getM_money() {
+		return m_money;
+	}
 
-	
-	
+
+	public void setM_money(String m_money) {
+		this.m_money = m_money;
+	}
+
+
 	public MemberVo(int m_idx, String m_id, String m_name, String m_pwd, String m_date, String m_email, String m_photo,
-			String m_comment, String m_addr, String m_zip_code, String m_tel, String t_name, String m_nick,
+			String m_comment, String m_money,String m_addr, String m_zip_code, String m_tel, String t_name, String m_nick,
 			String m_ip) {
 		super();
 		this.m_idx = m_idx;
@@ -37,6 +47,7 @@ public class MemberVo {
 		this.t_name = t_name;
 		this.m_nick = m_nick;
 		this.m_ip = m_ip;
+		this.m_money =m_money;
 	}
 
 

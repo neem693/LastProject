@@ -91,8 +91,23 @@ public class TotoDaoImpl implements TotoDaoInterface {
 		
 		return result;
 	}
-
-
+	
+	@Override
+	public String[] select_toto_game_id() {
+		//최종처리된 행의 결과값을 처리 완료로 변경 T값일때 미처리 X값일때 처리완료
+		
+		List list=session.selectList("toto_select_game_id");
+		String[] game_id= new String[list.size()];
+		
+		for(int i=0; i< list.size();i++) {	
+			game_id[i]=(String)list.get(i);
+			//System.out.println(result[i].toString());
+		}
+		
+		return game_id;
+	}
+	
+	
 	@Override
 	public String[] select_toto_game_key(String m_id) {
 		
@@ -145,7 +160,36 @@ public class TotoDaoImpl implements TotoDaoInterface {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
+	@Override
+	public int toto_member_money_update(MemberVo vo) {
+		
+		session.update("toto_game_money",vo);
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public List my_bat_gamelist(MemberVo vo) {
+
+	List list =	session.selectList("toto_my_bating_list",vo);
+		return list;
+
 	
+	}
+
+
+	@Override
+	public MemberVo my_money_read(MemberVo vo) {
+
+		MemberVo voo = session.selectOne("member_select_vo_id",vo);
+		
+		return voo;
+	}
+	
+
 	
 	
 	

@@ -290,7 +290,9 @@
 				</span> <br> <input id="name" name="m_name" class="input input_s"
 					placeholder="이름(한글2~4자리)"><br> <input id="nick"
 					name="m_nick" class="input input_s" placeholder="닉네임(2~8자리 한글)">
-
+				
+				<input type=hidden name="m_money" value="5000">
+				
 				<input class="button button_id" value="중복확인" type="button"
 					onclick="check_nick();"><br> <input id="pwd"
 					name="m_pwd" class="input input_s" type="password"

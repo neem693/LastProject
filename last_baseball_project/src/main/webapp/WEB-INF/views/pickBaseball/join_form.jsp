@@ -20,18 +20,15 @@ function check_id() {
 	
 	$.ajax({
 		url:'check_id.do',
-		data:{'id' : id },
+		data: null,
 		success:function(result){
-			var json_array = eval(result);
-			var json = json_array[0];
 			
-			if(json.result=='no'){
-				alert('이미 사용중인 아이디 입니다');
-				return;
+			var json = result;
+			if(json=='fail'){
+				alert('로그인 해주세요');
+				
 			}
-			alert('사용가능한 아이디 입니다');
 			
-			$('#id').attr('readOnly',true);
 		}
 	});
 }

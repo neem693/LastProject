@@ -108,7 +108,7 @@ public class MemberDaoImpl implements MemberDaoInterface {
 	public MemberVo selectOne_IdIdx(MemberVo vo) {
 		// TODO Auto-generated method stub
 		
-		MemberVo voo = session.selectOne("member.select_id_idx",vo);
+		MemberVo voo = session.selectOne("member.member_select_vo_id",vo);
 		
 		
 		return voo;

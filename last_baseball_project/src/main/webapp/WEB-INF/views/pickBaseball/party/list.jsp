@@ -147,6 +147,7 @@ border-bottom: 1px solid black;
 	font-size: xx-large;
 	font-weight: 900;
 	text-decoration: none;
+	
 }
 
 .pre_cal {

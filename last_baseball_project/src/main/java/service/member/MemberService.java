@@ -175,7 +175,20 @@ public class MemberService implements MemberServiceInterface {
 		return voo;
 	}
 
+	@Override
+	public MemberVo my_money(MemberVo vo) {
+		// TODO Auto-generated method stub
+	
+		MemberVo voo= member_dao.selectOne_login(vo);
+		
+		return voo;
+	}
 
+
+	
+	
+	
+	
 	
 
 }
