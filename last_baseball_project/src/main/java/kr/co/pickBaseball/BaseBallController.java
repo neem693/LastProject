@@ -719,6 +719,7 @@ public class BaseBallController {
 
 
 
+
 	@RequestMapping("/bat_game.do")
 	public String bat_game(Model model,HttpServletRequest request){
 		
@@ -776,8 +777,5 @@ public class BaseBallController {
 		model.addAttribute("member",vo);
 		return Myconst.Toto.TOTO+"toto_game.jsp";
 	}
-
-	
-
 
 }
