@@ -10,6 +10,7 @@ public class PlayVo {
 	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	SimpleDateFormat day_format = new SimpleDateFormat("dd");
 	
+	
 	int day;
 	String p_idx;
 	String p_date;

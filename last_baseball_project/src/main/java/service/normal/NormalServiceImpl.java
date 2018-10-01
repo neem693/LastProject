@@ -76,9 +76,8 @@ public class NormalServiceImpl implements NormalServiceInterface{
 		return list;
 	}
 	@Override
-	public int insert(NormalVo vo,HttpServletRequest request,String editor) {
+	public int insert(NormalVo vo,HttpServletRequest request) {
 		// TODO Auto-generated method stub
-		System.err.println("저장할 내용:" + editor);
 		
 		String nc_ip = request.getRemoteAddr();//요청자 IP
 		

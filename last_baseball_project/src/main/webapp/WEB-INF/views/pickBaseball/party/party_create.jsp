@@ -4,7 +4,9 @@
 <!DOCTYPE>
 <html>
 <head>
-<meta content="text/html; charset=EUC-KR">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
 <script type="text/javascript"
 	src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=1025388614b7b8c70d0002c6339d84f4&libraries=services
@@ -220,10 +222,18 @@
 
 					});
 </script>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/party/font.css">
+
 <style type="text/css">
 table {
 	border-collapse: collapse;
-	width: 70%;
+	width: 100%;
+}
+
+table tr td {
+	border-top: 1px solid rgb(128, 128, 128);
+	padding: 10px 5px;
 }
 
 .select {
@@ -251,137 +261,201 @@ table {
 #search_addr, #search_addr_b, #search_help {
 	display: none;
 }
+
+.form_main {
+	margin-left: 15%;
+	margin-right: 15%;
+	background-color: rgba(255, 255, 255, 0.8);
+	box-shadow: 5px 5px 5px black;
+}
+
+.date {
+	width: 100%;
+	text-align: center;
+	font-size: x-large;
+}
+
+.help {
+	font-size: large;
+	font-weight: bold;
+}
+
+body {
+	background-image:
+		url('${pageContext.request.contextPath}/resources/images/party/form_back.jpg');
+}
+
+.submit_button {
+	border: none;
+	padding: 10px;
+	display: block;
+	margin: auto;
+	cursor: pointer;
+	width: 100px;
+	transition: all 0.5s;
+	
+	
+}
+.submit_button:hover{
+	background-color: rgb(89, 89, 89);
+	color: white;
+}
+@media screen and (max-width:1300px){
+
+	.form_main{
+		margin-left: 1px;
+		margin-right: 1px;
+	}
+}
+@media screen and (max-width:600px){
+	input{
+	width: 100%;
+	}
+	table{
+	table-layout: fixed;
+	}
+	.item{
+	width: 30%;
+	}
+}
 </style>
 </head>
 <body>
 
+	<%@include file="/WEB-INF/views/main/header/header.jsp"%>
+
 	<!-- 삽입해야 할 것. 파티명, 날짜, 목적, 경기, 최대인원수, 모일장소, 파티설명  -->
-	<p class="date">
-		일시:<span class="year_value">${param.year}</span>년<span
-			class="month_value">${param.month}</span>월<span class="day_value">${param.day}</span>일
-	</p>
+	<div class="form_main">
+		<p class="date">
 
-	<form id="baseball_party">
-		<input type = "hidden" name = "m_idx" value ="${user.m_idx}">
-		<input type = "hidden" name = "m_id" value ="${user.m_id}">
-		<input type="hidden" name="year"> <input type="hidden"
-			name="month"> <input type="hidden" name="day">
-		<table class="form_table">
-			<tr>
-				<td>파티 이름</td>
-				<td><input name="pt_name"></td>
-			</tr>
-			<tr>
-				<td>예약유형</td>
-				<td>골라주세요<input type="radio" name="date" value="none"
-					checked="checked" onclick="check_radio(this)"><br>
-					시간으로 잡기<input type="radio" name="date" value="time"
-					onclick="check_radio(this)"><br> <c:if
-						test="${is_long eq 'true'}"> 날짜로 잡기<input type="radio"
-							name="date" value="day" onclick="check_radio(this)">
-						<br>
-						<select name="pt_day1" id="day" class="hide">
-							<option value="-1" selected="selected">경기시작 1일 전</option>
-							<option value="-2">경기시작 2일 전</option>
-							<option value="-10">경기시작 3일 전 이상</option>
-					</c:if> <c:if test="${is_long eq 'false'}">
-						<input id="day" type="hidden">
-					</c:if> </select> <select name="pt_day2" id="hour" class="hide">
+			일시:<span class="year_value">${param.year}</span>년<span
+				class="month_value">${param.month}</span>월<span class="day_value">${param.day}</span>일
+		</p>
 
-						<option value="+2">경기시작 2시간 후</option>
-						<option value="+1">경기시작 1시간 후</option>
-						<option value="0">경기시간에 딱 맞춰서</option>
-						<option value="-1" selected="selected">경기시작 1시간 전</option>
-						<option value="-2">경기시작 2시간 전</option>
-						<option value="-3">경기시작 3시간 전</option>
-						<option value="-4">경기시작 4시간 전</option>
-						<option value="-5">경기시작 5시간 전</option>
-						<option value="-6">경기시작 6시간 전</option>
-						<option value="-12">그 이상(12시간 전으로 체크됨)</option>
+		<form id="baseball_party">
+			<input type="hidden" name="m_idx" value="${user.m_idx}"> <input
+				type="hidden" name="m_id" value="${user.m_id}"> <input
+				type="hidden" name="year" value="${param.year }"> <input
+				type="hidden" name="month" value="${param.month }"> <input
+				value="${param.day }" type="hidden" name="day"> <input
+				type="hidden" value="${param.team }" name="team">
+			<table class="form_table">
+				<tr>
+					<td class = "item">파티 이름</td>
+					<td><input id = "pt_name" name="pt_name"></td>
+				</tr>
+				<tr>
+					<td class = "">예약유형</td>
+					<td><input type="radio" name="date" value="none"
+						checked="checked" onclick="check_radio(this)">골라주세요<br>
+						<input type="radio" name="date" value="time"
+						onclick="check_radio(this)">시간으로 잡기<br> <c:if
+							test="${is_long eq 'true'}"> 날짜로 잡기<input type="radio"
+								name="date" value="day" onclick="check_radio(this)">
+							<br>
+							<select name="pt_day1" id="day" class="hide">
+								<option value="-1" selected="selected">경기시작 1일 전</option>
+								<option value="-2">경기시작 2일 전</option>
+								<option value="-10">경기시작 3일 전 이상</option>
+						</c:if> <c:if test="${is_long eq 'false'}">
+							<input id="day" type="hidden">
+						</c:if> </select> <select name="pt_day2" id="hour" class="hide">
 
-				</select><br> <input type="hidden" name="pt_day"></td>
-			</tr>
-			<tr>
-				<td>파티 목적</td>
-				<td><select id="purpose" name="pt_purpose"
-					onchange="check_purpose(this)">
-						<option value="0" selected="selected">목적 선택</option>
-						<option value="1">구장내 특수시설 이용</option>
-						<option value="2">신나는 응원</option>
-						<option value="3">일단 모여라!</option>
-						<option value="10">기타</option>
-				</select></td>
-			</tr>
-			<tr>
-				<td>최대인원수</td>
-				<td>※해당 인원수는 본인 포함입니다.<br> <select name="pt_maxPeople"
-					id="max_size">
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
-						<option value="6">6</option>
-						<option value="7">7</option>
-						<option value="8">8</option>
-						<option value="9">9</option>
-						<option value="10">10</option>
-						<option value="0">제한없음</option>
-				</select>
-				</td>
-			</tr>
-			<tr>
-				<td>경기 선택</td>
-				<td><select id="select_match" name="p_idx"
-					onchange="ajax_for_stadium_team(this);">
-						<option value="0" selected="selected">경기 선택</option>
-						<c:forEach var="o" items="${match_list}">
-							<option value="${o.p_idx}">${o.t_away}VS${o.t_home}<c:if test="${o.dh ne null}">[DH]</c:if></option>
-						</c:forEach>
-				</select></td>
-			</tr>
-			<tr>
-				<td>팀 선택</td>
-				<td><select id="select_team" name="t_name">
-						<option value="no" selected="selected">상관없음</option>
-				</select></td>
-			</tr>
+							<option value="+2">경기시작 2시간 후</option>
+							<option value="+1">경기시작 1시간 후</option>
+							<option value="0">경기시간에 딱 맞춰서</option>
+							<option value="-1" selected="selected">경기시작 1시간 전</option>
+							<option value="-2">경기시작 2시간 전</option>
+							<option value="-3">경기시작 3시간 전</option>
+							<option value="-4">경기시작 4시간 전</option>
+							<option value="-5">경기시작 5시간 전</option>
+							<option value="-6">경기시작 6시간 전</option>
+							<option value="-12">그 이상(12시간 전으로 체크됨)</option>
 
-
-			<tr>
-				<td>모일장소</td>
-				<td><label id="stadium_label">경기장:</label><input name="stadium"
-					id="stadium" disabled="disabled"> <select
-					onchange="location_pick(this);">
-						<option selected="selected" value="0">경기장 주위</option>
-						<option value="1">경기장 외부</option>
-				</select><input id="search_addr">
-					<button value="버튼" id="search_addr_b"
-						onclick="search_location();return false;">위치 검색</button> <br>
-					<p id="search_help">※위치를 검색하면 해당 주소로 맵이 이동합니다.</p>
-					<p>※지도를 클릭하여 마크를 만들어서 모일 장소를 명확히 지정해주세요</p> <br>
-					<div id="centerAddr"></div>
-					<div class="map" id="map"></div> <label>실제주소:</label> <input
-					readonly="readonly" class="addr1" id="real_addr" name="addr1"><br>
-					<label>주소메모:</label><input class="addr2" id="some_addr"
-					name="addr2"> <input type="hidden" readonly="readonly"
-					id="coor_x" name="addr3"><input readonly="readonly"
-					type="hidden" id="coor_y" name="addr4"> <input
-					type="hidden" name="pt_location"> <!-- addr1은 도로명 주소_번지주소\ addr2는 메모주소 \ 가장 중요한 addr3는 x좌표 \ 또 중요한 addr4는 y좌표 -->
-				</td>
-			</tr>
-			<tr>
-				<td>파티 설명</td>
-				<td><textarea id="pt_text" name="pt_text">※경기장 좌석 정보에 대해서 필수적으로 입력해 주세요^^</textarea>
-				</td>
-			</tr>
+					</select><br> <input type="hidden" name="pt_day"></td>
+				</tr>
+				<tr>
+					<td>파티 목적</td>
+					<td><select id="purpose" name="pt_purpose"
+						onchange="check_purpose(this)">
+							<option value="0" selected="selected">목적 선택</option>
+							<option value="1">구장내 특수시설 이용</option>
+							<option value="2">신나는 응원</option>
+							<option value="3">일단 모여라!</option>
+							<option value="10">기타</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td>최대인원수</td>
+					<td><span class="help">※해당 인원수는 본인 포함입니다.</span><br> <select
+						name="pt_maxPeople" id="max_size">
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="0">제한없음</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td>경기 선택</td>
+					<td><select id="select_match" name="p_idx"
+						onchange="ajax_for_stadium_team(this);">
+							<option value="0" selected="selected">경기 선택</option>
+							<c:forEach var="o" items="${match_list}">
+								<option value="${o.p_idx}">${o.t_away}<span> VS
+									</span>${o.t_home}<c:if test="${o.dh ne null}">[DH]</c:if></option>
+							</c:forEach>
+					</select></td>
+				</tr>
+				<tr>
+					<td>팀 선택</td>
+					<td><select id="select_team" name="t_name">
+							<option value="no" selected="selected">상관없음</option>
+					</select></td>
+				</tr>
 
 
+				<tr>
+					<td>모일장소</td>
+					<td><label id="stadium_label">경기장:</label><input
+						name="stadium" id="stadium" disabled="disabled"> <select
+						onchange="location_pick(this);">
+							<option selected="selected" value="0">경기장 주위</option>
+							<option value="1">경기장 외부</option>
+					</select><input id="search_addr">
+						<button value="버튼" id="search_addr_b"
+							onclick="search_location();return false;">위치 검색</button> <br>
+						<p id="search_help" class="help">※위치를 검색하면 해당 주소로 맵이 이동합니다.</p>
+						<p class="help">※지도를 클릭하여 마크를 만들어서 모일 장소를 명확히 지정해주세요</p> <br>
+						<div id="centerAddr"></div>
+						<div class="map" id="map"></div> <label>실제주소:</label> <input
+						readonly="readonly" class="addr1" id="real_addr" name="addr1"><br>
+						<label>주소메모:</label><input class="addr2" id="some_addr"
+						name="addr2"> <input type="hidden" readonly="readonly"
+						id="coor_x" name="addr3"><input readonly="readonly"
+						type="hidden" id="coor_y" name="addr4"> <input
+						type="hidden" name="pt_location"> <!-- addr1은 도로명 주소_번지주소\ addr2는 메모주소 \ 가장 중요한 addr3는 x좌표 \ 또 중요한 addr4는 y좌표 -->
+					</td>
+				</tr>
+				<tr>
+					<td>파티 설명</td>
+					<td><textarea id="pt_text" name="pt_text">※경기장 좌석 정보에 대해서 필수적으로 입력해 주세요^^</textarea>
+					</td>
+				</tr>
 
 
-		</table>
-	</form>
 
-	<button onclick="send_form();return false;">보내기</button>
 
+			</table>
+		</form>
+		<button class="submit_button" onclick="send_form();return false;">등록</button>
+	</div>
+
+	<%@include file="/WEB-INF/views/main/footer/footer.jsp"%>
 </body>
 </html>

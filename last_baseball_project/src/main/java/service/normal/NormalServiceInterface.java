@@ -12,7 +12,7 @@ public interface NormalServiceInterface {
 
 	List getList(Integer page,String nc_search,String nc_search_text);
 
-	int insert(NormalVo vo,HttpServletRequest request,String editor);
+	int insert(NormalVo vo,HttpServletRequest request);
 
 	void file_up(HttpServletRequest request);
 

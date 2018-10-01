@@ -17,11 +17,11 @@ function insert_form(){
 		if(confirm('글쓰기는 로그인 하신후에 가능합니다\n로그인하시겠습니까?')==false)return;
 		
 		//로그인 폼으로 이동
-		location.href='${pageContext.request.contextPath}/member/login_form.do';
+		location.href='${pageContext.request.contextPath}/member/login.do';
 		return;
 	}
 	
-	location.href='normal_insert_form.do'
+	location.href='insert_form.do'
 }
 
 function search(){
@@ -57,6 +57,7 @@ window.onload = function(){
 </head>
 <body>
 
+<%@include file="/WEB-INF/views/main/header/header.jsp"%>
 
 <table width="1000" align="center" border="0" cellpadding="0" cellspacing="0" bgcolor="#F1F5F4">
 <tr>
@@ -116,6 +117,6 @@ window.onload = function(){
 		</td>
 	</tr>
 </table>
-
+<%@include file="/WEB-INF/views/main/footer/footer.jsp"%>
 </body>
 </html>

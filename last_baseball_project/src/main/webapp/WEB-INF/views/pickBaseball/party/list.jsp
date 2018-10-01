@@ -257,7 +257,7 @@ var bs; //buttons 즉 버튼들의 집합
 var month_num = ${month};
 var year_num = ${year};
 var team = '${team}';
-var party_list_section;
+var $party_list_section;
 var party_list_top_offset;
 var day_saved; //최근 일에 대한걸 저장함.
 var page_saved; //페이징 처리시 최근 페이지에 대해서 저장함;
@@ -444,7 +444,8 @@ function create_party(day_num){
 	
 	
 	
-	location.href = "${pageContext.request.contextPath}/party/insert_party.do?year=" + year_num + "&month=" + month_num +"&day=" + day_num; 
+	location.href = "${pageContext.request.contextPath}/party/insert_party.do?year=" + year_num + "&month=" + month_num +"&day=" + day_num + "&team=" + team; 
+
 	
 }
 

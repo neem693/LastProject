@@ -56,7 +56,42 @@
 
 		}
 	}
+	
+	function go_party(){
+		location.href = "${ pageContext.request.contextPath }/party/party_list.do";
+		
+	}
 </script>
+<style type="text/css">
+.day {
+	width: 14%;
+	box-sizing: border-box;
+	float: left; //
+	border: 1px solid black;
+	padding: 15px 0;
+	text-align: center;
+}
+
+.today {
+	background-color: rgb(128, 128, 128);
+	color: white;
+}
+
+.month {
+	text-align: center;
+	font-weight: 900;
+	font-size: xx-large;
+}
+.play_list{
+cursor: pointer;
+border: 1px solid rgb(217, 217, 217);
+}
+.play{
+
+	text-align: center;
+	font-size: large;
+}
+</style>
 
 </head>
 
@@ -116,43 +151,77 @@
 
 		</div>
 
-
+		<c:set var="day" value="0" />
 		<div class="rightcolumn">
 			<div class="card">
 				<h2>오늘의 경기</h2>
-				<div class="fakeimg" style="height: 100px;">달력</div>
-				<p>경기1- A:B</p>
-				<p>경기2- C:D</p>
-				<p>경기3- E:F</p>
-				<p>경기4- G:H</p>
-				<p>경기5- I:J</p>
-				<p>경기를 클릭하면 파티로 넘어가?</p>
+				<div class="fakeimg">
+					<div class="month">${this_year}/${this_month }</div>
+					<c:forEach var="i" begin="0" end="5">
+						<c:forEach var="j" begin="1" end="7">
+							<c:set var="is_create" value="true" />
+							<%-- is_create는 해당 당일에 파티생성을 해도될지에 대한것 처음 값을 투르로 주고, 밑에 값에서 체크하여 false를 줌 --%>
+							<c:choose>
+								<c:when test="${first_day > j || day>last_day}">
+									<span class="day"></span>
+								</c:when>
+								<c:otherwise>
+									<c:set var="day" value="${day+1}"></c:set>
+									<c:set var="today"></c:set>
+									<c:if test="${day eq this_day}">
+										<c:set var="today">today</c:set>
+									</c:if>
+									<span class="day ${today}">${day}</span>
+									<c:if test="${fisrt_day != 0}">
+										<c:set var="first_day" value="0"></c:set>
+									</c:if>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</c:forEach>
+					<div style="clear: both"></div>
 
+
+
+				</div>
+
+				<div onclick="go_party();" class="play_list">
+					<c:choose>
+						<c:when test="${fn:length(play_list) eq 0}">오늘은 경기가 없습니다.</c:when>
+					</c:choose>
+					<c:choose>
+						<c:when test="${fn:length(play_list) ne 0}">
+							<c:forEach var="vo" items="${play_list}">
+							
+								<div class = "play">${vo.t_home }<span> VS </span>${vo.t_away}<span> </span>${vo.p_date}</div>
+							
+							</c:forEach>
+						</c:when>
+					</c:choose>
+
+				</div>
 			</div>
 			<div class="card">
-				
+
 				<div class="fakeimg">
-				<span class = "team_item">순위</span>
-				<span class = "team_item">팀</span>
-				<span class = "team_item">경기</span>
-				<span class = "team_item">승</span>
-				<span class = "team_item">무</span>
-				<span class = "team_item">패</span>
-				
-				<div style = "clear:both"></div>
-				<c:forEach var="team" items="${ranking}">
-				
-					<span class = "rank"> ${team.t_rank}</span>
-					<span class = "team">${team.t_name}</span>
-					<span class = "game">${team.t_nom}</span>
-					<span class = "win">${team.t_win}</span>
-					<span class = "draw">${team.t_draw}</span>
-					<span class = "lose">${team.t_lose}</span>
-					
-					<br>
-				</c:forEach>
-				<div style = "clear: both"></div>
-</div>
+					<span class="team_item">순위</span> <span class="team_item">팀</span>
+					<span class="team_item">경기</span> <span class="team_item">승</span>
+					<span class="team_item">무</span> <span class="team_item">패</span>
+
+					<div style="clear: both"></div>
+					<c:forEach var="team" items="${ranking}">
+
+						<span class="rank"> ${team.t_rank}</span>
+						<span class="team">${team.t_name}</span>
+						<span class="game">${team.t_nom}</span>
+						<span class="win">${team.t_win}</span>
+						<span class="draw">${team.t_draw}</span>
+						<span class="lose">${team.t_lose}</span>
+
+						<br>
+					</c:forEach>
+					<div style="clear: both"></div>
+				</div>
 			</div>
 
 			<div class="card">
