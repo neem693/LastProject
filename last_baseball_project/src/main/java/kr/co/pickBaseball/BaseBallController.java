@@ -398,7 +398,7 @@ public class BaseBallController {
 
 		for (int i = 0; i < play_list.size(); i++) {
 			PlayVo vo = (PlayVo) play_list.get(i);
-			vo.setP_date(Myconst.DateCheck.DATE_TIME_PRETTY.format(vo.getDate()));
+			vo.setHour_minute(Myconst.DateCheck.DATE_TIME_PRETTY.format(vo.getDate()));
 			play_list.set(i, vo);
 
 		}
@@ -522,7 +522,8 @@ public class BaseBallController {
 	@RequestMapping("/normal/list.do")
 	public String normal_list(Model model, Integer page, String nc_search, String nc_search_text) {
 
-		List list = normalService.getList(page, nc_search, nc_search_text);
+		List list = normalService.getList(page, nc_search, nc_search_text,model);
+		session.removeAttribute("show");
 
 		model.addAttribute("list", list);
 		// 기억 해봐 여기주소
@@ -557,7 +558,6 @@ public class BaseBallController {
 	@RequestMapping("/normal/view.do")
 	public String normal_view(int nc_idx, HttpServletRequest request, Model model) {
 
-		normalService.normal_view(nc_idx, request, model);
 		NormalVo vo = normalService.normal_view(nc_idx, request, model);
 		model.addAttribute("vo", vo);
 

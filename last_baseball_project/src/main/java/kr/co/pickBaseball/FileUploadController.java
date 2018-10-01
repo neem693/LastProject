@@ -159,7 +159,7 @@ HttpServletRequest request;
 			out.write(bytes);
 			String callback = request.getParameter("CKEditorFuncNum");
 			printWriter = response.getWriter();
-			String url = request.getRequestURL().toString().replaceAll("/party_image_upload.do", "");
+			String url = request.getRequestURL().toString().replaceAll("/normal_image_upload.do", "");
 			// System.out.println(url);
 			String fileUrl = url + web_path + fileName;// url°æ·Î
 			printWriter.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction(" + callback

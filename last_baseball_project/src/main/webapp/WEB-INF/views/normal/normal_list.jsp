@@ -63,7 +63,7 @@ window.onload = function(){
 <tr>
 	<td align="center">
 	<select id="nc_search">
-		<option value="all">전체</option>
+	
 		<option value="m_nick">작성자 닉네임</option>
 		<option value="nc_title">제목</option>
 		<option value="nc_contents">내용</option>
@@ -113,7 +113,7 @@ window.onload = function(){
 <table align="center">
 	<tr>
 		<td>
-			${ Myconst.NormarPageing}
+			${ pageMenu}
 		</td>
 	</tr>
 </table>

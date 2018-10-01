@@ -29,12 +29,12 @@ public class NormalDaoImpl implements NormalDaoInterface{
 		this.session = session;
 	}
 	
-	public List<NormalVo> selectList() {
+	public List<NormalVo> selectList(Map map) {
 		// TODO Auto-generated method stub
 		
 		List<NormalVo> list = null;
 		
-		list = session.selectList("normal.normal_list");
+		list = session.selectList("normal.normal_list",map);
 		
 		return list;
 	}

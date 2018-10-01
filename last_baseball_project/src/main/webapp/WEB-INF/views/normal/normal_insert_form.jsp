@@ -57,7 +57,8 @@
 			return;
 		}
 
-		f.action = "normal_insert.do"
+		f.action = "insert.do"
+		f.method = "POST";
 		f.submit();
 	}
 	
@@ -120,6 +121,7 @@
 				class="normal_insert">글쓰기</span>
 		</div>
 		<form id="normal_form">
+		<input type="hidden" value = "${user.m_idx}" name = "m_idx" >
 			<div class="item">
 				<input class="n_input subject" name="nc_title">
 			</div>

@@ -44,11 +44,11 @@
 	}
 	
 	function comment_send() {
-		if('${empty user}'==true){
+		if('${empty user}'=='true'){
 			
 			if(confirm('댓글은 로그인하신후에 사용가능합니다\n 로그인 하시겠습니까?')== false)return;
 			
-			location.href='../member/login_form.do?url=' + encodeURIComponent(location.href);
+			location.href='../member/login.do';
 			
 			return;
 		}
@@ -66,7 +66,7 @@
 		
 		$.ajax({
 			url: 'comment_normal_insert.do',
-			data:{'${ vo.nc_idx }':nc_idx,'${user.m_id}':m_id,'${user.m_nick}':m_nick,'${c_content}':c_content},
+			data:{'nc_idx':nc_idx,'user.m_id':m_id,'user.m_nick':m_nick,'c_content':c_content},
 			dataType:'json',
 			success:function(data){
 				if(data.result == 'fail'){
