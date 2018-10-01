@@ -4,44 +4,102 @@
 
 <mapper namespace="toto">
 
+<insert id="insert_game" parameterType="vo.Toto_Game_Vo">
+
+ INSERT INTO toto_gametable(m_id,game_number,bat_price,ratio,p_idx,bat_win_lose,game_result) VALUES    
+  ( 
+   #{m_id},
+   #{game_number},
+   #{bat_price}, 
+   #{ratio},
+   #{p_idx},
+   #{bat_win_lose},
+   #{game_result}
+   )
+
+</insert>
+
+
+
+    <select id="toto_select_game_key" parameterType ="String" resultType="String">
+ 	<!-- 미처리된 게임 key를 가져온다  -->
+		
+		SELECT DISTINCT game_number
+		FROM(
+				SELECT * 
+				FROM toto_gametable
+				WHERE m_id=#{m_idx} AND game_result='T'
+			) g_num
+ 
+    </select>
+
+	    <select id="toto_select_pick_game" parameterType ="String" resultType="vo.Toto_Game_Vo">
+ 	<!--  게임 key를 가지고 해당 게임 리스트를 불러온다.  -->
+		
+			SELECT * FROM toto_gametable
+			WHERE game_number=#{game_num}
+ 
+    </select>
+	    <select id="toto_select_game_result_info" parameterType ="String" resultType="String">
+ 	<!--  업데이트 된 게임 결과를 가져온다.  -->
+			SELECT p_rts FROM play
+			WHERE p_idx=#{p_idx}
+    </select>
+
+
+
 
 <insert id="insert_toto_schdule" parameterType="java.util.Map">
 
-   INSERT INTO toto_schdule(home_team,away_team,winner_ratio,lost_ratio,toto_place) VALUES                                           
+   INSERT INTO toto_schdule(winner_ratio,lose_ratio,p_idx,toto_place) VALUES                                           
                          <!-- list는 map으로 보낸 데이터의 키값이다.-->
      
                        <foreach collection="list" item="vo" separator=",">
-           				(
-           				 #{vo.home_team}, 
-           				 #{vo.away_team},
+           				(          				
            				 #{vo.winner_ratio},
-           				 #{vo.lost_ratio},
-           				 #{vo.toto_place}      				 
+           				 #{vo.lose_ratio},          	
+           				 #{vo.p_idx},
+           				 #{vo.toto_place}    			 
         				    )
         				</foreach>   
   
 </insert>
 	
-	<select id="select_row" resultType="int">
-		 SELECT COUNT(*)FROM toto_schdule 
-	</select>
-
 	<delete id="delete_table">
-
 	truncate table toto_schdule
 	</delete>
 
 											     			
-	<update id="update_table" parameterType="vo.TotoSchduleVo">
+	<update id="update_table" parameterType="vo.TotoValueVo">
 		<!-- 미사용 -->
           			update toto_schdule set	    			 
            			home_team= #{home_team}, 
            	     	away_team= #{away_team},
            			winner_ratio=#{winner_ratio},
-           		    lost_ratio= #{lost_ratio},
+           		    lost_ratio= #{lose_ratio},
            			toto_place=#{toto_place}              			
            			where toto_idx=#{toto_idx}        		    				 		  
- 
 	  </update>
+
+
+    <select id="select_game_list" resultType="vo.Toto_sch_Vo">
+ 	<!-- 게임 일정  -->
+		SELECT t.*,p.p_date,p.p_score,p.p_rts,p.s_idx,p.t_home,p.t_away
+		FROM toto_schdule t LEFT OUTER JOIN play p
+		ON t.p_idx = p.p_idx
+ 
+    </select>
+
+	<update id="toto_game_result_update" parameterType="vo.Toto_Game_Vo">
+			UPDATE toto_gametable SET			    
+        	game_result=#{game_result} 
+        	where p_idx=#{p_idx}		
+	</update>
+
+		<update id="toto_game_result_remove" parameterType="vo.Toto_Game_Vo">
+			UPDATE toto_gametable SET			    
+        	game_result=#{game_result} 
+        	where p_idx=#{p_idx}		
+	</update>
 
 </mapper>
