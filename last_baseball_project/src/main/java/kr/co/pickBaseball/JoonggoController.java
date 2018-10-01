@@ -95,8 +95,14 @@ public String view(int j_idx, Model model)
 {
 	JoonggoVo vo = joonggo_dao.selectOne(j_idx);
 	
+	session = request.getSession();
+	if(session.getAttribute("show")==null)
+	{
+		int res = joonggo_dao.readhits(j_idx);
+	}
 	
 	model.addAttribute("vo", vo);
+	model.addAttribute("show", true);
 /*	
 	try {
 		System.out.println( URLDecoder.decode(vo.getJ_content(),"utf-8") );
@@ -110,11 +116,11 @@ public String view(int j_idx, Model model)
 
 /*삭제*/
 @RequestMapping("/joonggo/delete.do")
-public String delete(int j_idx)
+public String delete(int j_idx, Integer page)
 {
 	int res = joonggo_dao.delete(j_idx);
 	
-	return "redirect:list.do?page=\" + page";
+	return "redirect:list.do?page=" + page;
 }
 
 /*조회*/

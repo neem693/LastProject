@@ -7,6 +7,7 @@
 <!-- 리스트 조회 -->
 <select id="joonggo_list" resultType="joonggo">
 select * from joonggo
+order by 
 <!-- SELECT j_idx,
 		j_category,
 		j_title,
@@ -112,7 +113,7 @@ delete from joonggo where j_idx=#{j_idx}
 
 <!-- 조회수 증가 -->
 <update id = "joonggo_readhits" parameterType="int">
-update joonggo set readhits = readhits + 1
+update joonggo set j_readhits = j_readhits + 1
 where j_idx=#{j_idx}
 </update> 
  

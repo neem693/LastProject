@@ -10,7 +10,7 @@
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/comment/comment.css?ver=1">
+<link href="${ pageContext.request.contextPath }/resources/css/comment/comment.css?ver=1" rel="stylesheet" id="bootstrap-css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
@@ -56,13 +56,20 @@
 <div class="container">
     <div class="row">
         <div class="panel panel-default widget">
-            <div class="panel-heading">
+            <%-- <div class="panel-heading">
                 <span class="glyphicon glyphicon-comment"></span>
                 <h3 class="panel-title">
                     Recent Comments</h3>
+                <lable>댓글</lable>
                 <span class="label label-info">
-                    78</span>
-            </div>
+                    </span>
+                    <lable>댓글</lable>
+                <span class="label label-info">
+                    </span>
+                    <lable></lable>
+                <span class="label label-info">
+                    ${vo.j_readhits }</span>
+            </div> --%>
             <div class="panel-body">
                 <ul class="list-group">
                 <c:forEach var="vo" items="${ list }">

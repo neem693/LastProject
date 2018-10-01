@@ -7,18 +7,48 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/joonggo/joonggo.css">
+<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/joonggo/joonggo.css?var=1" rel="stylesheet" id="bootstrap-css">
 
 
 <!-- smart_editor2 -->
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 
+<script type="text/javascript">
+var sel_file;
+
+$(document).ready(function() {
+    $("#input_img").on("change", handleImgFileSelect);
+}); 
+
+function handleImgFileSelect(e) {
+    var files = e.target.files;
+    var filesArr = Array.prototype.slice.call(files);
+
+    filesArr.forEach(function(f) {
+        if(!f.type.match("image.*")) {
+            alert("확장자는 이미지 확장자만 가능합니다.");
+            return;
+        }
+
+        sel_file = f;
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $("#img_file").attr("src", e.target.result);
+        }
+        reader.readAsDataURL(f);
+    });
+}
+
+</script>
+
 </head>
 <body>
+<%@include file="/WEB-INF/views/main/header/header.jsp" %>	
 <form method="post" id="insertBoardFrm" enctype="multipart/form-data">
 <input type = "hidden" name = "m_idx" value="${user.m_idx }">
 
@@ -26,22 +56,37 @@
 	<div  id = main_insert_form align="center">
 		<div class="container">
 		<div class="panel panel-default">
-        <div class="panel-heading clearfix">
+        <!-- <div class="panel-heading clearfix">
           <h3 class="panel-title">글 쓰기</h3>
-        </div>
+        </div> -->
         <br>
-      <div class = "category">  
-    
-        <label class="col-sm-2">카테고리</label>
-
-        <select name="j_category" align = "list">
+      <table align= "center">
+        <tr>
+     <td width = "300px"> 
+        <label width = "100px">카테고리</label>
+       <select id="j_category" name="j_category" align = "list">
         		<option value="0">카테고리 선택</option>
         		<option value="1">구매합니다</option>
         		<option value="2">판매합니다</option>
         		<option value="3">교환합니다</option>
-
         </select>
+   
+    </td>
+    
+     <td><label width = "100px">대표이미지</label></td>
+     
+    <td class = "file">
+				 <div>
+				 <div class="img_wrap">
+				<img id="img_file" />					
+			  	</div>
+			  	 <input type="file" id="input_img"name="Filedata" class = "J_image">
     </div>
+
+			
+				</td>
+				</tr>
+    </table>
     
         <div class="panel-body">
                 <div class="form-group">
@@ -78,20 +123,11 @@
                   <div class="col-sm-10"><input class="form-control" name="m_email" placeholder="E_MAIL을 입력하세요." value="${user.m_email }"></div><br>
 
                 </div>
-                
-                  <br>
-                  <div class="form-group">
-                  <label class="col-sm-2" >대표이미지</label>
-
-                  <div class="col-sm-10"><input type="file" name="Filedata" class = "J_image"></div><br>
-
-                </div>
-
-
+               
                 <br>
                       <!-- 스마트 에디터2 -->
 
-                    <textarea name="j_content" id="editor" style="width: auto; height: auto;" ></textarea>
+                    <textarea name="j_content" id="editor" style="width: auto; height: auto;"></textarea>
 
 
 		</div>
