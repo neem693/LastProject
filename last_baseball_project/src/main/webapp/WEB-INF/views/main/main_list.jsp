@@ -193,7 +193,7 @@ border: 1px solid rgb(217, 217, 217);
 						<c:when test="${fn:length(play_list) ne 0}">
 							<c:forEach var="vo" items="${play_list}">
 							
-								<div class = "play">${vo.t_home }<span> VS </span>${vo.t_away}<span> </span>${vo.hour_minute}</div>
+								<div class = "play">${vo.t_away}<span> VS </span><span>${vo.t_home }</span>${vo.hour_minute}</div>
 							
 							</c:forEach>
 						</c:when>

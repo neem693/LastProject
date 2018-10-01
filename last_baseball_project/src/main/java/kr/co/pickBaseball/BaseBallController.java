@@ -412,7 +412,7 @@ public class BaseBallController {
 		////// 경기 가져오기//////
 		String day = String.valueOf(map.get("this_day"));
 
-		List play_list = partyService.take_play_list(year, month, day + 1);
+		List play_list = partyService.take_play_list(year, month, day);
 
 		for (int i = 0; i < play_list.size(); i++) {
 			PlayVo vo = (PlayVo) play_list.get(i);
