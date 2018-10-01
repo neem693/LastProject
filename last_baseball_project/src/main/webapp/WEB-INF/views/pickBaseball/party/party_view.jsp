@@ -19,6 +19,14 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/party_join.js"></script>
 <script type="text/javascript">
+var $party_list_section;
+var $view_main;
+var party_list_top_offset;
+var day_saved; //최근 일에 대한걸 저장함.
+var page_saved; //페이징 처리시 최근 페이지에 대해서 저장함;
+
+
+
 	$(document).ready(function() {
 
 		var acc = document.getElementsByClassName("accordion");
@@ -65,7 +73,99 @@
 		},800);
 		
 		
+		$party_list_section = $("#show_party_list");
+		$view_main = $("#view_main");
+		show_party_list(${param.day});
+		
 	});
+	
+	
+	function show_party_list(d){
+		
+		day_saved = d;
+		page = '${param.page}';
+		if(page==''||page=='undefined')
+			page= '1';
+		page_saved = page;
+
+		
+		var op = {
+			    url:'show_party_list.do',
+			    data:{
+			        'year':'${param.year}',
+			        'month':'${param.month}',
+			        'team':'${param.team}',
+			        'selt_pt_idx': '${party.pt_idx}',
+			        'page': page,
+			        'mode':1,
+			        'day':d
+			        
+			    },
+			    async:false,
+			    success:function(result){
+			        //alert(result);
+			    	$party_list_section.html(result);
+			    	//밑으로 자연스럽게 옮겨주는 것
+			    	party_list_top_offset = $view_main.offset().top;
+			    	$('html,body').animate({scrollTop: party_list_top_offset},800);
+			  
+			    }
+		}
+
+		
+		$.ajax(op);
+		
+		
+		
+	}
+
+
+	function party_list_page(d,page){
+		
+		
+		day_saved = d;
+		page_saved = page;
+
+		
+		var op = {
+			    url:'show_party_list.do',
+			    data:{
+			        'year':'${param.year}',
+			        'month':'${param.month}',
+			        'team':'${param.team}',
+			        'mode':'1',
+			        'selt_pt_idx': '${party.pt_idx}',
+			        'day':d,
+			        'page':page
+			        
+			    },
+			    async:false,
+			    success:function(result){
+			        //alert(result);
+			    	$party_list_section.html(result);
+			    	//밑으로 자연스럽게 옮겨주는 것
+			    	party_list_top_offset = $party_list_section.offset().top;
+			    	$('html,body').animate({scrollTop: party_list_top_offset},800);
+			  
+			    }
+		}
+
+		
+		$.ajax(op);
+		
+		
+		
+	}
+	
+	function show_view(pt_idx){
+		
+		
+		
+		location.href = "${pageContext.request.contextPath}/party/view.do?year=${param.year}&month=${param.month}&day=" + day_saved + "&team=${param.team}&pt_idx="+pt_idx + "&page=" + page_saved; 
+		
+		
+		
+	}
 	
 	
 	
@@ -166,11 +266,11 @@
 	content: "경기장";
 }
 
-.stadium, .sta_addr, .sta_all_seat, .play_time, .leader_name,
-	.leader_count, .leader_tel, .leader_email, .party_name,
+.stadium, .sta_addr, .sta_all_seat, .play_time, .leader_view_name,
+	.leader_view_count, .leader_tel, .leader_email, .party_view_name,
 	.party_condition, .party_purpose, .party_people, .party_addr,
 	.party_time, .party_coordinate, .leader_team, .party_member,
-	.party_leader {
+	.party_view_leader {
 	text-align: center;
 	font-size: large;
 }
@@ -183,11 +283,11 @@
 	content: "좌석 수 ";
 }
 
-.leader_name:before {
+.leader_view_name:before {
 	content: "리더";
 }
 
-.leader_count:before {
+.leader_view_count:before {
 	content: "리더 횟수";
 }
 
@@ -200,11 +300,11 @@
 	ㅣ
 }
 
-.party_name:before {
+.party_view_name:before {
 	content: "파티명"
 }
 
-.party_name {
+.party_view_name {
 	font-size: x-large;
 }
 
@@ -236,7 +336,7 @@
 	content: "응원 팀";
 }
 
-.party_member, .party_leader {
+.party_member, .party_view_leader {
 	font-size: x-large;
 }
 
@@ -244,7 +344,7 @@
 	content: "멤버";
 }
 
-.party_leader:before {
+.party_view_leader:before {
 	content: "리더";
 }
 
@@ -258,6 +358,47 @@
 	text-align: right;
 	display: block;
 }
+
+@media screen and (max-width: 1350px){
+.view_main {
+
+}
+
+.view {
+	width: 100%;
+	float: none;
+}
+
+.view_aside {
+	float: none;
+	width: 100%;
+}
+}
+@media screen and (max-width: 650px){
+.view_main {
+	margin-left: 1px;
+	margin-right: 1px;
+}
+
+.view {
+	width: 100%;
+	float: none;
+}
+
+.view_aside {
+	float: none;
+	width: 100%;
+}
+.long_itme{
+float: none;
+}
+.view_item  {
+	width: 100%;
+	float: none;
+	clear: both;
+
+}
+}
 </style>
 </head>
 <body>
@@ -265,7 +406,7 @@
 	<%@include file="/WEB-INF/views/main/header/header.jsp"%>
 
 
-	<article class="view_main">
+	<article id="view_main" class="view_main">
 		<section class="view">
 
 			<button class="accordion">경기</button>
@@ -296,8 +437,8 @@
 
 			<button class="accordion">리더</button>
 			<div class="panel">
-				<p class="view_item leader_name">${party_leader.m_nick}</p>
-				<p class="view_item leader_count">${leader_count}</p>
+				<p class="view_item leader_view_name">${party_leader.m_nick}</p>
+				<p class="view_item leader_view_count">${leader_count}</p>
 				<c:if test="${user eq null}">
 					<p class="view_item leader_tel">
 						<a href="${pageContext.request.contextPath}/member/login.do">로그인</a>을
@@ -314,7 +455,7 @@
 			<button id="party_button" class="accordion">파티</button>
 			<div class="panel">
 
-				<p class="long_item party_name">${party.pt_name}</p>
+				<p class="long_item party_view_name">${party.pt_name}</p>
 				<p class="view_item party_condition">${party.pt_condition}</p>
 				<p class="view_item party_purpose">${party.pt_purpose}</p>
 				<p class="view_item party_people">${party.pt_maxPeople}/${party.pt_people}</p>
@@ -334,12 +475,17 @@
 			</div>
 			<button class="accordion">파티멤버</button>
 			<div class="panel">
-				<c:if test="${(fn:length(party_member)) eq 1 }">
+				<c:if
+					test="${(fn:length(party_member)) eq 1  && party.pt_condition ne '마감'}">
 					<div class="long_item party_member">
 						아직 누구도 파티에 들어오지 않았습니다.ㅜㅜ<br>지금 보고 있는 당신 이 파티에 참여하세요!!
 					</div>
+
 				</c:if>
-				<c:if test="${(fn:length(party_member)) > 1 }">
+				<c:if test="${ party.pt_condition eq '마감'}">
+					<div class="long_item party_member">파티가 마감되었습니다.</div>
+				</c:if>
+				<c:if test="${(fn:length(party_member)) > 1  && party.pt_condition ne '마감'}">
 
 					<c:forEach var="vo" items="${party_member}">
 						<c:if test="${(user.m_idx eq vo.m_idx)}">
@@ -349,10 +495,14 @@
 
 
 						<c:if test="${vo.b_leader eq 10}">
-							<p class="view_item party_leader">${vo.m_nick}</p>
+							<p class="view_item party_view_leader">${vo.m_nick}</p>
 						</c:if>
 						<c:if test="${vo.b_leader eq 1}">
-							<p class="view_item party_member">${vo.m_nick}</p>
+							<p class="view_item party_member">${vo.m_nick}
+								<c:if test="${user.m_idx eq party_leader.m_idx}">
+									<br>${vo.m_email}<br>${vo.m_tel}
+								</c:if>
+							</p>
 						</c:if>
 
 
@@ -362,8 +512,8 @@
 			</div>
 
 			<div class="view_buttons">
-			<c:if test= "${user eq null }">
-			<a href="${pageContext.request.contextPath}/member/login.do">로그인</a>을
+				<c:if test="${user eq null }">
+					<a href="${pageContext.request.contextPath}/member/login.do">로그인</a>을
 						해야 참여할 수 있습니다.</c:if>
 				<form method="POST">
 					<input type="hidden" name="year" value="${param.year}"> <input
@@ -376,7 +526,8 @@
 						<c:set var="leader_guy" value="true"></c:set>
 					</c:if>
 
-					<c:if test="${user ne null && already_join ne true && leader_guy ne true}">
+					<c:if
+						test="${user ne null && already_join ne true && leader_guy ne true}">
 						<button class="view_button join" id="view_join"
 							onclick="party_join(this.form)">참여</button>
 					</c:if>
@@ -394,7 +545,12 @@
 
 		</section>
 
-		<aside class="view_aside">이곳은 리스트가 올 것이다.</aside>
+		<aside class="view_aside">
+			<a id="go_to_party_list"
+				href="${pageContext.request.contextPath}/party/party_list.do?year=${param.year}&month=${param.month}&team=${param.team}">달력으로
+				다시 가기</a>
+			<div id="show_party_list"></div>
+		</aside>
 
 	</article>
 	<div style="clear: both;"></div>

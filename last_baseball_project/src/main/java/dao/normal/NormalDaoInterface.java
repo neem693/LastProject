@@ -7,7 +7,7 @@ import vo.NormalVo;
 
 public interface NormalDaoInterface {
 
-	public List<NormalVo> selectList();
+	public List<NormalVo> selectList(Map map);
 	/*public List<NormalVo> selectList(Map map);*/
 	public NormalVo selectOne(int nc_idx);
 	public int update_views(int nc_idx);

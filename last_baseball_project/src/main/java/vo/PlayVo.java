@@ -10,6 +10,7 @@ public class PlayVo {
 	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	SimpleDateFormat day_format = new SimpleDateFormat("dd");
 	
+	
 	int day;
 	String p_idx;
 	String p_date;
@@ -20,6 +21,7 @@ public class PlayVo {
 	int s_idx;
 	String t_home;
 	String t_away;
+	String hour_minute;
 	
 	
 	
@@ -178,6 +180,14 @@ public class PlayVo {
 		
 		this.dh = dh;
 	
+	}
+
+	public String getHour_minute() {
+		return hour_minute;
+	}
+
+	public void setHour_minute(String hour_minute) {
+		this.hour_minute = hour_minute;
 	}
 
 

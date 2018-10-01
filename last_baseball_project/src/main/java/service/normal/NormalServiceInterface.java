@@ -10,9 +10,9 @@ import vo.NormalVo;
 
 public interface NormalServiceInterface {
 
-	List getList(Integer page,String nc_search,String nc_search_text);
+	List getList(Integer page,String nc_search,String nc_search_text,Model model);
 
-	int insert(NormalVo vo,HttpServletRequest request,String editor);
+	int insert(NormalVo vo,HttpServletRequest request);
 
 	void file_up(HttpServletRequest request);
 

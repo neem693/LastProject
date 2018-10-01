@@ -9,7 +9,7 @@
   <entry>
     <title>What's new in Spring Data Lovelace?</title>
     <link rel="alternate" href="https://spring.io/blog/2018/09/27/what-s-new-in-spring-data-lovelace" />
-    <category term="releases" label="Releases" />
+    <category term="engineering" label="Engineering" />
     <author>
       <name>Oliver Gierke</name>
     </author>
@@ -663,7 +663,6 @@ public class ConsumerApplication implements ApplicationListener&amp;lt;Applicati
 &lt;p&gt;This blog post explains the new and noteworthy in &lt;a href="https://github.com/spring-projects/spring-data-commons/wiki/Release-Train-Lovelace"&gt;Spring Data Lovelace&lt;/a&gt; for &lt;a href="https://spring.io/blog/2018/09/26/what-s-new-in-spring-data-lovelace-for-redis-and-apache-cassandra#cassandra"&gt;Apache Cassandra&lt;/a&gt; and &lt;a href="https://spring.io/blog/2018/09/26/what-s-new-in-spring-data-lovelace-for-redis-and-apache-cassandra#redis"&gt;Redis&lt;/a&gt;.
 Make sure to also check out the blog post on &lt;a href="https://spring.io/blog/2018/09/27/what-s-new-in-spring-data-lovelace-for-mongodb"&gt;What&amp;#8217;s new in Spring Data Lovelace for MongoDB?&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
-&lt;h1 id="introduction" class="sect0"&gt;&lt;a class="anchor" href="#introduction"&gt;&lt;/a&gt;Introduction&lt;/h1&gt;
 &lt;div class="paragraph"&gt;
 &lt;p&gt;With Spring Data Lovelace just released in its generally available version last week, it&amp;#8217;s time to have a brief walk through the new feature&amp;#8217;s we have added.
 The release train is pretty packed with features.&lt;/p&gt;
@@ -856,7 +855,8 @@ class Dependance {
 
 operations.getTableName(Person::class)
 
-operations.find&amp;lt;Person&amp;gt;().as&amp;lt;Contact&amp;gt;.matching(query(where("firstname").isEqualTo("luke"))).all();&lt;/code&gt;&lt;/pre&gt;
+operations.find&amp;lt;Person&amp;gt;().as&amp;lt;Contact&amp;gt;
+  .matching(query(where("firstname").isEqualTo("luke"))).all();&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="paragraph"&gt;
@@ -948,13 +948,13 @@ long count = select.count();&lt;/code&gt;&lt;/pre&gt;
 &lt;div class="listingblock"&gt;
 &lt;div class="content"&gt;
 &lt;pre class="prettyprint highlight"&gt;&lt;code class="language-java" data-lang="java"&gt;LettuceClientConfiguration clientConfiguration = LettuceClientConfiguration.builder()
-                          .readFrom(ReadFrom.NEAREST)
-                          .build();
+  .readFrom(ReadFrom.NEAREST)
+  .build();
 
 RedisSentinelConfiguration endpoint = new RedisSentinelConfiguration()
-                          .master("my-master")
-                          .sentinel("sentinel-host1", 26379)
-                          .sentinel("sentinel-host2", 26379);
+  .master("my-master")
+  .sentinel("sentinel-host1", 26379)
+  .sentinel("sentinel-host2", 26379);
 
 LettuceConnectionFactory factory = new LettuceConnectionFactory(endpoint, clientConfiguration);&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
@@ -970,8 +970,8 @@ LettuceConnectionFactory factory = new LettuceConnectionFactory(endpoint, client
 &lt;pre class="prettyprint highlight"&gt;&lt;code class="language-java" data-lang="java"&gt;LettuceClientConfiguration clientConfiguration = LettuceClientConfiguration.builder().readFrom(ReadFrom.NEAREST).build();
 
 RedisStaticMasterSlaveConfiguration endpoint = new RedisStaticMasterSlaveConfiguration("my-master-host", 6379)
-                          .node("my-replica-host1", 6379)
-                          .node("my-replica-host2", 6379);
+  .node("my-replica-host1", 6379)
+  .node("my-replica-host2", 6379);
 
 LettuceConnectionFactory factory = new LettuceConnectionFactory(endpoint, clientConfiguration);&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
@@ -1027,7 +1027,8 @@ LettuceConnectionFactory factory = new LettuceConnectionFactory(clusterConfigura
 &lt;/div&gt;
 &lt;div class="listingblock"&gt;
 &lt;div class="content"&gt;
-&lt;pre class="prettyprint highlight"&gt;&lt;code class="language-java" data-lang="java"&gt;Cursor&amp;lt;byte[]&amp;gt; scan = clusterConnection.keyCommands().scan(ScanOptions.scanOptions().match("foo*").build());
+&lt;pre class="prettyprint highlight"&gt;&lt;code class="language-java" data-lang="java"&gt;Cursor&amp;lt;byte[]&amp;gt; scan = clusterConnection.keyCommands()
+  .scan(ScanOptions.scanOptions().match("foo*").build());
 scan.forEachRemaining(key -&amp;gt; ¡¦);&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1182,7 +1183,7 @@ class Person {
       <name>Dave Syer</name>
     </author>
     <id>tag:spring.io,2018-09-25:3416</id>
-    <updated>2018-09-25T15:33:40Z</updated>
+    <updated>2018-09-25T15:33:00Z</updated>
     <content type="html">&lt;div class="paragraph"&gt;
 &lt;p&gt;&lt;a href="https://github.com/spring-cloud/spring-cloud-function"&gt;Spring Cloud
 Function&lt;/a&gt; has had support for Microsoft
@@ -1194,9 +1195,7 @@ background behind the shift. We in the Spring team had a lot of fun
 working on this and collaborating with the folks at Microsoft to get
 the best blend of the two technologies for our users.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="sect1"&gt;
-&lt;h2 id="azure-functions-for-java"&gt;&lt;a class="anchor" href="#azure-functions-for-java"&gt;&lt;/a&gt;Azure Functions for Java&lt;/h2&gt;
-&lt;div class="sectionbody"&gt;
+&lt;h1 id="azure-functions-for-java" class="sect0"&gt;&lt;a class="anchor" href="#azure-functions-for-java"&gt;&lt;/a&gt;Azure Functions for Java&lt;/h1&gt;
 &lt;div class="paragraph"&gt;
 &lt;p&gt;Microsoft has had Java support in Azure Functions for a while, and it
 enables developers to easily write and deploy Java code that connects
@@ -1362,11 +1361,7 @@ sample. They are all important but basically boilerplate - you should
 be able to copy them and re-use the same configuration in all Azure
 Function Applications.&lt;/p&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="sect1"&gt;
-&lt;h2 id="spring-cloud-function"&gt;&lt;a class="anchor" href="#spring-cloud-function"&gt;&lt;/a&gt;Spring Cloud Function&lt;/h2&gt;
-&lt;div class="sectionbody"&gt;
+&lt;h1 id="spring-cloud-function" class="sect0"&gt;&lt;a class="anchor" href="#spring-cloud-function"&gt;&lt;/a&gt;Spring Cloud Function&lt;/h1&gt;
 &lt;div class="paragraph"&gt;
 &lt;p&gt;Spring Cloud Function aims to support similar serverless use cases
 when the application developer declares Spring beans of type
@@ -1498,8 +1493,6 @@ If you are at &lt;a href="https://springoneplatform.io"&gt;Spring One Platform&l
 &lt;/td&gt;
 &lt;/tr&gt;
 &lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;
 &lt;/div&gt;</content>
   </entry>
   <entry>

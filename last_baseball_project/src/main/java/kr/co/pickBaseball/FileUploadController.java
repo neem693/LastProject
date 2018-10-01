@@ -2,18 +2,22 @@ package kr.co.pickBaseball;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.UUID;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import myconst.Myconst;
 import vo.JoonggoVo;
@@ -22,8 +26,10 @@ import vo.JoonggoVo;
 
 @Controller
 public class FileUploadController {
-	
-
+	@Autowired
+HttpServletRequest request;
+	@Autowired
+	ServletContext application;
 	
 
 	//단일파일업로드
@@ -120,6 +126,59 @@ public class FileUploadController {
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
+	}
+	
+	@RequestMapping("/normal_image_upload.do")
+	public void ckeditor_image_upload_normal(@RequestParam MultipartFile upload, HttpServletResponse response)
+			throws Exception {
+		OutputStream out = null;
+		PrintWriter printWriter = null;
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		try {
+			String fileName = upload.getOriginalFilename();
+			byte[] bytes = upload.getBytes();
+			String web_path = "/resources/normal_upload/";
+			String abs_path = application.getRealPath(web_path);
+			// String uploadPath = "저장경로/" + fileName;//저장경로
+			File dir = new File(abs_path);
+			System.out.println(dir.mkdirs());
+			File f = new File(abs_path, fileName);
+
+			// 동일화일이 있는경우
+			System.out.println("테스트 " + abs_path + fileName);
+			if (f.exists()) {
+				long time = System.currentTimeMillis();
+				int index = fileName.lastIndexOf('.');
+				String f_name = fileName.substring(0, index);
+				String f_ext = fileName.substring(index);
+				fileName = String.format("%s_%d%s", f_name, time, f_ext);
+				f = new File(abs_path, fileName);
+			}
+			out = new FileOutputStream(f);
+			out.write(bytes);
+			String callback = request.getParameter("CKEditorFuncNum");
+			printWriter = response.getWriter();
+			String url = request.getRequestURL().toString().replaceAll("/normal_image_upload.do", "");
+			// System.out.println(url);
+			String fileUrl = url + web_path + fileName;// url경로
+			printWriter.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction(" + callback
+					+ ",'" + fileUrl + "','이미지를 업로드 하였습니다.'" + ")</script>");
+			printWriter.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (out != null) {
+					out.close();
+				}
+				if (printWriter != null) {
+					printWriter.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 

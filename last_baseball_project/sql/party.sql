@@ -153,3 +153,8 @@ from party pt inner join play p
 on pt.p_idx = p.p_idx
 where p.p_date <= "2018-09-29 18:32:30" 
 and pt_condition <> '¸¶°¨'
+
+
+
+select *
+from party

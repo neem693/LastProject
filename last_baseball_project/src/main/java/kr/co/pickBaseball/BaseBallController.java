@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -125,15 +126,14 @@ public class BaseBallController {
 				int update = partyService.updateParty();
 				System.out.println(update + "개 party 마감 업데이트");
 				try {
-					String result=totoservice.MakeToToScore();
+					String result = totoservice.MakeToToScore();
 					System.out.println(result);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}	
-			
-			}
-			else if (res == 0)
+				}
+
+			} else if (res == 0)
 				System.out.println("지금은 파싱을 할 수 없습니다.(맞는 월이 아님, n시간 카운트가 안지남)");
 			else if (res == -1)
 				System.out.println("파싱 오류발생");
@@ -163,7 +163,7 @@ public class BaseBallController {
 	@RequestMapping("/parsing.do")
 	@ResponseBody
 	public String parsing() throws IOException {
-		//System.out.println("파싱두");
+		// System.out.println("파싱두");
 		TeamVo[] vo = new TeamParsing().parsing_url();
 
 		partyService.team_update(vo);
@@ -289,7 +289,6 @@ public class BaseBallController {
 		return file_name;
 	}
 
-
 	@RequestMapping("/parsing_toto.do")
 	public String parsing_toto(Model model) throws IOException {
 		// Jsoup lib를 사용하여 HTML 문서를 파싱한다.
@@ -299,10 +298,6 @@ public class BaseBallController {
 		System.out.println(result);
 		return Myconst.Toto.TOTO + "toto_game.jsp";
 	}
-
-
-	
-
 
 	@RequestMapping("/party/party_list.do")
 	public String party_list(String year, String month, Model model, String team) {
@@ -317,7 +312,7 @@ public class BaseBallController {
 			MemberVo member = (MemberVo) session.getAttribute("user");
 			if (member != null)
 				team = member.getT_name();
-		} else if (team.isEmpty()||team.equals("team_list_all"))
+		} else if (team.isEmpty() || team.equals("team_list_all"))
 			team = null;
 
 		List list = partyService.take_play_list(year, month);
@@ -336,12 +331,11 @@ public class BaseBallController {
 		model.addAttribute("today", map.get("today"));
 		model.addAttribute("this_year", map.get("this_year"));
 		model.addAttribute("this_month", map.get("this_month"));
-		model.addAttribute("this_day",map.get("this_day"));
+		model.addAttribute("this_day", map.get("this_day"));
 		model.addAttribute("first_day", map.get("first_day"));
 		model.addAttribute("last_day", map.get("last_day"));
 		model.addAttribute("party_count", party_count);
 		model.addAttribute("team", team);
-		
 
 		System.out.println(team);
 
@@ -349,7 +343,7 @@ public class BaseBallController {
 	}
 
 	@RequestMapping("/party/insert_party.do")
-	public String insert_party(String year, String month, String day, Model model) {
+	public String insert_party(String year, String month, String team, String day, Model model) {
 
 		MemberVo vo = (MemberVo) session.getAttribute("user");
 		if (vo == null)
@@ -357,6 +351,9 @@ public class BaseBallController {
 
 		if (year == null || month == null || day == null)
 			return "redirect:/party/party_list.do?fail=not_found";
+
+		if (team == null || team.isEmpty())
+			team = "team_list_all";
 
 		// 파티를 등록하기 전에 오늘 과연 해당 파티가 있는지 없는지 검색해본다.
 		int month_int = Integer.parseInt(month);
@@ -367,6 +364,7 @@ public class BaseBallController {
 			model.addAttribute("year", year);
 			model.addAttribute("month", month);
 			model.addAttribute("day", day);
+			model.addAttribute("team", team);
 			model.addAttribute("fail", "joined");
 
 			return "redirect:/party/party_list.do";
@@ -398,6 +396,31 @@ public class BaseBallController {
 	public String insert_form(Model model) {
 		List list = partyService.get_team_rank();
 		model.addAttribute("ranking", list);
+
+		Calendar calendar = Calendar.getInstance();
+		String year = String.valueOf(calendar.get(Calendar.YEAR));
+		String month = String.valueOf(calendar.get(Calendar.MONTH) + 1);
+
+		Map map = partyService.getWeekday(year, month);
+		model.addAttribute("today", map.get("today"));
+		model.addAttribute("this_year", map.get("this_year"));
+		model.addAttribute("this_month", map.get("this_month"));
+		model.addAttribute("this_day", map.get("this_day"));
+		model.addAttribute("first_day", map.get("first_day"));
+		model.addAttribute("last_day", map.get("last_day"));
+
+		////// 경기 가져오기//////
+		String day = String.valueOf(map.get("this_day"));
+
+		List play_list = partyService.take_play_list(year, month, day + 1);
+
+		for (int i = 0; i < play_list.size(); i++) {
+			PlayVo vo = (PlayVo) play_list.get(i);
+			vo.setHour_minute(Myconst.DateCheck.DATE_TIME_PRETTY.format(vo.getDate()));
+			play_list.set(i, vo);
+
+		}
+		model.addAttribute("play_list", play_list);
 
 		return myconst.Myconst.Main.VIEW_PATH + "main_list.jsp";
 	}
@@ -466,7 +489,8 @@ public class BaseBallController {
 	}
 
 	@RequestMapping("/party/insert_party_one.do")
-	public String insert_party_one(PartyVo vo, MemberVo voo, String year, String month, String day) {
+	public String insert_party_one(PartyVo vo, MemberVo voo, String year, String month, String day, String team,
+			Model model) {
 
 		MemberVo member = memberservice.selectOne_id_idx(voo);
 		if (member == null)
@@ -475,11 +499,16 @@ public class BaseBallController {
 		if (res == 1)
 			res = partyService.insert_party_book(member);
 
+		model.addAttribute("year", year);
+		model.addAttribute("month", month);
+		model.addAttribute("team", team);
+
 		return "redirect:party_list.do";
 	}
 
 	@RequestMapping("/party/show_party_list.do")
-	public String show_party_list(String year, String month, String day, String team, Model model, String page) {
+	public String show_party_list(String year, String month, String day, String team, Model model, String mode,
+			String page, String selt_pt_idx) {
 
 		System.out.println("쇼 파티 리스트 두");
 		int nowPage = 1;
@@ -495,15 +524,24 @@ public class BaseBallController {
 		model.addAttribute("list", list);
 		model.addAttribute("page_html", page_html);
 
-		return Myconst.BaseBall.PARTY_DIR + "show_party_list.jsp";
+		// mode가 1일 경우에는 view에서 호출한 것으로
+		// 그에 맞는 jsp로 리턴 시켜야 한다.
+		if ((mode == null || mode.isEmpty()) == false) {
+			if (Integer.parseInt(mode) == 1) {
+				model.addAttribute("selt_pt_idx", Integer.parseInt(selt_pt_idx));
+				return Myconst.BaseBall.PARTY_DIR + "show_party_list_view_mode.jsp";
+			} else
+				return Myconst.BaseBall.PARTY_DIR + "show_party_list.jsp";
+		} else
+			return Myconst.BaseBall.PARTY_DIR + "show_party_list.jsp";
 
 	}
-
 
 	@RequestMapping("/normal/list.do")
 	public String normal_list(Model model, Integer page, String nc_search, String nc_search_text) {
 
-		List list = normalService.getList(page, nc_search, nc_search_text);
+		List list = normalService.getList(page, nc_search, nc_search_text,model);
+		session.removeAttribute("show");
 
 		model.addAttribute("list", list);
 		// 기억 해봐 여기주소
@@ -518,10 +556,13 @@ public class BaseBallController {
 	}
 
 	@RequestMapping("/normal/insert.do")
-	public String normal_insert(NormalVo vo, HttpServletRequest request, String editor) {
+	public String normal_insert(NormalVo vo, HttpServletRequest request) {
 
-		normalService.insert(vo, request, editor);
-		return "/WEB-INF/views/normal/normal_list.jsp";
+		int res = normalService.insert(vo, request);
+		if (res == 1)
+			return "redirect:/normal/list.do";
+		else
+			return "redirect:/normal/list.do?fail=fail_normal_insert";
 	}
 
 	@RequestMapping("/file_uploader_html5.do")
@@ -535,7 +576,6 @@ public class BaseBallController {
 	@RequestMapping("/normal/view.do")
 	public String normal_view(int nc_idx, HttpServletRequest request, Model model) {
 
-		normalService.normal_view(nc_idx, request, model);
 		NormalVo vo = normalService.normal_view(nc_idx, request, model);
 		model.addAttribute("vo", vo);
 
@@ -678,6 +718,7 @@ public class BaseBallController {
 	}
 
 
+
 	@RequestMapping("/bat_game.do")
 	public String bat_game(Model model,HttpServletRequest request){
 		
@@ -737,9 +778,6 @@ public class BaseBallController {
 	}
 
 	
-	
-	
-	
-	
+
 
 }

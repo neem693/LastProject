@@ -23,6 +23,8 @@ public class Myconst {
 
 		public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		public static final SimpleDateFormat DATE_P_IDX_FORMAT = new SimpleDateFormat("yyyyMMdd");
+		public static final SimpleDateFormat DATE_TIME_PRETTY = new SimpleDateFormat("[HH:mm]");
+		
 
 	}
 
