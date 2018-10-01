@@ -10,12 +10,41 @@
 <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/joonggo/joonggo.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/joonggo/joonggo.css?var=1" rel="stylesheet" id="bootstrap-css">
 
 
 <!-- smart_editor2 -->
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+
+<script type="text/javascript">
+var sel_file;
+
+$(document).ready(function() {
+    $("#input_img").on("change", handleImgFileSelect);
+}); 
+
+function handleImgFileSelect(e) {
+    var files = e.target.files;
+    var filesArr = Array.prototype.slice.call(files);
+
+    filesArr.forEach(function(f) {
+        if(!f.type.match("image.*")) {
+            alert("확장자는 이미지 확장자만 가능합니다.");
+            return;
+        }
+
+        sel_file = f;
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $("#img_file").attr("src", e.target.result);
+        }
+        reader.readAsDataURL(f);
+    });
+}
+
+</script>
 
 </head>
 <body>
@@ -33,7 +62,7 @@
         <br>
       <table align= "center">
         <tr>
-     <td width = "300px"> <div class="form-group">  
+     <td width = "300px"> 
         <label width = "100px">카테고리</label>
        <select id="j_category" name="j_category" align = "list">
         		<option value="0">카테고리 선택</option>
@@ -41,13 +70,20 @@
         		<option value="2">판매합니다</option>
         		<option value="3">교환합니다</option>
         </select>
-    </div>
+   
     </td>
-    <td width = "300px">
-    <div class="form-group">
-                  <label width = "100px">대표이미지</label>
-                  <input type="file" name="Filedata" class = "J_image">
-				</div>
+    
+     <td><label width = "100px">대표이미지</label></td>
+     
+    <td class = "file">
+				 <div>
+				 <div class="img_wrap">
+				<img id="img_file" />					
+			  	</div>
+			  	 <input type="file" id="input_img"name="Filedata" class = "J_image">
+    </div>
+
+			
 				</td>
 				</tr>
     </table>

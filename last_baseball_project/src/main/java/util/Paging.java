@@ -1,10 +1,10 @@
 package util;
 /*
-        pageURL:ÆäÀÌÂ¡Ã³¸®ÇÒ ¸®½ºÆ®ÆäÀÌÁö      
-        nowPage:ÇöÀçÆäÀÌÁö
-        rowTotal:ÀüÃ¼µ¥ÀÌÅÍ°¹¼ö
-        blockList:ÇÑÆäÀÌÁö´ç °Ô½Ã¹°¼ö
-        blockPage:ÇÑÈ­¸é¿¡ ³ªÅ¸³¾ ÆäÀÌÁö ¸ñ·Ï¼ö
+        pageURL:í˜ì´ì§•ì²˜ë¦¬í•  ë¦¬ìŠ¤íŠ¸í˜ì´ì§€      
+        nowPage:í˜„ì¬í˜ì´ì§€
+        rowTotal:ì „ì²´ë°ì´í„°ê°¯ìˆ˜
+        blockList:í•œí˜ì´ì§€ë‹¹ ê²Œì‹œë¬¼ìˆ˜
+        blockPage:í•œí™”ë©´ì— ë‚˜íƒ€ë‚¼ í˜ì´ì§€ ëª©ë¡ìˆ˜
  */
 public class Paging {
 	public static String getPaging(
@@ -14,83 +14,100 @@ public class Paging {
 			int blockList, 
 			int blockPage){
 		
-		int totalPage/*ÀüÃ¼ÆäÀÌÁö¼ö*/,
-            startPage/*½ÃÀÛÆäÀÌÁö¹øÈ£*/,
-            endPage;/*¸¶Áö¸·ÆäÀÌÁö¹øÈ£*/
+		int totalPage/*ì „ì²´í˜ì´ì§€ìˆ˜*/,
+            startPage/*ì‹œì‘í˜ì´ì§€ë²ˆí˜¸*/,
+            endPage;/*ë§ˆì§€ë§‰í˜ì´ì§€ë²ˆí˜¸*/
 
 		boolean  isPrevPage,isNextPage;
 		
 		
-		StringBuffer sb; //¸ğµç »óÈ²À» ÆÇ´ÜÇÏ¿© HTMLÄÚµå¸¦ ÀúÀåÇÒ °÷
+		StringBuffer sb; //ëª¨ë“  ìƒí™©ì„ íŒë‹¨í•˜ì—¬ HTMLì½”ë“œë¥¼ ì €ì¥í•  ê³³
 		
 		
 		isPrevPage=isNextPage=false;
-		//ÀÔ·ÂµÈ ÀüÃ¼ ÀÚ¿øÀ» ÅëÇØ ÀüÃ¼ ÆäÀÌÁö ¼ö¸¦ ±¸ÇÑ´Ù..
+		//ì…ë ¥ëœ ì „ì²´ ìì›ì„ í†µí•´ ì „ì²´ í˜ì´ì§€ ìˆ˜ë¥¼ êµ¬í•œë‹¤..
 		totalPage = rowTotal/blockList;
 		if(rowTotal%blockList != 0)totalPage++; 
 		
 
-		//¸¸¾à Àß¸øµÈ ¿¬»ê°ú ¿òÁ÷ÀÓÀ¸·Î ÀÎÇÏ¿© ÇöÀç ÆäÀÌÁö ¼ö°¡ ÀüÃ¼ ÆäÀÌÁö ¼ö¸¦
-		//³ÑÀ» °æ¿ì °­Á¦·Î ÇöÀçÆäÀÌÁö °ªÀ» ÀüÃ¼ ÆäÀÌÁö °ªÀ¸·Î º¯°æ
+		//ë§Œì•½ ì˜ëª»ëœ ì—°ì‚°ê³¼ ì›€ì§ì„ìœ¼ë¡œ ì¸í•˜ì—¬ í˜„ì¬ í˜ì´ì§€ ìˆ˜ê°€ ì „ì²´ í˜ì´ì§€ ìˆ˜ë¥¼
+		//ë„˜ì„ ê²½ìš° ê°•ì œë¡œ í˜„ì¬í˜ì´ì§€ ê°’ì„ ì „ì²´ í˜ì´ì§€ ê°’ìœ¼ë¡œ ë³€ê²½
 		if(nowPage > totalPage)nowPage = totalPage;
 		
 
-		//½ÃÀÛ ÆäÀÌÁö¿Í ¸¶Áö¸· ÆäÀÌÁö¸¦ ±¸ÇÔ.
+		//ì‹œì‘ í˜ì´ì§€ì™€ ë§ˆì§€ë§‰ í˜ì´ì§€ë¥¼ êµ¬í•¨.
 		startPage = (int)(((nowPage-1)/blockPage)*blockPage+1);
 		endPage = startPage + blockPage - 1; //
 		
 		
 		
-		//¸¶Áö¸· ÆäÀÌÁö ¼ö°¡ ÀüÃ¼ÆäÀÌÁö¼öº¸´Ù Å©¸é ¸¶Áö¸·ÆäÀÌÁö °ªÀ» º¯°æ
+		//ë§ˆì§€ë§‰ í˜ì´ì§€ ìˆ˜ê°€ ì „ì²´í˜ì´ì§€ìˆ˜ë³´ë‹¤ í¬ë©´ ë§ˆì§€ë§‰í˜ì´ì§€ ê°’ì„ ë³€ê²½
 		if(endPage > totalPage)endPage = totalPage;
 		
-		//¸¶Áö¸·ÆäÀÌÁö°¡ ÀüÃ¼ÆäÀÌÁöº¸´Ù ÀÛÀ» °æ¿ì ´ÙÀ½ ÆäÀÌÂ¡ÀÌ Àû¿ëÇÒ ¼ö ÀÖµµ·Ï
-		//booleanÇü º¯¼öÀÇ °ªÀ» ¼³Á¤
+		//ë§ˆì§€ë§‰í˜ì´ì§€ê°€ ì „ì²´í˜ì´ì§€ë³´ë‹¤ ì‘ì„ ê²½ìš° ë‹¤ìŒ í˜ì´ì§•ì´ ì ìš©í•  ìˆ˜ ìˆë„ë¡
+		//booleaní˜• ë³€ìˆ˜ì˜ ê°’ì„ ì„¤ì •
 		if(endPage < totalPage) isNextPage = true;
-		//½ÃÀÛÆäÀÌÁöÀÇ °ªÀÌ 1º¸´Ù ÀÛÀ¸¸é ÀÌÀüÆäÀÌÂ¡ Àû¿ëÇÒ ¼ö ÀÖµµ·Ï °ª¼³Á¤
+		//ì‹œì‘í˜ì´ì§€ì˜ ê°’ì´ 1ë³´ë‹¤ ì‘ìœ¼ë©´ ì´ì „í˜ì´ì§• ì ìš©í•  ìˆ˜ ìˆë„ë¡ ê°’ì„¤ì •
 		if(startPage > 1)isPrevPage = true;
 		
-		//HTMLÄÚµå¸¦ ÀúÀåÇÒ StringBuffer»ı¼º=>ÄÚµå»ı¼º
+		//HTMLì½”ë“œë¥¼ ì €ì¥í•  StringBufferìƒì„±=>ì½”ë“œìƒì„±
 		sb = new StringBuffer();
-//-----±×·ìÆäÀÌÁöÃ³¸® ÀÌÀü --------------------------------------------------------------------------------------------		
+//-----ê·¸ë£¹í˜ì´ì§€ì²˜ë¦¬ ì´ì „ --------------------------------------------------------------------------------------------		
 		if(isPrevPage){
 			sb.append("<a href ='"+pageURL+"?page=");
 			sb.append(startPage-1); // nowPage-blockPage
-			sb.append("'>¢¸</a>");
+			/*sb.append("'>â—€</a>");*/
+			sb.append("<li class=\'disabled\'><a href='list.do?page='>Â«</a></li>");
 		}
 		else
-			sb.append("¢¸");
+			sb.append("<li class=\"'disabled\'><a>Â«</a></li>");
 		
-//------ÆäÀÌÁö ¸ñ·Ï Ãâ·Â -------------------------------------------------------------------------------------------------
-		sb.append("|");
+//------í˜ì´ì§€ ëª©ë¡ ì¶œë ¥ -------------------------------------------------------------------------------------------------
+		
+		/*<li class="disabled"><a href="#">Â«</a></li>
+		<li class="active"><a href="list.do?page=1">1 <span class="sr-only">(current)</span></a></li>
+		<li><a href="list.do?page=2">2</a></li>
+		<li><a href="list.do?page=3">3</a></li>
+		<li><a href="list.do?page=4">Â»</a></li>*/
+		
+	/*	sb.append("|");*/
 		for(int i=startPage; i<= endPage ;i++){
 			//if(i>totalPage)break;
-			if(i == nowPage){ //ÇöÀç ÀÖ´Â ÆäÀÌÁö
-				sb.append("&nbsp;<b><font size='3' color='red'>[");
-				sb.append(i);
-				sb.append("]</font></b>");
+			if(i == nowPage){ //í˜„ì¬ ìˆëŠ” í˜ì´ì§€
+				/*sb.append("&nbsp;<b><font size='3' color='red'>[");*/
+				/*sb.append(i);*/
+				/*sb.append("]</font></b>");*/
+				sb.append("<li class=\'active\'><a href=\'list.do?page="+i+"\'>"+i+"<span class=\'sr-only\'>(current)</span></a></li>");
+				
 			}
-			else{//ÇöÀç ÆäÀÌÁö°¡ ¾Æ´Ï¸é
+			else{//í˜„ì¬ í˜ì´ì§€ê°€ ì•„ë‹ˆë©´
 				sb.append("&nbsp;<a href='"+pageURL+"?page=");
-				sb.append(i);
-				sb.append("'>");
+				/*sb.append(i);*/
+				/*sb.append("'>");*/
 				sb.append(i);
 				sb.append("</a>");
+				sb.append("<li><a href=\'list.do?page="+i+"\'>"+i+"<span class=\'sr-only\'>(current)</span></a></li>");
+				
 			}
 		}// end for
 		
-		sb.append("&nbsp;|");
+		sb.append("&nbsp;");
 		
-//-----±×·ìÆäÀÌÁöÃ³¸® ´ÙÀ½ ----------------------------------------------------------------------------------------------
+//-----ê·¸ë£¹í˜ì´ì§€ì²˜ë¦¬ ë‹¤ìŒ ----------------------------------------------------------------------------------------------
 		if(isNextPage){
 			sb.append("<a href='"+pageURL+"?page=");
 
 			sb.append(endPage + 1);
 			
-			sb.append("'>¢º</a>");
+			sb.append("<li><a href='list.do?page='>Â»</a></li>");
 		}
 		else
-			sb.append("¢º");
+			sb.append("<li><a href=\"#\">Â»</a></li>");
+			/*sb.append("'>â–¶</a>");
+			
+		}
+		else
+			sb.append("â–¶");*/
 //---------------------------------------------------------------------------------------------------------------------	    
 
 		return sb.toString();
@@ -106,45 +123,45 @@ public class Paging {
 			int blockList, 
 			int blockPage){
 		
-		int totalPage/*ÀüÃ¼ÆäÀÌÁö¼ö*/,
-            startPage/*½ÃÀÛÆäÀÌÁö¹øÈ£*/,
-            endPage;/*¸¶Áö¸·ÆäÀÌÁö¹øÈ£*/
+		int totalPage/*ì „ì²´í˜ì´ì§€ìˆ˜*/,
+            startPage/*ì‹œì‘í˜ì´ì§€ë²ˆí˜¸*/,
+            endPage;/*ë§ˆì§€ë§‰í˜ì´ì§€ë²ˆí˜¸*/
 
 		boolean  isPrevPage,isNextPage;
 		
 		
-		StringBuffer sb; //¸ğµç »óÈ²À» ÆÇ´ÜÇÏ¿© HTMLÄÚµå¸¦ ÀúÀåÇÒ °÷
+		StringBuffer sb; //ëª¨ë“  ìƒí™©ì„ íŒë‹¨í•˜ì—¬ HTMLì½”ë“œë¥¼ ì €ì¥í•  ê³³
 		
 		
 		isPrevPage=isNextPage=false;
-		//ÀÔ·ÂµÈ ÀüÃ¼ ÀÚ¿øÀ» ÅëÇØ ÀüÃ¼ ÆäÀÌÁö ¼ö¸¦ ±¸ÇÑ´Ù..
+		//ì…ë ¥ëœ ì „ì²´ ìì›ì„ í†µí•´ ì „ì²´ í˜ì´ì§€ ìˆ˜ë¥¼ êµ¬í•œë‹¤..
 		totalPage = rowTotal/blockList;
 		if(rowTotal%blockList != 0)totalPage++; 
 		
 
-		//¸¸¾à Àß¸øµÈ ¿¬»ê°ú ¿òÁ÷ÀÓÀ¸·Î ÀÎÇÏ¿© ÇöÀç ÆäÀÌÁö ¼ö°¡ ÀüÃ¼ ÆäÀÌÁö ¼ö¸¦
-		//³ÑÀ» °æ¿ì °­Á¦·Î ÇöÀçÆäÀÌÁö °ªÀ» ÀüÃ¼ ÆäÀÌÁö °ªÀ¸·Î º¯°æ
+		//ë§Œì•½ ì˜ëª»ëœ ì—°ì‚°ê³¼ ì›€ì§ì„ìœ¼ë¡œ ì¸í•˜ì—¬ í˜„ì¬ í˜ì´ì§€ ìˆ˜ê°€ ì „ì²´ í˜ì´ì§€ ìˆ˜ë¥¼
+		//ë„˜ì„ ê²½ìš° ê°•ì œë¡œ í˜„ì¬í˜ì´ì§€ ê°’ì„ ì „ì²´ í˜ì´ì§€ ê°’ìœ¼ë¡œ ë³€ê²½
 		if(nowPage > totalPage)nowPage = totalPage;
 		
 
-		//½ÃÀÛ ÆäÀÌÁö¿Í ¸¶Áö¸· ÆäÀÌÁö¸¦ ±¸ÇÔ.
+		//ì‹œì‘ í˜ì´ì§€ì™€ ë§ˆì§€ë§‰ í˜ì´ì§€ë¥¼ êµ¬í•¨.
 		startPage = (int)(((nowPage-1)/blockPage)*blockPage+1);
 		endPage = startPage + blockPage - 1; //
 		
 		
 		
-		//¸¶Áö¸· ÆäÀÌÁö ¼ö°¡ ÀüÃ¼ÆäÀÌÁö¼öº¸´Ù Å©¸é ¸¶Áö¸·ÆäÀÌÁö °ªÀ» º¯°æ
+		//ë§ˆì§€ë§‰ í˜ì´ì§€ ìˆ˜ê°€ ì „ì²´í˜ì´ì§€ìˆ˜ë³´ë‹¤ í¬ë©´ ë§ˆì§€ë§‰í˜ì´ì§€ ê°’ì„ ë³€ê²½
 		if(endPage > totalPage)endPage = totalPage;
 		
-		//¸¶Áö¸·ÆäÀÌÁö°¡ ÀüÃ¼ÆäÀÌÁöº¸´Ù ÀÛÀ» °æ¿ì ´ÙÀ½ ÆäÀÌÂ¡ÀÌ Àû¿ëÇÒ ¼ö ÀÖµµ·Ï
-		//booleanÇü º¯¼öÀÇ °ªÀ» ¼³Á¤
+		//ë§ˆì§€ë§‰í˜ì´ì§€ê°€ ì „ì²´í˜ì´ì§€ë³´ë‹¤ ì‘ì„ ê²½ìš° ë‹¤ìŒ í˜ì´ì§•ì´ ì ìš©í•  ìˆ˜ ìˆë„ë¡
+		//booleaní˜• ë³€ìˆ˜ì˜ ê°’ì„ ì„¤ì •
 		if(endPage < totalPage) isNextPage = true;
-		//½ÃÀÛÆäÀÌÁöÀÇ °ªÀÌ 1º¸´Ù ÀÛÀ¸¸é ÀÌÀüÆäÀÌÂ¡ Àû¿ëÇÒ ¼ö ÀÖµµ·Ï °ª¼³Á¤
+		//ì‹œì‘í˜ì´ì§€ì˜ ê°’ì´ 1ë³´ë‹¤ ì‘ìœ¼ë©´ ì´ì „í˜ì´ì§• ì ìš©í•  ìˆ˜ ìˆë„ë¡ ê°’ì„¤ì •
 		if(startPage > 1)isPrevPage = true;
 		
-		//HTMLÄÚµå¸¦ ÀúÀåÇÒ StringBuffer»ı¼º=>ÄÚµå»ı¼º
+		//HTMLì½”ë“œë¥¼ ì €ì¥í•  StringBufferìƒì„±=>ì½”ë“œìƒì„±
 		sb = new StringBuffer();
-//-----±×·ìÆäÀÌÁöÃ³¸® ÀÌÀü --------------------------------------------------------------------------------------------		
+//-----ê·¸ë£¹í˜ì´ì§€ì²˜ë¦¬ ì´ì „ --------------------------------------------------------------------------------------------		
 		if(isPrevPage){
 			sb.append("<a href ='"+pageURL+"?page=");
 			sb.append(startPage-1); // nowPage-blockPage
@@ -155,21 +172,24 @@ public class Paging {
 			sb.append(search_text);
 			
 			
-			sb.append("'>¢¸</a>");
+			/*sb.append("'>â—€</a>");*/
+			sb.append("<li class=\'disabled\'><a href=\'#\'>Â«</a></li>");
 		}
 		else
-			sb.append("¢¸");
+			/*sb.append("â—€");*/
+             sb.append("<li class=\'disabled\'><a href=\'\'>Â«</a></li>");
 		
-//------ÆäÀÌÁö ¸ñ·Ï Ãâ·Â -------------------------------------------------------------------------------------------------
-		sb.append("|");
+//------í˜ì´ì§€ ëª©ë¡ ì¶œë ¥ -------------------------------------------------------------------------------------------------
+		sb.append("&nbsp;");
 		for(int i=startPage; i<= endPage ;i++){
 			//if(i>totalPage)break;
-			if(i == nowPage){ //ÇöÀç ÀÖ´Â ÆäÀÌÁö
-				sb.append("&nbsp;<b><font size='3' color='red'>[");
+			if(i == nowPage){ //í˜„ì¬ ìˆëŠ” í˜ì´ì§€
+			/*	sb.append("&nbsp;<b><font size='3' color='red'>[");
 				sb.append(i);
-				sb.append("]</font></b>");
+				sb.append("]</font></b>");*/
+				sb.append("<li class=\'active\'><a href=\'list.do?page="+i+"\'>"+i+"<span class=\'sr-only\'>(current)</span></a></li>");
 			}
-			else{//ÇöÀç ÆäÀÌÁö°¡ ¾Æ´Ï¸é
+			else{//í˜„ì¬ í˜ì´ì§€ê°€ ì•„ë‹ˆë©´
 				sb.append("&nbsp;<a href='"+pageURL+"?page=");
 				sb.append(i);
 				
@@ -178,15 +198,22 @@ public class Paging {
 				sb.append("&search_text=");
 				sb.append(search_text);
 				
-				sb.append("'>");
+				/*sb.append("'>");
 				sb.append(i);
-				sb.append("</a>");
+				sb.append("</a>");*/
+				sb.append("<li><a href=\'list.do?page=" + i +"\'>"+i+"</a></li>");
 			}
 		}// end for
 		
-		sb.append("&nbsp;|");
+		sb.append("&nbsp;");
 		
-//-----±×·ìÆäÀÌÁöÃ³¸® ´ÙÀ½ ----------------------------------------------------------------------------------------------
+		/*<li class="disabled"><a href="#">Â«</a></li>
+		<li class="active"><a href="list.do?page=1">1 <span class="sr-only">(current)</span></a></li>
+		<li><a href="list.do?page=2">2</a></li>
+		<li><a href="list.do?page=3">3</a></li>
+		<li><a href="list.do?page=4">Â»</a></li>*/
+		
+//-----ê·¸ë£¹í˜ì´ì§€ì²˜ë¦¬ ë‹¤ìŒ ----------------------------------------------------------------------------------------------
 		if(isNextPage){
 			sb.append("<a href='"+pageURL+"?page=");
 
@@ -197,10 +224,11 @@ public class Paging {
 			sb.append("&search_text=");
 			sb.append(search_text);
 			
-			sb.append("'>¢º</a>");
+			/*sb.append("'>â–¶</a>");*/
+			sb.append("<li><a href='list.do?page='>Â»</a></li>");
 		}
 		else
-			sb.append("¢º");
+			sb.append("<li><a href=\"#\">Â»</a></li>");
 //---------------------------------------------------------------------------------------------------------------------	    
 
 		return sb.toString();
@@ -212,63 +240,63 @@ public class Paging {
 			int blockList, 
 			int blockPage){
 		
-		int totalPage/*ÀüÃ¼ÆäÀÌÁö¼ö*/,
-            startPage/*½ÃÀÛÆäÀÌÁö¹øÈ£*/,
-            endPage;/*¸¶Áö¸·ÆäÀÌÁö¹øÈ£*/
+		int totalPage/*ì „ì²´í˜ì´ì§€ìˆ˜*/,
+            startPage/*ì‹œì‘í˜ì´ì§€ë²ˆí˜¸*/,
+            endPage;/*ë§ˆì§€ë§‰í˜ì´ì§€ë²ˆí˜¸*/
 
 		boolean  isPrevPage,isNextPage;
 		
 		
-		StringBuffer sb; //¸ğµç »óÈ²À» ÆÇ´ÜÇÏ¿© HTMLÄÚµå¸¦ ÀúÀåÇÒ °÷
+		StringBuffer sb; //ëª¨ë“  ìƒí™©ì„ íŒë‹¨í•˜ì—¬ HTMLì½”ë“œë¥¼ ì €ì¥í•  ê³³
 		
 		
 		isPrevPage=isNextPage=false;
-		//ÀÔ·ÂµÈ ÀüÃ¼ ÀÚ¿øÀ» ÅëÇØ ÀüÃ¼ ÆäÀÌÁö ¼ö¸¦ ±¸ÇÑ´Ù..
+		//ì…ë ¥ëœ ì „ì²´ ìì›ì„ í†µí•´ ì „ì²´ í˜ì´ì§€ ìˆ˜ë¥¼ êµ¬í•œë‹¤..
 		totalPage = rowTotal/blockList;
 		if(rowTotal%blockList != 0)totalPage++; 
 		
 
-		//¸¸¾à Àß¸øµÈ ¿¬»ê°ú ¿òÁ÷ÀÓÀ¸·Î ÀÎÇÏ¿© ÇöÀç ÆäÀÌÁö ¼ö°¡ ÀüÃ¼ ÆäÀÌÁö ¼ö¸¦
-		//³ÑÀ» °æ¿ì °­Á¦·Î ÇöÀçÆäÀÌÁö °ªÀ» ÀüÃ¼ ÆäÀÌÁö °ªÀ¸·Î º¯°æ
+		//ë§Œì•½ ì˜ëª»ëœ ì—°ì‚°ê³¼ ì›€ì§ì„ìœ¼ë¡œ ì¸í•˜ì—¬ í˜„ì¬ í˜ì´ì§€ ìˆ˜ê°€ ì „ì²´ í˜ì´ì§€ ìˆ˜ë¥¼
+		//ë„˜ì„ ê²½ìš° ê°•ì œë¡œ í˜„ì¬í˜ì´ì§€ ê°’ì„ ì „ì²´ í˜ì´ì§€ ê°’ìœ¼ë¡œ ë³€ê²½
 		if(nowPage > totalPage)nowPage = totalPage;
 		
 
-		//½ÃÀÛ ÆäÀÌÁö¿Í ¸¶Áö¸· ÆäÀÌÁö¸¦ ±¸ÇÔ.
+		//ì‹œì‘ í˜ì´ì§€ì™€ ë§ˆì§€ë§‰ í˜ì´ì§€ë¥¼ êµ¬í•¨.
 		startPage = (int)(((nowPage-1)/blockPage)*blockPage+1);
 		endPage = startPage + blockPage - 1; //
 		
 		
 		
-		//¸¶Áö¸· ÆäÀÌÁö ¼ö°¡ ÀüÃ¼ÆäÀÌÁö¼öº¸´Ù Å©¸é ¸¶Áö¸·ÆäÀÌÁö °ªÀ» º¯°æ
+		//ë§ˆì§€ë§‰ í˜ì´ì§€ ìˆ˜ê°€ ì „ì²´í˜ì´ì§€ìˆ˜ë³´ë‹¤ í¬ë©´ ë§ˆì§€ë§‰í˜ì´ì§€ ê°’ì„ ë³€ê²½
 		if(endPage > totalPage)endPage = totalPage;
 		
-		//¸¶Áö¸·ÆäÀÌÁö°¡ ÀüÃ¼ÆäÀÌÁöº¸´Ù ÀÛÀ» °æ¿ì ´ÙÀ½ ÆäÀÌÂ¡ÀÌ Àû¿ëÇÒ ¼ö ÀÖµµ·Ï
-		//booleanÇü º¯¼öÀÇ °ªÀ» ¼³Á¤
+		//ë§ˆì§€ë§‰í˜ì´ì§€ê°€ ì „ì²´í˜ì´ì§€ë³´ë‹¤ ì‘ì„ ê²½ìš° ë‹¤ìŒ í˜ì´ì§•ì´ ì ìš©í•  ìˆ˜ ìˆë„ë¡
+		//booleaní˜• ë³€ìˆ˜ì˜ ê°’ì„ ì„¤ì •
 		if(endPage < totalPage) isNextPage = true;
-		//½ÃÀÛÆäÀÌÁöÀÇ °ªÀÌ 1º¸´Ù ÀÛÀ¸¸é ÀÌÀüÆäÀÌÂ¡ Àû¿ëÇÒ ¼ö ÀÖµµ·Ï °ª¼³Á¤
+		//ì‹œì‘í˜ì´ì§€ì˜ ê°’ì´ 1ë³´ë‹¤ ì‘ìœ¼ë©´ ì´ì „í˜ì´ì§• ì ìš©í•  ìˆ˜ ìˆë„ë¡ ê°’ì„¤ì •
 		if(startPage > 1)isPrevPage = true;
 		
-		//HTMLÄÚµå¸¦ ÀúÀåÇÒ StringBuffer»ı¼º=>ÄÚµå»ı¼º
+		//HTMLì½”ë“œë¥¼ ì €ì¥í•  StringBufferìƒì„±=>ì½”ë“œìƒì„±
 		sb = new StringBuffer();
-//-----±×·ìÆäÀÌÁöÃ³¸® ÀÌÀü --------------------------------------------------------------------------------------------		
+//-----ê·¸ë£¹í˜ì´ì§€ì²˜ë¦¬ ì´ì „ --------------------------------------------------------------------------------------------		
 		if(isPrevPage){
 			sb.append("<a onclick='comment_list(");
 			sb.append(startPage-1); // nowPage-blockPage
-			sb.append(");'>¢¸</a>");
+			sb.append(");'>â—€</a>");
 		}
 		else
-			sb.append("¢¸");
+			sb.append("â—€");
 		
-//------ÆäÀÌÁö ¸ñ·Ï Ãâ·Â -------------------------------------------------------------------------------------------------
+//------í˜ì´ì§€ ëª©ë¡ ì¶œë ¥ -------------------------------------------------------------------------------------------------
 		sb.append("|");
 		for(int i=startPage; i<= endPage ;i++){
 			//if(i>totalPage)break;
-			if(i == nowPage){ //ÇöÀç ÀÖ´Â ÆäÀÌÁö
+			if(i == nowPage){ //í˜„ì¬ ìˆëŠ” í˜ì´ì§€
 				sb.append("&nbsp;<b><font size='3' color='red'>[");
 				sb.append(i);
 				sb.append("]</font></b>");
 			}
-			else{//ÇöÀç ÆäÀÌÁö°¡ ¾Æ´Ï¸é
+			else{//í˜„ì¬ í˜ì´ì§€ê°€ ì•„ë‹ˆë©´
 				sb.append("&nbsp;<a onclick='comment_list(");
 				sb.append(i);
 				sb.append(");'>");
@@ -279,16 +307,16 @@ public class Paging {
 		
 		sb.append("&nbsp;|");
 		
-//-----±×·ìÆäÀÌÁöÃ³¸® ´ÙÀ½ ----------------------------------------------------------------------------------------------
+//-----ê·¸ë£¹í˜ì´ì§€ì²˜ë¦¬ ë‹¤ìŒ ----------------------------------------------------------------------------------------------
 		if(isNextPage){
 			sb.append("<a onclick='comment_list(");
 
 			sb.append(endPage + 1);
 			
-			sb.append(");'>¢º</a>");
+			sb.append(");'>â–¶</a>");
 		}
 		else
-			sb.append("¢º");
+			sb.append("â–¶");
 //---------------------------------------------------------------------------------------------------------------------	    
 
 		return sb.toString();

@@ -8,9 +8,17 @@ body {
 padding-top: 0px !important;
 border: 1px solid black;
 
-
 }
 
+.main_box
+{
+	padding-top: 5px;
+	/* width: 1000px; */
+	margin-left: 15% !important;
+	margin-right: 15% !important;
+	
+	
+}
 input, .input-group-addon, button {
   border-radius: 0 !important;
 }
@@ -22,9 +30,7 @@ input, .input-group-addon, button {
 }
 
 .center_cont{
-	 padding-top: 5px;
-	margin-left: 15% !important;
-	margin-right: 15% !important;
+	 
 	
 }
 
@@ -72,8 +78,12 @@ img#image {
     width :  260px;
     height: 260px;
     border: 1px solid black;
+ 
 }
-
+.selledImg{
+	opacity: 0.3;
+	
+}
 .title
 {
 	font-size: 15pt;
@@ -166,6 +176,7 @@ hight : auto;
     top:0%;
 	width: 260px;
  	height:260px;
+
 }
 
 .mid{
@@ -175,11 +186,13 @@ position:absolute;
 top:40%;
 
 
+
 }
 .mid:after{
 content: '판매완료';
  font-size : 30pt;
  font-weight: bold;
+ 
 }
 
 #button2
@@ -252,12 +265,12 @@ content: '판매완료';
     border-radius: 4px;	
 }
 .button_div{
-width : 1330px;
-higth : 100px;
+width : 99%;
+higth : auto;
 display: inline-block;
 float : none;
 position:relative;
-left: 285px;
+/* left: 285px; */
 text-align: right;
  
 }
@@ -272,6 +285,15 @@ hr.five
  tr
  {
  font-size: 20pt;
+ }
+ .count th
+ {
+ font-size: 10pt;
+ }
+ 
+  .count td
+ {
+ font-size: 10pt;
  }
  
  /*!

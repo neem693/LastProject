@@ -23,6 +23,12 @@
 <link rel="stylesheet"
 	href="${ pageContext.request.contextPath }/resources/css/joonggo/joonggo_view.css?ver=1" rel="stylesheet" type="text/css">
 <script type="text/javascript">
+
+/* function write(f){
+		f.action = "insert_form.do";
+		f.submit();
+	}
+	 */
 	function del(f) {
 		if (confirm('정말 삭제하시겠습니까?') == false)
 			return;
@@ -140,13 +146,14 @@
 <%@include file="/WEB-INF/views/main/header/header.jsp" %>	
 	<!-- method="post" -->
 	<form>
+	<div class = "main_box">
 	<div class="container center_cont">
 		
 			<input type="hidden" name="j_idx" value="${vo.j_idx }">
 			<%-- 	    <input type="hidden" name="m_idx" value="${user.m_idx }"> --%>
 			<input type="hidden" name="page" value="${param.page}">
 		
-
+            <c:if test="${vo.j_sell_yn eq 'y'}"><c:set var="selled_img">selledImg</c:set></c:if>
 
 			<div class="title">
 				<label class="col-sm-10">${vo.j_title }</label>
@@ -171,7 +178,7 @@
 			<table id="file">
 				<tr>
 					<td width="300"><div id="s_container">
-							<img id="image"
+							<img id="image" class = "${selled_img }"
 								src="${pageContext.request.contextPath }/resources/photo_upload/${vo.j_filename}">
 
 							<c:if test="${vo.j_sell_yn eq 'y'}">
@@ -333,13 +340,13 @@
 			</div>
 		<br>
 		<table>
-		<tr>
+		<tr class = "count">
 		<th>댓글</th>
 		<td><!-- 댓글갯수 -->
         <c:if test="${ vo.c_count ne 0 }">
 	    <font>${ vo.c_count }</font>
 		</c:if>
-		${ vo.c_count }
+	
 		</td>
 		<th>조회수</th>
 		<td>${vo.j_readhits }</td>
@@ -381,15 +388,16 @@
 		<c:if test="${requestScope.vo.m_nick eq sessionScope.user.m_nick }">
 			<!-- (1 eq 1) : true를 만들어줘서 삭제 버튼을 보여줌 -->
 			<!-- 글쓰기 -->
-			<button type="submit" class="button1"onclick="location.href='insert_form.do';">글쓰기</button>
+			<button class="button1" onclick ="location.href='insert_form.do?page=${param.page}&search=${ param.search}&search_text=${ param.search_text}'; return false;">글쓰기</button>
 		    <button class="button1" onclick="send(this.form);">수정</button>
 		    <button class="button1" onclick="del(this.form);">삭제</button>
 		</c:if>
 	
 
 		<button type="submit" class="button1"
-			onclick="location.href='list.do?page=${param.page}&search=${ param.search}&search_text=${ param.search_text}'; return false;"">목록보기</button>
+			onclick="location.href='list.do?page=${param.page}&search=${ param.search}&search_text=${ param.search_text}'; return false;">목록보기</button>
 
+	</div>
 	</div>
 </form>
 </body>
