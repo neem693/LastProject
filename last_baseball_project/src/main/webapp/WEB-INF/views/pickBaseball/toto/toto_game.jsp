@@ -27,6 +27,12 @@ tr, td, th {
 }
 
 
+.main {
+	margin-left: 15%;
+	margin-right: 15%;
+}
+
+
 </style>
 
 
@@ -61,6 +67,12 @@ function check(chk){
 
 <body>
 
+
+<%@include file="/WEB-INF/views/main/header/header.jsp"%>
+
+
+
+<div class="main">
 	 토토 게임 리스트 <br>
  	
  	경기장 장소 	홈팀    원정팀     승리배당      패배배당<br>
@@ -107,16 +119,9 @@ function check(chk){
 		
 		</div>	
 			
-			
-			
-			
-		
-			
-			
-		
-			
-				
-			
+	</div>					
+	<div style="clear: both;"></div>
+	<%@include file="/WEB-INF/views/main/footer/footer.jsp"%>
 
 </body>
 </html>

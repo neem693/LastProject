@@ -88,7 +88,7 @@ function send_main(){
 		
 	<div class="topnav">
 		<a href="${ pageContext.request.contextPath }/joonggo/list.do">중고거래</a>
-		<a href="${ pageContext.request.contextPath }/toto/toto_list.do">BETTING</a>
+		<a href="${ pageContext.request.contextPath }/toto_view.do">BETTING</a>
 		<a href="${ pageContext.request.contextPath }/party/party_list.do">PARTY</a>
 		<a href="${ pageContext.request.contextPath }/normal/list.do">자유게시판</a>
 	</div>

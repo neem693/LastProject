@@ -9,9 +9,11 @@
 		<typeAlias type="vo.TeamVo" alias="Team" />
 		<typeAlias type="vo.PlayVo" alias = "Play"/>
 
+
 		
 		<typeAlias type="vo.NormalVo" alias = "Normal"/>
 		<typeAlias type="vo.CommentVo_normal" alias = "Comment_normal"/>
+
 
 		<typeAlias type="vo.PartyVo" alias = "Party"/>
 		<typeAlias type="vo.Parsing_updateVo" alias = "Parsing"/>

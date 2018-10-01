@@ -32,11 +32,6 @@ function send_main(){
 
 
 
-
-
-
-
-
 </head>
 
 <body>
@@ -46,8 +41,6 @@ function send_main(){
 	
 	<div id="header_img">
 	
-						
-						
 
 	        <!-- 로그인이 안된 상태 -->	
 	        <c:if test="${ empty user }">						

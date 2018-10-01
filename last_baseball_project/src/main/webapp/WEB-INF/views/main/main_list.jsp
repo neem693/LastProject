@@ -62,9 +62,7 @@
 
 <body>
 
-
 	<%@include file="/WEB-INF/views/main/header/header.jsp"%>
-
 
 	<div class="row">
 
