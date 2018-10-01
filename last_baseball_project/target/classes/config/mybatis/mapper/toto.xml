@@ -18,7 +18,14 @@
    )
 
 </insert>
+    <select id="toto_select_game_id" resultType="String">
+ 	<!-- 미처리된 게임 key를 가져온다  -->
+		
+	SELECT DISTINCT m_id
+	from toto_gametable
+	where game_result='T'
 
+    </select>
 
 
     <select id="toto_select_game_key" parameterType ="String" resultType="String">
@@ -44,6 +51,15 @@
  	<!--  업데이트 된 게임 결과를 가져온다.  -->
 			SELECT p_rts FROM play
 			WHERE p_idx=#{p_idx}
+    </select>
+
+	
+	 
+	 <select id="toto_my_bating_list" parameterType ="vo.MemberVo" resultType="vo.Toto_Game_Vo">
+ 	<!--  현재 이용자가 배팅한 게임 목록  -->
+				SELECT * FROM toto_gametable
+				WHERE m_id=#{m_id} AND game_result='T'
+				
     </select>
 
 
@@ -101,5 +117,13 @@
         	game_result=#{game_result} 
         	where p_idx=#{p_idx}		
 	</update>
+
+		
+	<update id="toto_game_money" parameterType="vo.MemberVo">
+			UPDATE member SET			    
+        	m_money=#{m_money} 
+        	where m_idx=#{m_idx}	
+	</update>
+
 
 </mapper>

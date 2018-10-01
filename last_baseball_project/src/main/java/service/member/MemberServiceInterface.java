@@ -13,6 +13,7 @@ public interface MemberServiceInterface {
 
 	public List<MemberVo> selectList();
 	
+	
 	String selectOne(String m_id);
 	String selectOne(Map map);
 	MemberVo selectOne(int idx);	
@@ -23,7 +24,7 @@ public interface MemberServiceInterface {
 	int delete(int idx);
 	public MemberVo login_action(MemberVo vo);
 
-	
+	MemberVo my_money(MemberVo vo);
 
 	
 	MemberVo selectOne_id_idx(MemberVo vo);

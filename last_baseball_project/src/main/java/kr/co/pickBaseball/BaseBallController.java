@@ -41,6 +41,7 @@ import vo.Party_bookVo;
 import vo.PlayVo;
 import vo.StadiumVo;
 import vo.TeamVo;
+import vo.Toto_Game_Vo;
 
 @Controller
 public class BaseBallController {
@@ -186,8 +187,8 @@ public class BaseBallController {
 	@RequestMapping("/member/login_action.do")
 	public String login_action(MemberVo vo) {
 
-		System.out.println(vo.getM_id());
-		System.out.println(vo.getM_pwd());
+	//	System.out.println(vo.getM_id());
+	//	System.out.println(vo.getM_pwd());
 		MemberVo voo = memberservice.login_action(vo);
 
 		if (voo == null)
@@ -240,6 +241,23 @@ public class BaseBallController {
 		memberservice.update(vo);
 		return "test_list.do";
 	}
+
+
+	@RequestMapping("/check_login.do")
+	@ResponseBody
+	public String check_login() {
+
+	MemberVo vo=(MemberVo)session.getAttribute("user");
+	
+	if(vo==null) {
+		return "fail";
+	}
+	else return "ok";
+	
+	
+	}
+
+	
 
 	@RequestMapping("/check_id.do")
 	@ResponseBody
@@ -659,19 +677,25 @@ public class BaseBallController {
 		return "redirect:/party/view.do";
 	}
 
-	@RequestMapping("/toto_view.do")
-	public String view(Model model) throws IOException{
-		//메인 페이지 출력 
-		List list=totoservice.Select_gamelist();
-		model.addAttribute("list",list);
-		return Myconst.Toto.TOTO+"toto_game.jsp";
-	}
 
 	@RequestMapping("/bat_game.do")
 	public String bat_game(Model model,HttpServletRequest request){
 		
 	//주기적으로 파라미터명이 변하기때문에(p_idx와동일하므로) 별도로 처리해준다.
-	totoservice.Make_game(request);
+	totoservice.Make_game(request);//(게임생성)
+	  
+	String bat_price=request.getParameter("bat_price");//(생성완료후 배팅금 처리)
+	String m_idx=request.getParameter("m_idx");//(생성완료후 배팅금 처리)
+    
+	MemberVo m_vo = memberservice.selectOne(Integer.parseInt(m_idx));
+	
+	int bat_p=Integer.parseInt(bat_price);
+	bat_p=Integer.parseInt(m_vo.getM_money())-bat_p;
+	m_vo.setM_money(Integer.toString(bat_p));
+	
+	totoservice.update_money(m_vo);
+	
+  
 	System.out.println("batting good");	
 	return "toto_view.do";		
 	}
@@ -679,8 +703,7 @@ public class BaseBallController {
 	@RequestMapping("/game_result.do")
 	public String game_result(Model model,HttpServletRequest request){
 	
-		//HttpSession session = request.getSession(); 세션영역에서 로그인된 사용자의 id를 얻어온다.(9-28 현재 미구현)
-		//session.getAttribute("player");
+		
 		String m_id="player";
 		//사용자가 생선한 게임 가져오기 (미처리된 게임)		
 		totoservice.Game_Result(m_id);	
@@ -689,6 +712,30 @@ public class BaseBallController {
 		return "toto_view.do";		
 	}
 	
+	
+	@RequestMapping("/toto_view.do")
+	public String view(Model model,HttpServletRequest request){
+		//메인 페이지 출력 
+		
+		MemberVo vo=(MemberVo)session.getAttribute("user");
+		
+		if(vo==null) {
+			return "redirect:member/login.do";
+		}
+		
+
+		List list=totoservice.Select_gamelist();
+		model.addAttribute("list",list);
+		
+		List my_bat_list=totoservice.my_bat_gamelist(vo);
+		model.addAttribute("my_bat_list",my_bat_list);
+		
+		vo= totoservice.my_money_read(vo);
+		
+		model.addAttribute("member",vo);
+		return Myconst.Toto.TOTO+"toto_game.jsp";
+	}
+
 	
 	
 	
