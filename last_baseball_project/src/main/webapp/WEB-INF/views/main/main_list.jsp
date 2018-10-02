@@ -66,8 +66,7 @@
 .day {
 	width: 14%;
 	box-sizing: border-box;
-	float: left; //
-	border: 1px solid black;
+	float: left; 
 	padding: 15px 0;
 	text-align: center;
 }
@@ -239,7 +238,19 @@ border: 1px solid rgb(217, 217, 217);
 
 			<div class="card">
 			<div class="card_back_3"   style="height: 300px;">
-				<h3>오늘의 소식</h3>
+				<h3>WITH</h3>
+			<ul class = "banner">	
+			<li><a href="https://www.koreabaseball.com/">
+			<img src="${ pageContext.request.contextPath }/resources/images/main/kbo.png">KBO</a></li>
+			<li><a href="https://www.sportstoto.co.kr/index.jsp">
+			<img src="${ pageContext.request.contextPath }/resources/images/main/toto.png">스포츠토토</a></li>
+			<li><a href="https://www.mlb.com/">
+			<img src="${ pageContext.request.contextPath }/resources/images/main/mlb.png">MLB</a></li>
+			<li><a href="http://gall.dcinside.com/board/lists/?id=baseball_new6">
+			<img src="${ pageContext.request.contextPath }/resources/images/main/dc.png">야구갤러리</a></li>
+			<li><a href="http://mlbpark.donga.com/mp/b.php?b=bullpen">
+			<img src="${ pageContext.request.contextPath }/resources/images/main/mlbpark.png">엠팍불펜</a></li>
+			</ul>
 				
 			</div>	
 			</div>

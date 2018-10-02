@@ -80,7 +80,7 @@
 				href="${ pageContext.request.contextPath }/joonggo/list.do"><img
 				src="${pageContext.request.contextPath}/resources/images/main/header/nav_junggo.png">중고거래</a>
 			<a class="betting"
-				href="${ pageContext.request.contextPath }/toto/toto_list.do"><img
+				href="${ pageContext.request.contextPath }/toto_view.do"><img
 				src="${pageContext.request.contextPath}/resources/images/main/header/nav_betting.png">BETTING</a>
 			<a class="party"
 				href="${ pageContext.request.contextPath }/party/party_list.do"><img
