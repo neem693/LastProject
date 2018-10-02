@@ -154,7 +154,11 @@ border: 1px solid rgb(217, 217, 217);
 		<c:set var="day" value="0" />
 		<div class="rightcolumn">
 			<div class="card">
+				<div class ="card_back_1">
+			
+			
 				<h2>오늘의 경기</h2>
+
 				<div class="fakeimg">
 					<div class="month">${this_year}/${this_month }</div>
 					<c:forEach var="i" begin="0" end="5">
@@ -200,41 +204,44 @@ border: 1px solid rgb(217, 217, 217);
 					</c:choose>
 
 				</div>
+
 			</div>
+			</div>
+			
 			<div class="card">
 
-				<div class="fakeimg">
-					<span class="team_item">순위</span> <span class="team_item">팀</span>
-					<span class="team_item">경기</span> <span class="team_item">승</span>
-					<span class="team_item">무</span> <span class="team_item">패</span>
+				<div class ="card_back_2">
 
-					<div style="clear: both"></div>
-					<c:forEach var="team" items="${ranking}">
+				<span class = "team_item">순위</span>
+				<span class = "team_item">팀</span>
+				<span class = "team_item">경기</span>
+				<span class = "team_item">승</span>
+				<span class = "team_item">무</span>
+				<span class = "team_item">패</span>
+				
+				<div style = "clear:both"></div>
+				<c:forEach var="team" items="${ranking}">
+				
+					<span class = "rank"> ${team.t_rank}</span>
+					<span class = "team">${team.t_name}</span>
+					<span class = "game">${team.t_nom}</span>
+					<span class = "win">${team.t_win}</span>
+					<span class = "draw">${team.t_draw}</span>
+					<span class = "lose">${team.t_lose}</span>
+					
+					<br>
+				</c:forEach>
+				<div style = "clear: both"></div>
+				
+				</div>	
 
-						<span class="rank"> ${team.t_rank}</span>
-						<span class="team">${team.t_name}</span>
-						<span class="game">${team.t_nom}</span>
-						<span class="win">${team.t_win}</span>
-						<span class="draw">${team.t_draw}</span>
-						<span class="lose">${team.t_lose}</span>
-
-						<br>
-					</c:forEach>
-					<div style="clear: both"></div>
-				</div>
 			</div>
 
 			<div class="card">
+			<div class="card_back_3"   style="height: 300px;">
 				<h3>오늘의 소식</h3>
-				<div class="fakeimg">
-					<p>Image</p>
-				</div>
-				<div class="fakeimg">
-					<p>Image</p>
-				</div>
-				<div class="fakeimg">
-					<p>Image</p>
-				</div>
+				
+			</div>	
 			</div>
 		</div>
 	</div>

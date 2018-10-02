@@ -27,7 +27,7 @@
 	
 
 	<div class="footer">
-		<h2>우리회사 주소,전화번호 etc</h2>
+	
 		<div id="footer_content">
 			(주)인크레파스 A강의실 
 			<a href="">개인정보관리정책</a><br>
