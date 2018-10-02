@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 
 import vo.MemberVo;
+import vo.My_Game_Result_Vo;
 import vo.Toto_Game_Vo;
 
 public interface TotoServiceInterface {
@@ -22,5 +23,7 @@ public interface TotoServiceInterface {
 	
 	int update_money(MemberVo vo);
 	MemberVo my_money_read(MemberVo vo);
+	
+	List my_game_result(String m_id);
 	
 }

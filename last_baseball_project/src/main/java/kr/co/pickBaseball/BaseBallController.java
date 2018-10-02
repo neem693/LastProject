@@ -773,8 +773,14 @@ public class BaseBallController {
 		model.addAttribute("my_bat_list",my_bat_list);
 		
 		vo= totoservice.my_money_read(vo);
-		
 		model.addAttribute("member",vo);
+		
+		System.out.println(vo.getM_id());
+		List my_game_list = totoservice.my_game_result(vo.getM_id());
+		
+		model.addAttribute("my_game_list",my_game_list);
+		
+		
 		return Myconst.Toto.TOTO+"toto_game.jsp";
 	}
 

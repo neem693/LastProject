@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import vo.MemberVo;
+import vo.My_Game_Result_Vo;
 import vo.TotoValueVo;
 import vo.Toto_Game_Vo;
 
@@ -31,6 +32,13 @@ public interface TotoDaoInterface {
 	List my_bat_gamelist(MemberVo vo);
 	
 	MemberVo my_money_read(MemberVo vo);
+	//---------------------------------------------
+	
+	int my_game_result_insert(My_Game_Result_Vo vo);
+	
+	List my_game_list(String id);
+	
+	
 	
 	
 }

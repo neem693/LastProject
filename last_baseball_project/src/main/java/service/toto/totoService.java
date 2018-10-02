@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 
 import dao.toto.TotoDaoInterface;
 import vo.MemberVo;
+import vo.My_Game_Result_Vo;
 import vo.TotoValueVo;
 import vo.Toto_Game_Vo;
 
@@ -49,8 +50,8 @@ public class totoService implements TotoServiceInterface {
 			String[] round_arr=round.split("=");	
 			
 			int num=(Integer.parseInt(round_arr[3]));		//위주소는 전회차이므로 현재차를 구하려면 +1회차 해준다.
-			String r_number=Integer.toString(num);
-			round_num= Integer.toString((Integer.parseInt(round_num)));
+			String r_number=Integer.toString(num-1);
+			round_num= Integer.toString((Integer.parseInt(round_num)-1));
 
 			String toto_url="https://www.betman.co.kr/gameSchedule.so?method=basic&gameId=G101&gameRound="+
 						     r_number+"&innerRound="+r_number+"&outerRound="+round_num+"&saleYear="+year+
@@ -177,7 +178,7 @@ public class totoService implements TotoServiceInterface {
 				toto_dao.insert_totogame(vo);// 배팅한 모든 게임 정보를 저장한다.
 		
 			}
-
+			
 			// TODO Auto-generated method stub
 			return "ok";
 		}
@@ -212,7 +213,8 @@ public class totoService implements TotoServiceInterface {
 									
 									//업데이트된 경기 결과를 플레이 테이블에서 가져온다.p_idx가 유일키이므로 경기도 단하나만 존재
 									String game_result = toto_dao.Game_Information(vo.getP_idx());
-										  if(!game_result.equals('-')) {		// 예정일경우 - 그외의 경우 승 패 우천취소
+									
+									if(!game_result.equals('-')) {		// 미정이나 예정일경우 - 그외의 경우 승 패 우천취소
 											  vo.setGame_result(game_result);
 											  toto_dao.game_result_update(vo);					  
 										  }
@@ -284,13 +286,22 @@ public class totoService implements TotoServiceInterface {
 						}	 
 						 double total_money=(double)bat_money*final_ratio;
 						
-						 System.out.printf("적중 축하합니다.총금액 %d 배당률 %d 입니다 \n",(int)total_money,(int)final_ratio);
+						 System.out.printf("적중 축하합니다.총금액 %d 배당률 %f 입니다 \n",(int)total_money,final_ratio);
 						 //해당금액을 맴버 아이디에 업데이트 하면 종료(미구현) 
-					
-					
+						 
+						 My_Game_Result_Vo my_game_vo=new My_Game_Result_Vo();
+						 my_game_vo.setFinal_ratio(Double.toString(final_ratio));
+						 my_game_vo.setGame_number(game_num);
+						 my_game_vo.setTotal_money(Double.toString(total_money));						 
+						 my_game_vo.setM_id(game_id[id]);
+						 //지난 게임결과 등록  
+						 
+						 toto_dao.my_game_result_insert(my_game_vo);
+						 
 					}
 		
-			}
+			
+		}
 			
 		return null;
 	
@@ -321,6 +332,15 @@ public class totoService implements TotoServiceInterface {
 			MemberVo voo = toto_dao.my_money_read(vo);
 			
 			return voo;
+		}
+		
+		@Override
+		public List my_game_result(String m_id) {
+			
+			List list= toto_dao.my_game_list(m_id);
+			
+			// TODO Auto-generated method stub
+			return list;
 		}
 		
 		

@@ -170,7 +170,32 @@ function check(chk){
 						</tr>
 						</c:forEach>
 						
+						<tr>
+						<td>  </td>  <td></td><td></td><td></td>
+						</tr>
+						<tr>
+						<td>  </td>  <td></td><td></td><td></td>
+						</tr>
+						<tr>
+						<td>내 배팅 기록</td>
+						</tr>
+						
+						
+						
+						<c:forEach var="game_list" items="${my_game_list}"  varStatus="i">	
+						<tr>
+						<td>게임번호:${game_list.game_number}</td> 
+						<td>사용자:${game_list.m_id}</td> 
+						<td>적중금액:${game_list.total_money}</td>
+						<td>적중배율:${game_list.final_ratio}</td>
+						</tr>
+						</c:forEach>
+						
+		
+				
 						</table>
+						
+						
 					
 					
 					</aside>
