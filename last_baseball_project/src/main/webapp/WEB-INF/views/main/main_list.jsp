@@ -65,7 +65,6 @@
 
 	<%@include file="/WEB-INF/views/main/header/header.jsp"%>
 
-
 	<div class="row">
 
 		<div class="leftcolumn">
@@ -121,19 +120,23 @@
 
 		<div class="rightcolumn">
 			<div class="card">
+				<div class ="card_back_1">
+			
+			
 				<h2>오늘의 경기</h2>
-				<div class="fakeimg" style="height: 100px;">달력</div>
+				<div class="fakeimg" style="height: 50px;">오늘날짜</div>
 				<p>경기1- A:B</p>
 				<p>경기2- C:D</p>
 				<p>경기3- E:F</p>
 				<p>경기4- G:H</p>
 				<p>경기5- I:J</p>
 				<p>경기를 클릭하면 파티로 넘어가?</p>
-
 			</div>
+			</div>
+			
 			<div class="card">
-				
-				<div class="fakeimg">
+				<div class ="card_back_2">
+
 				<span class = "team_item">순위</span>
 				<span class = "team_item">팀</span>
 				<span class = "team_item">경기</span>
@@ -154,20 +157,15 @@
 					<br>
 				</c:forEach>
 				<div style = "clear: both"></div>
-</div>
+				
+				</div>	
 			</div>
 
 			<div class="card">
+			<div class="card_back_3"   style="height: 300px;">
 				<h3>오늘의 소식</h3>
-				<div class="fakeimg">
-					<p>Image</p>
-				</div>
-				<div class="fakeimg">
-					<p>Image</p>
-				</div>
-				<div class="fakeimg">
-					<p>Image</p>
-				</div>
+				
+			</div>	
 			</div>
 		</div>
 	</div>

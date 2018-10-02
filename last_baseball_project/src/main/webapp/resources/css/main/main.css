@@ -2,7 +2,7 @@
 
  * {
     box-sizing: border-box; 
-/*     border: 2px solid #80ff00; */ 
+     /* border: 2px solid #80ff00; */  
       
      }
 
@@ -20,10 +20,6 @@ body {
 .quick{
 	
 }
-
-
-
-
 
 
 
@@ -116,11 +112,15 @@ img {vertical-align: middle;} */
 }
 
 /* Fake image */
-.fakeimg {
+/* .fakeimg {
     background-color: #aaa;
     width: 100%;
     padding: 20px;
-}
+} */
+
+
+
+
 
 /* Add a card effect for articles */
 .card {
@@ -132,6 +132,31 @@ img {vertical-align: middle;} */
 	 	margin-left: 15% ;
     margin-right:15% ;
 }
+
+.card_back_1{
+	background-image: url("../../../resources/images/main/match.png"); 
+	background-repeat: no-repeat;
+	background-size:contain;
+	background-position: center;	 
+  	/* filter:opacity(50%); */
+}
+.card_back_2{
+	background-image: url("../../../resources/images/main/ranking.png"); 
+	background-repeat: no-repeat;
+	background-size:contain;
+	background-position: center;	 
+  	/* filter:opacity(50%); */
+}
+.card_back_3{
+	background-image: url("../../../resources/images/main/news.png"); 
+	background-repeat: no-repeat;
+	background-size:contain;
+	background-position: center;	 
+  	/* filter:opacity(50%); */
+}
+
+
+
 
 /* Clear floats after the columns */
 .row:after {
