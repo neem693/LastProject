@@ -151,11 +151,24 @@ img {vertical-align: middle;} */
 	background-image: url("../../../resources/images/main/news.png"); 
 	background-repeat: no-repeat;
 	background-size:contain;
-	background-position: center;	 
+	background-position: right;	 
   	/* filter:opacity(50%); */
 }
 
-
+.banner{
+	list-style: none;
+	padding-left: 0px;
+	
+	
+}
+.banner li{
+	font-size: large;
+	
+	
+}
+.banner li a{
+	text-decoration: none;
+}
 
 
 /* Clear floats after the columns */
