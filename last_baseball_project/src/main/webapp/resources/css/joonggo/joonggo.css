@@ -53,10 +53,13 @@ p{
 }
 
 img #image{
+	 display: inline-block;
+
 	width: 150px;
 	height: 150px;
 	border: 1px solid gray;
 	outline: 1px solid black;
+	
 }
 
 .selledImg{

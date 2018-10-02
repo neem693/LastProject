@@ -342,10 +342,10 @@
 		<table>
 		<tr class = "count">
 		<th>댓글</th>
-		<td><!-- 댓글갯수 -->
 		
+		<td><!-- 댓글갯수 -->
         <c:if test="${ vo.c_count ne 0 }">
-	    <font>${ vo.c_count }</font>
+	     ${ vo.c_count }
 		</c:if>
 	
 		</td>
