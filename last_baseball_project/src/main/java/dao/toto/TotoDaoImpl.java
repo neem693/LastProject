@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import vo.MemberVo;
+import vo.My_Game_Result_Vo;
 import vo.TotoValueVo;
 import vo.Toto_Game_Vo;
 
@@ -183,13 +184,29 @@ public class TotoDaoImpl implements TotoDaoInterface {
 
 	@Override
 	public MemberVo my_money_read(MemberVo vo) {
-
-		MemberVo voo = session.selectOne("member_select_vo_id",vo);
-		
+		MemberVo voo = session.selectOne("member_select_vo_id",vo);	
 		return voo;
 	}
-	
 
+
+	@Override
+	public int my_game_result_insert(My_Game_Result_Vo vo) {
+
+		session.insert("my_game_result_insert",vo);
+		
+		return 0;
+	}
+
+
+	@Override
+	public List my_game_list(String id) {
+		
+		List list=session.selectList("my_game_list",id);
+		
+		return list;
+	}
+	
+	
 	
 	
 	

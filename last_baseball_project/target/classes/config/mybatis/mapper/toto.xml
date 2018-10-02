@@ -4,6 +4,23 @@
 
 <mapper namespace="toto">
 
+
+
+<insert id="my_game_result_insert" parameterType="vo.My_Game_Result_Vo">
+
+ INSERT INTO My_toto_result(total_money,final_ratio,game_number,m_id) VALUES    
+  ( 
+  
+   #{total_money},
+   #{final_ratio},
+   #{game_number},
+   #{m_id}
+   )
+
+</insert>
+
+
+
 <insert id="insert_game" parameterType="vo.Toto_Game_Vo">
 
  INSERT INTO toto_gametable(m_id,game_number,bat_price,ratio,p_idx,bat_win_lose,game_result) VALUES    
@@ -18,6 +35,18 @@
    )
 
 </insert>
+
+
+
+<select id="my_game_list" parameterType="String"  resultType="vo.My_Game_Result_Vo">
+ 	<!-- 미처리된 게임 key를 가져온다  -->
+	
+	SELECT ROUND(total_money,1) AS total_money ,ROUND(Final_ratio,1) AS Final_ratio,m_id,game_number 
+	FROM My_toto_result
+	where m_id=#{m_id}
+    </select>
+
+
     <select id="toto_select_game_id" resultType="String">
  	<!-- 미처리된 게임 key를 가져온다  -->
 		
