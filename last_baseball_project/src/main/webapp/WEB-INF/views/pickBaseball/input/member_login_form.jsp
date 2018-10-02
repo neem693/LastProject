@@ -34,7 +34,7 @@ $(document).ready(function() {
 	//id_check  영문자로 시작하는 4자리에서 10자리
 	 var idreg = /^[A-Za-z]{1}[A-Za-z0-9]{3,10}$/;
 	 //name_check 한글2~4자리 
-	 var name = /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/; 
+	 var name = /^[가-힣a-zA-Z0-9]{2,8}$/; 
 	 //nick_check 닉네임2~7자리 
 	 var nick = /^[가-힣]{2,8}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/; 
 	 var pwd =  /^.*(?=.{4,10})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;

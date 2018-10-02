@@ -219,7 +219,7 @@ public class BaseBallController {
 
 		vo.setM_ip(request.getRemoteAddr());
 		memberservice.insert(vo);
-		return "test_list.do";
+		return "redirect:/member/login.do";
 	}
 
 	@RequestMapping("/test_delete_list.do")
