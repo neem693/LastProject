@@ -52,7 +52,7 @@ function login(){
 			<button onclick="login();return false;" class="btn_return cyan ">
 				<b>로그인</b>
 			</button>
-			<button class="btn_join cyan">
+			<button onclick="location.href = '${pageContext.request.contextPath}/join.do';return false;" class="btn_join cyan">
 				<b>회원가입</b>
 			</button>
 
