@@ -1,10 +1,11 @@
+
 package util;
 /*
-        pageURL:페이징처리할 리스트페이지      
-        nowPage:현재페이지
-        rowTotal:전체데이터갯수
-        blockList:한페이지당 게시물수
-        blockPage:한화면에 나타낼 페이지 목록수
+        pageURL:?럹?씠吏뺤쿂由ы븷 由ъ뒪?듃?럹?씠吏?      
+        nowPage:?쁽?옱?럹?씠吏?
+        rowTotal:?쟾泥대뜲?씠?꽣媛??닔
+        blockList:?븳?럹?씠吏??떦 寃뚯떆臾쇱닔
+        blockPage:?븳?솕硫댁뿉 ?굹???궪 ?럹?씠吏? 紐⑸줉?닔
  */
 public class Paging {
 	public static String getPaging(
@@ -14,100 +15,83 @@ public class Paging {
 			int blockList, 
 			int blockPage){
 		
-		int totalPage/*전체페이지수*/,
-            startPage/*시작페이지번호*/,
-            endPage;/*마지막페이지번호*/
+		int totalPage/*?쟾泥댄럹?씠吏??닔*/,
+            startPage/*?떆?옉?럹?씠吏?踰덊샇*/,
+            endPage;/*留덉?留됲럹?씠吏?踰덊샇*/
 
 		boolean  isPrevPage,isNextPage;
 		
 		
-		StringBuffer sb; //모든 상황을 판단하여 HTML코드를 저장할 곳
+		StringBuffer sb; //紐⑤뱺 ?긽?솴?쓣 ?뙋?떒?븯?뿬 HTML肄붾뱶瑜? ???옣?븷 怨?
 		
 		
 		isPrevPage=isNextPage=false;
-		//입력된 전체 자원을 통해 전체 페이지 수를 구한다..
+		//?엯?젰?맂 ?쟾泥? ?옄?썝?쓣 ?넻?빐 ?쟾泥? ?럹?씠吏? ?닔瑜? 援ы븳?떎..
 		totalPage = rowTotal/blockList;
 		if(rowTotal%blockList != 0)totalPage++; 
 		
 
-		//만약 잘못된 연산과 움직임으로 인하여 현재 페이지 수가 전체 페이지 수를
-		//넘을 경우 강제로 현재페이지 값을 전체 페이지 값으로 변경
+		//留뚯빟 ?옒紐삳맂 ?뿰?궛怨? ??吏곸엫?쑝濡? ?씤?븯?뿬 ?쁽?옱 ?럹?씠吏? ?닔媛? ?쟾泥? ?럹?씠吏? ?닔瑜?
+		//?꽆?쓣 寃쎌슦 媛뺤젣濡? ?쁽?옱?럹?씠吏? 媛믪쓣 ?쟾泥? ?럹?씠吏? 媛믪쑝濡? 蹂?寃?
 		if(nowPage > totalPage)nowPage = totalPage;
 		
 
-		//시작 페이지와 마지막 페이지를 구함.
+		//?떆?옉 ?럹?씠吏??? 留덉?留? ?럹?씠吏?瑜? 援ы븿.
 		startPage = (int)(((nowPage-1)/blockPage)*blockPage+1);
 		endPage = startPage + blockPage - 1; //
 		
 		
 		
-		//마지막 페이지 수가 전체페이지수보다 크면 마지막페이지 값을 변경
+		//留덉?留? ?럹?씠吏? ?닔媛? ?쟾泥댄럹?씠吏??닔蹂대떎 ?겕硫? 留덉?留됲럹?씠吏? 媛믪쓣 蹂?寃?
 		if(endPage > totalPage)endPage = totalPage;
 		
-		//마지막페이지가 전체페이지보다 작을 경우 다음 페이징이 적용할 수 있도록
-		//boolean형 변수의 값을 설정
+		//留덉?留됲럹?씠吏?媛? ?쟾泥댄럹?씠吏?蹂대떎 ?옉?쓣 寃쎌슦 ?떎?쓬 ?럹?씠吏뺤씠 ?쟻?슜?븷 ?닔 ?엳?룄濡?
+		//boolean?삎 蹂??닔?쓽 媛믪쓣 ?꽕?젙
 		if(endPage < totalPage) isNextPage = true;
-		//시작페이지의 값이 1보다 작으면 이전페이징 적용할 수 있도록 값설정
+		//?떆?옉?럹?씠吏??쓽 媛믪씠 1蹂대떎 ?옉?쑝硫? ?씠?쟾?럹?씠吏? ?쟻?슜?븷 ?닔 ?엳?룄濡? 媛믪꽕?젙
 		if(startPage > 1)isPrevPage = true;
 		
-		//HTML코드를 저장할 StringBuffer생성=>코드생성
+		//HTML肄붾뱶瑜? ???옣?븷 StringBuffer?깮?꽦=>肄붾뱶?깮?꽦
 		sb = new StringBuffer();
-//-----그룹페이지처리 이전 --------------------------------------------------------------------------------------------		
+//-----洹몃９?럹?씠吏?泥섎━ ?씠?쟾 --------------------------------------------------------------------------------------------		
 		if(isPrevPage){
 			sb.append("<a href ='"+pageURL+"?page=");
 			sb.append(startPage-1); // nowPage-blockPage
-			/*sb.append("'>◀</a>");*/
-			sb.append("<li class=\'disabled\'><a href='list.do?page='>«</a></li>");
+			sb.append("'>??</a>");
 		}
 		else
-			sb.append("<li class=\"'disabled\'><a>«</a></li>");
+			sb.append("??");
 		
-//------페이지 목록 출력 -------------------------------------------------------------------------------------------------
-		
-		/*<li class="disabled"><a href="#">«</a></li>
-		<li class="active"><a href="list.do?page=1">1 <span class="sr-only">(current)</span></a></li>
-		<li><a href="list.do?page=2">2</a></li>
-		<li><a href="list.do?page=3">3</a></li>
-		<li><a href="list.do?page=4">»</a></li>*/
-		
-	/*	sb.append("|");*/
+//------?럹?씠吏? 紐⑸줉 異쒕젰 -------------------------------------------------------------------------------------------------
+		sb.append("|");
 		for(int i=startPage; i<= endPage ;i++){
 			//if(i>totalPage)break;
-			if(i == nowPage){ //현재 있는 페이지
-				/*sb.append("&nbsp;<b><font size='3' color='red'>[");*/
-				/*sb.append(i);*/
-				/*sb.append("]</font></b>");*/
-				sb.append("<li class=\'active\'><a href=\'list.do?page="+i+"\'>"+i+"<span class=\'sr-only\'>(current)</span></a></li>");
-				
+			if(i == nowPage){ //?쁽?옱 ?엳?뒗 ?럹?씠吏?
+				sb.append("&nbsp;<b><font size='3' color='red'>[");
+				sb.append(i);
+				sb.append("]</font></b>");
 			}
-			else{//현재 페이지가 아니면
+			else{//?쁽?옱 ?럹?씠吏?媛? ?븘?땲硫?
 				sb.append("&nbsp;<a href='"+pageURL+"?page=");
-				/*sb.append(i);*/
-				/*sb.append("'>");*/
+				sb.append(i);
+				sb.append("'>");
 				sb.append(i);
 				sb.append("</a>");
-				sb.append("<li><a href=\'list.do?page="+i+"\'>"+i+"<span class=\'sr-only\'>(current)</span></a></li>");
-				
 			}
 		}// end for
 		
 		sb.append("&nbsp;");
 		
-//-----그룹페이지처리 다음 ----------------------------------------------------------------------------------------------
+//-----洹몃９?럹?씠吏?泥섎━ ?떎?쓬 ----------------------------------------------------------------------------------------------
 		if(isNextPage){
 			sb.append("<a href='"+pageURL+"?page=");
 
 			sb.append(endPage + 1);
 			
-			sb.append("<li><a href='list.do?page='>»</a></li>");
+			sb.append("'>?뼳</a>");
 		}
 		else
-			sb.append("<li><a href=\"#\">»</a></li>");
-			/*sb.append("'>▶</a>");
-			
-		}
-		else
-			sb.append("▶");*/
+			sb.append("?뼳");
 //---------------------------------------------------------------------------------------------------------------------	    
 
 		return sb.toString();
@@ -123,74 +107,74 @@ public class Paging {
 			int blockList, 
 			int blockPage){
 		
-		int totalPage/*전체페이지수*/,
-            startPage/*시작페이지번호*/,
-            endPage;/*마지막페이지번호*/
+		int totalPage/*?쟾泥댄럹?씠吏??닔*/,
+            startPage/*?떆?옉?럹?씠吏?踰덊샇*/,
+            endPage;/*留덉?留됲럹?씠吏?踰덊샇*/
 
 		boolean  isPrevPage,isNextPage;
 		
 		
-		StringBuffer sb; //모든 상황을 판단하여 HTML코드를 저장할 곳
+		StringBuffer sb; //紐⑤뱺 ?긽?솴?쓣 ?뙋?떒?븯?뿬 HTML肄붾뱶瑜? ???옣?븷 怨?
 		
 		
 		isPrevPage=isNextPage=false;
-		//입력된 전체 자원을 통해 전체 페이지 수를 구한다..
+		//?엯?젰?맂 ?쟾泥? ?옄?썝?쓣 ?넻?빐 ?쟾泥? ?럹?씠吏? ?닔瑜? 援ы븳?떎..
 		totalPage = rowTotal/blockList;
 		if(rowTotal%blockList != 0)totalPage++; 
 		
 
-		//만약 잘못된 연산과 움직임으로 인하여 현재 페이지 수가 전체 페이지 수를
-		//넘을 경우 강제로 현재페이지 값을 전체 페이지 값으로 변경
+		//留뚯빟 ?옒紐삳맂 ?뿰?궛怨? ??吏곸엫?쑝濡? ?씤?븯?뿬 ?쁽?옱 ?럹?씠吏? ?닔媛? ?쟾泥? ?럹?씠吏? ?닔瑜?
+		//?꽆?쓣 寃쎌슦 媛뺤젣濡? ?쁽?옱?럹?씠吏? 媛믪쓣 ?쟾泥? ?럹?씠吏? 媛믪쑝濡? 蹂?寃?
 		if(nowPage > totalPage)nowPage = totalPage;
 		
 
-		//시작 페이지와 마지막 페이지를 구함.
+		//?떆?옉 ?럹?씠吏??? 留덉?留? ?럹?씠吏?瑜? 援ы븿.
 		startPage = (int)(((nowPage-1)/blockPage)*blockPage+1);
 		endPage = startPage + blockPage - 1; //
 		
 		
 		
-		//마지막 페이지 수가 전체페이지수보다 크면 마지막페이지 값을 변경
+		//留덉?留? ?럹?씠吏? ?닔媛? ?쟾泥댄럹?씠吏??닔蹂대떎 ?겕硫? 留덉?留됲럹?씠吏? 媛믪쓣 蹂?寃?
 		if(endPage > totalPage)endPage = totalPage;
 		
-		//마지막페이지가 전체페이지보다 작을 경우 다음 페이징이 적용할 수 있도록
-		//boolean형 변수의 값을 설정
+		//留덉?留됲럹?씠吏?媛? ?쟾泥댄럹?씠吏?蹂대떎 ?옉?쓣 寃쎌슦 ?떎?쓬 ?럹?씠吏뺤씠 ?쟻?슜?븷 ?닔 ?엳?룄濡?
+		//boolean?삎 蹂??닔?쓽 媛믪쓣 ?꽕?젙
 		if(endPage < totalPage) isNextPage = true;
-		//시작페이지의 값이 1보다 작으면 이전페이징 적용할 수 있도록 값설정
+		//?떆?옉?럹?씠吏??쓽 媛믪씠 1蹂대떎 ?옉?쑝硫? ?씠?쟾?럹?씠吏? ?쟻?슜?븷 ?닔 ?엳?룄濡? 媛믪꽕?젙
 		if(startPage > 1)isPrevPage = true;
 		
-		//HTML코드를 저장할 StringBuffer생성=>코드생성
+		//HTML肄붾뱶瑜? ???옣?븷 StringBuffer?깮?꽦=>肄붾뱶?깮?꽦
 		sb = new StringBuffer();
-//-----그룹페이지처리 이전 --------------------------------------------------------------------------------------------		
+//-----洹몃９?럹?씠吏?泥섎━ ?씠?쟾 --------------------------------------------------------------------------------------------		
 		if(isPrevPage){
-			sb.append("<a href ='"+pageURL+"?page=");
+			/*sb.append("<a href ='"+pageURL+"?page=");*/
 			sb.append(startPage-1); // nowPage-blockPage
 			
-			sb.append("&search=");
+			/*sb.append("&search=");
 			sb.append(search);
 			sb.append("&search_text=");
 			sb.append(search_text);
+			sb.append("<li class=\'disabled\'><a href=\'#\'>吏?</a></li>");
 			
-			
-			/*sb.append("'>◀</a>");*/
+			sb.append("'>??</a>");*/
 			sb.append("<li class=\'disabled\'><a href=\'#\'>«</a></li>");
 		}
 		else
-			/*sb.append("◀");*/
-             sb.append("<li class=\'disabled\'><a href=\'\'>«</a></li>");
+			/*sb.append("??");*/
+			sb.append("<li class=\'disabled\'><a href=\'\'>«</a></li>");
 		
-//------페이지 목록 출력 -------------------------------------------------------------------------------------------------
-		sb.append("&nbsp;");
+//------?럹?씠吏? 紐⑸줉 異쒕젰 -------------------------------------------------------------------------------------------------
+		sb.append("");
 		for(int i=startPage; i<= endPage ;i++){
 			//if(i>totalPage)break;
-			if(i == nowPage){ //현재 있는 페이지
-			/*	sb.append("&nbsp;<b><font size='3' color='red'>[");
+			if(i == nowPage){ //?쁽?옱 ?엳?뒗 ?럹?씠吏?
+				/*sb.append("&nbsp;<b><font size='3' color='red'>[");
 				sb.append(i);
 				sb.append("]</font></b>");*/
 				sb.append("<li class=\'active\'><a href=\'list.do?page="+i+"\'>"+i+"<span class=\'sr-only\'>(current)</span></a></li>");
 			}
-			else{//현재 페이지가 아니면
-				sb.append("&nbsp;<a href='"+pageURL+"?page=");
+			else{//?쁽?옱 ?럹?씠吏?媛? ?븘?땲硫?
+				/*sb.append("&nbsp;<a href='"+pageURL+"?page=");
 				sb.append(i);
 				
 				sb.append("&search=");
@@ -198,7 +182,7 @@ public class Paging {
 				sb.append("&search_text=");
 				sb.append(search_text);
 				
-				/*sb.append("'>");
+				sb.append("'>");
 				sb.append(i);
 				sb.append("</a>");*/
 				sb.append("<li><a href=\'list.do?page=" + i +"\'>"+i+"</a></li>");
@@ -207,27 +191,22 @@ public class Paging {
 		
 		sb.append("&nbsp;");
 		
-		/*<li class="disabled"><a href="#">«</a></li>
-		<li class="active"><a href="list.do?page=1">1 <span class="sr-only">(current)</span></a></li>
-		<li><a href="list.do?page=2">2</a></li>
-		<li><a href="list.do?page=3">3</a></li>
-		<li><a href="list.do?page=4">»</a></li>*/
-		
-//-----그룹페이지처리 다음 ----------------------------------------------------------------------------------------------
+//-----洹몃９?럹?씠吏?泥섎━ ?떎?쓬 ----------------------------------------------------------------------------------------------
 		if(isNextPage){
-			sb.append("<a href='"+pageURL+"?page=");
+			/*sb.append("<a href='"+pageURL+"?page=");*/
 
 			sb.append(endPage + 1);
 			
-			sb.append("&search=");
+	/*		sb.append("&search=");
 			sb.append(search);
 			sb.append("&search_text=");
 			sb.append(search_text);
 			
-			/*sb.append("'>▶</a>");*/
+			sb.append("'>?뼳</a>");*/
 			sb.append("<li><a href='list.do?page='>»</a></li>");
 		}
 		else
+			/*sb.append("?뼳");*/
 			sb.append("<li><a href=\"#\">»</a></li>");
 //---------------------------------------------------------------------------------------------------------------------	    
 
@@ -240,63 +219,63 @@ public class Paging {
 			int blockList, 
 			int blockPage){
 		
-		int totalPage/*전체페이지수*/,
-            startPage/*시작페이지번호*/,
-            endPage;/*마지막페이지번호*/
+		int totalPage/*?쟾泥댄럹?씠吏??닔*/,
+            startPage/*?떆?옉?럹?씠吏?踰덊샇*/,
+            endPage;/*留덉?留됲럹?씠吏?踰덊샇*/
 
 		boolean  isPrevPage,isNextPage;
 		
 		
-		StringBuffer sb; //모든 상황을 판단하여 HTML코드를 저장할 곳
+		StringBuffer sb; //紐⑤뱺 ?긽?솴?쓣 ?뙋?떒?븯?뿬 HTML肄붾뱶瑜? ???옣?븷 怨?
 		
 		
 		isPrevPage=isNextPage=false;
-		//입력된 전체 자원을 통해 전체 페이지 수를 구한다..
+		//?엯?젰?맂 ?쟾泥? ?옄?썝?쓣 ?넻?빐 ?쟾泥? ?럹?씠吏? ?닔瑜? 援ы븳?떎..
 		totalPage = rowTotal/blockList;
 		if(rowTotal%blockList != 0)totalPage++; 
 		
 
-		//만약 잘못된 연산과 움직임으로 인하여 현재 페이지 수가 전체 페이지 수를
-		//넘을 경우 강제로 현재페이지 값을 전체 페이지 값으로 변경
+		//留뚯빟 ?옒紐삳맂 ?뿰?궛怨? ??吏곸엫?쑝濡? ?씤?븯?뿬 ?쁽?옱 ?럹?씠吏? ?닔媛? ?쟾泥? ?럹?씠吏? ?닔瑜?
+		//?꽆?쓣 寃쎌슦 媛뺤젣濡? ?쁽?옱?럹?씠吏? 媛믪쓣 ?쟾泥? ?럹?씠吏? 媛믪쑝濡? 蹂?寃?
 		if(nowPage > totalPage)nowPage = totalPage;
 		
 
-		//시작 페이지와 마지막 페이지를 구함.
+		//?떆?옉 ?럹?씠吏??? 留덉?留? ?럹?씠吏?瑜? 援ы븿.
 		startPage = (int)(((nowPage-1)/blockPage)*blockPage+1);
 		endPage = startPage + blockPage - 1; //
 		
 		
 		
-		//마지막 페이지 수가 전체페이지수보다 크면 마지막페이지 값을 변경
+		//留덉?留? ?럹?씠吏? ?닔媛? ?쟾泥댄럹?씠吏??닔蹂대떎 ?겕硫? 留덉?留됲럹?씠吏? 媛믪쓣 蹂?寃?
 		if(endPage > totalPage)endPage = totalPage;
 		
-		//마지막페이지가 전체페이지보다 작을 경우 다음 페이징이 적용할 수 있도록
-		//boolean형 변수의 값을 설정
+		//留덉?留됲럹?씠吏?媛? ?쟾泥댄럹?씠吏?蹂대떎 ?옉?쓣 寃쎌슦 ?떎?쓬 ?럹?씠吏뺤씠 ?쟻?슜?븷 ?닔 ?엳?룄濡?
+		//boolean?삎 蹂??닔?쓽 媛믪쓣 ?꽕?젙
 		if(endPage < totalPage) isNextPage = true;
-		//시작페이지의 값이 1보다 작으면 이전페이징 적용할 수 있도록 값설정
+		//?떆?옉?럹?씠吏??쓽 媛믪씠 1蹂대떎 ?옉?쑝硫? ?씠?쟾?럹?씠吏? ?쟻?슜?븷 ?닔 ?엳?룄濡? 媛믪꽕?젙
 		if(startPage > 1)isPrevPage = true;
 		
-		//HTML코드를 저장할 StringBuffer생성=>코드생성
+		//HTML肄붾뱶瑜? ???옣?븷 StringBuffer?깮?꽦=>肄붾뱶?깮?꽦
 		sb = new StringBuffer();
-//-----그룹페이지처리 이전 --------------------------------------------------------------------------------------------		
+//-----洹몃９?럹?씠吏?泥섎━ ?씠?쟾 --------------------------------------------------------------------------------------------		
 		if(isPrevPage){
 			sb.append("<a onclick='comment_list(");
 			sb.append(startPage-1); // nowPage-blockPage
-			sb.append(");'>◀</a>");
+			sb.append(");'>??</a>");
 		}
 		else
-			sb.append("◀");
+			sb.append("??");
 		
-//------페이지 목록 출력 -------------------------------------------------------------------------------------------------
+//------?럹?씠吏? 紐⑸줉 異쒕젰 -------------------------------------------------------------------------------------------------
 		sb.append("|");
 		for(int i=startPage; i<= endPage ;i++){
 			//if(i>totalPage)break;
-			if(i == nowPage){ //현재 있는 페이지
+			if(i == nowPage){ //?쁽?옱 ?엳?뒗 ?럹?씠吏?
 				sb.append("&nbsp;<b><font size='3' color='red'>[");
 				sb.append(i);
 				sb.append("]</font></b>");
 			}
-			else{//현재 페이지가 아니면
+			else{//?쁽?옱 ?럹?씠吏?媛? ?븘?땲硫?
 				sb.append("&nbsp;<a onclick='comment_list(");
 				sb.append(i);
 				sb.append(");'>");
@@ -307,16 +286,16 @@ public class Paging {
 		
 		sb.append("&nbsp;|");
 		
-//-----그룹페이지처리 다음 ----------------------------------------------------------------------------------------------
+//-----洹몃９?럹?씠吏?泥섎━ ?떎?쓬 ----------------------------------------------------------------------------------------------
 		if(isNextPage){
 			sb.append("<a onclick='comment_list(");
 
 			sb.append(endPage + 1);
 			
-			sb.append(");'>▶</a>");
+			sb.append(");'>?뼳</a>");
 		}
 		else
-			sb.append("▶");
+			sb.append("?뼳");
 //---------------------------------------------------------------------------------------------------------------------	    
 
 		return sb.toString();

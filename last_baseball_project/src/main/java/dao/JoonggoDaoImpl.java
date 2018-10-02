@@ -111,6 +111,17 @@ public class JoonggoDaoImpl implements JoonggoDao  {
 		return res;
 	}
 
+	@Override
+	public int commentDaoTotal(int j_idx) {
+		// TODO Auto-generated method stub
+		
+		int res =0;
+		res = sqlSession.selectOne("comment.comment_row_total",j_idx);
+		
+		
+		return res;
+	}
+
 /*	@Override
 	public int reply(JoonggoVo vo) {
 		// TODO Auto-generated method stub

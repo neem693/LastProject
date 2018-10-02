@@ -58,7 +58,7 @@ HttpServletRequest request;
 	        ///////////////// 서버에 파일쓰기 /////////////////
 	            vo.getFiledata().transferTo(new File(path+realname));
 	            /*서버 경로에 이미지가 존재해야 이미지가 뜬다 .그래서  "http://localhost:9090/pickBaseball/resources/photo_upload/" 요렇게 잡아줬다.*/
-	            file_result += "&bNewLine=true&sFileName="+original_name+"&sFileURL=http://localhost:9090/pickBaseball/resources/photo_upload/"+realname;
+	            /*file_result += "&bNewLine=true&sFileName="+original_name+"&sFileURL=http://localhost:9090/pickBaseball/resources/photo_upload/"+realname;*/
 	        	//System.out.println(   request.getRequestURI());
 	            //System.out.println(   request.getRequestURL());
 	        } else {
@@ -118,7 +118,17 @@ HttpServletRequest request;
 	         request.getRequestURL();
 	      
 	         /*서버 경로에 이미지가 존재해야 이미지가 뜬다 .그래서  "http://localhost:9090/pickBaseball/resources/photo_upload/" 요렇게 잡아줬다.*/
-	         sFileInfo += "&sFileURL=" + request.getContextPath() + realFileNm;
+	         String url_str = request.getRequestURL().toString().replaceAll("multiplePhotoUpload", "");
+	          url_str = url_str + "resources/photo_upload/" + realFileNm;
+	         sFileInfo += "&sFileURL=" +url_str;
+	         System.out.println("-------------------------------------");
+/*	         System.out.println(request.getContextPath());
+	         System.out.println(request.getRequestURI());
+	         System.out.println(request.getRequestURL());
+	         System.out.println(realFileNm);*/
+	       
+	       //  System.out.println(request.getRequestURI()+ request.getContextPath() + realFileNm);
+	          System.out.println(url_str);
 	         PrintWriter print = response.getWriter();
 	         print.print(sFileInfo);
 	         print.flush();
@@ -127,6 +137,23 @@ HttpServletRequest request;
 	        e.printStackTrace();
 	    }
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@RequestMapping("/normal_image_upload.do")
 	public void ckeditor_image_upload_normal(@RequestParam MultipartFile upload, HttpServletResponse response)
