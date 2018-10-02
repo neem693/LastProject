@@ -1,0 +1,115 @@
+@charset "UTF-8";
+
+body {
+	
+	background-repeat: repeat;
+}
+
+.container {
+	margin: 10% auto;
+	left: 0;
+	right: 0;
+
+	height: 400px;
+	padding: 3% 0 0 0;
+	width: 50%;
+	text-align: center;
+	color: white;
+	/* color: #804000!important; */
+	background-color: rgba(0, 0, 0, 0.5);
+	box-shadow: 5px 5px 5px black;
+}
+
+.text_brown {
+	color: #ffffff!important;
+	text-shadow: 5px 5px 5px black;
+}
+
+.login_input {
+	margin: 0 auto;
+	display: block;
+	height: 35px;
+	border: none;
+	border-bottom: 2px solid #ccc;
+	width: 300px;
+	color: #ffffff !important;
+	background-color: rgba(0, 0, 0, 0);
+}
+
+.login_input:active {
+	
+}
+
+.pading {
+	padding: 15px;
+}
+
+.lobster_title {
+	padding: 3px;
+	font-family: "Lobster", serif;
+	font-size: 30px;
+}
+
+.lobster {
+	font-family: "Lobster", serif;
+	font-size: 20px;
+}
+
+.btn_join {
+	
+		margin: 10px 0;
+	border-radius: 16px;
+	border: none;
+	display: inline-block;
+	padding: 10px 18px;
+	vertical-align: middle;
+	overflow: hidden;
+	text-decoration: none;
+	color: inherit;
+	background-color: inherit;
+	text-align: center;
+	cursor: pointer;
+	white-space: nowrap;
+}
+
+.btn_return {
+	
+	margin: 10px 0;
+	border-radius: 16px;
+	border: none;
+	display: inline-block;
+	padding: 10px 18px;
+	vertical-align: middle;
+	overflow: hidden;
+	text-decoration: none;
+	color: inherit;
+	background-color: inherit;
+	text-align: center;
+	cursor: pointer;
+	white-space: nowrap;
+}
+
+.cyan {
+	color: #000 !important;
+	background-color: #e6c4db !important
+}
+
+.cyan:hover {
+	color: #fff !important;
+	background-color: #000 !important
+}
+
+@media screen and (max-width: 630px) {
+	.login_input {
+		width: 100%;
+	}
+	
+	.btn_join{
+	display: block;
+	width:100%;
+	}
+	.btn_return{
+	display:block;
+	width: 100%;
+	}
+}

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="normal">
+
+	<!-- 전체목록 조회 -->
+	<select id="normal_list" resultType="vo.NormalVo"
+		parameterType="Map">
+		select n.*, m.*
+		from normal n inner join member m
+		on n.m_idx = m.m_idx
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="nc_title!=null">
+				nc_title like concat('%',#{nc_title},'%')
+			</if>
+			<if test="nc_contents!=null">
+				or nc_contents like concat('%',#{nc_contents},'%')
+			</if>
+			<if test="m_nick!=null">
+				or m_nick like concat('%',#{m_nick},'%')
+			</if>
+
+
+		</trim>
+		Limit #{start},#{display}
+	</select>
+
+	<!-- 전체레코드수 구하기 -->
+	<select id="normal_total_count" parameterType="Map"
+		resultType="int">
+		select ifnull(count(*),0) from normal inner join member
+		on normal.m_idx = member.m_idx
+		<trim prefix="where" prefixOverrides="or">
+			<if test="m_nick!=null">
+				m_nick like concat('%' ,#{m_nick}, '%')
+			</if>
+			<if test="nc_title!=null">
+				or nc_title like concat('%' ,#{nc_title}, '%')
+			</if>
+			<if test="nc_contents!=null">
+				or nc_contents like concat('%' ,#{nc_contents}, '%')
+			</if>
+
+		</trim>
+	</select>
+
+	<!-- 페이지별 목록조회 -->
+	<!-- <select id="normal_condition_list" parameterType="java.util.Map" resultType="normal"> 
+		select * from ( select nc.*, (select count(*) from comment where nc_idx=nc.idx) 
+		nc_count from ( select * from normal <trim prefix="where" prefixOverrides="or"> 
+		<if test="m_name!=null"> m_name like concat('%' ,#{m_name}, '%') </if> <if 
+		test="nc_title!=null"> or nc_title like concat('%' ,#{nc_title}, '%') </if> 
+		<if test="nc_content!=null"> or nc_contents like concat('%' ,#{nc_contents}, 
+		'%') </if> </trim> )nc ) order by ref desc,step asc limit #{ start }, #{display} 
+		</select> -->
+
+	<!-- 게시물 1건 조회 -->
+	<select id="normal_one" parameterType="int"
+		resultType="vo.NormalVo">
+		select n.*,m.m_nick
+		from normal n inner join member m
+		on
+		n.m_idx = m.m_idx
+		where nc_idx=#{ nc_idx }
+	</select>
+
+	<!-- 조회수 증가 -->
+	<update id="normal_update_views" parameterType="int">
+		update normal set
+		nc_views = nc_views + 1
+		where nc_idx=#{ nc_idx }
+	</update>
+
+	<!-- 게시물 추가 -->
+	<insert id="normal_insert" parameterType="vo.NormalVo">
+		insert into
+		normal(m_idx,nc_title,nc_contents,nc_ip,nc_regdate)
+		values(
+		#{m_idx},
+		#{nc_title},
+		#{nc_contents},
+		#{nc_ip},
+		now()
+		)
+	</insert>
+
+	<update id="normal_update" parameterType="normal">
+		update normal set
+		nc_title=#{nc_title},
+		nc_contents=#{nc_contents},
+		nc_regdate=now(),
+		where nc_idx=#{nc_idx}
+	</update>
+
+	<delete id="normal_delete" parameterType="int">
+		delete from normal
+		where nc_idx=#{nc_idx}
+	</delete>
+
+</mapper>

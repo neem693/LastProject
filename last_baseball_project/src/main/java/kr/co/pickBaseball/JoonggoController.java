@@ -173,7 +173,9 @@ public String list(String search, String search_text, Integer page, Model model)
 	//게시판 목록가져오기
 	List<JoonggoVo> list = joonggo_dao.selectList(map);
 	//세션에 게시물을 봤냐에 대한정보(show)삭제
-	session.removeAttribute("show");
+	HttpSession session1 = request.getSession();
+	if(session1!=null)
+	   session1.removeAttribute("show");
 	
 	//페이지 메뉴 생성
 	int rowTotal = joonggo_dao.selectRowTotal(map); // 전체레코드수

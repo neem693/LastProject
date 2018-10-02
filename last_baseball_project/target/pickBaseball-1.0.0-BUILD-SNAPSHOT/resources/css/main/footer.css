@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+/* Footer */
+.footer {
+	margin-top : 8px ;
+	border-top : 1px solid #c0c0c0;
+    padding : 20px;
+    text-align : left;
+    background : #ddd;
+   
+}

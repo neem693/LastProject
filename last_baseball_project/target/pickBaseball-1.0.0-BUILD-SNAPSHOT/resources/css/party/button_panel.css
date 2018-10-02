@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+button.accordion {
+	background-color: #eee;
+	color: #444;
+	cursor: pointer;
+	padding: 18px;
+	width: 100%;
+	border: none;
+	text-align: left;
+	outline: none;
+	font-size: 15px;
+	transition: 0.4s;
+}
+
+button.accordion.active, button.accordion:hover {
+	background-color: #ddd;
+}
+
+div.panel {
+	padding: 0 18px;
+	background-color: white;
+	max-height: 0px; /*이렇게 0px이라고 정의를 해줘야지만 슬라이드 효과가 나타난다.*/
+	opacity: 0;
+	transition: 0.4s ease-out; /*변환명사를 아무것도 입력하지 않으면 all이 디폴트 값으로 적용된다.*/
+	overflow: hidden;
+}
+
+div.panel.show {
+	max-height: 2000px;
+	/*max-height: 0px과 같이 에니메이션의 끝의 표시이며, max이기에 유동적으로 움직일 수 있다.*/
+	opacity: 1;
+	overflow: auto;
+	/*텍스트가 넘쳤을 때 알아서 스크롤해 줄 수 있다.*/
+}
+
+button.accordion:after {
+	content: '\02795'; /*Unicode character for "plus" sign (+)*/
+	font-size: 13px;
+	color: #777;
+	float: right;
+	margin-left: 5px;
+}
+
+button.accordion.active:after {
+	content: "\2796"; /*Unicode character fot "minus" sign (-) */
+}

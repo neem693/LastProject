@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+
+@font-face {
+	font-family: notoFont;
+	src: url('../../../resources/font/NotoSerifKR-Regular.otf');
+}
+
+* {
+	font-family: notoFont;
+}

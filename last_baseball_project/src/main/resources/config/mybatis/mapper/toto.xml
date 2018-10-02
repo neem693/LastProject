@@ -8,7 +8,7 @@
 
 <insert id="my_game_result_insert" parameterType="vo.My_Game_Result_Vo">
 
- INSERT INTO My_toto_result(total_money,final_ratio,game_number,m_id) VALUES    
+ INSERT INTO my_toto_result(total_money,final_ratio,game_number,m_id) VALUES    
   ( 
   
    #{total_money},
@@ -42,7 +42,7 @@
  	<!-- 미처리된 게임 key를 가져온다  -->
 	
 	SELECT ROUND(total_money,1) AS total_money ,ROUND(Final_ratio,1) AS Final_ratio,m_id,game_number 
-	FROM My_toto_result
+	FROM my_toto_result
 	where m_id=#{m_id}
     </select>
 

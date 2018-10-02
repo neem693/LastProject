@@ -141,7 +141,7 @@ public class CommentController {
 		if(res==0)
 			result = "fail";
 
-		String result_json = String.format("{\"result\":\"%s}", result);
+		String result_json = String.format("{\"result\":\"%s\"}", result);
 		 
 		return result_json; // @ResponseBody : 현재 반환되는 값을 바로 응답시켜라
 		
