@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import dao.CommentDao;
 import dao.JoonggoDao;
 import util.Paging;
 import vo.JoonggoVo;
@@ -100,6 +101,7 @@ public String view(int j_idx, Model model)
 	{
 		int res = joonggo_dao.readhits(j_idx);
 	}
+	vo.setC_count(joonggo_dao.commentDaoTotal(j_idx));
 	
 	model.addAttribute("vo", vo);
 	model.addAttribute("show", true);

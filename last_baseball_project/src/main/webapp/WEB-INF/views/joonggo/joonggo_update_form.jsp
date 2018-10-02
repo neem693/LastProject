@@ -61,6 +61,31 @@ function send(f)
 	}
 	}
 
+var sel_file;
+
+$(document).ready(function() {
+    $("#input_img").on("change", handleImgFileSelect);
+}); 
+
+function handleImgFileSelect(e) {
+    var files = e.target.files;
+    var filesArr = Array.prototype.slice.call(files);
+
+    filesArr.forEach(function(f) {
+        if(!f.type.match("image.*")) {
+            alert("확장자는 이미지 확장자만 가능합니다.");
+            return;
+        }
+
+        sel_file = f;
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $("#img_file").attr("src", e.target.result);
+        }
+        reader.readAsDataURL(f);
+    });
+}
 
 
 </script>
@@ -76,9 +101,7 @@ function send(f)
 	<div  id = main_insert_form align="center">
 		<div class="container">
 		<div class="panel panel-default">
-        <div class="panel-heading clearfix">
-          <h3 class="panel-title">수정</h3>
-        </div>
+
         <br>
      <table>
         <tr>
@@ -94,10 +117,19 @@ function send(f)
     </td>
     <td><div class="form-group">
                   <label width = "100px">대표이미지</label>
-                 
                   <img src="${ pageContext.request.contextPath }/resources/photo_upload/${ vo.j_filename}"> 
-                   <div><input type="file" name="Filedata" class = "J_image"></div>
+                  <!--  <div><input type="file" name="Filedata" class = "J_image"></div> -->
 				</div>
+				</td>
+				    <td class = "file">
+				 <div>
+				 <div class="img_wrap">
+				<img id="img_file" />					
+			  	</div>
+			  	 <input type="file" id="input_img"name="Filedata" class = "J_image">
+    </div>
+
+			
 				</td>
 				</tr>
     </table>
@@ -129,7 +161,7 @@ function send(f)
                 </div>
                   <br>
                   
-                <br>
+                <br>${vo.j_content }
                       <!-- 스마트 에디터2 -->
                     <textarea style="width: auto; height: auto;" name="j_content" id="editor"  value ="${vo.j_content }" ></textarea>
 

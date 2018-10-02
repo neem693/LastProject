@@ -35,6 +35,10 @@ public interface JoonggoDao {
 	// 판매완료(sell)
 	public int sell(JoonggoVo vo);
 	
+	public int commentDaoTotal(int j_idx);
+	
+	
+	
 /*	public int reply(JoonggoVo vo);*/
 	
 	
