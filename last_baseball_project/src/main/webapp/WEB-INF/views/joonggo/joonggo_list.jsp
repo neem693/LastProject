@@ -17,7 +17,7 @@
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link rel="stylesheet"
-	href="${ pageContext.request.contextPath }/resources/css/joonggo/joonggo.css?ver=1"
+	href="${ pageContext.request.contextPath }/resources/css/joonggo/joonggo.css?ver=2"
 	rel="stylesheet" id="bootstrap-css">
 <script type="text/javascript">
 	window.onload = function() {
@@ -70,13 +70,14 @@
 			<c:forEach var="vo" items="${list }">
 
 				<ul>
-					<div class="s_container">
+					<div class="s_container" >
 						<c:set var="selled_img"></c:set>
 						<c:if test="${vo.j_sell_yn eq 'y'}">
 							<c:set var="selled_img">selledImg</c:set>
 						</c:if>
-						<li><img id="image" class="${selled_img}"
-							src="${ pageContext.request.contextPath }/resources/photo_upload/${ vo.j_filename}">
+						
+						<li><img class="${selled_img}" style="max-width: 100%; height: auto;"
+								src="${ pageContext.request.contextPath }/resources/photo_upload/${ vo.j_filename}">
 
 							<c:if test="${vo.j_sell_yn eq 'y'}">
 								<div class="s_center">

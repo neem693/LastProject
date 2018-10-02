@@ -161,7 +161,7 @@ function handleImgFileSelect(e) {
                 </div>
                   <br>
                   
-                <br>${vo.j_content }
+                
                       <!-- 스마트 에디터2 -->
                     <textarea style="width: auto; height: auto;" name="j_content" id="editor"  value ="${vo.j_content }" ></textarea>
 

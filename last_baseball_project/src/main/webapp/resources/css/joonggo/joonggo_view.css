@@ -13,7 +13,7 @@ border: 1px solid black;
 .main_box
 {
 	padding-top: 5px;
-	width: 1000px;
+	
 	margin-left: 15% !important;
 	margin-right: 15% !important;
 	
@@ -75,8 +75,11 @@ input, .input-group-addon, button {
 
 img#image {
     max-width: 100%;
+  
     width :  260px;
     height: 260px;
+    
+    
     border: 1px solid black;
  
 }
