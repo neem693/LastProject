@@ -334,7 +334,9 @@
     	var tempFile,
     		sUploadURL;
     	
-    	sUploadURL= '/pickBaseball/multiplePhotoUpload'; 	//upload URL
+    	console.log(location.href);
+    	var ctx = sessionStorage.getItem('ctx');
+    	sUploadURL= ctx + '/multiplePhotoUpload.do'; 	//upload URL
     	
     	//파일을 하나씩 보내고, 결과를 받음.
     	for(var j=0, k=0; j < nImageInfoCnt; j++) {

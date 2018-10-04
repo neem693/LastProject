@@ -37,6 +37,18 @@
 	  });
 	  
   }
+  function edit_comment(c,c_idx){
+	  return;
+	
+	  /* var op = 
+	  {
+			  url: 'comment_modify.do',
+			  data: {
+				  
+			  }
+	  } */
+	  
+  }
   
   
  
@@ -88,12 +100,10 @@
                                     ${ vo.c_content }
                                 </div>
                                 <div class="action">
-                                    <button type="button" class="btn btn-primary btn-xs" title="Edit">
+                                    <button type="button" class="btn btn-primary btn-xs" title="Edit" onclick="edit_comment(this,${vo.c_idx})">
                                         <span class="glyphicon glyphicon-pencil"></span>
                                     </button>
-                                    <button type="button" class="btn btn-success btn-xs" title="Approved" >
-                                        <span class="glyphicon glyphicon-ok"></span>
-                                    </button>
+                                 
                                     <button type="button" class="btn btn-danger btn-xs" title="Delete" onclick="del1('${ vo.c_idx }');">
                                         <span class="glyphicon glyphicon-trash"></span>
                                     </button>

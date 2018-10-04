@@ -14,6 +14,7 @@
 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css"> -->
 <script src="${ pageContext.request.contextPath }/resources/jquery/jquery-3.3.1.min.js"></script>
+
 <script
 	src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
@@ -102,8 +103,8 @@
 			success : function(data) {
 				//Controller 값 받아와서 결과값 처리
 				//data = {"result_json":"success"}  or {"result_json":"fail"},
-				alert(data);
-				if (data.result_json == 'fail') {
+				//alert(data.result);
+				if (data.result == 'fail') {
 					alert('댓글달기 실패!!');
 					return;
 				}
@@ -112,7 +113,7 @@
 				$('#c_content').focus();
 
 				//성공=> 댓글목록 가져오기
-				//comment_list(1);
+				comment_list(1);
 
 			}
 		});
@@ -375,7 +376,7 @@
 					<textarea id="c_content" class="form-control" rows="3"></textarea>
 
 				</div>
-				<button class="button3" onclick="comment_send();">등록</button>
+				<button class="button3" onclick="comment_send(); return false;">등록</button>
 			
 				
 			</div>

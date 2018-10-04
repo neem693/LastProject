@@ -72,21 +72,26 @@ HttpServletRequest request;
 
 		
 	//다중파일업로드
-	@RequestMapping("/multiplePhotoUpload")
+	@RequestMapping("/multiplePhotoUpload.do")
 	public void multiplePhotoUpload(HttpServletRequest request, HttpServletResponse response){
 	    try {
 	         //파일정보
 	         String sFileInfo = "";
 	         //파일명을 받는다 - 일반 원본파일명
 	         String filename = request.getHeader("file-name");
+	         System.out.println(filename);
 	         //파일 확장자
 	         String filename_ext = filename.substring(filename.lastIndexOf(".")+1);
+	         System.out.println(filename_ext);
 	         //확장자를소문자로 변경
 	         filename_ext = filename_ext.toLowerCase();
+	         System.out.println(filename_ext);
 	         //파일 기본경로
 	         String dftFilePath = request.getSession().getServletContext().getRealPath("/");
+	         System.out.println(dftFilePath);
 	         //파일 기본경로 _ 상세경로 경로 : resources\photo_upload 
 	         String filePath = dftFilePath + "resources" + File.separator + "photo_upload" + File.separator;
+	         System.out.println(filePath);
 	         File file = new File(filePath);
 	         if(!file.exists()) {
 	            file.mkdirs();
@@ -116,12 +121,14 @@ HttpServletRequest request;
 	         sFileInfo += "&sFileName="+ filename;
 	         
 	         request.getRequestURL();
-	      
+	     
 	         /*서버 경로에 이미지가 존재해야 이미지가 뜬다 .그래서  "http://localhost:9090/pickBaseball/resources/photo_upload/" 요렇게 잡아줬다.*/
-	         String url_str = request.getRequestURL().toString().replaceAll("multiplePhotoUpload", "");
+	         String url_str = request.getRequestURL().toString().replaceAll("multiplePhotoUpload.do", "");
 	          url_str = url_str + "resources/photo_upload/" + realFileNm;
 	         sFileInfo += "&sFileURL=" +url_str;
 	         System.out.println("-------------------------------------");
+	         System.out.println( request.getRequestURL());
+	         System.out.println("파일이름:" + realFileNm);
 /*	         System.out.println(request.getContextPath());
 	         System.out.println(request.getRequestURI());
 	         System.out.println(request.getRequestURL());
