@@ -52,14 +52,22 @@ p{
   white-space: nowrap; 
 }
 
-img #image{
+img#image{
 	 display: inline-block;
 
 	width: 150px;
 	height: 150px;
 	border: 1px solid gray;
 	outline: 1px solid black;
-	
+}
+
+img#update
+{
+	display: inline-block;
+	width: 150px;
+	height: 150px;
+	border: 1px solid black;
+	/* outline: 1px solid black; */
 }
 
 .selledImg{
@@ -217,8 +225,8 @@ content: '판매완료';
 }
 #img_file
 {
-	width: 120px;
-	height: 120px;
+	width: 150px;
+	height: 150px;
 }
 /* 첨부파일 미리보기 */
 .img_wrap {

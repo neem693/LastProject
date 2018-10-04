@@ -76,7 +76,7 @@
 							<c:set var="selled_img">selledImg</c:set>
 						</c:if>
 						
-						<li><img class="${selled_img}" style="max-width: 100%; height: auto;"
+						<li><img class="${selled_img}" style=" width: 150px; height: 150px; max-width: 100%; "
 								src="${ pageContext.request.contextPath }/resources/photo_upload/${ vo.j_filename}">
 
 							<c:if test="${vo.j_sell_yn eq 'y'}">

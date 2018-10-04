@@ -117,7 +117,7 @@ function handleImgFileSelect(e) {
     </td>
     <td><div class="form-group">
                   <label width = "100px">대표이미지</label>
-                  <img src="${ pageContext.request.contextPath }/resources/photo_upload/${ vo.j_filename}"> 
+                  <img id = "update" style="max-width: 100%; height: 100%;" src="${ pageContext.request.contextPath }/resources/photo_upload/${ vo.j_filename}"> 
                   <!--  <div><input type="file" name="Filedata" class = "J_image"></div> -->
 				</div>
 				</td>
@@ -180,6 +180,8 @@ function handleImgFileSelect(e) {
 </div>
 </form>
 </body>
+
+
 <script type="text/javascript">
 $(function(){
     //전역변수
