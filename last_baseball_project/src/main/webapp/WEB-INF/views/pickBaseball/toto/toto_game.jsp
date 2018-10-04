@@ -26,21 +26,22 @@ tr, td, th {
 
 
 .main {
+	
 	margin-left: 15%;
 	margin-right:5%;
 	float: left;
+	
 }
 
 
 
 .right_side {
 	/* border: 1px solid black; */
-
 	float: right;
 	width: 600px;
 	box-sizing: border-box;
-	margin-top: 5%;
-	
+	margin-left: 60%;
+	position: fixed;
 	
 }
 .center_text{
@@ -157,32 +158,64 @@ function check(chk){
 		</div>	
 				<div >
 					<aside class="right_side">
-							사용자 배팅정보1<br>
+							 내 배팅내역<br>
+							 사용자 id: ${member.m_id} 
+							 현재 보유금액:${member.m_money}
 							<table class="outline">	
-						<tr>
-						<th>사용자 아이디 :${member.m_id}</th><th>현재 보유금액:${member.m_money}</th>
-						</tr>
-						
-						<c:forEach var="bat_list" items="${my_bat_list}"  varStatus="i">	
-						<tr>
-						<td>게임경기:${bat_list.p_idx}</td> 
-						<td>배팅금액:${bat_list.bat_price}${bat_list.bat_win_lose}</td>
-						</tr>
-						</c:forEach>
-						
-						<tr>
-						<td>  </td>  <td></td><td></td><td></td>
-						</tr>
-						<tr>
-						<td>  </td>  <td></td><td></td><td></td>
-						</tr>
-						<tr>
-						<td>내 배팅 기록</td>
-						</tr>
 						
 						
+					
+					<c:forEach var="bat_list" items="${my_bat_list}"  varStatus="i">	
 						
+
+						<tr>
+							<c:choose>
+				
+							<c:when test="${ bat_list.game_number != game_key }">									
+								<tr>
+								<th class="team_name w3-lime"> 게임고유번호</th>
+								<th class="team_name w3-green">배팅경기</th>
+								<th class="team_name w3-green">배팅금액:${bat_list.bat_price}원</th>
+								<th class="team_name w3-blue">사용자 픽</th>
+								</tr>
+								
+								<td>${bat_list.game_number}</td>									
+							</c:when>
+				
+							 <c:otherwise>
+							 	<td></td>								 
+							 </c:otherwise>
+							</c:choose>
+							
+							<td>게임경기:${bat_list.p_idx}</td> 
+							
+							<td></td>	
+							
+							<c:set var="game_key" value="${bat_list.game_number}" scope="page" /> 
+							
+		
+							
+							<td>홈팀:${bat_list.bat_win_lose}</td>
+						
+						
+						</tr>
+						
+					</c:forEach>
+						
+						<tr height=20px;>
+							<td>  </td>  
+						</tr>
+					
+						
+						<tr>
+							<td>지난 배팅 기록</td>
+						</tr>
+						
+						
+
+
 						<c:forEach var="game_list" items="${my_game_list}"  varStatus="i">	
+			
 						<tr>
 						<td>게임번호:${game_list.game_number}</td> 
 						<td>사용자:${game_list.m_id}</td> 
