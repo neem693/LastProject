@@ -65,6 +65,9 @@ var sel_file;
 
 $(document).ready(function() {
     $("#input_img").on("change", handleImgFileSelect);
+
+	
+   
 }); 
 
 function handleImgFileSelect(e) {
@@ -117,7 +120,7 @@ function handleImgFileSelect(e) {
     </td>
     <td><div class="form-group">
                   <label width = "100px">대표이미지</label>
-                  <img src="${ pageContext.request.contextPath }/resources/photo_upload/${ vo.j_filename}"> 
+                  <img style = "" src="${ pageContext.request.contextPath }/resources/photo_upload/${ vo.j_filename}"> 
                   <!--  <div><input type="file" name="Filedata" class = "J_image"></div> -->
 				</div>
 				</td>
@@ -163,7 +166,7 @@ function handleImgFileSelect(e) {
                   
                 
                       <!-- 스마트 에디터2 -->
-                    <textarea style="width: auto; height: auto;" name="j_content" id="editor"  value ="${vo.j_content }" ></textarea>
+                    <textarea style="width: auto; height: auto;" name="j_content" id="editor" >${vo.j_content }</textarea>
 
 		</div>
 
@@ -198,6 +201,7 @@ $(function(){
             bUseModeChanger : true,
         }
     });
+    obj.getById[텍스트박스ID].exec("LOAD_CONTENTS_FIELD");
     //전송버튼
     $("#insertBoard").click(function(){
         //id가 smarteditor인 textarea에 에디터에서 대입
