@@ -120,7 +120,7 @@ function handleImgFileSelect(e) {
     </td>
     <td><div class="form-group">
                   <label width = "100px">대표이미지</label>
-                  <img style = "" src="${ pageContext.request.contextPath }/resources/photo_upload/${ vo.j_filename}"> 
+                  <img style = "width: 260px; height: 260px;" src="${ pageContext.request.contextPath }/resources/photo_upload/${ vo.j_filename}"> 
                   <!--  <div><input type="file" name="Filedata" class = "J_image"></div> -->
 				</div>
 				</td>
