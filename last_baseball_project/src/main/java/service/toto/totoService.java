@@ -50,8 +50,8 @@ public class totoService implements TotoServiceInterface {
 			String[] round_arr=round.split("=");	
 			
 			int num=(Integer.parseInt(round_arr[3]));		//위주소는 전회차이므로 현재차를 구하려면 +1회차 해준다.
-			String r_number=Integer.toString(num-1);
-			round_num= Integer.toString((Integer.parseInt(round_num)-1));
+			String r_number=Integer.toString(num);
+			round_num= Integer.toString((Integer.parseInt(round_num)));
 
 			String toto_url="https://www.betman.co.kr/gameSchedule.so?method=basic&gameId=G101&gameRound="+
 						     r_number+"&innerRound="+r_number+"&outerRound="+round_num+"&saleYear="+year+
@@ -151,6 +151,7 @@ public class totoService implements TotoServiceInterface {
 		
 			String m_id = request.getParameter(param.nextElement().toString());
 			String game_number=System.currentTimeMillis()+m_id;
+			
 			param.nextElement().toString();//m_idx 값 통과
 			
 			String bat_price= request.getParameter(param.nextElement().toString());
@@ -158,6 +159,8 @@ public class totoService implements TotoServiceInterface {
 				
 			//생성된 게임 고유 번호
 			while(param.hasMoreElements()){
+				
+				
 				Toto_Game_Vo vo= new Toto_Game_Vo();
 				vo.setM_id(m_id);
 				vo.setGame_number(game_number);
@@ -183,6 +186,13 @@ public class totoService implements TotoServiceInterface {
 			return "ok";
 		}
 
+		
+		
+		
+		
+		
+		
+		
 		@Override
 		public String[] Game_Result(String m_id) {
 			//아직 처리되지 않은 game의 key값을 불러옴
