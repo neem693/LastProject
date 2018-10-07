@@ -614,7 +614,7 @@ function changeTeam(team){
 									<c:if test="${fisrt_day != 0}">
 										<c:set var="first_day" value="0"></c:set>
 									</c:if>
-									<c:forEach var="i" begin="${n}" end="${n+4}">
+									<c:forEach var="i" begin="${n}" end="${n+5}">
 										<c:if test="${list[i].day eq day}">
 											<%-- <!-- 경기가 있을 떄마다 c를 증가 밑 foreach문이 해당 c값 만큼 경기 갯수 출력 -->	
 											<p>

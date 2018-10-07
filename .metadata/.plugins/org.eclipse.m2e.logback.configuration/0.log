@@ -12755,3 +12755,34 @@ Caused by: java.io.FileNotFoundException: C:\mywork\LastProject\.metadata\.plugi
 2018-10-05 19:52:46,289 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 25 resources
 2018-10-05 19:52:46,889 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
 2018-10-05 19:52:46,906 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2018-10-06 01:20:05,934 [Worker-15] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2018-10-06 01:20:34,168 [Worker-5] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: kr.co:pickBaseball:1.0.0-BUILD-SNAPSHOT @ C:\mywork\LastProject\last_baseball_project\pom.xml.
+2018-10-06 01:20:39,072 [Worker-5] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /last_baseball_project/src/main/java
+2018-10-06 01:20:39,073 [Worker-5] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /last_baseball_project/src/main/resources
+2018-10-06 01:20:39,074 [Worker-5] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /last_baseball_project/src/test/java
+2018-10-06 01:20:39,075 [Worker-5] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /last_baseball_project/src/test/resources
+2018-10-06 01:20:41,844 [Worker-5] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 1 project(s) in 9 sec
+2018-10-06 01:20:48,610 [Worker-16] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-10-06 01:20:48,623 [Worker-16] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 25 resources
+2018-10-06 01:20:48,756 [Worker-16] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-10-06 01:20:48,758 [Worker-16] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2018-10-06 01:31:06,262 [Worker-1] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2018-10-06 01:31:11,986 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-10-06 01:31:11,994 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 25 resources
+2018-10-06 01:31:12,004 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-10-06 01:31:12,006 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2018-10-06 01:31:24,323 [Worker-1] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\mywork\LastProject\last_baseball_project
+2018-10-06 01:31:24,325 [Worker-1] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B install
+2018-10-06 01:31:35,546 [Worker-23] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-10-06 01:31:35,551 [Worker-23] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2018-10-06 01:31:35,553 [Worker-23] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-10-06 01:31:35,555 [Worker-23] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2018-10-07 15:11:00,235 [Worker-4] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2018-10-07 15:12:24,551 [Worker-7] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-10-07 15:12:24,559 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 25 resources
+2018-10-07 15:12:24,571 [Worker-7] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-10-07 15:12:24,572 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2018-10-07 15:13:27,098 [Worker-12] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-10-07 15:13:27,104 [Worker-12] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2018-10-07 15:13:27,105 [Worker-12] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-10-07 15:13:27,107 [Worker-12] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
